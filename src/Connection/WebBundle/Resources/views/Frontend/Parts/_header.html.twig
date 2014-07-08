@@ -1,0 +1,9 @@
+<div>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') or is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+
+    {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+        <div id="header-login">
+            {{ render(controller("ConnectionUserBundle:Security:login", {'request': app.request})) }}
+        </div>
+    {% endif %}
+</div>

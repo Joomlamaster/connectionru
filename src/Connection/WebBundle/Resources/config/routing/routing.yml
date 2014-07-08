@@ -1,0 +1,3 @@
+connection_homepage:
+    path:     /
+    defaults: { _controller: ConnectionWebBundle:Frontend:index }

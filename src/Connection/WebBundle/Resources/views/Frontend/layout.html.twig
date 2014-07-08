@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            {% block title %}
+                {{ settings.title|default() }}
+            {% endblock %}
+        </title>
+
+        <meta charset="UTF-8">
+        <meta name="description" content="{{ settings.meta_description|default() }}">
+        <meta name="keywords" content="{{ settings.meta_keywords|default() }}">
+
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+
+        {# stylesheets... #}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/bootstrap.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/bootstrap-theme.css') }}" type="text/css" />
+
+        {% stylesheets output='assets/compiled/frontend.css' filter='cssrewrite'
+            '@ConnectionWebBundle/Resources/assets/css/frontend.css'
+        %}
+        <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
+            {% endstylesheets %}
+        {% endblock %}
+
+        <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <style type="text/css">
+            body {background-color: #fff;}
+        </style>
+    </head>
+    <body>
+
+        <div class="container">
+			{% block header %}
+				{% include 'ConnectionWebBundle:Frontend/Parts:_header.html.twig' %}
+			{% endblock %}
+
+            {% block flashes %}
+                {% for name, flashes in app.session.flashbag.all if name in ['success', 'error', 'notice', 'fos_user_success'] %}
+                    {% for flash in flashes %}
+                        <div class="alert alert-{{ name == 'fos_user_success' ? 'success' : name == 'error' ? 'danger' : name == 'notice' ? 'warning' : name }}">
+                            <a class="close" data-dismiss="alert" href="#">×</a>
+                            {{ flash|trans }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+            {% endblock %}
+
+			{% block main %}
+                {% block content %}
+                {% endblock %}
+            {% endblock %}
+
+            {% block footer %}
+            {% endblock %}
+        </div>
+
+        <div class="footer">
+{#        {% include 'ConnectionWebBundle:Frontend:_footer.html.twig' %}#}
+        </div>
+
+        {# javascript... #}
+        {% block javascript %}
+            <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jquery-1.11.1.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/bootstrap.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jquery-ui.min.js') }}"></script>
+
+            {% javascripts output='assets/compiled/frontend.js'
+                '@ConnectionWebBundle/Resources/assets/js/frontend.js'
+            %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        {% endblock %}
+    </body>
+</html>

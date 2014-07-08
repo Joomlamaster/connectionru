@@ -1,0 +1,7 @@
+security:
+  login:
+    username_hint: User name or e-mail
+    password_hint: Your password
+    submit: Sign In
+form:
+  email_confirmation: Confirm Email

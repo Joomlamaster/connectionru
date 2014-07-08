@@ -1,0 +1,5 @@
+connection_user:
+    resource: "@ConnectionUserBundle/Resources/config/routing.yml"
+
+connection_web:
+    resource: "@ConnectionWebBundle/Resources/config/routing/routing.yml"

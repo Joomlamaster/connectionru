@@ -1,0 +1,33 @@
+{% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
+
+{% block content %}
+<div id="top-navbar">
+    {{ render(controller("ConnectionWebBundle:Frontend:topNavbar")) }}
+</div>
+<div id="main">
+    <div class="row">
+        <div class="col-lg-5">
+            <div id="registration-box">
+                <ul class="nav nav-tabs" id="myTab">
+                    <li class="active"><a data-toggle="tab" href="#quick-free-registration">QUICK FREE REGISTRATION</a></li>
+                    <li><a data-toggle="tab" href="#quick-search">QUICK SEARCH</a></li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div id="quick-free-registration" class="tab-pane fade in active">
+                        {{ render(controller("ConnectionUserBundle:Registration:register")) }}
+                    </div>
+                    <div id="quick-search" class="tab-pane fade">
+                        {#{{ render(controller("ConnectionUserBundle:Registration:register")) }}#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jquery.watermark.js') }}"></script>
+{% endblock %}

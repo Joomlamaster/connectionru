@@ -1,0 +1,341 @@
+<?php
+
+namespace Connection\CoreBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use DateTime;
+use FOS\UserBundle\Model\User as BaseUser;
+
+/**
+ * User
+ *
+ * @ORM\Table(name="user")
+ * @ORM\Entity
+ */
+class User extends BaseUser
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="bigint")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password_confirmation_token", type="string", length=255)
+     */
+    protected $passwordConfirmationToken;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="first_name", type="string", length=50)
+     * @Assert\NotBlank(message="Please enter your first name.", groups={"Registration", "Profile"})
+     * @Assert\Length(
+     *      min=3,
+     *      max=50,
+     *      minMessage="First name is too short",
+     *      maxMessage="First name is too long",
+     *      groups={"Registration", "Profile"}
+     * )
+     */
+    protected $firstName;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="last_name", type="string", length=50)
+     * @Assert\NotBlank(message="Please enter your last name.", groups={"Registration", "Profile"})
+     * @Assert\Length(
+     *      min=3,
+     *      max=50,
+     *      minMessage="Last name is too short",
+     *      maxMessage="Last name is too long",
+     *      groups={"Registration", "Profile"}
+     * )
+     */
+    protected $lastName;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="gender", type="smallint")
+     */
+    protected $gender;
+
+    /**
+     * @var DateTime
+     *
+     * @ORM\Column(name="birthdate", type="date")
+     */
+    protected $birthdate;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="age", type="integer")
+     */
+    protected $age;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="seek", type="smallint")
+     */
+    protected $seek;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="looking_for", type="integer")
+     */
+    protected $lookingFor;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="originally_from", type="bigint")
+     */
+    protected $originallyFrom;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="education", type="integer")
+     */
+    protected $education;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="profession", type="integer")
+     */
+    protected $profession;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="income", type="integer")
+     */
+    protected $income;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="religion", type="integer")
+     */
+    protected $religion;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="telephone", type="string", length=50)
+     */
+    protected $telephone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="mobile", type="string", length=50)
+     */
+    protected $mobile;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="interests_and_hobbies", type="string", length=600)
+     */
+    protected $interestsAndHobbies;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="marital_status", type="integer")
+     */
+    protected $maritalStatus;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="height", type="integer")
+     */
+    protected $height;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="weight", type="integer")
+     */
+    protected $weight;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="eye_color", type="integer")
+     */
+    protected $eyeColor;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="hair_color", type="integer")
+     */
+    protected $hairColor;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="smoking", type="integer")
+     */
+    protected $smoking;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="drinking", type="integer")
+     */
+    protected $drinking;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="have_children", type="integer")
+     */
+    protected $haveChildren;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="want_children", type="integer")
+     */
+    protected $wantChildren;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="lives_with_children", type="integer")
+     */
+    protected $livesWithChildren;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="open_to_person_with_kids", type="integer")
+     */
+    protected $openToPersonWithKids;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="ethnicity", type="integer")
+     */
+    protected $ethnicity;
+
+    /**
+     * @var DateTime
+     *
+     * @ORM\Column(name="last_login", type="datetime")
+     */
+    //protected $lastLogin;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="amazon_id", type="string", length=255)
+     */
+    protected $amazonId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="facebook_id", type="string", length=255)
+     */
+    protected $facebookId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="google_id", type="string", length=255)
+     */
+    protected $googleId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="packet_plan", type="integer")
+     */
+    protected $packetPlan;
+
+    /**
+     * @var DateTime
+     *
+     * @ORM\Column(name="packet_activated", type="datetime")
+     */
+    protected $packetActivated;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="packet_active", type="boolean")
+     */
+    protected $packetActive;
+
+    /**
+     * @var string
+     *
+     * @ORM\OneToMany(targetEntity="UserLanguage", mappedBy="user", cascade={"persist", "remove"})
+     */
+    protected $languages;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="about_me", type="string", length=600)
+     */
+    protected $aboutMe;
+
+    /**
+     * @var DateTime
+     *
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    protected $createdAt;
+
+    /**
+     * @var DateTime
+     *
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    protected $updatedAt;
+
+    /**
+     * @var DateTime
+     *
+     * @ORM\Column(name="deleted_at", type="datetime")
+     */
+    protected $deletedAt;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\OneToMany(targetEntity="UserImage", mappedBy="user", cascade={"persist", "remove"})
+     */
+    protected $images;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\OneToMany(targetEntity="UserAddress", mappedBy="user", cascade={"persist", "remove"})
+     */
+    protected $addresses;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="user", cascade={"persist", "remove"})
+     */
+    protected $events;
+
+}
