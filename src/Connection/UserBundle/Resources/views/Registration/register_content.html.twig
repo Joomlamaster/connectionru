@@ -1,99 +1,25 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
-    {{ form_row(form.username) }}
-    {{ form_row(form.plainPassword) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.emailConfirmation) }}
-    {{ form_row(form.birthDate) }}
-    {{ form_row(form.aboutMe) }}
-    {{ form_row(form.interestsAndHobbies) }}
-    {{ form_row(form.gender) }}
-    {{ form_row(form.location.country) }}
-    {{ form_row(form.location.region) }}
-    {{ form_row(form.location.city) }}
-    {{ form_row(form.location.zipCode) }}
-    {{ form_row(form.originallyFrom) }}
-    {{ form_row(form.seek) }}
-    {{ form_row(form.lookingFor) }}
-    {{ form_row(form.maritalStatus) }}
-    {{ form_row(form.height) }}
-    {{ form_row(form.weight) }}lbs
-    {{ form_row(form.eyeColor) }}
-    {{ form_row(form.hairColor) }}
-    {{ form_row(form.smoking) }}
-    {{ form_row(form.drinking) }}
-    {{ form_row(form.education) }}
-    {{ form_row(form.profession) }}
-    {{ form_row(form.languages) }}
-    {{ form_row(form.haveChildren) }}
-    {{ form_row(form.wantChildren) }}
-    {{ form_row(form.openToPersonWithKids) }}
-    {{ form_row(form.religion) }}
-    {{ form_row(form.ethnicity) }}
-
-    <div>
-        <input type="submit" value="{{ 'registration.submit'|trans }}" />
-    </div>
-</form>
-<script type="text/javascript">
-
-    function countryAjaxCall(){
-        var val = $('#{{ form.location.country.vars.id }}').val();
-        if(val == null){
-            return;
-        }
-        $.ajax({
-            type: "POST",
-            url: "{{ path('user_register_location_ajax_call') }}?country=" + val,
-            success: function(data) {
-                var empty = true;
-                $('#{{ form.location.region.vars.id }}').html('').parent().hide();
-                $('#{{ form.location.city.vars.id }}').html('').parent().hide();
-                $.each(data, function(k, v) {
-                    empty = false;
-                    $('#{{ form.location.region.vars.id }}').append('<option value="' + v.id + '">' + v.name + '</option>');
-                });
-                if(!empty){
-                    $('#{{ form.location.region.vars.id }}').parent().show();
-                }
-                regionAjaxCall();
-            }
-        });
-    }
-    function regionAjaxCall(){
-        var val = $('#{{ form.location.region.vars.id }}').val();
-        if(val == null){
-            return;
-        }
-        $.ajax({
-            type: "POST",
-            url: "{{ path('user_register_location_ajax_call') }}?region=" + val,
-            success: function(data) {
-                var empty = true;
-                $('#{{ form.location.city.vars.id }}').html('').parent().hide();
-                $.each(data, function(k, v) {
-                    empty = false;
-                    $('#{{ form.location.city.vars.id }}').append('<option value="' + v.id + '">' + v.name + '</option>');
-                });
-                if(!empty){
-                    $('#{{ form.location.city.vars.id }}').parent().show();
-                }
-            }
-        });
-    }
-    function registrationLoad(){
-        $('#{{ form.location.region.vars.id }}').html('').parent().hide();
-        $('#{{ form.location.city.vars.id }}').html('').parent().hide();
-        $('#{{ form.location.country.vars.id }}').change(function(){
-            countryAjaxCall();
-        });
-        $('#{{ form.location.region.vars.id }}').change(function(){
-            regionAjaxCall();
-        });
-        countryAjaxCall();
-    }
-
-
-    window.addEventListener('load', registrationLoad);
-</script>
+{{ form_start(form, {'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+        {{ form_errors(form) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.plainPassword) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.profile.languages) }}
+        {{ form_row(form.profile.birthdate) }}
+        {{ form_row(form.profile.gender) }}
+        <div id="country_state">
+            <div id="country">
+                {{ form_row(form.profile.country) }}
+            </div>
+            {% if (form.profile.state is defined) %}
+                <div id="state">
+                    {{ form_row(form.profile.state) }}
+                </div>
+            {% endif %}
+        </div>
+        {{ form_row(form.profile.ethnicity) }}
+        {{ form_row(form.agree) }}
+        {{ form_row(form.register) }}
+        {{ form_widget(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

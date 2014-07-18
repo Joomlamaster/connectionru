@@ -17,16 +17,28 @@ class Language
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=45)
      */
     private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="code", type="string", length=45)
+     */
+    private $code;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Connection\UserBundle\Entity\Profile", mappedBy="language")
+     **/
+    private $profile;
 
     public function __construct($id, $name){
         $this->id = $id;

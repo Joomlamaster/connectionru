@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new Connection\CoreBundle\ConnectionCoreBundle(),
             new Connection\WebBundle\ConnectionWebBundle(),
             new Connection\UserBundle\ConnectionUserBundle(),
+            new Connection\EventBundle\ConnectionEventBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

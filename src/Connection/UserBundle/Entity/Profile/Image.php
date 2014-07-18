@@ -1,6 +1,6 @@
 <?php
 
-namespace Connection\CoreBundle\Entity;
+namespace Connection\UserBundle\Entity\Profile;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -34,6 +34,12 @@ class Image
      * @ORM\Column(name="path", type="string", length=255)
      */
     private $path;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\Gallery", inversedBy="images")
+     * @ORM\JoinColumn(name="gallery", referencedColumnName="id")
+     **/
+    private $gallery;
 
 
     /**
@@ -91,4 +97,22 @@ class Image
     {
         return $this->path;
     }
+
+    /**
+     * @param mixed $gallery
+     */
+    public function setGallery ( $gallery )
+    {
+        $this->gallery = $gallery;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getGallery ()
+    {
+        return $this->gallery;
+    }
+
+
 }

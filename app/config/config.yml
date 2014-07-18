@@ -72,7 +72,7 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Connection\CoreBundle\Entity\User
+    user_class: Connection\UserBundle\Entity\User
     registration:
       form:
         type: connection_user_registration

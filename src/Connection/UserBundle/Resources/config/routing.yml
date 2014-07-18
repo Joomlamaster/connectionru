@@ -17,11 +17,6 @@ fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
 
-user_header_security_check:
-    path: /hlogin
-    defaults:
-      _controller: ConnectionUserBundle:Security:userHeaderLogin
-
 user_register_location_ajax_call:
     path: /register/ajax
     methods: [POST]

@@ -1,13 +1,13 @@
 <?php
 
-namespace Connection\CoreBundle\Entity;
+namespace Connection\UserBundle\Entity\Profile;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Address
  *
- * @ORM\Table(name="address")
+ * @ORM\Table(name="user_address")
  * @ORM\Entity
  */
 class Address
@@ -57,18 +57,10 @@ class Address
     private $zip;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created_at", type="datetime")
-     */
-    private $createdAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="updated_at", type="datetime")
-     */
-    private $updatedAt;
+     * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\User", inversedBy="addresses")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id")
+     **/
+    private $user;
 
 
     /**
@@ -194,51 +186,5 @@ class Address
     public function getZip()
     {
         return $this->zip;
-    }
-
-    /**
-     * Set createdAt
-     *
-     * @param \DateTime $createdAt
-     * @return Address
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Get createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Set updatedAt
-     *
-     * @param \DateTime $updatedAt
-     * @return Address
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    /**
-     * Get updatedAt
-     *
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
     }
 }

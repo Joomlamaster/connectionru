@@ -22,11 +22,10 @@ class State
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="code", type="string", length=50)
-     */
-    private $code;
+     * @ORM\ManyToOne(targetEntity="Connection\CoreBundle\Entity\Country", inversedBy="state")
+     * @ORM\JoinColumn(name="country", referencedColumnName="id")
+     **/
+    private $country;
 
     /**
      * @var string
@@ -35,60 +34,72 @@ class State
      */
     private $name;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="timezone", type="string", length=50)
+     */
+    private $timezone;
 
     /**
-     * Get id
-     *
-     * @return integer
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\OneToMany(targetEntity="Connection\UserBundle\Entity\Profile", mappedBy="state")
      */
-    public function getId()
+    private $profile;
+
+    /**
+     * @return int
+     */
+    public function getId ()
     {
         return $this->id;
     }
-
     /**
-     * Set code
-     *
-     * @param string $code
-     * @return State
+     * @param mixed $country
      */
-    public function setCode($code)
+    public function setCountry ( $country )
     {
-        $this->code = $code;
-
-        return $this;
+        $this->country = $country;
     }
 
     /**
-     * Get code
-     *
-     * @return string
+     * @return mixed
      */
-    public function getCode()
+    public function getCountry ()
     {
-        return $this->code;
+        return $this->country;
     }
 
+
     /**
-     * Set name
-     *
      * @param string $name
-     * @return State
      */
-    public function setName($name)
+    public function setName ( $name )
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
-     * Get name
-     *
      * @return string
      */
-    public function getName()
+    public function getName ()
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $timezone
+     */
+    public function setTimezone ( $timezone )
+    {
+        $this->timezone = $timezone;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTimezone ()
+    {
+        return $this->timezone;
     }
 }
