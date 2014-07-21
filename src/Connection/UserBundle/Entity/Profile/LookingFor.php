@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Address
  *
- * @ORM\Table(name="user_profession")
+ * @ORM\Table(name="user_looking_for")
  * @ORM\Entity
  */
-class Profession
+class LookingFor
 {
     /**
      * @var integer
@@ -30,7 +30,7 @@ class Profession
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
-     * @ORM\OneToMany(targetEntity="Connection\UserBundle\Entity\Profile", mappedBy="profession")
+     * @ORM\OneToMany(targetEntity="Connection\UserBundle\Entity\Profile", mappedBy="lookingFor")
      */
     private $profile;
 

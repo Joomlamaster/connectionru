@@ -43,6 +43,12 @@ class Profile
     protected $seek;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\LookingFor", inversedBy="profile")
+     * @ORM\JoinColumn(name="looking_for", referencedColumnName="id")
+     **/
+    protected $lookingFor;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Connection\CoreBundle\Entity\Country", inversedBy="profile")
      * @ORM\JoinColumn(name="country", referencedColumnName="id")
      **/

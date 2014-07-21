@@ -7,9 +7,9 @@ services:
         arguments: ['@service_container']
         tags:
           - { name: form.type, alias: connection_user_registration }
-
-    connection_user.registration.address.form.type:
-        class: %connection_user.registration.address.form.type.class%
-        arguments: ['@service_container']
-        tags:
-          - { name: form.type, alias: connection_registration_address }
+#
+#    connection_user.registration.address.form.type:
+#        class: %connection_user.registration.address.form.type.class%
+#        arguments: ['@service_container']
+#        tags:
+#          - { name: form.type, alias: connection_registration_address }

@@ -48,6 +48,12 @@ class State
     private $profile;
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\OneToMany(targetEntity="Connection\EventBundle\Entity\Event", mappedBy="state")
+     */
+    private $event;
+
+    /**
      * @return int
      */
     public function getId ()
@@ -101,5 +107,37 @@ class State
     public function getTimezone ()
     {
         return $this->timezone;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $event
+     */
+    public function setEvent ( $event )
+    {
+        $this->event = $event;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getEvent ()
+    {
+        return $this->event;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $profile
+     */
+    public function setProfile ( $profile )
+    {
+        $this->profile = $profile;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getProfile ()
+    {
+        return $this->profile;
     }
 }

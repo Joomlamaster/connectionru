@@ -1,6 +1,6 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{{ form_start(form, {'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+{{ form_start(form, {'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register master_slave'}}) }}
         {{ form_errors(form) }}
         {{ form_row(form.username) }}
         {{ form_row(form.plainPassword) }}
@@ -8,12 +8,12 @@
         {{ form_row(form.profile.languages) }}
         {{ form_row(form.profile.birthdate) }}
         {{ form_row(form.profile.gender) }}
-        <div id="country_state">
-            <div id="country">
+        <div id="master_slave">
+            <div>
                 {{ form_row(form.profile.country) }}
             </div>
             {% if (form.profile.state is defined) %}
-                <div id="state">
+                <div id="slave_block">
                     {{ form_row(form.profile.state) }}
                 </div>
             {% endif %}
@@ -21,5 +21,4 @@
         {{ form_row(form.profile.ethnicity) }}
         {{ form_row(form.agree) }}
         {{ form_row(form.register) }}
-        {{ form_widget(form._token) }}
 {{ form_end(form, {'render_rest': false}) }}

@@ -16,9 +16,3 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /profile
-
-user_register_location_ajax_call:
-    path: /register/ajax
-    methods: [POST]
-    defaults:
-      _controller: ConnectionUserBundle:Registration:locationAjaxCall

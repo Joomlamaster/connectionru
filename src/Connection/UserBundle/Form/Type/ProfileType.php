@@ -25,6 +25,7 @@ class ProfileType extends AbstractType
         $builder->add('country', 'entity', array(
             'class' => 'ConnectionCoreBundle:Country',
             'property' => 'name',
+            'attr' => array('class' => 'master')
         ));
 
         $formModifier = function (FormInterface $form, Country $country = null) {
@@ -32,6 +33,7 @@ class ProfileType extends AbstractType
                 $form->add('state', 'entity', array(
                     'class' => 'ConnectionCoreBundle:State',
                     'property' => 'name',
+                    'attr' => array('class' => 'slave'),
                     'query_builder' => function(EntityRepository $er) use ($country) {
                             return $er
                                 ->createQueryBuilder('s')

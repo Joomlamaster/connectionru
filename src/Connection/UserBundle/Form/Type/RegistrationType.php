@@ -37,7 +37,8 @@ class RegistrationType extends BaseType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Connection\UserBundle\Entity\User',
-            'cascade_persist' => true
+            'cascade_persist' => true,
+            'csrf_protection' => false
         ));
     }
 

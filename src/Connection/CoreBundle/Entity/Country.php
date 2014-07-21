@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Country
  *
  * @ORM\Table(name="country")
- * @ORM\Entity(repositoryClass="Connection\CoreBundle\Repository\CountryRepository")
+ * @ORM\Entity()
  */
 class Country
 {
@@ -108,6 +108,12 @@ class Country
      * @ORM\OneToMany(targetEntity="Connection\UserBundle\Entity\Profile", mappedBy="country")
      */
     private $profile;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\OneToMany(targetEntity="Connection\EventBundle\Entity\Event", mappedBy="country")
+     */
+    private $event;
 
     /**
      * @return int

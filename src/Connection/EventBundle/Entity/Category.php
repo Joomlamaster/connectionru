@@ -1,16 +1,16 @@
 <?php
 
-namespace Connection\CoreBundle\Entity;
+namespace Connection\EventBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Image
+ * Category
  *
- * @ORM\Table(name="language")
+ * @ORM\Table(name="event_category")
  * @ORM\Entity
  */
-class Language
+class Category
 {
     /**
      * @var integer
@@ -24,26 +24,15 @@ class Language
     /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=45)
+     * @ORM\Column(name="name", type="string", length=50)
      */
     private $name;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="code", type="string", length=45)
-     */
-    private $code;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Connection\UserBundle\Entity\Profile", mappedBy="languages")
+     * @ORM\ManyToMany(targetEntity="Connection\EventBundle\Entity\Event", mappedBy="category")
      **/
-    private $profile;
+    private $event;
 
-    public function __construct($id, $name){
-        $this->id = $id;
-        $this->name = $name;
-    }
 
     /**
      * Get id
@@ -59,7 +48,7 @@ class Language
      * Set name
      *
      * @param string $name
-     * @return Language
+     * @return Category
      */
     public function setName($name)
     {
@@ -78,20 +67,26 @@ class Language
         return $this->name;
     }
 
-    public function __toString(){
-        return $this->getName();
+    /**
+     * Set event
+     *
+     * @param \stdClass $event
+     * @return Category
+     */
+    public function setEvent($event)
+    {
+        $this->event = $event;
+
+        return $this;
     }
 
     /**
-     * Set id
+     * Get event
      *
-     * @param integer $id
-     * @return Language
+     * @return \stdClass 
      */
-    public function setId($id)
+    public function getEvent()
     {
-        $this->id = $id;
-
-        return $this;
+        return $this->event;
     }
 }
