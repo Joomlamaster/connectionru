@@ -256,7 +256,7 @@ class User extends BaseUser
 
     /**
      * @ORM\PrePersist
-     * @ORM\preUpdate
+     * @ORM\PreUpdate
      */
     public function setUpdatedAt ()
     {
@@ -272,7 +272,7 @@ class User extends BaseUser
     }
 
     /**
-     * @ORM\preRemove
+     * @ORM\PreRemove
      */
     public function setDeletedAt ()
     {
@@ -288,8 +288,8 @@ class User extends BaseUser
     }
 
     /**
-     * @ORM\postPersist
-     * @ORM\postUpdate
+     * @ORM\PostPersist
+     * @ORM\PostUpdate
      */
     public function setProfileUser ()
     {

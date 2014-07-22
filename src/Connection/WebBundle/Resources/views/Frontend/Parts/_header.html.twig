@@ -1,9 +1,15 @@
-<div>
-    {% if is_granted('IS_AUTHENTICATED_FULLY') or is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-
-    {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
-        <div id="header-login">
-            {{ render(controller("ConnectionUserBundle:Security:login", {'request': app.request})) }}
+<div class="navbar navbar-first" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <div class="sprite sprite-navbar-facebook"></div>
+            <div class="sprite sprite-navbar-twitter"></div>
         </div>
-    {% endif %}
+        <div class="navbar-collapse collapse">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') or is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+
+            {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
+                {{ render(controller("ConnectionUserBundle:Security:login", {'request': app.request})) }}
+            {% endif %}
+        </div>
+    </div>
 </div>

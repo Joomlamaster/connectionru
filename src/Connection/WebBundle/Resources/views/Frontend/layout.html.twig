@@ -20,6 +20,8 @@
 
         {% stylesheets output='assets/compiled/frontend.css' filter='cssrewrite'
             '@ConnectionWebBundle/Resources/assets/css/frontend.css'
+            '@ConnectionWebBundle/Resources/public/css/main.css'
+            '@ConnectionWebBundle/Resources/public/css/sprite.css'
         %}
         <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
             {% endstylesheets %}
@@ -29,39 +31,57 @@
         <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <style type="text/css">
-            body {background-color: #fff;}
-        </style>
+
+        <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=latin,cyrillic-ext' rel='stylesheet' type='text/css'>
     </head>
     <body>
+        {% block header %}
+            {% include 'ConnectionWebBundle:Frontend/Parts:_header.html.twig' %}
+        {% endblock %}
+
+        {% block flashes %}
+            {% for name, flashes in app.session.flashbag.all if name in ['success', 'error', 'notice', 'fos_user_success'] %}
+                {% for flash in flashes %}
+                    <div class="alert alert-{{ name == 'fos_user_success' ? 'success' : name == 'error' ? 'danger' : name == 'notice' ? 'warning' : name }}">
+                        <a class="close" data-dismiss="alert" href="#">×</a>
+                        {{ flash|trans }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        {% endblock %}
+
+        {% block main %}
+            {% block content %}
+            {% endblock %}
+        {% endblock %}
+
+        {% block footer %}
+        {% endblock %}
+
 
         <div class="container">
-			{% block header %}
-				{% include 'ConnectionWebBundle:Frontend/Parts:_header.html.twig' %}
-			{% endblock %}
+            <footer>
+                {#{% include 'ConnectionWebBundle:Frontend:_footer.html.twig' %}#}
 
-            {% block flashes %}
-                {% for name, flashes in app.session.flashbag.all if name in ['success', 'error', 'notice', 'fos_user_success'] %}
-                    {% for flash in flashes %}
-                        <div class="alert alert-{{ name == 'fos_user_success' ? 'success' : name == 'error' ? 'danger' : name == 'notice' ? 'warning' : name }}">
-                            <a class="close" data-dismiss="alert" href="#">×</a>
-                            {{ flash|trans }}
-                        </div>
-                    {% endfor %}
-                {% endfor %}
-            {% endblock %}
-
-			{% block main %}
-                {% block content %}
-                {% endblock %}
-            {% endblock %}
-
-            {% block footer %}
-            {% endblock %}
-        </div>
-
-        <div class="footer">
-{#        {% include 'ConnectionWebBundle:Frontend:_footer.html.twig' %}#}
+                <div class="col-xs-2">
+                    <div class="footer-logo sprite sprite-logo-bottom"></div>
+                </div>
+                <div class="col-xs-6">
+                    <p class="copy">2014 All rights reserved. Copyright Terms of service/Pravacy policy Info@ConnectionRu.com</p>
+                </div>
+                <div class="col-xs-4">
+                    <ul class="bottom-right-menu">
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">privacy</a></li>
+                        <li><a href="#">contact us</a></li>
+                        <li class="sprite sprite-rss"></li>
+                        <li class="sprite sprite-facebook"></li>
+                        <li class="sprite sprite-twitter"></li>
+                        <li class="sprite sprite-instagram"></li>
+                        <li class="sprite sprite-pinterest"></li>
+                    </ul>
+                </div>
+            </footer>
         </div>
 
         {# javascript... #}
