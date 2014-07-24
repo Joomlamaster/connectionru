@@ -41,12 +41,10 @@ class EventController extends Controller
         $form = $this->createForm(new EventType(), $event);
         $form->handleRequest($request);
 
-        if ( $form->isSubmitted() ) {
-            if ( $form->isValid() ) {
-                $em->persist($event);
-                $em->flush();
-                return $this->redirect( $this->generateUrl('event_manage', array('id' => $event->getId())) );
-            }
+        if ( $form->isSubmitted() && $form->isValid() ) {
+            $em->persist($event);
+            $em->flush();
+            return $this->redirect( $this->generateUrl('event_manage', array('id' => $event->getId())) );
         }
 
         return array(

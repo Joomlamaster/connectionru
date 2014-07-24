@@ -1,7 +1,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-    <form class="navbar-form navbar-right" role="form" id='login-form' method="post">
+    <form class="navbar-form navbar-right" action="{{ path("fos_user_security_check") }}" role="form" id='login-form' method="post">
         {% if error %}
             <div class="alert alert-danger hlogin-error" role="alert">{{ error|trans }}</div>
         {% endif %}
@@ -18,35 +18,35 @@
             <input type="checkbox" value=""> {{ 'security.login.remember_me'|trans }}
         </label>
     </form>
-    <script type="text/javascript">
-        function headerLoginLoad() {
-            $('#username').watermark('{{ 'security.login.username_hint'|trans({},'messages') }}');
-            $('#password').watermark('{{ 'security.login.password_hint'|trans({},'messages') }}');
-            $('#login-form').submit(function(e){
-                e.preventDefault();
-                $.ajax({
-                    type        : $('#login-form').attr( 'method' ),
-                    url         : '{{ path("fos_user_security_check") }}',
-                    data        : $('#login-form').serialize(),
-                    dataType    : "json",
-                    success     : function(data, status, object) {
-                        if(data.error) {
-                            $('.login-error').html(data.message);
-                        }
-                    },
-                    error: function(data, status, object){
-                        $('#header-login').html(data.responseText);
-                    }
-                });
-                return false;
-            });
-        }
-        if(window.jQuery){
-            headerLoginLoad();
-        } else {
-            window.addEventListener('load', headerLoginLoad);
-        }
-    </script>
+    {#<script type="text/javascript">#}
+        {#function headerLoginLoad() {#}
+            {#$('#username').watermark('{{ 'security.login.username_hint'|trans({},'messages') }}');#}
+            {#$('#password').watermark('{{ 'security.login.password_hint'|trans({},'messages') }}');#}
+            {#$('#login-form').submit(function(e){#}
+                {#e.preventDefault();#}
+                {#$.ajax({#}
+                    {#type        : $('#login-form').attr( 'method' ),#}
+                    {#url         : '{{ path("fos_user_security_check") }}',#}
+                    {#data        : $('#login-form').serialize(),#}
+                    {#dataType    : "json",#}
+                    {#success     : function(data, status, object) {#}
+                        {#if(data.error) {#}
+                            {#$('.login-error').html(data.message);#}
+                        {#}#}
+                    {#},#}
+                    {#error: function(data, status, object){#}
+                        {#$('#header-login').html(data.responseText);#}
+                    {#}#}
+                {#});#}
+                {#return false;#}
+            {#});#}
+        {#}#}
+        {#if(window.jQuery){#}
+            {#headerLoginLoad();#}
+        {#} else {#}
+            {#window.addEventListener('load', headerLoginLoad);#}
+        {#}#}
+    {#</script>#}
 
 {% endblock fos_user_content %}
 

@@ -1,6 +1,5 @@
 parameters:
     connection_user.registration.form.type.class: Connection\UserBundle\Form\Type\RegistrationType
-    connection_user.registration.address.form.type.class: Connection\UserBundle\Form\Type\RegistrationAddressType
 services:
     connection_user.registration.form.type:
         class: %connection_user.registration.form.type.class%

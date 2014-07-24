@@ -6,7 +6,7 @@
         </div>
         <div class="navbar-collapse collapse">
             {% if is_granted('IS_AUTHENTICATED_FULLY') or is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-
+                <h4 class="navbar-form navbar-right" style="color:#fff;">Hello {{ app.user.username }}</h4>
             {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
                 {{ render(controller("ConnectionUserBundle:Security:login", {'request': app.request})) }}
             {% endif %}
