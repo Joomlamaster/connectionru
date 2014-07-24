@@ -58,21 +58,35 @@ class EventType extends AbstractType
             }
         );
         $builder
-            ->add('title')
-            ->add('description', 'textarea')
-            ->add('eventDate', 'datetime')
+            ->add('title', 'text', array(
+                'label' => 'Event  posting title:'
+            ))
+            ->add('description', 'textarea', array(
+                    'attr' => array(
+                        'placeholder' => "Example:  let's get together and celebrated it's cool Russian party in the style bits!"
+                    )
+                ))
+            ->add('eventDate', 'date', array(
+                'widget'    => 'single_text',
+                'attr'      => array(
+                    'class' => 'input-append date'
+                )
+            ))
             ->add('category', 'entity', array(
                 'class' => 'ConnectionEventBundle:Category',
                 'property' => 'name',
                 'multiple' => true,
-                'expanded' => true
+                'expanded' => true,
+                'label'    => 'Select a category:'
             ))
             ->add('contactName')
             ->add('email')
             ->add('phone')
             ->add('lat', 'hidden')
             ->add('lng', 'hidden')
-            ->add('save', 'submit')
+            ->add('save', 'submit', array(
+                'label' => 'Submit'
+            ));
         ;
     }
 

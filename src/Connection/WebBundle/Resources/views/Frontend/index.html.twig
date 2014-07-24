@@ -1,87 +1,86 @@
 {% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
 
-{% block content %}
-    {{ render(controller("ConnectionWebBundle:Frontend:topNavbar")) }}
+{% block theme %}homepage{% endblock %}
 
-    <div class="jumbotron">
-        <div class="container">
-            <div class="row main-block">
-                <div class="col-xs-7">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="active"><a href="#registration" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-time"></span> Quick Free Registration</a></li>
-                        <li><a href="#search" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-search"></span> Quick Search</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="registration">
-                            {{ render(controller("FOSUserBundle:Registration:register")) }}
-                        </div>
-                        <div class="tab-pane" id="search">
-                            {#{{ render(controller("ConnectionUserBundle:Registration:register")) }}#}
-                        </div>
+{% block content %}
+
+        <div class="row main-block">
+            <div class="col-xs-7">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#registration" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-time"></span> Quick Free Registration</a></li>
+                    <li><a href="#search" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-search"></span> Quick Search</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="registration">
+                        {{ render(controller("FOSUserBundle:Registration:register")) }}
+                    </div>
+                    <div class="tab-pane" id="search">
+                        {#{{ render(controller("ConnectionUserBundle:Registration:register")) }}#}
                     </div>
                 </div>
-                <div class="col-xs-5">
-                    <div class="people">
-                        <div class="face">
-                            <div class="info">
-                                <p class="name">Nick Cave</p>
-                                <p>34, Brooklyn, NY</p>
-                                <p>Looking for:</p>
-                                <p class="blue">Anything Leasure &</p>
-                                <a href="#">see this user</a>
-                            </div>
+            </div>
+            <div class="col-xs-5">
+                <div class="people">
+                    <div class="face">
+                        <div class="info">
+                            <p class="name">Nick Cave</p>
+                            <p>34, Brooklyn, NY</p>
+                            <p>Looking for:</p>
+                            <p class="blue">Anything Leasure &</p>
+                            <a href="#">see this user</a>
                         </div>
-                        <div class="face">
-                            <div class="info">
-                                <p class="name">Nick Cave 2</p>
-                                <p>34, Brooklyn, NY</p>
-                                <p>Looking for:</p>
-                                <p class="blue">Anything Leasure &</p>
-                                <a href="#">see this user</a>
-                            </div>
-                        </div>
-                        <div class="face">
-                            <div class="info">
-                                <p class="name">Nick Cave 3</p>
-                                <p>34, Brooklyn, NY</p>
-                                <p>Looking for:</p>
-                                <p class="blue">Anything Leasure &</p>
-                                <a href="#">see this user</a>
-                            </div>
-                        </div>
-                        <div class="face">
-                            <div class="info">
-                                <p class="name">Nick Cave 4</p>
-                                <p>34, Brooklyn, NY</p>
-                                <p>Looking for:</p>
-                                <p class="blue">Anything Leasure &</p>
-                                <a href="#">see this user</a>
-                            </div>
-                        </div>
-                        <div class="face">
-                            <div class="info">
-                                <p class="name">Nick Cave 5</p>
-                                <p>34, Brooklyn, NY</p>
-                                <p>Looking for:</p>
-                                <p class="blue">Anything Leasure &</p>
-                                <a href="#">see this user</a>
-                            </div>
-                        </div>
-                        <div class="face">
-                            <div class="info">
-                                <p class="name">Nick Cave 6</p>
-                                <p>34, Brooklyn, NY</p>
-                                <p>Looking for:</p>
-                                <p class="blue">Anything Leasure &</p>
-                                <a href="#">see this user</a>
-                            </div>
-                        </div>
-                        <a class="more pull-right" href="#">More profile ></a>
                     </div>
+                    <div class="face">
+                        <div class="info">
+                            <p class="name">Nick Cave 2</p>
+                            <p>34, Brooklyn, NY</p>
+                            <p>Looking for:</p>
+                            <p class="blue">Anything Leasure &</p>
+                            <a href="#">see this user</a>
+                        </div>
+                    </div>
+                    <div class="face">
+                        <div class="info">
+                            <p class="name">Nick Cave 3</p>
+                            <p>34, Brooklyn, NY</p>
+                            <p>Looking for:</p>
+                            <p class="blue">Anything Leasure &</p>
+                            <a href="#">see this user</a>
+                        </div>
+                    </div>
+                    <div class="face">
+                        <div class="info">
+                            <p class="name">Nick Cave 4</p>
+                            <p>34, Brooklyn, NY</p>
+                            <p>Looking for:</p>
+                            <p class="blue">Anything Leasure &</p>
+                            <a href="#">see this user</a>
+                        </div>
+                    </div>
+                    <div class="face">
+                        <div class="info">
+                            <p class="name">Nick Cave 5</p>
+                            <p>34, Brooklyn, NY</p>
+                            <p>Looking for:</p>
+                            <p class="blue">Anything Leasure &</p>
+                            <a href="#">see this user</a>
+                        </div>
+                    </div>
+                    <div class="face">
+                        <div class="info">
+                            <p class="name">Nick Cave 6</p>
+                            <p>34, Brooklyn, NY</p>
+                            <p>Looking for:</p>
+                            <p class="blue">Anything Leasure &</p>
+                            <a href="#">see this user</a>
+                        </div>
+                    </div>
+                    <a class="more pull-right" href="#">More profile ></a>
                 </div>
             </div>
         </div>
     </div>
+
 {% endblock %}
 
 {% block javascript %}

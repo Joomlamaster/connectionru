@@ -1,35 +1,85 @@
 {% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
+{% form_theme form 'ConnectionUserBundle:Registration:fields.html.twig' %}
+
+{% block breadcrumbs %}
+    <div class="container breadcrumbs">
+        <ul>
+            <li><a href="{{ path('connection_homepage') }}">Main page</a></li>
+            <li>Add an event</li>
+        </ul>
+    </div>
+{% endblock breadcrumbs %}
+
 {% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('bundles/connectionevent/css/google/map.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
+
 {% block content %}
-    <h1>Event edit</h1>
-    {{ form_start(form, {'action': path('event_manage', {id: id}), 'attr': {'class': 'fos_user_registration_register master_slave gmap'}}) }}
-        {{ form_row(form.title) }}
-        {{ form_row(form.description) }}
-        {{ form_row(form.eventDate) }}
-        {{ form_row(form.category) }}
-        {{ form_row(form.contactName) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.phone) }}
-        <div id="master_slave">
-            <div>
-                {{ form_row(form.country) }}
+    <h4>ADD AN EVENT:</h4>
+    {{ form_start(form, {'action': path('event_manage', {id: id}), 'attr': {'class': 'fos_user_registration_register master_slave gmap event'}}) }}
+        <div class="row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-3">
+                {{ form_row(form.category) }}
+                {{ form_row(form.eventDate, {'attr': {'class': 'input-append date' } } ) }}
             </div>
-            {% if (form.state is defined) %}
-                <div id="slave_block">
-                    {{ form_row(form.state) }}
+            <div class="col-xs-3">
+                <div id="master_slave">
+                    <div>
+                        {{ form_row(form.country) }}
+                    </div>
+                    {% if (form.state is defined) %}
+                        <div id="slave_block">
+                            {{ form_row(form.state) }}
+                        </div>
+                    {% endif %}
                 </div>
-            {% endif %}
+            </div>
+            <div class="col-xs-3">
+                {{ form_row(form.contactName) }}
+                {{ form_row(form.email) }}
+                {{ form_row(form.phone) }}
+            </div>
+            <div class="col-xs-2">
+                <div class="clearfix form-inline">
+                    <label>Add a photo:</label>
+                    <div id="add-photo">
+
+                    </div>
+                </div>
+
+            </div>
         </div>
-        {{ form_row(form.lat) }}
-        {{ form_row(form.lng) }}
-        {{ form_row(form.save) }}
+        <div class="row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-3">
+                {{ form_row(form.title) }}
+            </div>
+            <div class="col-xs-6">
+                {{ form_row(form.description) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1"></div>
+            <div class="col-xs-9">
+                <div id="map_canvas"></div>
+                {{ form_row(form.lat) }}
+                {{ form_row(form.lng) }}
+            </div>
+            <div class="col-xs-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-xs-5"></div>
+            <div class="col-xs-3">
+                {{ form_row(form.save, { attr: { class: 'btn-gradient' }}) }}
+            </div>
+            <div class="col-xs-4"></div>
+        </div>
+
     {{ form_errors(form) }}
     {{ form_end(form, {'render_rest': false}) }}
 
-    <div id="map_canvas"></div>
 {% endblock %}
 {% block javascript %}
     {{ parent() }}

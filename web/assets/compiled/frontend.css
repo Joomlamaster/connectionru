@@ -40,15 +40,8 @@ body {
   border-radius: 8px;
   font-size: 12px;
   padding: 0 12px;
-}
-.navbar.navbar-first .navbar-right button.btn {
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 11px;
-  text-transform: uppercase;
-  padding: 2px 7px;
-  background-image: linear-gradient(to bottom right, #f2efed 0%, #bab7b6 100%);
-  box-shadow: 0px 0px 25px 0px rgba(50, 50, 50, 0.7);
+  background-color: white;
+  width: auto;
 }
 .navbar.navbar-first .navbar-right .remember {
   margin-bottom: 0;
@@ -81,10 +74,10 @@ body {
   padding: 10px;
 }
 .jumbotron {
-  background: url('/bundles/connectionweb/img/main-background.png') center 0 no-repeat;
-  background-size: cover;
+  background-color: #ffffff;
   min-height: 521px;
   margin-bottom: 9px;
+  padding-top: 0;
 }
 .jumbotron .main-block {
   margin-top: 28px;
@@ -103,7 +96,8 @@ body {
 }
 .jumbotron .main-block .tab-content {
   width: 323px;
-  background-color: #FFF;
+  background-color: #ededed;
+  opacity: 0.9;
   border: 5px solid #CAECFB;
   margin-top: 5px;
   border-bottom-left-radius: 5px;
@@ -112,59 +106,6 @@ body {
 .jumbotron .main-block .tab-content .tab-pane {
   padding-left: 37px;
   padding-top: 10px;
-}
-.jumbotron .main-block .tab-content .tab-pane#registration .form-group {
-  margin-top: 0px;
-  margin-bottom: 0px;
-}
-.jumbotron .main-block .tab-content .tab-pane#registration .form-group label:first-child {
-  color: #00A0E3;
-  font-size: 12px;
-  margin-top: 8px;
-}
-.jumbotron .main-block .tab-content .tab-pane#registration .form-group .form-control,
-.jumbotron .main-block .tab-content .tab-pane#registration .form-inline .form-control {
-  width: auto;
-  box-shadow: none;
-  font-size: 12px;
-  margin-top: 0;
-  padding-top: 0;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-.jumbotron .main-block .tab-content .tab-pane#registration .form-group select.form-control,
-.jumbotron .main-block .tab-content .tab-pane#registration .form-inline select.form-control {
-  border: 0;
-  height: 26px;
-}
-.jumbotron .main-block .tab-content .tab-pane#registration .form-group input.form-control,
-.jumbotron .main-block .tab-content .tab-pane#registration .form-inline input.form-control {
-  border-radius: 15px;
-  padding: 6px 12px;
-  height: 20px;
-  width: 78px;
-}
-.jumbotron .main-block .tab-content .tab-pane#registration .form-group label,
-.jumbotron .main-block .tab-content .tab-pane#registration .form-inline label {
-  font-size: 12px;
-  margin-bottom: 0;
-  margin-top: 0;
-  padding-right: 0;
-}
-.jumbotron .main-block .tab-content .tab-pane#registration .form-group label:first-child,
-.jumbotron .main-block .tab-content .tab-pane#registration .form-inline label:first-child {
-  color: #00A0E3;
-}
-.jumbotron .main-block .tab-content .tab-pane#registration button[type=submit] {
-  width: 90px;
-  height: 22px;
-  background-color: #858585;
-  color: #FFF;
-  border: 0;
-  margin: 8px 59px 15px;
-  text-transform: uppercase;
-  border-radius: 9px;
-  font-size: 11px;
 }
 .jumbotron .main-block .people {
   margin: 7px 0 0 48px;
@@ -225,6 +166,13 @@ body {
   font-style: italic;
   text-decoration: none;
 }
+.jumbotron h4 {
+  color: #00A0E3;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-top: -2px;
+  font-size: 18px;
+}
 .container {
   width: 970px;
 }
@@ -250,6 +198,167 @@ footer .bottom-right-menu li {
   vertical-align: middle;
 }
 footer .bottom-right-menu li a {
+  color: #000000;
+}
+.breadcrumbs {
+  background-color: white;
+  padding-left: 0;
+  font-size: 12px;
+  font-style: italic;
+}
+.breadcrumbs ul {
+  padding-left: 13px;
+  padding-top: 7px;
+}
+.breadcrumbs ul li {
+  display: inline-block;
+  color: #7B7A7A;
+}
+.breadcrumbs ul li a {
+  color: #7B7A7A;
+  text-decoration: underline;
+}
+.breadcrumbs ul li:before {
+  content: ' > ';
+}
+.breadcrumbs ul li:first-child:before {
+  content: '';
+}
+/* Form */
+.form-group {
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.form-group label:first-child {
+  color: #00A0E3;
+  font-size: 12px;
+  margin-top: 8px;
+}
+.form-group .form-control,
+.form-inline .form-control {
+  opacity: 1;
+  background-color: inherit;
+  width: auto;
+  box-shadow: none;
+  font-size: 12px;
+  margin-top: 0;
+  padding-top: 0;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  max-width: 125px;
+}
+.form-group select.form-control,
+.form-inline select.form-control {
+  border: 0;
+  height: 26px;
+}
+.form-group select.form-control[multiple=multiple],
+.form-inline select.form-control[multiple=multiple] {
+  height: 100px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.form-group input.form-control,
+.form-inline input.form-control {
+  border-radius: 15px;
+  padding: 6px 12px;
+  height: 20px;
+  width: 78px;
+}
+.form-group label,
+.form-inline label {
+  opacity: 1;
+  font-size: 12px;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding-right: 0;
+}
+.form-group label:first-child,
+.form-inline label:first-child {
+  color: #00A0E3;
+}
+button[type=submit] {
+  width: 90px;
+  height: 22px;
+  background-color: #858585;
+  color: #FFF;
+  border: 0;
+  margin: 8px 59px 15px;
+  text-transform: uppercase;
+  border-radius: 9px;
+  font-size: 11px;
+}
+/* Homepage */
+body.homepage .jumbotron {
+  background: url('/bundles/connectionweb/img/main-background.png') center 0 no-repeat;
+  background-size: cover;
+  padding-top: 48px;
+}
+/* Event */
+form.event .form-control {
+  height: auto;
+  border: 0;
+  padding-left: 0;
+}
+form.event .form-control label {
+  white-space: nowrap;
+  font-weight: normal;
+  color: #000000;
+}
+form.event .form-control label:first-child {
+  color: #000000;
+}
+form.event .form-inline > label {
+  font-size: 100%;
+  margin-top: 20px;
+}
+form.event input[type="radio"],
+form.event input[type="checkbox"] {
+  vertical-align: sub;
+  margin-right: 5px;
+}
+form.event input[type="date"] {
+  display: block;
+  width: auto;
+}
+form.event input[type="text"],
+form.event textarea.form-control {
+  display: block;
+  border: 1px solid #858585;
+  border-radius: 6px;
+  padding: 1px 10px;
+  margin-top: 5px;
+  font-size: 12px;
+  width: 100%;
+  max-width: none;
+}
+form.event select {
+  display: block;
+}
+form.event textarea.form-control {
+  resize: none;
+  height: 76px;
+}
+form.event #add-photo {
+  background-color: #adadad;
+  width: 140px;
+  height: 190px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+form.event #map_canvas {
+  margin: 30px 0;
+  width: 100%;
+}
+button.btn-gradient {
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 11px;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  background-image: linear-gradient(to bottom right, #f2efed 0%, #bab7b6 100%);
+  margin: 0;
+  width: auto;
   color: #000000;
 }
 
