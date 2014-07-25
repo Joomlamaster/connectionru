@@ -28,7 +28,8 @@ class ProfileController extends Controller
         $form = $formFactory->createForm();
         $form->setData($profile->getUser());
         return array(
-            'form' => $form->createView()
+            'form'      => $form->createView(),
+            'profile'   => $profile
         );
     }
 }

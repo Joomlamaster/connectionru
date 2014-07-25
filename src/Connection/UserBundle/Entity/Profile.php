@@ -578,6 +578,22 @@ class Profile
     }
 
     /**
+     * @param mixed $lookingFor
+     */
+    public function setLookingFor($lookingFor)
+    {
+        $this->lookingFor = $lookingFor;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLookingFor()
+    {
+        return $this->lookingFor;
+    }
+
+    /**
      * @param mixed $smoking
      */
     public function setSmoking ( $smoking )

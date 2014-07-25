@@ -26,7 +26,7 @@ class RegistrationType extends BaseType
                 'required' => false
             ))
             ->add('agree', 'checkbox', array(
-                'label'     => 'I Agree to the terms of service:',
+                'label'     => 'I Agree to the terms of service',
                 'required'  => true,
                 'mapped'    => false
             ))

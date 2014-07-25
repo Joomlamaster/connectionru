@@ -92,22 +92,29 @@ body {
             border-bottom: 0;
 
             li {
+                text-align: center;
+                width: 135px;
+
+                &:first-child {
+                    width: 200px;
+                }
+
                 a {
                     color: #4d4d4d;
                     background-color: #caecfb;
+                    border: 0;
                 }
 
                 &.active {
                     a {
                         color: #caecfb;
                         background-color: #4d4d4d;
-                        border: 0;
                     }
                 }
             }
         }
         .tab-content {
-            width: 323px;
+            width: 333px;
             background-color: #ededed;
             opacity: 0.9;
             border: 5px solid #CAECFB;
@@ -342,9 +349,29 @@ body.homepage {
         padding-top: 48px;
     }
 }
+/* Profile */
+body.create-profile {
+    #add-photo {
+        background-color: #FFF;
+        border: 5px solid #CAECFB;
+        color: #484848;
+        margin-top: 14px;
+        border-radius: 13px;
+        height: 200px;
+        width: 150px;
+
+        .msg {
+            padding-top: 75px;
+
+            .sprite {
+                margin: 0 auto 12px auto;
+            }
+        }
+    }
+}
 
 /* Event */
-form.event {
+.jumbotron {
     .form-control {
         height: auto;
         border: 0;
@@ -389,7 +416,7 @@ form.event {
         width: 100%;
         max-width: none;
     }
-    select {
+    select.form-control {
         display: block;
     }
 
@@ -398,17 +425,29 @@ form.event {
         height: 76px;
     }
 
-    #add-photo {
-        background-color: #adadad;
-        width: 140px;
-        height: 190px;
-        border-radius: 8px;
-        cursor: pointer;
-    }
-
     #map_canvas {
         margin: 30px 0;
         width: 100%;
+    }
+}
+
+#add-photo {
+    background-color: #adadad;
+    width: 140px;
+    height: 190px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: center;
+    color: #ffffff;
+    font-size: 13px;
+    text-decoration: underline;
+
+    .msg {
+        padding-top: 135px;
+
+        .sprite {
+            margin: 0 auto;
+        }
     }
 }
 

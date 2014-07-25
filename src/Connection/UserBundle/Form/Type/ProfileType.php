@@ -65,6 +65,12 @@ class ProfileType extends AbstractType
                 'property' => 'name',
             ))
 
+            ->add('lookingFor', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\LookingFor',
+                'property' => 'name',
+                'expanded' =>  true,
+            ))
+
             ->add('birthdate', 'date', array(
                 'years' => range(date('Y'), date('Y') - 100),
                 'input'  => 'datetime',
@@ -92,6 +98,7 @@ class ProfileType extends AbstractType
             ->add('religion', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Religion',
                 'property' => 'name',
+                'label' => 'My religion'
             ))
 
             ->add('telephone', 'number')
@@ -103,6 +110,7 @@ class ProfileType extends AbstractType
             ->add('maritalStatus', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\MaritalStatus',
                 'property' => 'name',
+                'expanded' => true
             ))
 
             ->add('height', 'number')
@@ -122,31 +130,37 @@ class ProfileType extends AbstractType
             ->add('smoking', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Smoking',
                 'property' => 'name',
+                'label' => 'Smoking?',
             ))
 
             ->add('drinking', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Drinking',
                 'property' => 'name',
+                'label' => 'Drinking?'
             ))
 
             ->add('haveChildren', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\HaveChildren',
                 'property' => 'name',
+                'label' => 'Do you have children?'
             ))
 
             ->add('wantChildren', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\WantChildren',
                 'property' => 'name',
+                'label' => 'Do you want children?'
             ))
 
             ->add('livesWithChildren', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\LivesWithChildren',
                 'property' => 'name',
+                'label' => 'Do you live with your children?'
             ))
 
             ->add('openToPersonWithKids', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\OpenToPersonWithKids',
                 'property' => 'name',
+                'label' => 'Are you open to dating a person with kids?'
             ))
 
             ->add('ethnicity', 'entity', array(

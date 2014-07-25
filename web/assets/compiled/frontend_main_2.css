@@ -71,17 +71,24 @@ body {
 .jumbotron .main-block .nav-tabs {
   border-bottom: 0;
 }
+.jumbotron .main-block .nav-tabs li {
+  text-align: center;
+  width: 135px;
+}
+.jumbotron .main-block .nav-tabs li:first-child {
+  width: 200px;
+}
 .jumbotron .main-block .nav-tabs li a {
   color: #4d4d4d;
   background-color: #caecfb;
+  border: 0;
 }
 .jumbotron .main-block .nav-tabs li.active a {
   color: #caecfb;
   background-color: #4d4d4d;
-  border: 0;
 }
 .jumbotron .main-block .tab-content {
-  width: 323px;
+  width: 333px;
   background-color: #ededed;
   opacity: 0.9;
   border: 5px solid #CAECFB;
@@ -280,35 +287,51 @@ body.homepage .jumbotron {
   background-size: cover;
   padding-top: 48px;
 }
+/* Profile */
+body.create-profile #add-photo {
+  background-color: #FFF;
+  border: 5px solid #CAECFB;
+  color: #484848;
+  margin-top: 14px;
+  border-radius: 13px;
+  height: 200px;
+  width: 150px;
+}
+body.create-profile #add-photo .msg {
+  padding-top: 75px;
+}
+body.create-profile #add-photo .msg .sprite {
+  margin: 0 auto 12px auto;
+}
 /* Event */
-form.event .form-control {
+.jumbotron .form-control {
   height: auto;
   border: 0;
   padding-left: 0;
 }
-form.event .form-control label {
+.jumbotron .form-control label {
   white-space: nowrap;
   font-weight: normal;
   color: #000000;
 }
-form.event .form-control label:first-child {
+.jumbotron .form-control label:first-child {
   color: #000000;
 }
-form.event .form-inline > label {
+.jumbotron .form-inline > label {
   font-size: 100%;
   margin-top: 20px;
 }
-form.event input[type="radio"],
-form.event input[type="checkbox"] {
+.jumbotron input[type="radio"],
+.jumbotron input[type="checkbox"] {
   vertical-align: sub;
   margin-right: 5px;
 }
-form.event input[type="date"] {
+.jumbotron input[type="date"] {
   display: block;
   width: auto;
 }
-form.event input[type="text"],
-form.event textarea.form-control {
+.jumbotron input[type="text"],
+.jumbotron textarea.form-control {
   display: block;
   border: 1px solid #858585;
   border-radius: 6px;
@@ -318,23 +341,33 @@ form.event textarea.form-control {
   width: 100%;
   max-width: none;
 }
-form.event select {
+.jumbotron select.form-control {
   display: block;
 }
-form.event textarea.form-control {
+.jumbotron textarea.form-control {
   resize: none;
   height: 76px;
 }
-form.event #add-photo {
+.jumbotron #map_canvas {
+  margin: 30px 0;
+  width: 100%;
+}
+#add-photo {
   background-color: #adadad;
   width: 140px;
   height: 190px;
   border-radius: 8px;
   cursor: pointer;
+  text-align: center;
+  color: #ffffff;
+  font-size: 13px;
+  text-decoration: underline;
 }
-form.event #map_canvas {
-  margin: 30px 0;
-  width: 100%;
+#add-photo .msg {
+  padding-top: 135px;
+}
+#add-photo .msg .sprite {
+  margin: 0 auto;
 }
 button.btn-gradient {
   border-radius: 8px;
