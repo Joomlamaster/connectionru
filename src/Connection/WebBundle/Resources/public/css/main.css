@@ -281,6 +281,66 @@ button[type=submit] {
   border-radius: 9px;
   font-size: 11px;
 }
+body.create-profile .jumbotron .form-control,
+body.manage-event .jumbotron .form-control {
+  height: auto;
+  border: 0;
+  padding-left: 0;
+}
+body.create-profile .jumbotron .form-control label,
+body.manage-event .jumbotron .form-control label {
+  white-space: nowrap;
+  font-weight: normal;
+  color: #000000;
+}
+body.create-profile .jumbotron .form-control label:first-child,
+body.manage-event .jumbotron .form-control label:first-child {
+  color: #000000;
+}
+body.create-profile .jumbotron .form-inline > label,
+body.manage-event .jumbotron .form-inline > label {
+  font-size: 100%;
+  margin-top: 20px;
+}
+body.create-profile .jumbotron input[type="radio"],
+body.manage-event .jumbotron input[type="radio"],
+body.create-profile .jumbotron input[type="checkbox"],
+body.manage-event .jumbotron input[type="checkbox"] {
+  vertical-align: sub;
+  margin-right: 5px;
+}
+body.create-profile .jumbotron input[type="date"],
+body.manage-event .jumbotron input[type="date"] {
+  display: block;
+  width: auto;
+}
+body.create-profile .jumbotron input[type="text"],
+body.manage-event .jumbotron input[type="text"],
+body.create-profile .jumbotron textarea.form-control,
+body.manage-event .jumbotron textarea.form-control {
+  display: block;
+  border: 1px solid #858585;
+  border-radius: 6px;
+  padding: 1px 10px;
+  margin-top: 5px;
+  font-size: 12px;
+  width: 100%;
+  max-width: none;
+}
+body.create-profile .jumbotron select.form-control,
+body.manage-event .jumbotron select.form-control {
+  display: block;
+}
+body.create-profile .jumbotron textarea.form-control,
+body.manage-event .jumbotron textarea.form-control {
+  resize: none;
+  height: 76px;
+}
+body.create-profile .jumbotron #map_canvas,
+body.manage-event .jumbotron #map_canvas {
+  margin: 30px 0;
+  width: 100%;
+}
 /* Homepage */
 body.homepage .jumbotron {
   background: url('/bundles/connectionweb/img/main-background.png') center 0 no-repeat;
@@ -303,55 +363,16 @@ body.create-profile #add-photo .msg {
 body.create-profile #add-photo .msg .sprite {
   margin: 0 auto 12px auto;
 }
-/* Event */
-.jumbotron .form-control {
-  height: auto;
-  border: 0;
-  padding-left: 0;
+body.create-profile h5 {
+  color: #00A0E3;
+  font-size: 18px;
+  margin-bottom: 4px;
 }
-.jumbotron .form-control label {
-  white-space: nowrap;
-  font-weight: normal;
-  color: #000000;
+body.create-profile h6 {
+  font-size: 14px;
+  margin-top: 3px;
 }
-.jumbotron .form-control label:first-child {
-  color: #000000;
-}
-.jumbotron .form-inline > label {
-  font-size: 100%;
-  margin-top: 20px;
-}
-.jumbotron input[type="radio"],
-.jumbotron input[type="checkbox"] {
-  vertical-align: sub;
-  margin-right: 5px;
-}
-.jumbotron input[type="date"] {
-  display: block;
-  width: auto;
-}
-.jumbotron input[type="text"],
-.jumbotron textarea.form-control {
-  display: block;
-  border: 1px solid #858585;
-  border-radius: 6px;
-  padding: 1px 10px;
-  margin-top: 5px;
-  font-size: 12px;
-  width: 100%;
-  max-width: none;
-}
-.jumbotron select.form-control {
-  display: block;
-}
-.jumbotron textarea.form-control {
-  resize: none;
-  height: 76px;
-}
-.jumbotron #map_canvas {
-  margin: 30px 0;
-  width: 100%;
-}
+/* Add photo */
 #add-photo {
   background-color: #adadad;
   width: 140px;
@@ -369,6 +390,7 @@ body.create-profile #add-photo .msg .sprite {
 #add-photo .msg .sprite {
   margin: 0 auto;
 }
+/* Buttons */
 button.btn-gradient {
   border-radius: 8px;
   font-weight: bold;
