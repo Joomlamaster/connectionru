@@ -6,9 +6,22 @@ services:
         arguments: ['@service_container']
         tags:
           - { name: form.type, alias: connection_user_registration }
-#
-#    connection_user.registration.address.form.type:
-#        class: %connection_user.registration.address.form.type.class%
-#        arguments: ['@service_container']
-#        tags:
-#          - { name: form.type, alias: connection_registration_address }
+
+    connection_user.facebook:
+        class: Connection\UserBundle\Service\FacebookSdkService
+        arguments:
+            container: @service_container
+            appId: %facebook.appid%
+            secret: %facebook.secret%
+
+    connection_user.social.user:
+        class: Connection\UserBundle\Service\SocialUserService
+        arguments:
+            container: @service_container
+
+    connection_user.twitter:
+        class: Connection\UserBundle\Service\TwitterSdkService
+        arguments:
+            container: @service_container
+            appId: %twitter.key%
+            secret: %twitter.secret%

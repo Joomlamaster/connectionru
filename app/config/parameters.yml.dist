@@ -13,3 +13,11 @@ parameters:
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
+
+    # Facebook Credentials
+    facebook.appid: 333611596791648
+    facebook.secret: 4b2dca00073e7e1ab97b7ccf79b66f03
+
+    # Twitter Credentials
+    twitter.key: yWH87mrc1pETeR49y97MileCd
+    twitter.secret: 9m5DqquPbP52Hxklx23Oxm8HQLHirFT6H1gbT63vOfgpdWjGAV

@@ -6,16 +6,18 @@
         <div class="row main-block">
             <div class="col-xs-7">
                 <ul class="nav nav-tabs" role="tablist">
-                    <li class="active"><a href="#registration" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-time"></span> Quick Free Registration</a></li>
+                    {% if not is_granted('ROLE_USER') %}
+                        <li class="active"><a href="#registration" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-time"></span> Quick Free Registration</a></li>
+                    {% endif %}
                     <li><a href="#search" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-search"></span> Quick Search</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane active" id="registration">
-                        {{ render(controller("FOSUserBundle:Registration:register")) }}
-                    </div>
-                    <div class="tab-pane" id="search">
-                        {#{{ render(controller("ConnectionUserBundle:Registration:register")) }}#}
-                    </div>
+                    {% if not is_granted('ROLE_USER') %}
+                        <div class="tab-pane active" id="registration">
+                            {{ render(controller("FOSUserBundle:Registration:register")) }}
+                        </div>
+                    {% endif %}
+                    <div class="tab-pane" id="search"></div>
                 </div>
             </div>
             <div class="col-xs-5">

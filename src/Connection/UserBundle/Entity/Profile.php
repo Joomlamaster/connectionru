@@ -203,6 +203,13 @@ class Profile
     protected $googleId;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="twitter_id", type="string", length=255, nullable=true)
+     */
+    protected $twitterId;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Connection\CoreBundle\Entity\Language", inversedBy="profile")
      * @ORM\JoinTable(name="user_profile_language")
      **/
@@ -735,5 +742,29 @@ class Profile
     public function getGoogleId ()
     {
         return $this->googleId;
+    }
+
+    /**
+     * @param string $twitterId
+     */
+    public function setTwitterId ( $twitterId )
+    {
+        $this->twitterId = $twitterId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTwitterId ()
+    {
+        return $this->twitterId;
+    }
+
+    public function setSocialId($fieldName, $fieldValue) {
+        if ( !property_exists($this, $fieldName) ) {
+            throw new \Exception("Unrecognized Field {$fieldName}");
+        }
+
+        $this->$fieldName = $fieldValue;
     }
 }

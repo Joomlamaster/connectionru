@@ -7,13 +7,13 @@
     <div class="container breadcrumbs">
         <ul>
             <li><a href="{{ path('connection_homepage') }}">Main page</a></li>
-            <li>Create profile</li>
+            <li>Profile</li>
         </ul>
     </div>
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <h4>Create Account:</h4>
+    <h4>Account:</h4>
     {{ form_start(form) }}
         <div class="row">
             <div class="col-xs-2">
@@ -28,7 +28,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <h5>{{ profile.user.firstName }} {{ profile.user.lastName }}</h5>
-                        <h6>35, Brooklyn</h6>
+                        <h6>35, {{ profile.state.name }}</h6>
                     </div>
                 </div>
                 <div class="row">
