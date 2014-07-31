@@ -18,14 +18,15 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
-            // Third party bundles.
-            new FOS\UserBundle\FOSUserBundle(),
-
-            // Project bundles
+            //  Users Bundles
             new Connection\CoreBundle\ConnectionCoreBundle(),
             new Connection\WebBundle\ConnectionWebBundle(),
             new Connection\UserBundle\ConnectionUserBundle(),
             new Connection\EventBundle\ConnectionEventBundle(),
+
+            //  Third party bundles.
+            new FOS\UserBundle\FOSUserBundle(),
+            new Oneup\UploaderBundle\OneupUploaderBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -15,3 +15,7 @@ connection_user:
 
 connection_fos_user_bundle:
     resource: "@ConnectionUserBundle/Resources/config/fos_user_bundle.yml"
+
+oneup_uploader:
+    resource: .
+    type: uploader
