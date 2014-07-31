@@ -4,6 +4,7 @@ namespace Connection\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -49,12 +50,14 @@ class Profile
     protected $lookingFor;
 
     /**
+     * @Assert\NotNull(groups={"profile"})
      * @ORM\ManyToOne(targetEntity="Connection\CoreBundle\Entity\Country", inversedBy="profile")
      * @ORM\JoinColumn(name="country", referencedColumnName="id")
      **/
     protected $country;
 
     /**
+     * @Assert\NotNull(groups={"profile"})
      * @ORM\ManyToOne(targetEntity="Connection\CoreBundle\Entity\State", inversedBy="profile")
      * @ORM\JoinColumn(name="state", referencedColumnName="id")
      **/
@@ -217,7 +220,6 @@ class Profile
 
     /**
      * @var string
-     *
      * @ORM\Column(name="about_me", type="string", length=600, nullable=true)
      */
     protected $aboutMe;

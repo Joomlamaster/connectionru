@@ -10,7 +10,7 @@
         <div class="navbar-collapse collapse">
             {% if is_granted('ROLE_USER') %}
                 <h4 class="navbar-form navbar-right" style="color:#fff;">
-                    Hello <a href="{{ path('user_profile', {'id': app.user.profile.id}) }}">{{ app.user.username }}</a>
+                    Hello <a href="{{ path('edit_user_profile') }}">{{ app.user.username }}</a>
                 </h4>
             {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
                 {{ render(controller("ConnectionUserBundle:Security:login", {'request': app.request})) }}

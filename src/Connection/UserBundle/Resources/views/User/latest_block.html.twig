@@ -1,0 +1,17 @@
+<div class="people">
+    {% for user in users %}
+        <div class="face">
+            <div class="info">
+                <p class="name">{{ user.userName }}</p>
+                <p>{{ user.profile.birthdate|userAge}} {{ user.profile.state.name is defined ? "," ~ user.profile.state.name : ""}}</p>
+
+                {% if user.profile.lookingFor.name is defined %}
+                    <p>Looking for:</p>
+                    <p class="blue">{{ user.profile.lookingFor.name }}</p>
+                {% endif %}
+                <a href="#">see this user</a>
+            </div>
+        </div>
+    {% endfor %}
+    <a class="more pull-right" href="#">More profile ></a>
+</div>

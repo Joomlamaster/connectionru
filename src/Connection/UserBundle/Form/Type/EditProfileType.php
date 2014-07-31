@@ -9,10 +9,10 @@
 namespace Connection\UserBundle\Form\Type;
 
 use Symfony\Component\Form\FormBuilderInterface;
-use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\AbstractType;
 
-class RegistrationType extends BaseType
+class EditProfileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -22,28 +22,23 @@ class RegistrationType extends BaseType
         $builder
             ->add('firstName', 'text')
             ->add('lastName', 'text')
-            ->add('profile', new ProfileType(), array(
-                'required' => false
-            ))
-            ->add('agree', 'checkbox', array(
-                'label'     => 'I Agree to the terms of service',
-                'required'  => true,
-                'mapped'    => false
-            ))
+            ->add('profile', new ProfileType(array('validation_groups' => array('profile'))))
             ->add('submit', 'submit');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Connection\UserBundle\Entity\User',
-            'cascade_persist' => true,
-            'csrf_protection' => false
+            'data_class'        => 'Connection\UserBundle\Entity\User',
+            'cascade_persist'   => true,
+            'cascade_validation' => true,
+            'validation_groups' => array('profile'),
+            'csrf_protection'   => false
         ));
     }
 
     public function getName()
     {
-        return 'connection_user_registration';
+        return 'connection_user_profile_edit';
     }
 }

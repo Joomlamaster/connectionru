@@ -2,6 +2,7 @@
 
 namespace Connection\UserBundle\Controller;
 
+use Connection\UserBundle\Form\Type\EditProfileType;
 use Connection\UserBundle\Form\Type\LinkAccountType;
 use Connection\UserBundle\Form\Type\RegistrationType;
 use Symfony\Component\Form\FormError;
@@ -19,22 +20,43 @@ use Connection\UserBundle\Entity\Profile;
  */
 class ProfileController extends Controller
 {
+
     /**
-     * @Route("/{id}", name="user_profile", requirements={"id" = "\d+"})
+     * @Route("/{id}", name="view_profile", requirements={"id" = "\d+"})
      * @Template()
      * @ParamConverter("Profile", class="ConnectionUserBundle:Profile")
      */
-    public function indexAction(Profile $profile)
+    public function viewAction( Profile $profile )
     {
-        $formFactory = $this->get('fos_user.registration.form.factory');
-        $form = $formFactory->createForm();
-        $form->setData($profile->getUser());
-        return array(
-            'form'      => $form->createView(),
-            'profile'   => $profile
-        );
+        return array( 'user'   => $profile->getUser() );
     }
 
+    /**
+     * @Route("/edit", name="edit_user_profile")
+     * @Template()
+     */
+    public function editAction( Request $request )
+    {
+        if ( !$user = $this->getUser() ) {
+            return $this->redirect( $this->generateUrl('connection_homepage') );
+        }
+
+        $form = $this->createForm( new EditProfileType(), $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($form->getData());
+            $em->flush();
+
+            return $this->redirect( $this->generateUrl('edit_user_profile') );
+        }
+
+        return array(
+            'form'      => $form->createView(),
+            'user'   => $user
+        );
+    }
 
     /**
      * @Route("/link-profile", name="link_profile")

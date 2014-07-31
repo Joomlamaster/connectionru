@@ -39,7 +39,6 @@ FormAjaxFields = {
             if ( $form.length ) {
                 master = $form.find('.master');
                 if (master.length) {
-                    FormAjaxFields.loadCountryState($form);
                     $form.on('change', '#'+master.attr('id'), function() {
                         FormAjaxFields.loadCountryState($form);
                     });

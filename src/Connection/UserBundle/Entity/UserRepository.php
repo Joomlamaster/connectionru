@@ -33,4 +33,15 @@ class UserRepository extends EntityRepository
                     ->getQuery()
                     ->getOneOrNullResult();
     }
+
+    public function getLatest($limit)
+    {
+        return $this->createQueryBuilder('u')
+            ->select('u')
+            ->join('u.profile', 'p')
+            ->orderBy('u.createdAt')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
 }
