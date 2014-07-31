@@ -54,9 +54,13 @@ class SocialUserService {
         if ( !empty($socialProfile['last_name']) ) {
             $user->setLastName($socialProfile['last_name']);
         }
-        if ( !empty($socialProfile['username']) ) {
-            $user->setUsername($socialProfile['username']);
+        if ( empty($socialProfile['username']) ) {
+            $socialProfile['username'] = implode(" ", array($socialProfile['first_name'], $socialProfile['last_name']));
+            if ( empty($socialProfile['username']) ) {
+                $socialProfile['username'] = $socialProfile['id'];
+            }
         }
+        $user->setUsername($socialProfile['username']);
         if ( !empty($socialProfile['email']) ) {
             $user->setEmail($socialProfile['email']);
         }
