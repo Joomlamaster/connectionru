@@ -3,7 +3,7 @@
 namespace Connection\UserBundle\Service;
 
 use Symfony\Component\DependencyInjection\Container;
-use Connection\UserBundle\Library\Twitter\Oauth\TwitterOAuth;
+use Connection\UserBundle\Library\Twitter\OAuth\TwitterOAuth;
 
 class TwitterSdkService implements SocialServiceInterface {
     private $container;

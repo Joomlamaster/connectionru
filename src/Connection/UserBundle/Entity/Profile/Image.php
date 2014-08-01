@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Image
  *
  * @ORM\Table(name="image")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Connection\UserBundle\Entity\Profile\ImageRepository")
  */
 class Image
 {
@@ -112,6 +112,11 @@ class Image
     public function getGallery ()
     {
         return $this->gallery;
+    }
+
+    public function getUploadRootDir()
+    {
+        return __DIR__.'/../../../../../' . $this->getPath();
     }
 
 

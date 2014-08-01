@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Image
  *
  * @ORM\Table(name="user_gallery")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Connection\UserBundle\Entity\Profile\GalleryRepository")
  */
 class Gallery
 {
@@ -38,6 +38,13 @@ class Gallery
      * @ORM\JoinColumn(name="user", referencedColumnName="id")
      **/
     private $user;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="default", type="boolean")
+     */
+    private $default = false;
 
 
     /**
@@ -96,5 +103,15 @@ class Gallery
     public function getUser ()
     {
         return $this->user;
+    }
+
+    public function getDefault()
+    {
+        return $this->default;
+    }
+
+    public function setDefault($default)
+    {
+        $this->default = $default;
     }
 }

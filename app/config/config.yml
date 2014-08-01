@@ -76,6 +76,9 @@ fos_user:
 
 oneup_uploader:
     mappings:
-        gallery:
+        user:
+            storage:
+                directory: %kernel.root_dir%/../web/uploads/user/profile
             frontend: fancyupload
+            namer: connection_user.propety_images_namer
 

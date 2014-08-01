@@ -1,6 +1,16 @@
 parameters:
     connection_user.registration.form.type.class: Connection\UserBundle\Form\Type\RegistrationType
 services:
+    connection_user.file.upload.listener:
+        class: Connection\UserBundle\EventListener\FileUploadListener
+        arguments: [@service_container]
+        tags:
+          - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }
+
+    connection_user.propety_images_namer:
+        class: Connection\UserBundle\Service\PropertyImageNamer
+        arguments: [ @service_container ]
+
     connection_user.registration.form.type:
         class: %connection_user.registration.form.type.class%
         arguments: ['@service_container']

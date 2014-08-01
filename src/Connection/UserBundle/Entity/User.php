@@ -271,6 +271,7 @@ class User extends BaseUser
     {
         $gallery = new Gallery();
         $gallery->setUser($this);
+        $gallery->setDefault(true);
         $this->addGallery($gallery);
     }
 
