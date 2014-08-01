@@ -4,6 +4,7 @@ namespace Connection\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -49,12 +50,14 @@ class Profile
     protected $lookingFor;
 
     /**
+     * @Assert\NotNull(groups={"profile"})
      * @ORM\ManyToOne(targetEntity="Connection\CoreBundle\Entity\Country", inversedBy="profile")
      * @ORM\JoinColumn(name="country", referencedColumnName="id")
      **/
     protected $country;
 
     /**
+     * @Assert\NotNull(groups={"profile"})
      * @ORM\ManyToOne(targetEntity="Connection\CoreBundle\Entity\State", inversedBy="profile")
      * @ORM\JoinColumn(name="state", referencedColumnName="id")
      **/
@@ -203,6 +206,13 @@ class Profile
     protected $googleId;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="twitter_id", type="string", length=255, nullable=true)
+     */
+    protected $twitterId;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Connection\CoreBundle\Entity\Language", inversedBy="profile")
      * @ORM\JoinTable(name="user_profile_language")
      **/
@@ -210,7 +220,6 @@ class Profile
 
     /**
      * @var string
-     *
      * @ORM\Column(name="about_me", type="string", length=600, nullable=true)
      */
     protected $aboutMe;
@@ -735,5 +744,29 @@ class Profile
     public function getGoogleId ()
     {
         return $this->googleId;
+    }
+
+    /**
+     * @param string $twitterId
+     */
+    public function setTwitterId ( $twitterId )
+    {
+        $this->twitterId = $twitterId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTwitterId ()
+    {
+        return $this->twitterId;
+    }
+
+    public function setSocialId($fieldName, $fieldValue) {
+        if ( !property_exists($this, $fieldName) ) {
+            throw new \Exception("Unrecognized Field {$fieldName}");
+        }
+
+        $this->$fieldName = $fieldValue;
     }
 }

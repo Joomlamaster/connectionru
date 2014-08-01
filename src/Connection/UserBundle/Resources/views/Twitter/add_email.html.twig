@@ -1,0 +1,27 @@
+{% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
+{% block theme %}create-profile{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="container breadcrumbs">
+        <ul>
+            <li><a href="{{ path('connection_homepage') }}">Main page</a></li>
+            <li>Twitter</li>
+            <li>Add Email</li>
+        </ul>
+    </div>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h4>Please provide Email Address:</h4>
+    <div class="row">
+        <div class="col-xs-5">
+            <div class="row">
+                <div class="col-xs-12">
+                    {{ form_start(form) }}
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-5"></div>
+    </div>
+{% endblock %}

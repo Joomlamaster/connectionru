@@ -2,6 +2,7 @@
 
 namespace Connection\UserBundle\Entity;
 
+use Connection\UserBundle\Entity\Profile\Gallery;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use FOS\UserBundle\Model\User as BaseUser;
@@ -10,7 +11,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  * User
  *
  * @ORM\Table(name="user")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Connection\UserBundle\Entity\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  */
 class User extends BaseUser
@@ -207,11 +208,11 @@ class User extends BaseUser
     }
 
     /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $galleries
+     * @return \Connection\UserBundle\Entity\Profile\Gallery
      */
-    public function setGalleries ( $galleries )
+    public function addGallery ( Gallery $gallery )
     {
-        $this->galleries = $galleries;
+        $this->galleries[] = $gallery;
     }
 
     /**
@@ -261,6 +262,16 @@ class User extends BaseUser
     public function setUpdatedAt ()
     {
         $this->updatedAt = new \DateTime();
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function addDefaultGallery ()
+    {
+        $gallery = new Gallery();
+        $gallery->setUser($this);
+        $this->addGallery($gallery);
     }
 
     /**

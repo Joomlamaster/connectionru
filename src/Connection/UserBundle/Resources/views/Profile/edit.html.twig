@@ -1,0 +1,178 @@
+{% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
+{% form_theme form 'ConnectionUserBundle:Registration:fields.html.twig' %}
+
+{% block theme %}create-profile{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="container breadcrumbs">
+        <ul>
+            <li><a href="{{ path('connection_homepage') }}">Main page</a></li>
+            <li>Profile</li>
+        </ul>
+    </div>
+{% endblock breadcrumbs %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/connectionweb/js/dropzone/css/dropzone.css') }}" type="text/css" />
+{% endblock %}
+
+{% block content %}
+    <h4>Account:</h4>
+        <div class="row">
+            <div class="col-xs-2">
+                <div id="add-photo" class="dropzone">
+                    <div class="msg dz-message">
+                        <span>
+                            <div class="sprite sprite-add-photo"></div>
+                            + Add photo
+                        </span>
+                    </div>
+                </div>
+            </div>
+            {{ form_start(form, {'action': path('edit_user_profile'), 'method': 'POST', 'attr': {'class': 'master_slave'}}) }}
+                <div class="col-xs-5">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_row(form.firstName) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_row(form.lastName) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                           {{ form_row(form.profile.aboutMe) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_row(form.profile.interestsAndHobbies) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_row(form.profile.gender) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div id="master_slave">
+                                <div>
+                                    {{ form_row(form.profile.country) }}
+                                </div>
+                                {% if (form.profile.state is defined) %}
+                                    <div id="slave_block">
+                                        {{ form_row(form.profile.state) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_row(form.profile.seek) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            {{ form_row(form.profile.lookingFor) }}
+                        </div>
+                        <div class="col-xs-6">
+                            {{ form_row(form.profile.maritalStatus) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            {{ form_row(form.profile.height) }}
+                        </div>
+                        <div class="col-xs-4">
+                            {{ form_row(form.profile.weight) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_row(form.profile.eyeColor) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_row(form.profile.hairColor) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_row(form.profile.smoking) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_row(form.profile.drinking) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_row(form.profile.education) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_row(form.profile.profession) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_row(form.profile.languages) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_row(form.profile.haveChildren) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_row(form.profile.wantChildren) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_row(form.profile.livesWithChildren) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_row(form.profile.openToPersonWithKids) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_row(form.profile.religion) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {{ form_row(form.profile.ethnicity) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                        </div>
+                        <div class="col-xs-9">
+                            {{ form_row(form.submit, { attr: { class: 'btn-gradient' }}) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-5"></div>
+            {{ form_end(form, {'render_rest': false}) }}
+        </div>
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/dropzone/dropzone.js') }}"></script>
+    <script type="text/javascript">
+        $("div#add-photo").dropzone({ url: "{{ oneup_uploader_endpoint('gallery') }}" });
+    </script>
+{% endblock %}

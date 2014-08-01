@@ -53,6 +53,16 @@ class ProfileType extends AbstractType
             }
         );
 
+        $builder->addEventListener(
+            FormEvents::PRE_SET_DATA,
+            function (FormEvent $event) use ($formModifier) {
+                $data = $event->getData();
+                if ($data) {
+                    $formModifier($event->getForm(), $data->getCountry());
+                }
+            }
+        );
+
         // add your custom field
         $builder
             ->add('gender', 'entity', array(
@@ -169,12 +179,6 @@ class ProfileType extends AbstractType
             ))
 
             ->add('aboutMe', 'textarea')
-
-            ->add('amazonId', 'text')
-
-            ->add('facebookId', 'text')
-
-            ->add('googleId', 'text')
         ;
     }
 

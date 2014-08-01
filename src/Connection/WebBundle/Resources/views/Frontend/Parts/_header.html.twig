@@ -1,12 +1,17 @@
 <div class="navbar navbar-first" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <div class="sprite sprite-navbar-facebook"></div>
-            <div class="sprite sprite-navbar-twitter"></div>
+                {% if is_granted('ROLE_USER') %}
+                {% else %}
+                    {{ render(controller("ConnectionUserBundle:Facebook:facebookLoginButton")) }}
+                    {{ render(controller("ConnectionUserBundle:Twitter:twitterLoginButton")) }}
+                {% endif %}
         </div>
         <div class="navbar-collapse collapse">
-            {% if is_granted('IS_AUTHENTICATED_FULLY') or is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                <h4 class="navbar-form navbar-right" style="color:#fff;">Hello {{ app.user.username }}</h4>
+            {% if is_granted('ROLE_USER') %}
+                <h4 class="navbar-form navbar-right" style="color:#fff;">
+                    Hello <a href="{{ path('edit_user_profile') }}">{{ app.user.username }}</a>
+                </h4>
             {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
                 {{ render(controller("ConnectionUserBundle:Security:login", {'request': app.request})) }}
             {% endif %}

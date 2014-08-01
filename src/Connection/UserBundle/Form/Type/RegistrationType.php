@@ -30,7 +30,7 @@ class RegistrationType extends BaseType
                 'required'  => true,
                 'mapped'    => false
             ))
-            ->add('register', 'submit');
+            ->add('submit', 'submit');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

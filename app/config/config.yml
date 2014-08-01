@@ -18,9 +18,7 @@ framework:
     default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
-    session:
-        # handler_id set to null will use default session handler from php.ini
-        handler_id:  ~
+    session: ~
     fragments:       ~
     http_method_override: true
 
@@ -75,4 +73,9 @@ fos_user:
     registration:
       form:
         type: connection_user_registration
+
+oneup_uploader:
+    mappings:
+        gallery:
+            frontend: fancyupload
 

@@ -1,0 +1,50 @@
+{% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
+{% block theme %}create-profile{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="container breadcrumbs">
+        <ul>
+            <li><a href="{{ path('connection_homepage') }}">Main page</a></li>
+            <li>Profile</li>
+        </ul>
+    </div>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h4>Account:</h4>
+        <div class="row">
+            <div class="col-xs-2">
+                <div id="add-photo">
+                    <div class="msg">
+                        <div class="sprite sprite-add-photo"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-5">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <h4>{{ user.userName }}</h4>
+                        <h6>{{ user.profile.birthdate|userAge}} {{ user.profile.state.name is defined ? "," ~ user.profile.state.name : ""}}</h6>
+                        {% if user.profile.lookingFor.name is defined %}
+                            <span>Looking for: {{ user.profile.lookingFor.name }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <h4>About Me:</h4>
+                            {{ user.profile.aboutMe }}
+                        </div>
+                    </div>
+                    {% if user.profile.interestsAndHobbies is defined %}
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h4>Interests and hobbies:</h4>
+                                {{ user.profile.interestsAndHobbies }}
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col-xs-5"></div>
+        </div>
+{% endblock %}
