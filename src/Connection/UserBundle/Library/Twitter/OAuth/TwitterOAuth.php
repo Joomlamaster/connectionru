@@ -1,6 +1,6 @@
 <?php
 
-namespace Connection\UserBundle\Library\Twitter\Oauth;
+namespace Connection\UserBundle\Library\Twitter\OAuth;
 
 class TwitterOAuth {
     /* Contains the last HTTP status code returned. */

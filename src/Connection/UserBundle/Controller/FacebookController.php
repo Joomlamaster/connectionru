@@ -34,11 +34,9 @@ class FacebookController extends Controller
         $faceBookSdkService  = $this->get('connection_user.facebook');
         $socialUserService   = $this->get('connection_user.social.user');
         //  Get Session From Facebook Redirect
-        $fbSession           = $faceBookSdkService->prepareSession()->getSession();
+        $faceBookprofile     = $faceBookSdkService->prepareProfile()->getProfile();
 
-        if ( $fbSession ) {
-            //  Get Facebook User Profile
-            $faceBookprofile = $faceBookSdkService->prepareProfile()->getProfile();
+        if ( $faceBookprofile ) {
             //  Check If We already have such user (by email address)
             if ( !$user = $socialUserService->getFbUser( $faceBookprofile['id'] ) ) {
                 if ( $userDuplicate = $socialUserService->findUserByEmail($faceBookprofile['email']) ) {

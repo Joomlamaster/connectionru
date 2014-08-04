@@ -4,10 +4,8 @@ namespace Connection\UserBundle\Service;
 
 use Connection\UserBundle\Entity\User;
 use Connection\UserBundle\Entity\Profile;
-use Facebook\FacebookSession;
-use Facebook\FacebookRequest;
-use Facebook\FacebookRequestException;
-use Facebook\FacebookRedirectLoginHelper;
+use Connection\UserBundle\Library\Facebook\Facebook;
+use Connection\UserBundle\Library\Facebook\FacebookApiException;
 use Symfony\Component\DependencyInjection\Container;
 
 class FacebookSdkService implements SocialServiceInterface {
@@ -15,9 +13,9 @@ class FacebookSdkService implements SocialServiceInterface {
     private $container;
     private $appId;
     private $secret;
-    private $session;
     private $profile;
     private $errors = array();
+    private $facebook;
 
     public function __construct( Container $container, $appId, $secret )
     {
@@ -29,23 +27,10 @@ class FacebookSdkService implements SocialServiceInterface {
             $_SESSION = $this->container->get('session')->all();
         }
 
-        FacebookSession::setDefaultApplication($this->appId, $this->secret);
-    }
-
-    /**
-     * @param mixed $session
-     */
-    private function setSession ( $session )
-    {
-        $this->session = $session;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getSession ()
-    {
-        return $this->session;
+        $this->facebook = new Facebook(array(
+            'appId'  => $this->appId,
+            'secret' => $this->secret,
+        ));
     }
 
     /**
@@ -82,34 +67,19 @@ class FacebookSdkService implements SocialServiceInterface {
 
     public function getLoginButton()
     {
-        return  new FacebookRedirectLoginHelper($this->container->get('router')->generate('facebook_login', array(), true));
+        $this->facebook->setLoginRedirectUrl($this->container->get('router')->generate('facebook_login', array(), true));
+        return  $this->facebook->getLoginUrl();
     }
 
-    public function prepareSession()
+    public function prepareProfile()
     {
-        $facebook   = new FacebookRedirectLoginHelper($this->container->get('router')->generate('facebook_login', array(), true));
-        try {
-            $session = $facebook->getSessionFromRedirect();
-            $this->setSession($session);
-        } catch(FacebookRequestException $ex) {
-            $this->addError($ex->getMessage());
-        } catch(\Exception $ex) {
-            $this->addError($ex->getMessage());
-        }
-        return $this;
-    }
-
-    public function prepareProfile( $session = null )
-    {
-        $session = empty($session) ? $this->getSession() : $session;
-
-        if ( empty($session) ) {
-            throw new \Exception('Empty Session, please provide a valid session');
+        if ($this->facebook->getUser()) {
+            try {
+                // Proceed knowing you have a logged in user who's authenticated.
+                $this->setProfile($this->facebook->api('/me'));
+            } catch (FacebookApiException $e) {}
         }
 
-        $request    = new FacebookRequest($session, 'GET', '/me');
-        $response   = $request->execute();
-        $this->setProfile($response->getGraphObject()->asArray());
         return $this;
     }
 
