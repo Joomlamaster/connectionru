@@ -14,7 +14,7 @@
                 <div class="tab-content">
                     {% if not is_granted('ROLE_USER') %}
                         <div class="tab-pane active" id="registration">
-                            {{ render(controller("FOSUserBundle:Registration:register")) }}
+                            {{ render(controller("ConnectionUserBundle:Registration:register")) }}
                         </div>
                     {% endif %}
                     <div class="tab-pane" id="search"></div>
