@@ -403,3 +403,8 @@ button.btn-gradient {
   width: auto;
   color: #000000;
 }
+
+.fos_user_registration_register label {
+    width: 93px;
+    white-space: nowrap;
+}
