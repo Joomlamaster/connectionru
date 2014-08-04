@@ -16,6 +16,7 @@ body {
 }
 .navbar.navbar-first .navbar-header .sprite {
   display: inline-block;
+  height: 19px;
 }
 .navbar.navbar-first .navbar-right {
   margin-bottom: 0;
