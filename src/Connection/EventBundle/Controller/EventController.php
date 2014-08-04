@@ -33,6 +33,9 @@ class EventController extends Controller
      */
     public function manageAction(Request $request, $id)
     {
+        if (!$user = $this->getUser()) {
+            return $this->redirect( $this->generateUrl('connection_homepage') );
+        }
         $em     = $this->getDoctrine()->getManager();
         if ( !$id || !$event = $em->getRepository('ConnectionEventBundle:Event')->find($id) ) {
             $event  = new Event();
