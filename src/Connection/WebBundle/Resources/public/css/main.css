@@ -77,7 +77,7 @@ body {
   width: 135px;
 }
 .jumbotron .main-block .nav-tabs li:first-child {
-  width: 200px;
+  width: 231px;
 }
 .jumbotron .main-block .nav-tabs li a {
   color: #4d4d4d;
@@ -89,7 +89,7 @@ body {
   background-color: #4d4d4d;
 }
 .jumbotron .main-block .tab-content {
-  width: 333px;
+  width: 365px;
   background-color: #ededed;
   opacity: 0.9;
   border: 5px solid #CAECFB;
@@ -255,7 +255,7 @@ footer .bottom-right-menu li a {
 .form-group input.form-control,
 .form-inline input.form-control {
   border-radius: 15px;
-  padding: 6px 12px;
+  padding: 5px 12px;
   height: 20px;
   width: 78px;
 }
@@ -407,4 +407,5 @@ button.btn-gradient {
 .fos_user_registration_register label {
     width: 93px;
     white-space: nowrap;
+    margin-right: 2px;
 }

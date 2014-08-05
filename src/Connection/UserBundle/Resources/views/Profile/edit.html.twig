@@ -21,17 +21,17 @@
     <h4>Account:</h4>
         <div class="row">
             <div class="col-xs-2">
-                <form action="{{ oneup_uploader_endpoint('user') }}" class="dropzone" id="property-images">
-                    {#<input type="hidden" name="property_id" value="{{ property.id }}">#}
-                </form>
-                {#<div id="add-photo" class="dropzone">#}
-                    {#<div class="msg dz-message">#}
-                        {#<span>#}
-                            {#<div class="sprite sprite-add-photo"></div>#}
-                            {#+ Add photo#}
-                        {#</span>#}
-                    {#</div>#}
-                {#</div>#}
+                <div id="add-photo">
+                    <form action="{{ oneup_uploader_endpoint('user') }}"  id="profile-images" class="dropzone">
+                        {#<input type="hidden" name="property_id" value="{{ property.id }}">#}
+                            <div class="msg dz-message">
+                                <span>
+                                    <div class="sprite sprite-add-photo"></div>
+                                    + Add photo
+                                </span>
+                            </div>
+                    </form>
+                </div>
             </div>
             {{ form_start(form, {'action': path('edit_user_profile'), 'method': 'POST', 'attr': {'class': 'master_slave'}}) }}
                 <div class="col-xs-5">

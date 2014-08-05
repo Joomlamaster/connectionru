@@ -21,8 +21,8 @@ class GalleryRepository extends EntityRepository
         if ($id) {
             $qb->andWhere('g.id = :gallery_id')->setParameter('gallery_id', $id);
         } else {
-            $qb->andWhere('g.default = :default')->setParameter('default', 1);
+            $qb->andWhere('g.isDefault = :is_default')->setParameter('is_default', 1);
         }
-        return $qb->getQuery()->getSingleResult();
+        return $qb->getQuery()->getOneOrNullResult();
     }
 }

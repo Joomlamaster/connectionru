@@ -1,9 +1,9 @@
 DropZoneStoreage = {};
 DropZoneStoreage = {
     'initDropZone': function(url, removeUrl) {
-        Dropzone.options.user = {
+        Dropzone.options.profileImages = {
+            maxFiles: 1,
             init: function() {
-
                 thisDropzone = this;
                 $.get(url, function(data) {
                     $.each(data, function(key,value){
@@ -33,10 +33,13 @@ DropZoneStoreage = {
                 thisDropzone.options.addedfile.call(thisDropzone, mockFile);
                 thisDropzone.options.thumbnail.call(thisDropzone, mockFile, data.name);
                 $("form.dropzone").find("img[src='" + data.name + "']").closest('div.dz-preview').addClass('dz-success');
+            },
+            'maxfilesexceeded': function() {
+                console.log('maxfilesexceeded');
             }
         };
 
-        var propImageDropzone = new Dropzone("#property-images", {
+        var profileImageDropzone = new Dropzone("#profile-images", {
             maxFilesize: 2, //MB
             parallelUploads: 100 //have to set this high to ensure all images are processed when manually called
 

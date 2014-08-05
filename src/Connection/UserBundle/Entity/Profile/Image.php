@@ -116,7 +116,7 @@ class Image
 
     public function getUploadRootDir()
     {
-        return __DIR__.'/../../../../../' . $this->getPath();
+        return __DIR__.'/../../../../../web' . $this->getPath();
     }
 
 

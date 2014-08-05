@@ -107,11 +107,11 @@ class Gallery
 
     public function getDefault()
     {
-        return $this->default;
+        return $this->isDefault;
     }
 
     public function setDefault($default)
     {
-        $this->default = $default;
+        $this->isDefault = $default;
     }
 }
