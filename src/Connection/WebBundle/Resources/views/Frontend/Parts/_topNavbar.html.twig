@@ -20,7 +20,6 @@
                     {% endif %}
                     <li class="search-item"><a href="#"><span class="glyphicon glyphicon-search"></span> Search</a></li>
                     {% if not is_granted('ROLE_USER') %}
-                        <li><a href="#">Login</a></li>
                         <li><a href="#">Register</a></li>
                     {% endif %}
                 </ul>
