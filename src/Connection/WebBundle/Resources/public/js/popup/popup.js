@@ -21,9 +21,18 @@ FM = {
             $('.fm-popup').on('dz.upload.complete', function() {
                 FM.popUp.closePopup();
             });
+
+            $('.fm-popup').on('dz.upload.complete.refresh.profile', function() {
+                location.reload();
+            });
+
+            $('.fm-popup').on('dz.added.file', function() {
+                $targetPopUp.center();
+            });
         },
         'closePopup': function() {
             $('.fm-popup').addClass('hidden');
+            $('#profile-images').trigger('fm.close.profile.popup', { context: "dz.added.file" });
         }
     }
 };

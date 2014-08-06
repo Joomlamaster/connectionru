@@ -2,7 +2,7 @@
     <form name="jcrop" action="{{ oneup_uploader_endpoint('user') }}" id="profile-images" style="min-height: 300px;">
         <div class="fm-top-inventory">
             <label form="profile_default_image">Set as default profile image
-                <input name="profile_default_image" type="checkbox">
+                <input name="profile_default_image" type="checkbox" checked="checked" value="1">
             </label>
             {% if galleries is defined %}
                 <label form="profile_default_image">Gallery

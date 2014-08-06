@@ -4,7 +4,6 @@ DropZoneStoreage = {
         Dropzone.options.profileImages = {
             maxFiles: 1,
             init: function() {
-//                console.log('asdasdasd');
                 this.on("maxfilesexceeded", function(file){
                     this.removeFile(file);
                     return;
@@ -12,8 +11,13 @@ DropZoneStoreage = {
 
                 this.on("addedfile", function(file) {
                     setTimeout(function() {
+                        $('.fm-popup').trigger('dz.added.file', { context: "dz.added.file" });
                         initJCrop();
-                    }, 1000);
+                    }, 500);
+                });
+
+                $('#profile-images').on('fm.close.profile.popup', function() {
+                    profileImageDropzone.removeAllFiles();
                 });
             },
             'removedfile': function(file) {
@@ -30,6 +34,7 @@ DropZoneStoreage = {
             },
             'success': function(file, data) {
                 $('.fm-popup').trigger('dz.upload.complete', { context: "dz.upload.complete" });
+                $('.fm-popup').trigger('dz.upload.complete.refresh.profile', { context: "dz.upload.complete.refresh.profile" });
                 profileImageDropzone.removeAllFiles();
             }
         };
