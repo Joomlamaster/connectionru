@@ -1,0 +1,12 @@
+{% if userPhotos is defined and userPhotos is not empty %}
+    {% for gallery in userPhotos %}
+        {% for galleryName, images in gallery %}
+            <div class="row profile-gallery">
+                <p class="lead">Gallery: {{ galleryName }}</p>
+                {% for image in images %}
+                    <img src="{{ image.path }}" class="img-rounded">
+                {% endfor %}
+            </div>
+        {% endfor %}
+    {% endfor %}
+{% endif %}

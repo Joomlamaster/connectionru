@@ -15,9 +15,13 @@
         <div class="row">
             <div class="col-xs-2">
                 <div id="add-photo">
-                    <div class="msg">
-                        <div class="sprite sprite-add-photo"></div>
-                    </div>
+                    {% if user.profile.avatar is defined and user.profile.avatar is not empty %}
+                        <img class="img-rounded" width="140px" height="190" src="{{ user.profile.avatar }}">
+                    {% else %}
+                        <div class="msg">
+                            <div class="sprite sprite-add-photo"></div>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-xs-5">

@@ -1,0 +1,12 @@
+<div class="fm-popup hidden" id="profile-image">
+    <div class="fm-popup-headline">Upload Profile Image</div>
+    <div class="fm-content">
+        {{ render(controller("ConnectionUserBundle:Image:jcropForm")) }}
+    </div>
+    <div class="fm-nav-container">
+        <div class="fm-nav">
+            <button class="btn btn-success dz-process-queue">Upload</button>
+            <button class="btn btn-danger pull-right close-popup">Cancel</button>
+        </div>
+    </div>
+</div>

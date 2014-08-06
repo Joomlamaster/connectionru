@@ -13,7 +13,7 @@
                         <p>Looking for:</p>
                         <p class="blue">{{ user.profile.lookingFor.name }}</p>
                     {% endif %}
-                    <a href="#">see this user</a>
+                    <a href="{{ path('view_profile', {id: user.profile.id}) }}">see this user</a>
                 </div>
             </div>
         {% endfor %}
