@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Connection\UserBundle\Entity\Profile;
+use Connection\UserBundle\Entity\Profile\Image;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 
@@ -48,5 +48,26 @@ class ImageController extends Controller
             'form' => $form->createView(),
             'galleries' => $galleries
         ));
+    }
+
+    /**
+     * @Route("/{id}", name="remove_profile_image", requirements={"id" = "\d+"})
+     * @ParamConverter("Image", class="ConnectionUserBundle:Profile\Image")
+     */
+    public function removeAction( Image $image)
+    {
+        if (!$user = $this->getUser()) {
+            throw new AccessDeniedException();
+        }
+
+        if ($image->getGallery()->getUser()->getId() != $user->getId()) {
+            throw new AccessDeniedException();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($image);
+        $em->flush();
+
+        return $this->redirect( $this->generateUrl('edit_user_profile') );
     }
 }

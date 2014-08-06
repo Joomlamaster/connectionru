@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="image")
  * @ORM\Entity(repositoryClass="Connection\UserBundle\Entity\Profile\ImageRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Image
 {
@@ -119,5 +120,10 @@ class Image
         return __DIR__.'/../../../../../web' . $this->getPath();
     }
 
-
+    /**
+     * @ORM\PreRemove()
+     */
+    public function removeFiles() {
+        unlink($this->getUploadRootDir());
+    }
 }

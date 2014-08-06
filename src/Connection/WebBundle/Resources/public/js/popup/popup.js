@@ -20,9 +20,6 @@ FM = {
 
             $('.fm-popup').on('dz.upload.complete', function() {
                 FM.popUp.closePopup();
-            });
-
-            $('.fm-popup').on('dz.upload.complete.refresh.profile', function() {
                 location.reload();
             });
 

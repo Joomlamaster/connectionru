@@ -2,7 +2,22 @@
     padding:14px;
 }
 
-.profile-gallery img{
+.profile-gallery img {
     padding:2px;
+    width: 120px;
+    float: none;
+    display: block;
+}
+
+.profile-image-box {
+    margin: 10px;
+    border: 1px solid #ccc;
+    float: left;
+    text-align: center;
+}
+
+.profile-image-box a {
+    font-size: 12px;
+    height: 28px;
     width: 120px;
 }

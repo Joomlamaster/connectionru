@@ -4,7 +4,10 @@
             <div class="row profile-gallery">
                 <p class="lead">Gallery: {{ galleryName }}</p>
                 {% for image in images %}
-                    <img src="{{ image.path }}" class="img-rounded">
+                    <div class="profile-image-box">
+                        <img src="{{ image.path }}">
+                        <a href="{{ path('remove_profile_image', {id: image.id}) }}" class="btn btn-danger profile-image-remove">Remove</a>
+                    </div>
                 {% endfor %}
             </div>
         {% endfor %}
