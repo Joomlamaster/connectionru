@@ -15,7 +15,7 @@ class ImageRepository extends EntityRepository
     public function getGroupedByGalleryImages( $userId )
     {
         $qb = $this->createQueryBuilder('i')
-                   ->select("i, g.id AS gallery_id")
+                   ->select("i, g.id AS gallery_id, g.title AS gallery_title")
                    ->join('i.gallery', 'g')
                    ->join('g.user', 'u')
                    ->where('u.id = :user_id')
@@ -24,7 +24,7 @@ class ImageRepository extends EntityRepository
 
         $result = array();
         foreach ($images as $image) {
-            $result[$image['gallery_id']][] = $image[0];
+            $result[$image['gallery_id']][$image['gallery_title']][] = $image[0];
         }
 
         return $result;

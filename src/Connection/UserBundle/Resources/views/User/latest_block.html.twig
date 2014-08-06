@@ -2,6 +2,9 @@
     <div class="people">
         {% for user in users %}
             <div class="face">
+                {% if user.profile.avatar is defined and user.profile.avatar is not empty %}
+                    <img style="position: absolute;" width="83px" height="112" src="{{ user.profile.avatar }}">
+                {% endif %}
                 <div class="info">
                     <p class="name">{{ user.userName }}</p>
                     <p>{{ user.profile.birthdate|userAge}} {{ user.profile.state.name is defined ? "," ~ user.profile.state.name : ""}}</p>

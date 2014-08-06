@@ -231,6 +231,12 @@ class Profile
     private $user;
 
     /**
+     * @var string
+     * @ORM\Column(name="avatar", type="string", length=200, nullable=true)
+     */
+    protected $avatar;
+
+    /**
      * @return int
      */
     public function getId ()
@@ -768,5 +774,21 @@ class Profile
         }
 
         $this->$fieldName = $fieldValue;
+    }
+
+    /**
+     * @param string $avatar
+     */
+    public function setAvatar ( $avatar )
+    {
+        $this->avatar = $avatar;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAvatar ()
+    {
+        return $this->avatar;
     }
 }

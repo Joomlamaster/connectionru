@@ -17,6 +17,7 @@
         {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/bootstrap.css') }}" type="text/css" />
         <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/bootstrap-theme.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/popup/popup.css') }}" type="text/css" />
 
         {% stylesheets output='assets/compiled/frontend.css' filter='cssrewrite'
             '@ConnectionWebBundle/Resources/assets/css/frontend.css'
@@ -89,6 +90,7 @@
                 </div>
             </footer>
         </div>
+        {% block popup %}{% endblock %}
 
         {# javascript... #}
         {% block javascript %}

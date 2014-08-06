@@ -26,7 +26,7 @@ class Gallery
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
-    private $title = "Profile";
+    private $title = "Profile Images";
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      * @ORM\OneToMany(targetEntity="Connection\UserBundle\Entity\Profile\Image", mappedBy="gallery", cascade={"persist", "remove"})

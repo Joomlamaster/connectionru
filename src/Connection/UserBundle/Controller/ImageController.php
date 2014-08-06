@@ -2,6 +2,7 @@
 
 namespace Connection\UserBundle\Controller;
 
+use Connection\WebBundle\Form\Type\JcropType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -30,5 +31,22 @@ class ImageController extends Controller
 
         $profileImages = $this->getDoctrine()->getRepository('ConnectionUserBundle:Profile\Image')->getGroupedByGalleryImages($user->getId());
         return new JsonResponse($profileImages);
+    }
+
+    /**
+     * @Route("/jcrop/from", name="jcrop_form")
+     */
+    public function jcropFormAction( Request $request )
+    {
+        if ( !$user = $this->getUser() ) {
+            throw new AccessDeniedException("Not Logged IN");
+        }
+
+        $galleries = $user->getGalleries();
+        $form      = $this->createForm( new JcropType());
+        return $this->render('ConnectionWebBundle:Frontend\Popups:jcrop_form.html.twig', array(
+            'form' => $form->createView(),
+            'galleries' => $galleries
+        ));
     }
 }

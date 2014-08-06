@@ -52,9 +52,12 @@ class ProfileController extends Controller
             return $this->redirect( $this->generateUrl('edit_user_profile') );
         }
 
+        $userPhotos = $this->getDoctrine()->getRepository('ConnectionUserBundle:Profile\Image')->getGroupedByGalleryImages($user->getId());
+
         return array(
-            'form'      => $form->createView(),
-            'user'   => $user
+            'form'       => $form->createView(),
+            'user'       => $user,
+            'userPhotos' => $userPhotos
         );
     }
 

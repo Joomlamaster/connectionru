@@ -12,17 +12,24 @@ use Doctrine\ORM\EntityRepository;
  */
 class GalleryRepository extends EntityRepository
 {
-    public function getGalleryByIdOrDefault( $userId, $id = false )
+    public function getGalleryByIdOrDefault( $userId, $id = 0 )
     {
-        $qb = $this->createQueryBuilder('g')
-                   ->join('g.user', 'u')
-                   ->where('u.id = :user_id')
-                   ->setParameter('user_id', $userId);
-        if ($id) {
-            $qb->andWhere('g.id = :gallery_id')->setParameter('gallery_id', $id);
-        } else {
-            $qb->andWhere('g.isDefault = :is_default')->setParameter('is_default', 1);
-        }
-        return $qb->getQuery()->getOneOrNullResult();
+            $gallery = $this->createQueryBuilder('g')
+                ->join('g.user', 'u')
+                ->where('u.id = :user_id')
+                ->setParameter('user_id', $userId)
+                ->andWhere('g.id = :gallery_id')->setParameter('gallery_id', $id)
+                ->getQuery()->getOneOrNullResult();
+
+            if (!$gallery) {
+                $gallery = $this->createQueryBuilder('g')
+                    ->join('g.user', 'u')
+                    ->where('u.id = :user_id')
+                    ->setParameter('user_id', $userId)
+                    ->andWhere('g.isDefault = :is_default')->setParameter('is_default', 1)
+                    ->getQuery()->getOneOrNullResult();
+            }
+
+        return $gallery;
     }
 }

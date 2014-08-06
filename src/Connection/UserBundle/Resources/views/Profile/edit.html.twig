@@ -15,6 +15,8 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/connectionweb/js/dropzone/css/dropzone.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/connectionuser/css/profile.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/connectionweb/js/jcorp/css/jquery.Jcrop.min.css') }}" type="text/css" />
 {% endblock %}
 
 {% block content %}
@@ -22,165 +24,45 @@
         <div class="row">
             <div class="col-xs-2">
                 <div id="add-photo">
-                    <form action="{{ oneup_uploader_endpoint('user') }}"  id="profile-images" class="dropzone">
-                        {#<input type="hidden" name="property_id" value="{{ property.id }}">#}
-                            <div class="msg dz-message">
-                                <span>
-                                    <div class="sprite sprite-add-photo"></div>
-                                    + Add photo
-                                </span>
-                            </div>
-                    </form>
+                    {% if app.user.profile.avatar is defined and app.user.profile.avatar is not empty %}
+                        <img class="img-rounded" width="140px" height="190" src="{{ app.user.profile.avatar }}">
+                    {% else %}
+                        <div class="msg">
+                            <div class="sprite sprite-add-photo fm-show-popup" data-target_popup="profile-image" ></div>
+                            + Add photo
+                        </div>
+                    {% endif %}
                 </div>
             </div>
-            {{ form_start(form, {'action': path('edit_user_profile'), 'method': 'POST', 'attr': {'class': 'master_slave'}}) }}
-                <div class="col-xs-5">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.firstName) }}
+            <div class="col-xs-8">
+                <ul class="nav nav-tabs" id="profile-tabs">
+                    <li class="active"><a href="#profile">Profile</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="profile">
+                        <div class="col-xs-5">
+                            {{ include('ConnectionUserBundle:Profile:personal_info.html.twig', {form: form}) }}
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.lastName) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                           {{ form_row(form.profile.aboutMe) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.interestsAndHobbies) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.birthdate) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.gender) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div id="master_slave">
-                                <div>
-                                    {{ form_row(form.profile.country) }}
-                                </div>
-                                {% if (form.profile.state is defined) %}
-                                    <div id="slave_block">
-                                        {{ form_row(form.profile.state) }}
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.seek) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            {{ form_row(form.profile.lookingFor) }}
-                        </div>
-                        <div class="col-xs-6">
-                            {{ form_row(form.profile.maritalStatus) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-4">
-                            {{ form_row(form.profile.height) }}
-                        </div>
-                        <div class="col-xs-4">
-                            {{ form_row(form.profile.weight) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.eyeColor) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.hairColor) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.smoking) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.drinking) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.education) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.profession) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.languages) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.haveChildren) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.wantChildren) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.livesWithChildren) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.openToPersonWithKids) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.religion) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.ethnicity) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-3">
-                        </div>
-                        <div class="col-xs-9">
-                            {{ form_row(form.submit, { attr: { class: 'btn-gradient' }}) }}
-                        </div>
+                    <div class="tab-pane" id="gallery">
+                        {{ include('ConnectionUserBundle:Profile:gallery.html.twig', {userPhotos: userPhotos}) }}
                     </div>
                 </div>
-                <div class="col-xs-5"></div>
-            {{ form_end(form, {'render_rest': false}) }}
+            </div>
         </div>
+{% endblock %}
+{% block popup %}
+    {{ include('ConnectionWebBundle:Frontend/Popups:profile_image_popup.html.twig') }}
 {% endblock %}
 {% block javascript %}
     {{ parent() }}
     <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/dropzone/dropzone.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/dropzone/dropzone-custom.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/popup/popup.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jcorp/js/jquery.Jcrop.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jcorp/js/settings.js') }}"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             DropZoneStoreage.initDropZone(
@@ -188,5 +70,11 @@
                     "{{ path('profile_image') }}"
             );
         });
+        FM.popUp.profileImage();
+
+        $('#profile-tabs a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        })
     </script>
 {% endblock %}

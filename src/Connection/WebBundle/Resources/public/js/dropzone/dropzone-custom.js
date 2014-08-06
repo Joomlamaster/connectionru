@@ -4,13 +4,16 @@ DropZoneStoreage = {
         Dropzone.options.profileImages = {
             maxFiles: 1,
             init: function() {
-                thisDropzone = this;
-                $.get(url, function(data) {
-                    $.each(data, function(key,value){
-                        var mockFile = { name: value.name, size: value.size, id: value.id };
-                        thisDropzone.options.addedfile.call(thisDropzone, mockFile);
-                        thisDropzone.options.thumbnail.call(thisDropzone, mockFile, value.name);
-                    });
+//                console.log('asdasdasd');
+                this.on("maxfilesexceeded", function(file){
+                    this.removeFile(file);
+                    return;
+                });
+
+                this.on("addedfile", function(file) {
+                    setTimeout(function() {
+                        initJCrop();
+                    }, 1000);
                 });
             },
             'removedfile': function(file) {
@@ -26,23 +29,23 @@ DropZoneStoreage = {
                 return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
             },
             'success': function(file, data) {
-                var _ref;
-                file.previewElement.parentNode.removeChild(file.previewElement);
-                thisDropzone = this;
-                var mockFile = { name: data.name, size: data.size, id: data.id };
-                thisDropzone.options.addedfile.call(thisDropzone, mockFile);
-                thisDropzone.options.thumbnail.call(thisDropzone, mockFile, data.name);
-                $("form.dropzone").find("img[src='" + data.name + "']").closest('div.dz-preview').addClass('dz-success');
-            },
-            'maxfilesexceeded': function() {
-                console.log('maxfilesexceeded');
+                $('.fm-popup').trigger('dz.upload.complete', { context: "dz.upload.complete" });
+                profileImageDropzone.removeAllFiles();
             }
         };
 
         var profileImageDropzone = new Dropzone("#profile-images", {
+            autoProcessQueue: false,
+            thumbnailWidth: null,
+            thumbnailHeight: null,
             maxFilesize: 2, //MB
             parallelUploads: 100 //have to set this high to ensure all images are processed when manually called
 
+        });
+
+        $(".dz-process-queue").on('click', function(e){
+            e.preventDefault();
+            profileImageDropzone.processQueue();
         });
     }
 };
