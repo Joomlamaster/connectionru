@@ -6,6 +6,7 @@ use Connection\UserBundle\Entity\Profile\Gallery;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use FOS\UserBundle\Model\User as BaseUser;
+use Connection\EventBundle\Entity\Event;
 
 /**
  * User
@@ -75,12 +76,17 @@ class User extends BaseUser
      */
     protected $addresses;
 
-//    /**
-//     * @var \Doctrine\Common\Collections\ArrayCollection
-//     * @ORM\OneToMany(targetEntity="Event", mappedBy="user", cascade={"persist", "remove"})
-//     */
-//    // ToDo: Add Relation With Event
-//    protected $events;
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\OneToMany(targetEntity="Connection\EventBundle\Entity\Event", mappedBy="user", cascade={"persist", "remove"})
+     */
+    protected $events;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Connection\EventBundle\Entity\Event", inversedBy="participants")
+     * @ORM\JoinTable(name="event_participant")
+     **/
+    private $participateEvents;
 
     /**
      * @var \DateTime
@@ -297,6 +303,38 @@ class User extends BaseUser
     public function getDeletedAt ()
     {
         return $this->deletedAt;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $event
+     */
+    public function setEvent ( Event $event )
+    {
+        $this->events[] = $event;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getEvents ()
+    {
+        return $this->events;
+    }
+
+    /**
+     * @param mixed $participateEvents
+     */
+    public function setParticipateEvents ( Event $event )
+    {
+        $this->participateEvents[] = $event;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParticipateEvents ()
+    {
+        return $this->participateEvents;
     }
 
     /**

@@ -12,11 +12,26 @@ class FrontendController extends Controller
 {
     /**
      * @Route("/", name="connection_homepage")
-     * @Template()
      */
     public function indexAction()
     {
         return $this->render('ConnectionWebBundle:Frontend:index.html.twig');
+    }
+
+    /**
+     * @Route("/about-us", name="connection_about")
+     */
+    public function aboutAction()
+    {
+        return $this->render('ConnectionWebBundle:Frontend:about.html.twig');
+    }
+
+    /**
+     * @Route("/privacy", name="connection_privacy")
+     */
+    public function privacyAction()
+    {
+        return $this->render('ConnectionWebBundle:Frontend:privacy.html.twig');
     }
 
     public function topNavbarAction()

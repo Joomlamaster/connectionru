@@ -1,0 +1,36 @@
+{% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
+
+{% block theme %}create-profile{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="container breadcrumbs">
+        <ul>
+            <li><a href="{{ path('connection_homepage') }}">Main page</a></li>
+            <li>About Us</li>
+        </ul>
+    </div>
+{% endblock breadcrumbs %}
+{% block content %}
+    <div class="row">
+        <div class="col-xs-8">
+            <h4>About us</h4>
+            <h5>ConnectionRu.com - <span class="blue">There is Someone for Everyone</span></h5>
+            <p>
+            Internet project ConnectionRu.com - quick meetings and live chat with real people from your city.<br/>
+            Our site is designed specifically for those people who are tired of spending his nights at the computer on the Internet and virtual communication, but rather would like to spend your leisure time with interesting people in real time.<br/>
+            By using our site, you can diversify your leisure not only in the evening, but during the day, for example - you do not have anyone to go to training or to the beach or do you want to go to the match of your favorite football team or concert band adored and your friends employed at this time.<br/>
+            ConnectionRu.com site provides you the opportunity to not be bored at home alone, and to communicate and meet with people who want the same. Months you can correspond with girls / guys on dating sites, but much better this time not to spend quiet time in the 4 walls, and in some wonderful place!<br/>
+            </p>
+            <h5>Our advantages:</h5>
+            <p>
+                speed<br/>
+                convenience<br/>
+                availability<br/>
+            </p>
+            <em>respected team ConnestionRu.com</em>
+        </div>
+        <div class="col-xs-4">
+            <img src="/bundles/connectionweb/img/about-us.png" alt="About us"/>
+        </div>
+    </div>
+{% endblock %}

@@ -2,29 +2,34 @@
 
 namespace Connection\EventBundle\Controller;
 
+use Connection\EventBundle\Entity\Event;
+use Connection\EventBundle\Form\EventType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Connection\EventBundle\Entity\Event;
-use Connection\EventBundle\Form\EventType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * Event controller.
+ * @Route("/event")
  */
 class EventController extends Controller
 {
-
     /**
-     * @Route("/", name="event")
+     * @Route("/{id}", name="view_event", requirements={"id" = "\d+"})
      * @Template()
+     * @ParamConverter("Event", class="ConnectionEventBundle:Event")
      */
-    public function indexAction()
+    public function viewAction( Event $event)
     {
-        $entities = $this->getDoctrine()->getRepository('ConnectionEventBundle:Event')->findAll();
-        return array(
-            'entities' => $entities,
-        );
+        $event->incViewed();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($event);
+        $em->flush();
+
+        return array( 'event'   => $event );
     }
 
     /**
@@ -54,5 +59,60 @@ class EventController extends Controller
             'id' => $id,
             'form' => $form->createView(),
         );
+    }
+
+    /**
+     * @Route("/", name="event")
+     * @Template()
+     */
+    public function searchAction()
+    {
+        $events = $this->getDoctrine()->getRepository('ConnectionEventBundle:Event')->findAll();
+        return array(
+            'events' => $events,
+        );
+    }
+
+    /**
+     * @Route("/subscribe/{id}", name="event_subscribe", requirements={"id" = "\d+"})
+     * @Template()
+     * @ParamConverter("Event", class="ConnectionEventBundle:Event")
+     */
+    public function subscribeAction( Event $event )
+    {
+        if ( !$user = $this->getUser() ) {
+            throw new AccessDeniedException("Not Logged IN");
+        }
+
+        if ( !$event->hasParticipant($user) ) {
+            $user->setParticipateEvents($event);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+        }
+
+        return new JsonResponse();
+    }
+
+    /**
+     * @Route("/unsubscribe/{id}", name="event_unsubscribe", requirements={"id" = "\d+"})
+     * @Template()
+     * @ParamConverter("Event", class="ConnectionEventBundle:Event")
+     */
+    public function unSubscribeAction( Event $event )
+    {
+        if ( !$user = $this->getUser() ) {
+            throw new AccessDeniedException("Not Logged IN");
+        }
+
+        if ( $event->hasParticipant($user) ) {
+            $user->getParticipateEvents()->removeElement($event);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+        }
+
+        return new JsonResponse();
+
     }
 }

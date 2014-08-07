@@ -1,0 +1,180 @@
+{% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
+
+{% block theme %}create-profile{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="container breadcrumbs">
+        <ul>
+            <li><a href="{{ path('connection_homepage') }}">Main page</a></li>
+            <li>Event</li>
+            <li>New York Philharmonic</li>
+        </ul>
+    </div>
+{% endblock breadcrumbs %}
+{% block content %}
+    <div class="row">
+        <div class="col-xs-8">
+            <div class="row">
+                <div class="col-xs-10">
+                    <h4>{{ event.title is defined ? event.title : "" }}</h4>
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <img class="event-image" src="/bundles/connectionweb/img/test-event-pic.png" alt=""/>
+                            <strong>Share this event</strong>
+                            <a href="#">
+                                <div class="share"><div class="sprite sprite-facebook"></div>Share</div>
+                            </a>
+                            <a href="#">
+                                <div class="share"><div class="sprite sprite-pinterest"></div>Share</div>
+                            </a>
+                            <a href="#">
+                                <div class="share"><div class="sprite sprite-instagram"></div>Share</div>
+                            </a>
+                        </div>
+                        <div class="col-xs-7 details">
+                            <time>{{ event.eventDate is defined ? event.eventDate|date : "" }}</time>
+                            {#<h5>New York Philharmonic</h5>#}
+                            <address>
+                                <strong>Venue</strong><br>
+                                {{ event.country.name is defined ? event.country.name : "" }}<br>
+                                {{ event.state.name is defined ? event.state.name : "" }}<br>
+                                <em><a href="#">Info</a> and <a href="#">map</a></em>
+                            </address>
+                            <a class="return" href="{{ path('event') }}"><div class="sprite sprite-return-events"></div>Return to events</a>
+
+                            <h6>Event Description:</h6>
+                            <em>
+                                {{ event.description is defined ? event.description : "" }}
+                            </em>
+                            {% if app.user.id is defined %}
+                                <div class="controls">
+                                    <div class="going">
+                                        <input type="checkbox" {{ event.hasParticipant(app.user) ? "checked" : "" }}/>I'm going
+                                    </div>
+                                    <div class="comment">Write comment</div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sx-12">
+                            <div class="block-title">{{ event.countParticipants }} people going:</div>
+                            <div class="people">
+                                <div class="face">
+                                    <p class="name">Jena coin</p>
+                                </div>
+                                <div class="face">
+                                    <p class="name">Joshua Bell</p>
+                                </div>
+                                <div class="face">
+                                    <p class="name">Nick Cave</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sx-12">
+                            <div class="block-title">1 people interested:</div>
+                            <div class="people">
+                                <div class="people">
+                                    <div class="face">
+                                        <p class="name">Mara stone</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-2 author">
+                    <div class="block-title">Posted:</div>
+                    <div class="people clearfix">
+                        <div class="face">
+                            <p class="name">Joshua Bell</p>
+                        </div>
+                    </div>
+                    <div class="event-stats">
+                        view<br/>
+                        {{ event.viewed is defined ? event.viewed: "" }}<br/>
+                        <br/>
+                        comment<br/>
+                        389<br/>
+                        <br/>
+                        going<br/>
+                        {{ event.countParticipants }}<br/>
+                        <br/>
+                        Share<br/>
+                        458
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-4 upcoming">
+            <div class="row">
+                <div class="block-title">Related upcoming events:</div>
+            </div>
+            <div class="row">
+                <div class="event-small">
+                    <div class="col-xs-4">
+                        <img src="/bundles/connectionweb/img/test-event-pic.png" alt=""/>
+                    </div>
+                    <div class="col-xs-8">
+                        <time>15.06.2014</time>
+                        <a class="title" href="#">OFFICE & Residential</a>
+                        <em>(NYC) pic map</em><br/>
+                        <a href="#" class="btn-gradient">View</a>
+                        <br/>
+                        <em>Posted:</em>
+                        <a href="#" class="name">Joshua Bell</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="event-small">
+                    <div class="col-xs-4">
+                        <img src="/bundles/connectionweb/img/test-event-pic.png" alt=""/>
+                    </div>
+                    <div class="col-xs-8">
+                        <time>15.06.2014</time>
+                        <a class="title" href="#">OFFICE & Residential</a>
+                        <em>(NYC) pic map</em><br/>
+                        <a href="#" class="btn-gradient">View</a>
+                        <br/>
+                        <em>Posted:</em>
+                        <a href="#" class="name">Joshua Bell</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="event-small">
+                    <div class="col-xs-4">
+                        <img src="/bundles/connectionweb/img/test-event-pic.png" alt=""/>
+                    </div>
+                    <div class="col-xs-8">
+                        <time>15.06.2014</time>
+                        <a class="title" href="#">OFFICE & Residential</a>
+                        <em>(NYC) pic map</em><br/>
+                        <a href="#" class="btn-gradient">View</a>
+                        <br/>
+                        <em>Posted:</em>
+                        <a href="#" class="name">Joshua Bell</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <a href="#">
+                    <div class="more">View all / others</div>
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/connectionevent/js/event.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            EM.subscriber.init("{{ path('event_subscribe', {id: event.id}) }}", "{{ path('event_unsubscribe', {id: event.id}) }}");
+        });
+    </script>
+{% endblock %}

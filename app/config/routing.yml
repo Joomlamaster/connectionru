@@ -1,17 +1,14 @@
 connection_web:
     resource: "@ConnectionWebBundle/Controller/"
     type:     annotation
-    prefix:   /
 
 connection_event:
     resource: "@ConnectionEventBundle/Controller/"
     type:     annotation
-    prefix:   /event
 
 connection_user:
     resource: "@ConnectionUserBundle/Controller/"
     type:     annotation
-    prefix:   /
 
 connection_fos_user_bundle:
     resource: "@ConnectionUserBundle/Resources/config/fos_user_bundle.yml"

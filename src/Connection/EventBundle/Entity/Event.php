@@ -4,6 +4,7 @@ namespace Connection\EventBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Connection\UserBundle\Entity\User;
 
 /**
  * event
@@ -112,11 +113,29 @@ class Event
      */
     private $lng;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\User", inversedBy="events")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id")
+     **/
+    private $user;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="viewed", type="integer")
+     */
+    private $viewed;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Connection\UserBundle\Entity\User", mappedBy="participateEvents")
+     **/
+    protected $participants;
+
 
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -139,7 +158,7 @@ class Event
     /**
      * Get category
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getCategory()
     {
@@ -178,7 +197,7 @@ class Event
     /**
      * Get location
      *
-     * @return \stdClass 
+     * @return \stdClass
      */
     public function getState()
     {
@@ -201,7 +220,7 @@ class Event
     /**
      * Get contactName
      *
-     * @return string 
+     * @return string
      */
     public function getContactName()
     {
@@ -224,7 +243,7 @@ class Event
     /**
      * Get date
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getEventDate()
     {
@@ -247,7 +266,7 @@ class Event
     /**
      * Get zipCode
      *
-     * @return integer 
+     * @return integer
      */
     public function getZipCode()
     {
@@ -270,7 +289,7 @@ class Event
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -293,7 +312,7 @@ class Event
     /**
      * Get phone
      *
-     * @return string 
+     * @return string
      */
     public function getPhone()
     {
@@ -316,7 +335,7 @@ class Event
     /**
      * Get title
      *
-     * @return string 
+     * @return string
      */
     public function getTitle()
     {
@@ -339,7 +358,7 @@ class Event
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -409,5 +428,61 @@ class Event
     public function getLng ()
     {
         return $this->lng;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser ( User $user )
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser ()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param int $viewed
+     */
+    public function incViewed ()
+    {
+        $this->viewed = $this->viewed + 1;
+    }
+
+    /**
+     * @return int
+     */
+    public function getViewed ()
+    {
+        return $this->viewed;
+    }
+
+    /**
+     * @param mixed $participants
+     */
+    public function setParticipant ( User $user )
+    {
+        $this->participants[] = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParticipants ()
+    {
+        return $this->participants;
+    }
+
+    public function hasParticipant( User $user ) {
+        return ($this->getParticipants()->contains($user));
+    }
+
+    public function countParticipants() {
+        return count($this->getParticipants());
     }
 }
