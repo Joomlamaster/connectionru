@@ -2,7 +2,6 @@
     {% for gallery in userPhotos %}
         {% for galleryName, images in gallery %}
             <div class="row profile-gallery">
-                <p class="lead">Gallery: {{ galleryName }}</p>
                 {% for image in images %}
                     <div class="profile-image-box">
                         <img src="{{ image.path }}" data-image_id="{{ image.id }}">
