@@ -21,3 +21,8 @@
     height: 28px;
     width: 120px;
 }
+
+.profile-image-box:hover {
+    border: 1px solid #484848;
+    cursor: pointer;
+}

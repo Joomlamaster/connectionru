@@ -44,7 +44,7 @@ class ImageController extends Controller
 
         $galleries = $user->getGalleries();
         $form      = $this->createForm( new JcropType());
-        return $this->render('ConnectionWebBundle:Frontend\Popups:jcrop_form.html.twig', array(
+        return $this->render('ConnectionUserBundle:Image\Popup:jcrop_form.html.twig', array(
             'form' => $form->createView(),
             'galleries' => $galleries
         ));
@@ -69,5 +69,30 @@ class ImageController extends Controller
         $em->flush();
 
         return $this->redirect( $this->generateUrl('edit_user_profile') );
+    }
+
+    /**
+     * @Route("/profile/update-image", name="update_profile_image", requirements={"id" = "\d+"})
+     */
+    public function updateProfileImageAction( Request $request)
+    {
+        if ( (!$user = $this->getUser()) || (!$id = $request->get('image_id')) ) {
+            throw new AccessDeniedException();
+        }
+
+        $em    = $this->getDoctrine()->getManager();
+        $image = $em->getRepository('ConnectionUserBundle:Profile\Image')->find($id);
+
+        if ( $image ) {
+            try {
+                if ($image->getGallery()->getUser()->getId() == $user->getId()) {
+                    $user->getProfile()->setAvatar($image->getPath());
+                    $em->persist($user);
+                    $em->flush();
+                }
+            } catch (\Exception $e) {}
+        }
+
+        return new JsonResponse();
     }
 }

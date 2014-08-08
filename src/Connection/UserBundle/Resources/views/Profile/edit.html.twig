@@ -45,18 +45,19 @@
                 <div class="tab-content">
                     <div class="tab-pane active" id="profile">
                         <div class="col-xs-5">
-                            {{ include('ConnectionUserBundle:Profile:personal_info.html.twig', {form: form}) }}
+                            {{ include('ConnectionUserBundle:Profile/Part:personal_info.html.twig', {form: form}) }}
                         </div>
                     </div>
                     <div class="tab-pane" id="gallery">
-                        {{ include('ConnectionUserBundle:Profile:gallery.html.twig', {userPhotos: userPhotos}) }}
+                        {{ include('ConnectionUserBundle:Profile/Part:gallery.html.twig', {userPhotos: userPhotos}) }}
                     </div>
                 </div>
             </div>
         </div>
 {% endblock %}
 {% block popup %}
-    {{ include('ConnectionWebBundle:Frontend/Popups:profile_image_popup.html.twig') }}
+    {{ include('ConnectionUserBundle:Profile/Popup:add_profile_image_popup.html.twig') }}
+    {{ include('ConnectionUserBundle:Profile/Popup:view_profile_image_popup.html.twig') }}
 {% endblock %}
 {% block javascript %}
     {{ parent() }}
@@ -66,14 +67,16 @@
     <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jcorp/js/jquery.Jcrop.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jcorp/js/settings.js') }}"></script>
     <script type="text/javascript">
+        {# Init DropZone #}
         $(document).ready(function() {
             DropZoneStoreage.initDropZone(
                     "{{ path('profile_image') }}",
                     "{{ path('profile_image') }}"
             );
         });
-        FM.popUp.profileImage();
-
+        {# PopUp Listener (Upload/View/Update) #}
+        FM.popUp.listen("{{ path('update_profile_image') }}");
+        {# Tabs #}
         $('#profile-tabs a').click(function (e) {
             e.preventDefault();
             $(this).tab('show');
