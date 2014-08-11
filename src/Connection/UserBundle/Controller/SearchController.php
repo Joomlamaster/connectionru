@@ -57,7 +57,7 @@ class SearchController extends Controller
 
         $users = $this->getDoctrine()->getRepository('ConnectionUserBundle:User')->search($sessionSearch);
 
-        var_dump($users);die;
+        \Doctrine\Common\Util\Debug::dump($users);die;
         return $this->render('ConnectionUserBundle:Search:quick.html.twig', array(
             'form'  => $form->createView(),
             'users' => $users
