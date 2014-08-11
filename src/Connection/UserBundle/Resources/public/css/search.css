@@ -1,0 +1,13 @@
+#search_gender, #search_seek {
+    border: none;
+    padding-left: 3px;
+}
+
+#search_gender label, #search_seek label {
+    display: inline;
+    color: #4d4d4d;
+}
+
+#search_gender input, #search_seek input {
+    margin: 8px 4px 0px 3px;
+}

@@ -2,22 +2,35 @@
 
 {% block theme %}homepage{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/connectionuser/css/search.css') }}" type="text/css" />
+{% endblock %}
+
 {% block content %}
         <div class="row main-block">
             <div class="col-xs-7">
                 <ul class="nav nav-tabs" role="tablist">
                     {% if not is_granted('ROLE_USER') %}
                         <li class="active"><a href="#registration" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-time"></span> Quick Free Registration</a></li>
+                        <li><a href="#search" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-search"></span> Quick Search</a></li>
+                    {% else %}
+                        <li class="active"><a href="#search" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-search"></span> Quick Search</a></li>
                     {% endif %}
-                    <li><a href="#search" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-search"></span> Quick Search</a></li>
                 </ul>
                 <div class="tab-content">
                     {% if not is_granted('ROLE_USER') %}
                         <div class="tab-pane active" id="registration">
                             {{ render(controller("ConnectionUserBundle:Registration:register")) }}
                         </div>
+                        <div class="tab-pane" id="search">
+                            {{ render(controller("ConnectionUserBundle:Search:quick")) }}
+                        </div>
+                    {% else %}
+                        <div class="tab-pane active" id="search">
+                            {{ render(controller("ConnectionUserBundle:Search:quick")) }}
+                        </div>
                     {% endif %}
-                    <div class="tab-pane" id="search"></div>
                 </div>
             </div>
             <div class="col-xs-5">

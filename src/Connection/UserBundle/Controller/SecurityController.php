@@ -8,11 +8,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 
-/**
- * Description of SecurityController
- *
- * @author vpinzaru
- */
 class SecurityController extends BaseController
 {
     protected function renderLogin(array $data)

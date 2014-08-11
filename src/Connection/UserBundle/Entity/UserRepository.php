@@ -15,23 +15,23 @@ class UserRepository extends EntityRepository
     public function findByFbId($id)
     {
         return $this->createQueryBuilder('u')
-                    ->select('u')
-                    ->join('u.profile', 'p')
-                    ->where('p.facebookId = :facebook_id')
-                    ->setParameter('facebook_id', $id)
-                    ->getQuery()
-                    ->getOneOrNullResult();
+            ->select('u')
+            ->join('u.profile', 'p')
+            ->where('p.facebookId = :facebook_id')
+            ->setParameter('facebook_id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     public function findByTwitterId($id)
     {
         return $this->createQueryBuilder('u')
-                    ->select('u')
-                    ->join('u.profile', 'p')
-                    ->where('p.twitterId = :twitter_id')
-                    ->setParameter('twitter_id', $id)
-                    ->getQuery()
-                    ->getOneOrNullResult();
+            ->select('u')
+            ->join('u.profile', 'p')
+            ->where('p.twitterId = :twitter_id')
+            ->setParameter('twitter_id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     public function getLatest($limit)
@@ -43,5 +43,50 @@ class UserRepository extends EntityRepository
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
+    }
+
+    public function search($filter)
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->join('u.profile', 'p');
+
+        //  Filter By Country
+        if ( !empty($filter['country']) ) {
+            $qb->join('p.country', 'c')->andWhere('c.id = :country')->setParameter('country', $filter['country']);
+        }
+
+        //  Filter By State
+        if ( !empty($filter['state']) ) {
+            $qb->join('p.state', 'st')->andWhere('st.id = :state')->setParameter('state', $filter['state']);
+        }
+
+        //  Found person should seek for searcher gender
+        if ( !empty($filter['gender']) ) {
+            $qb->join('p.seek', 's')->andWhere('s.id = :gender')->setParameter('gender', $filter['gender']);
+        }
+
+        //  Found person gender should be equal to searcher seek
+        if ( !empty($filter['seek']) ) {
+            $qb->join('p.gender', 'g')->andWhere('g.id = :seek')->setParameter('seek', $filter['seek']);
+        }
+
+        //  Filter By LookingFor
+        if ( !empty($filter['lookingFor']) ) {
+            $qb->join('p.lookingFor', 'lf')->andWhere('lf.id = :looking_for')->setParameter('looking_for', $filter['lookingFor']);
+        }
+
+        //  Filter By Age
+        if ( !empty($filter['age']) ) {
+            $age = explode("_", $filter['age']);
+            if ( !empty($age[0]) && !empty($age[1]) ) {
+                $to     = new \DateTime("-{$age[0]} years");
+                $from   = new \DateTime("-{$age[1]} years");
+
+                $qb->andWhere('p.birthdate < :age_to')->setParameter('age_to', $to);
+                $qb->andWhere('p.birthdate > :age_from')->setParameter('age_from', $from);
+            }
+        }
+
+        return $qb->getQuery()->getResult();
     }
 }

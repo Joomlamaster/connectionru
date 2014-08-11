@@ -1,0 +1,23 @@
+{% trans_default_domain 'FOSUserBundle' %}
+{% form_theme form 'ConnectionUserBundle:Registration:fields.html.twig' %}
+
+{{ form_start(form, {'action': path('search_quick_form'), 'attr': {'class': 'fos_user_registration_register master_slave form-horizontal'}}) }}
+    {{ form_errors(form) }}
+    {{ form_row(form.gender) }}
+    {{ form_row(form.seek) }}
+    {{ form_row(form.age) }}
+    {{ form_row(form.lookingFor) }}
+    <div class="master_slave">
+        <div>
+            {{ form_row(form.country) }}
+        </div>
+        {% if (form.state is defined) %}
+            <div class="slave_block">
+                {{ form_row(form.state) }}
+            </div>
+        {% endif %}
+    </div>
+    {{ form_row(form.zipCode) }}
+    {{ form_row(form.miles) }}
+{{ form_end(form) }}
+{#{{ form_end(form, {'render_rest': false}) }}#}
