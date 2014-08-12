@@ -68,7 +68,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <a class="title" href="{{ path('view_profile', {'id': user.profile.id}) }}">
-                                    <img src="{{ user.profile.avatar is defined ? user.profile.avatar : ""  }}" alt=""/>
+                                    <img style="height: 200px; overflow: hidden;" src="{{ user.profile.avatar is defined ? user.profile.avatar : ""  }}" alt=""/>
                                 </a>
                             </div>
                         </div>
