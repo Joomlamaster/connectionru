@@ -122,7 +122,7 @@ class SearchType extends AbstractType
                 ),
                 'required' => true
             ))
-            ->add('submit', 'submit');
+            ->add('search', 'submit');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
