@@ -57,8 +57,8 @@ class SearchController extends Controller
 
         $users = $this->getDoctrine()->getRepository('ConnectionUserBundle:User')->search($sessionSearch);
 
-        \Doctrine\Common\Util\Debug::dump($users);die;
-        return $this->render('ConnectionUserBundle:Search:quick.html.twig', array(
+//        \Doctrine\Common\Util\Debug::dump($users);die;
+        return $this->render('ConnectionUserBundle:Search:result.html.twig', array(
             'form'  => $form->createView(),
             'users' => $users
         ));
@@ -109,9 +109,9 @@ class SearchController extends Controller
         $result = array();
         $em     = $this->getDoctrine()->getManager();
 
-        array_walk($search, function(&$field, &$key) use ($em, $classMapping) {
-            if (!empty($classMapping[$key]) && !empty($field)) {
-                $field = $em->getRepository($classMapping[$key])->find($field);
+        array_walk($search, function(&$value, &$key) use ($em, $classMapping) {
+            if (!empty($classMapping[$key]) && !empty($value)) {
+                $value = $em->getRepository($classMapping[$key])->find($value);
             }
         });
 
