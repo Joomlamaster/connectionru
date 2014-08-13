@@ -44,6 +44,12 @@ class Image
 
 
     /**
+     * @ORM\OneToOne(targetEntity="Connection\EventBundle\Entity\Event", mappedBy="image")
+     **/
+    private $event;
+
+
+    /**
      * Get id
      *
      * @return integer
@@ -125,5 +131,21 @@ class Image
      */
     public function removeFiles() {
         unlink($this->getUploadRootDir());
+    }
+
+    /**
+     * @param mixed $event
+     */
+    public function setEvent ( $event )
+    {
+        $this->event = $event;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEvent ()
+    {
+        return $this->event;
     }
 }

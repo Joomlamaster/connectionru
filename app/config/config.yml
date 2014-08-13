@@ -79,6 +79,16 @@ oneup_uploader:
         user:
             storage:
                 directory: %kernel.root_dir%/../web/uploads/user/profile
-            frontend: fancyupload
-            namer: connection_user.propety_images_namer
+            frontend: dropzone
+            namer: connection_user.profile_images_namer
+        event:
+            storage:
+                directory: %kernel.root_dir%/../web/uploads/user/event
+            frontend: dropzone
+            namer: connection_user.event_images_namer
+
+fos_message:
+    db_driver: orm
+    thread_class: Connection\MessageBundle\Entity\Thread
+    message_class: Connection\MessageBundle\Entity\Message
 

@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use FOS\UserBundle\Model\User as BaseUser;
 use Connection\EventBundle\Entity\Event;
+use FOS\MessageBundle\Model\ParticipantInterface;
 
 /**
  * User
@@ -15,7 +16,7 @@ use Connection\EventBundle\Entity\Event;
  * @ORM\Entity(repositoryClass="Connection\UserBundle\Entity\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class User extends BaseUser
+class User extends BaseUser implements ParticipantInterface
 {
     /**
      * @var integer

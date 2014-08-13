@@ -28,7 +28,6 @@ FM = {
 
             $('.fm-popup').on('dz.upload.complete', function() {
                 FM.popUp.closePopup();
-                location.reload();
             });
 
             $('.fm-popup').on('dz.added.file', function() {

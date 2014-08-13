@@ -1,0 +1,31 @@
+{% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
+
+{% block theme %}content-page{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/connectionmessage/css/messenger.css') }}" type="text/css" />
+{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="container breadcrumbs">
+        <ul>
+            <li><a href="{{ path('connection_homepage') }}">Main page</a></li>
+            <li>Messenger</li>
+        </ul>
+    </div>
+{% endblock breadcrumbs %}
+{% block content %}
+    <div class="messenger-container">
+        <div class="navbar">
+            <h4>{% trans from 'FOSMessageBundle' %}messenger{% endtrans %}</h4>
+            <ul>
+                <li><a href="{{ url('fos_message_inbox') }}">{% trans from 'FOSMessageBundle' %}inbox{% endtrans %}</a></li>
+                <li><a href="{{ url('fos_message_sent') }}">{% trans from 'FOSMessageBundle' %}sent{% endtrans %}</a></li>
+                <li><a href="{{ url('fos_message_deleted') }}">{% trans from 'FOSMessageBundle' %}deleted{% endtrans %}</a></li>
+            </ul>
+        </div>
+        <div class="messenger-content">
+            {% block fos_message_content %}{% endblock %}
+        </div>
+    </div>
+{% endblock %}

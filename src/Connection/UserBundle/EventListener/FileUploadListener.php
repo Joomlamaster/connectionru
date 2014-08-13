@@ -20,12 +20,7 @@ class FileUploadListener
 
     public function onUpload(PostPersistEvent $event)
     {
-        $em         = $this->container->get('doctrine')->getManager();
         $user       = $this->container->get('security.context')->getToken()->getUser();
-        $file       = $event->getFile();
-        $request    = $event->getRequest();
-        $response   = $event->getResponse();
-        $galleryId  = $request->get('gallery');
         $config     = $event->getConfig();
 
         if ( empty($config['storage']['directory']) ) {
@@ -36,8 +31,26 @@ class FileUploadListener
             throw new AccessDeniedException('Not Logged In');
         }
 
-        $gallery = $em->getRepository('ConnectionUserBundle:Profile\Gallery')
-                      ->getGalleryByIdOrDefault( $user->getId(), $galleryId );
+        if ( 'connection_user.profile_images_namer' == $config['namer'] ) {
+            $this->processProfileImage($event);
+        }
+
+        if ( 'connection_user.event_images_namer' == $config['namer'] ) {
+            $this->processEventImage($event);
+        }
+    }
+
+    private function processProfileImage($event)
+    {
+        $em         = $this->container->get('doctrine')->getManager();
+        $user       = $this->container->get('security.context')->getToken()->getUser();
+        $file       = $event->getFile();
+        $request    = $event->getRequest();
+        $response   = $event->getResponse();
+        $galleryId  = $request->get('gallery');
+        $config     = $event->getConfig();
+        $gallery    = $em->getRepository('ConnectionUserBundle:Profile\Gallery')
+            ->getGalleryByIdOrDefault( $user->getId(), $galleryId );
 
         if ( !$file instanceof File || !$gallery ) {
             throw new AccessDeniedException('No Gallery found');
@@ -46,7 +59,7 @@ class FileUploadListener
         $cropResult = $this->cropImage($file, $request->request);
 
         if (!$cropResult) {
-            throw new \Exception('Fail on cropping image');
+            throw new \Exception('Fail cropping image');
         }
 
         $fileDir = str_replace($this->container->get('kernel')->getRootDir() . '/../web', "", $config['storage']['directory']);
@@ -59,6 +72,39 @@ class FileUploadListener
             $user->getProfile()->setAvatar($image->getPath());
             $em->persist($user);
         }
+
+        $em->persist($image);
+        $em->flush();
+
+        if ( file_exists($image->getUploadRootDir()) ) {
+            $response['id']   = $image->getId();
+            $response['name'] = $image->getPath();
+            $response['size'] = filesize($image->getUploadRootDir());
+        }
+    }
+
+    private function processEventImage($event)
+    {
+        $em         = $this->container->get('doctrine')->getManager();
+        $user       = $this->container->get('security.context')->getToken()->getUser();
+        $file       = $event->getFile();
+        $request    = $event->getRequest();
+        $response   = $event->getResponse();
+        $config     = $event->getConfig();
+
+        if ( !$file instanceof File ) {
+            throw new \Exception('Not instance of File');
+        }
+
+        $cropResult = $this->cropImage($file, $request->request);
+        if ( !$cropResult ) {
+            throw new \Exception('Fail cropping image');
+        }
+
+        $fileDir = str_replace($this->container->get('kernel')->getRootDir() . '/../web', "", $config['storage']['directory']);
+        $image   = new Image();
+        $image->setName($file->getFilename());
+        $image->setPath($fileDir. "/" . $user->getId() . "/" . $file->getFilename());
 
         $em->persist($image);
         $em->flush();

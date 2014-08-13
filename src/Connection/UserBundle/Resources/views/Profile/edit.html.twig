@@ -80,6 +80,10 @@
         $('#profile-tabs a').click(function (e) {
             e.preventDefault();
             $(this).tab('show');
-        })
+        });
+
+        $('.fm-popup').on('dz.upload.complete', function() {
+            location.reload();
+        });
     </script>
 {% endblock %}

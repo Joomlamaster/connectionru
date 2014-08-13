@@ -21,3 +21,5 @@ parameters:
     # Twitter Credentials
     twitter.key: yWH87mrc1pETeR49y97MileCd
     twitter.secret: 9m5DqquPbP52Hxklx23Oxm8HQLHirFT6H1gbT63vOfgpdWjGAV
+
+    search.user.per_page: 5

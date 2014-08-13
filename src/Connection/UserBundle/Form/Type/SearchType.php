@@ -100,28 +100,28 @@ class SearchType extends AbstractType
                 'required' => true
             ))
 
-            ->add('zipCode', 'text', array(
-                'required' => true
-            ))
-
-            ->add('miles', 'choice', array(
-                'constraints' => new NotBlank(),
-                'label' => "Radius search",
-                'choices'   => array(
-                    "5"     => "5 miles",
-                    "8"     => "8 miles",
-                    "10"    => "10 miles",
-                    "15"    => "15 miles",
-                    "25"    => "25 miles",
-                    "35"    => "35 miles",
-                    "50"    => "50 miles",
-                    "75"    => "75 miles",
-                    "100"   => "100 miles",
-                    "150"   => "150 miles",
-                    "200"   => "200 miles",
-                ),
-                'required' => true
-            ))
+//            ->add('zipCode', 'text', array(
+//                'required' => true
+//            ))
+//
+//            ->add('miles', 'choice', array(
+//                'constraints' => new NotBlank(),
+//                'label' => "Radius search",
+//                'choices'   => array(
+//                    "5"     => "5 miles",
+//                    "8"     => "8 miles",
+//                    "10"    => "10 miles",
+//                    "15"    => "15 miles",
+//                    "25"    => "25 miles",
+//                    "35"    => "35 miles",
+//                    "50"    => "50 miles",
+//                    "75"    => "75 miles",
+//                    "100"   => "100 miles",
+//                    "150"   => "150 miles",
+//                    "200"   => "200 miles",
+//                ),
+//                'required' => true
+//            ))
             ->add('search', 'submit');
     }
 

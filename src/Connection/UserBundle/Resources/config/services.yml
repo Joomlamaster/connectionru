@@ -7,8 +7,8 @@ services:
         tags:
           - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }
 
-    connection_user.propety_images_namer:
-        class: Connection\UserBundle\Service\PropertyImageNamer
+    connection_user.profile_images_namer:
+        class: Connection\UserBundle\Service\ProfileImageNamer
         arguments: [ @service_container ]
 
     connection_user.registration.form.type:

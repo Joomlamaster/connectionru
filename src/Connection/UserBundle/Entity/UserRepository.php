@@ -45,7 +45,15 @@ class UserRepository extends EntityRepository
             ->getResult();
     }
 
-    public function search($filter)
+    public function countAll()
+    {
+        return $this->createQueryBuilder('u')
+            ->select('COUNT(u.id) AS total')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function search($filter, $limit, $offset)
     {
         $qb = $this->createQueryBuilder('u')
             ->join('u.profile', 'p');
@@ -86,6 +94,9 @@ class UserRepository extends EntityRepository
                 $qb->andWhere('p.birthdate > :age_from')->setParameter('age_from', $from);
             }
         }
+
+        $qb->setMaxResults($limit);
+        $qb->setFirstResult($offset);
 
         return $qb->getQuery()->getResult();
     }

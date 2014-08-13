@@ -37,10 +37,10 @@ class SearchController extends Controller
     }
 
     /**
-     * @Route("/user", name="search_user_result")
+     * @Route("/user/{page}", name="search_user_result", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Template()
      */
-    public function searchResultAction( Request $request )
+    public function searchResultAction( Request $request, $page )
     {
         $session    = $request->getSession();
         $form       = $this->createForm( new SearchType() );
@@ -55,12 +55,16 @@ class SearchController extends Controller
             $form->setData($data);
         }
 
-        $users = $this->getDoctrine()->getRepository('ConnectionUserBundle:User')->search($sessionSearch);
+        $limit      = $this->container->getParameter('search.user.per_page');
+        $offset     = ($page * $limit) - $limit;
+        $total      = $this->getDoctrine()->getRepository('ConnectionUserBundle:User')->countAll();
+        $nextPage   = (($total/$limit) > $page) ? ++$page : 1;
+        $users      = $this->getDoctrine()->getRepository('ConnectionUserBundle:User')->search($sessionSearch, $limit, $offset);
 
-//        \Doctrine\Common\Util\Debug::dump($users);die;
         return $this->render('ConnectionUserBundle:Search:result.html.twig', array(
             'form'  => $form->createView(),
-            'users' => $users
+            'users' => $users,
+            'nextPage' => $nextPage
         ));
     }
 

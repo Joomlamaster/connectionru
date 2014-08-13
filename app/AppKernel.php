@@ -26,7 +26,9 @@ class AppKernel extends Kernel
 
             //  Third party bundles.
             new FOS\UserBundle\FOSUserBundle(),
+            new FOS\MessageBundle\FOSMessageBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),
+            new Connection\MessageBundle\ConnectionMessageBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

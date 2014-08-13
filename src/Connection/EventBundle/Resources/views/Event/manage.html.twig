@@ -15,6 +15,9 @@
 {% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('bundles/connectionevent/css/google/map.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/connectionweb/js/dropzone/css/dropzone.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/connectionuser/css/profile.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/connectionweb/js/jcorp/css/jquery.Jcrop.min.css') }}" type="text/css" />
 {% endblock %}
 
 {% block content %}
@@ -27,12 +30,12 @@
                 {{ form_row(form.eventDate, {'attr': {'class': 'input-append date' } } ) }}
             </div>
             <div class="col-xs-3">
-                <div id="master_slave">
+                <div class="master_slave">
                     <div>
                         {{ form_row(form.country) }}
                     </div>
                     {% if (form.state is defined) %}
-                        <div id="slave_block">
+                        <div class="slave_block">
                             {{ form_row(form.state) }}
                         </div>
                     {% endif %}
@@ -45,15 +48,19 @@
             </div>
             <div class="col-xs-2">
                 <div class="clearfix form-inline">
-                    <label>Add a photo:</label>
-                    <div id="add-photo">
-                        <div class="msg">
-                            <div class="sprite sprite-add-photo"></div>
-                            + Add photo
+                    <div class="fm-show-popup" data-target_popup="profile-image">
+                        <div id="add-photo">
+                            {% if event.image.path is defined and event.image.path is not empty %}
+                                <img class="img-rounded" width="140px" height="190" src="{{ event.image.path }}">
+                            {% else %}
+                                <div class="msg">
+                                    <div class="sprite sprite-add-photo"></div>
+                                    + Add photo
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="row">
@@ -81,13 +88,45 @@
             </div>
             <div class="col-xs-4"></div>
         </div>
+    <input id="image_id" type="hidden" name="image_id">
 
     {{ form_errors(form) }}
     {{ form_end(form, {'render_rest': false}) }}
 
 {% endblock %}
+{% block popup %}
+    {{ include('ConnectionEventBundle:Popup:add_event_image_popup.html.twig') }}
+{% endblock %}
 {% block javascript %}
     {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/dropzone/dropzone.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/dropzone/dropzone-custom.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/popup/popup.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jcorp/js/jquery.Jcrop.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jcorp/js/settings.js') }}"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
     <script type="text/javascript" src="{{ asset('bundles/connectionevent/js/google/map.js') }}"></script>
+    <script type="text/javascript">
+        {# Init DropZone #}
+        $(document).ready(function() {
+            DropZoneStoreage.initDropZone(
+                    "{{ path('profile_image') }}",
+                    "{{ path('profile_image') }}"
+            );
+        });
+        {# PopUp Listener (Upload/View/Update) #}
+        FM.popUp.listen("{{ path('update_profile_image') }}");
+        {# Tabs #}
+        $('#profile-tabs a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        })
+
+        $('.fm-popup').on('dz.upload.complete', function (e, file) {
+            $("#image_id").val(file.id);
+            $("#add-photo").html(
+                    $('<img />', { id: file.id, src: file.name, width: "140px", height: "190px"})
+            );
+        });
+    </script>
 {% endblock %}

@@ -41,7 +41,8 @@ class EventController extends Controller
         if (!$user = $this->getUser()) {
             return $this->redirect( $this->generateUrl('connection_homepage') );
         }
-        $em     = $this->getDoctrine()->getManager();
+        $em      = $this->getDoctrine()->getManager();
+        $imageId = $request->get('image_id');
         if ( !$id || !$event = $em->getRepository('ConnectionEventBundle:Event')->find($id) ) {
             $event  = new Event();
         }
@@ -50,6 +51,11 @@ class EventController extends Controller
         $form->handleRequest($request);
 
         if ( $form->isSubmitted() && $form->isValid() ) {
+            if ( !empty($imageId) ) {
+                $image = $em->getRepository('ConnectionUserBundle:Profile\Image')->find($imageId);
+                $event->setImage($image);
+            }
+
             $em->persist($event);
             $em->flush();
             return $this->redirect( $this->generateUrl('event_manage', array('id' => $event->getId())) );
@@ -58,6 +64,7 @@ class EventController extends Controller
         return array(
             'id' => $id,
             'form' => $form->createView(),
+            'event' => $event
         );
     }
 

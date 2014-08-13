@@ -7,7 +7,7 @@ use Oneup\UploaderBundle\Uploader\Naming\NamerInterface;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-class PropertyImageNamer implements NamerInterface
+class ProfileImageNamer implements NamerInterface
 {
 
     private $container;

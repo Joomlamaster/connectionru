@@ -1,3 +1,8 @@
+connection_message:
+    resource: "@ConnectionMessageBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 connection_web:
     resource: "@ConnectionWebBundle/Controller/"
     type:     annotation
@@ -16,3 +21,7 @@ connection_fos_user_bundle:
 oneup_uploader:
     resource: .
     type: uploader
+
+fos_message:
+    resource: "@FOSMessageBundle/Resources/config/routing.xml"
+    prefix: /message

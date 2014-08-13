@@ -6,11 +6,11 @@
 
     <!--
     <parameters>
-        <parameter key="connection_event.example.class">Connection\EventBundle\Example</parameter>
+        <parameter key="connection_message.example.class">Connection\MessageBundle\Example</parameter>
     </parameters>
 
     <services>
-        <service id="connection_event.example" class="%connection_event.example.class%">
+        <service id="connection_message.example" class="%connection_message.example.class%">
             <argument type="service" id="service_id" />
             <argument>plain_value</argument>
             <argument>%parameter_name%</argument>

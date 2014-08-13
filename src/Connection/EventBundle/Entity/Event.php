@@ -124,12 +124,18 @@ class Event
      *
      * @ORM\Column(name="viewed", type="integer")
      */
-    private $viewed;
+    private $viewed = 0;
 
     /**
      * @ORM\ManyToMany(targetEntity="Connection\UserBundle\Entity\User", mappedBy="participateEvents")
      **/
-    protected $participants;
+    private $participants;
+
+    /**
+     * @ORM\OneToOne(targetEntity="Connection\UserBundle\Entity\Profile\Image", inversedBy="event", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="image", referencedColumnName="id")
+     **/
+    private $image;
 
 
     /**
@@ -484,5 +490,32 @@ class Event
 
     public function countParticipants() {
         return count($this->getParticipants());
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage ( $image )
+    {
+        $this->image = $image;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImage ()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @ORM\PostPersist
+     * @ORM\PostUpdate
+     */
+    public function setImageEvent ()
+    {
+        if ( $this->getImage() && !$this->getImage()->getEvent() ) {
+            $this->getImage()->setEvent($this);
+        }
     }
 }

@@ -33,7 +33,7 @@ DropZoneStoreage = {
                 return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
             },
             'success': function(file, data) {
-                $('.fm-popup').trigger('dz.upload.complete', { context: "dz.upload.complete" });
+                $('.fm-popup').trigger('dz.upload.complete', data);
                 profileImageDropzone.removeAllFiles();
             }
         };
