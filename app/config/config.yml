@@ -62,8 +62,8 @@ doctrine:
 swiftmailer:
     transport: smtp
     host:      localhost
-    username:  connectionru
-    password:  CG2yeVNjb
+    username:  developer.optimum@gmail.com
+    password:  OptimumDev12
     spool:     { type: memory }
     
 fos_user:
