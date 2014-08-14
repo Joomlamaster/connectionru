@@ -71,6 +71,12 @@ fos_user:
     firewall_name: main
     user_class: Connection\UserBundle\Entity\User
     registration:
+      confirmation:
+          from_email:
+              address: webmaster@connectionru.com
+              sender_name: WebMaster
+          enabled:    true
+          template:   FOSUserBundle:Registration:email.txt.twig
       form:
         type: connection_user_registration
 
