@@ -12,25 +12,19 @@
             <div class="col-xs-7">
                 <ul class="nav nav-tabs" role="tablist">
                     {% if not is_granted('ROLE_USER') %}
-                        <li class="active"><a href="#registration" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-time"></span> Quick Free Registration</a></li>
-                        <li><a href="#search" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-search"></span> Quick Search</a></li>
-                    {% else %}
-                        <li class="active"><a href="#search" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-search"></span> Quick Search</a></li>
+                        <li><a href="#registration" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-time"></span> Quick Free Registration</a></li>
                     {% endif %}
+                    <li class="active"><a href="#search" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-search"></span> Quick Search</a></li>
                 </ul>
                 <div class="tab-content">
                     {% if not is_granted('ROLE_USER') %}
-                        <div class="tab-pane active" id="registration">
+                        <div class="tab-pane" id="registration">
                             {{ render(controller("ConnectionUserBundle:Registration:register")) }}
                         </div>
-                        <div class="tab-pane" id="search">
-                            {{ render(controller("ConnectionUserBundle:Search:quick")) }}
-                        </div>
-                    {% else %}
-                        <div class="tab-pane active" id="search">
-                            {{ render(controller("ConnectionUserBundle:Search:quick")) }}
-                        </div>
                     {% endif %}
+                    <div class="tab-pane active" id="search">
+                        {{ render(controller("ConnectionUserBundle:Search:quick")) }}
+                    </div>
                 </div>
             </div>
             <div class="col-xs-5">
