@@ -17,6 +17,9 @@
         <label class="remember pull-left">
             <input type="checkbox" value=""> {{ 'security.login.remember_me'|trans }}
         </label>
+        <label class="forgot">
+            <a href="{{ path('fos_user_resetting_request') }}">Forgot password ?</a>
+        </label>
     </form>
     {#<script type="text/javascript">#}
         {#function headerLoginLoad() {#}

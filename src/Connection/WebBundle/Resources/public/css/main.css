@@ -42,6 +42,14 @@ body {
   vertical-align: middle;
   margin-top: 0;
 }
+.navbar.navbar-first .navbar-right .forgot {
+    margin-bottom: 0;
+    color: #3FA4E4;
+    position: absolute;
+    font-size: 10px;
+    top: 25px;
+    left: 160px;
+}
 .navbar.navbar-second {
   min-height: 90px;
 }

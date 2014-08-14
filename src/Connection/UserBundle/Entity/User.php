@@ -339,8 +339,8 @@ class User extends BaseUser implements ParticipantInterface
     }
 
     /**
-     * @ORM\PostPersist
-     * @ORM\PostUpdate
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
      */
     public function setProfileUser ()
     {

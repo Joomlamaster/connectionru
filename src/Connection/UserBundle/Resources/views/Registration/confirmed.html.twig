@@ -1,0 +1,7 @@
+{% extends 'ConnectionUserBundle::registration_layout.html.twig' %}
+{% block fos_user_content %}
+    <p>{{ 'registration.confirmed'|trans({'%username%': user.username}, 'FOSUserBundle') }}</p>
+    {% if app.session is not empty %}
+        {% set targetUrl = app.session.get('_security.' ~ app.security.token.providerKey ~ '.target_path') %}
+    {% endif %}
+{% endblock fos_user_content %}

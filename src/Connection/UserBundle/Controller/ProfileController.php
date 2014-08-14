@@ -32,7 +32,7 @@ class ProfileController extends Controller
     }
 
     /**
-     * @Route("/edit", name="edit_user_profile")
+     * @Route("/", name="edit_user_profile")
      * @Template()
      */
     public function editAction( Request $request )
