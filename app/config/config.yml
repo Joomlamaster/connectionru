@@ -60,11 +60,9 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: smtp
-    host:      localhost
+    transport: gmail
     username:  developer.optimum@gmail.com
     password:  OptimumDev12
-    spool:     { type: memory }
     
 fos_user:
     db_driver: orm
