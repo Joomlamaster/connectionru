@@ -28,7 +28,7 @@
                             <img class="event-image img-rounded" width="190" src="{{ event.image.path is defined ? event.image.path : "" }}" alt=""/>
                             <strong>Share this event</strong>
                             <a href="#">
-                                <div class="share"><div class="sprite sprite-facebook"></div>Share</div>
+                                <div class="fb-share-button share" data-href="{{ path('connection_homepage', {}, true) }}"></div>
                             </a>
                             <a href="#">
                                 <div class="share"><div class="sprite sprite-pinterest"></div>Share</div>
@@ -195,6 +195,7 @@
     <script type="text/javascript" src="{{ asset('bundles/connectionevent/js/event.js') }}"></script>
     <script type="text/javascript">
         $(function() {
+            EM.social.share.facebook();
             EM.subscriber.init(
                     "{{ path('event_subscribe', {id: event.id}) }}",
                     "{{ path('event_unsubscribe', {id: event.id}) }}",
