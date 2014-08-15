@@ -90,6 +90,12 @@ class User extends BaseUser implements ParticipantInterface
     private $participateEvents;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Connection\EventBundle\Entity\Event", inversedBy="interested")
+     * @ORM\JoinTable(name="event_interested")
+     **/
+    private $interestedInEvents;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -336,6 +342,22 @@ class User extends BaseUser implements ParticipantInterface
     public function getParticipateEvents ()
     {
         return $this->participateEvents;
+    }
+
+    /**
+     * @param mixed $participateEvents
+     */
+    public function setInterestedInEvents ( Event $event )
+    {
+        $this->interestedInEvents[] = $event;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInterestedInEvents ()
+    {
+        return $this->interestedInEvents;
     }
 
     /**

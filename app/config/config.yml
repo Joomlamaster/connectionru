@@ -63,6 +63,7 @@ swiftmailer:
     transport: gmail
     username:  developer.optimum@gmail.com
     password:  OptimumDev12
+    port: 465
     
 fos_user:
     db_driver: orm

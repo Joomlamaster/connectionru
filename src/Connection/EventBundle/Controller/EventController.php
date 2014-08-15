@@ -29,7 +29,10 @@ class EventController extends Controller
         $em->persist($event);
         $em->flush();
 
-        return array( 'event'   => $event );
+        return array(
+            'event'   => $event,
+            'owner'   => $event->getUser()
+        );
     }
 
     /**
@@ -56,6 +59,7 @@ class EventController extends Controller
                 $event->setImage($image);
             }
 
+            $event->setUser($user);
             $em->persist($event);
             $em->flush();
             return $this->redirect( $this->generateUrl('event_manage', array('id' => $event->getId())) );
@@ -120,6 +124,45 @@ class EventController extends Controller
         }
 
         return new JsonResponse();
+    }
 
+    /**
+     * @Route("/interested/{id}", name="event_interested", requirements={"id" = "\d+"})
+     * @Template()
+     * @ParamConverter("Event", class="ConnectionEventBundle:Event")
+     */
+    public function interestedAction( Event $event )
+    {
+        if ( !$user = $this->getUser() ) {
+            throw new AccessDeniedException("Not Logged IN");
+        }
+
+        if ( !$event->hasInterested($user) ) {
+            $user->setInterestedInEvents($event);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+        }
+        return new JsonResponse();
+    }
+
+    /**
+     * @Route("/not-interested/{id}", name="event_not_interested", requirements={"id" = "\d+"})
+     * @Template()
+     * @ParamConverter("Event", class="ConnectionEventBundle:Event")
+     */
+    public function notInterestedAction( Event $event )
+    {
+        if ( !$user = $this->getUser() ) {
+            throw new AccessDeniedException("Not Logged IN");
+        }
+
+        if ( $event->hasInterested($user) ) {
+            $user->getInterestedInEvents()->removeElement($event);
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($user);
+            $em->flush();
+        }
+        return new JsonResponse();
     }
 }

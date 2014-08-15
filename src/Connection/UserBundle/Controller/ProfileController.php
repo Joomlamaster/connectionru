@@ -2,17 +2,17 @@
 
 namespace Connection\UserBundle\Controller;
 
+use Symfony\Component\Form\FormError;
+use Connection\UserBundle\Entity\Profile;
+use Symfony\Component\HttpFoundation\Request;
 use Connection\UserBundle\Form\Type\EditProfileType;
 use Connection\UserBundle\Form\Type\LinkAccountType;
 use Connection\UserBundle\Form\Type\RegistrationType;
-use Symfony\Component\Form\FormError;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Connection\UserBundle\Entity\Profile;
 
 
 /**

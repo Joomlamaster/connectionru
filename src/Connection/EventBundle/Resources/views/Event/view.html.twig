@@ -1,6 +1,10 @@
 {% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
 
 {% block theme %}view-event{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/connectionevent/css/event.css') }}" type="text/css" />
+{% endblock %}
 
 {% block breadcrumbs %}
     <div class="container breadcrumbs">
@@ -19,7 +23,8 @@
                     <h4>{{ event.title is defined ? event.title : "" }}</h4>
                     <div class="row">
                         <div class="col-xs-5">
-                            <img class="event-image" src="/bundles/connectionweb/img/test-event-pic.png" alt=""/>
+                            {#<img class="event-image" src="/bundles/connectionweb/img/test-event-pic.png" alt=""/>#}
+                            <img class="event-image img-rounded" width="190" src="{{ event.image.path is defined ? event.image.path : "" }}" alt=""/>
                             <strong>Share this event</strong>
                             <a href="#">
                                 <div class="share"><div class="sprite sprite-facebook"></div>Share</div>
@@ -49,63 +54,70 @@
                             {% if app.user.id is defined %}
                                 <div class="controls">
                                     <div class="going">
-                                        <input type="checkbox" {{ event.hasParticipant(app.user) ? "checked" : "" }}/>I'm going
+                                        <input type="checkbox" data-action="subscribe" {{ event.hasParticipant(app.user) ? "checked" : "" }}/>I'm going
                                     </div>
-                                    <div class="comment">Write comment</div>
+                                    <div class="going">
+                                        <input type="checkbox" data-action="interested" {{ event.hasInterested(app.user) ? "checked" : "" }}/>Interested
+                                    </div>
                                 </div>
                             {% endif %}
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sx-12">
-                            <div class="block-title">{{ event.countParticipants }} people going:</div>
-                            <div class="people">
-                                <div class="face">
-                                    <p class="name">Jena coin</p>
-                                </div>
-                                <div class="face">
-                                    <p class="name">Joshua Bell</p>
-                                </div>
-                                <div class="face">
-                                    <p class="name">Nick Cave</p>
-                                </div>
+                            <div class="block-title"><h4>Comments:</h4></div>
+                            <div class="comments">
+                                {% if event.comments is defined and event.comments is not empty %}
+                                    {% for comment in event.comments %}
+                                        <div class="comment" >
+                                            <div class="author"><a href="#">{{ comment.author.username }} | {{ comment.createdAt|date }}</a></div>
+                                            <div class="content">{{ comment.comment }}</div>
+                                        </div>
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                            <div class="add-comment-form">
+                                {{ render(controller("ConnectionEventBundle:Comment:addCommentForm", {'id': event.id})) }}
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sx-12">
-                            <div class="block-title">1 people interested:</div>
-                            <div class="people">
-                                <div class="people">
-                                    <div class="face">
-                                        <p class="name">Mara stone</p>
-                                    </div>
-                                </div>
+                    {#<div class="row">#}
+                        {#<div class="col-sx-12">#}
+                            {#<div class="block-title">1 people interested:</div>#}
+                            {#<div class="people">#}
+                                {#<div class="people">#}
+                                    {#<div class="face">#}
+                                        {#<p class="name">Mara stone</p>#}
+                                    {#</div>#}
+                                {#</div>#}
+                            {#</div>#}
+                        {#</div>#}
+                    {#</div>#}
+                </div>
+                {% if owner is defined and owner is not empty %}
+                    <div class="col-xs-2 author">
+                        <div class="block-title">Posted:</div>
+                        <div class="people clearfix">
+                            <div class="face">
+                                <p class="name"><a href="{{ path('view_profile', {'id': owner.profile.id}) }}">{{ owner.username }}</a></p>
+                                <img width="82px" src="{{ owner.profile.avatar }}">
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-xs-2 author">
-                    <div class="block-title">Posted:</div>
-                    <div class="people clearfix">
-                        <div class="face">
-                            <p class="name">Joshua Bell</p>
+                        <div class="event-stats">
+                            view<br/>
+                            {{ event.viewed is defined ? event.viewed: "" }}<br/>
+                            <br/>
+                            comment<br/>
+                            {{ event.countComments }}<br/>
+                            <br/>
+                            going<br/>
+                            {{ event.countParticipants }}<br/>
+                            <br/>
+                            interested<br/>
+                            {{ event.countInteresteds }}<br/>
                         </div>
                     </div>
-                    <div class="event-stats">
-                        view<br/>
-                        {{ event.viewed is defined ? event.viewed: "" }}<br/>
-                        <br/>
-                        comment<br/>
-                        389<br/>
-                        <br/>
-                        going<br/>
-                        {{ event.countParticipants }}<br/>
-                        <br/>
-                        Share<br/>
-                        458
-                    </div>
-                </div>
+                {% endif %}
             </div>
         </div>
 
@@ -174,7 +186,13 @@
     <script type="text/javascript" src="{{ asset('bundles/connectionevent/js/event.js') }}"></script>
     <script type="text/javascript">
         $(function() {
-            EM.subscriber.init("{{ path('event_subscribe', {id: event.id}) }}", "{{ path('event_unsubscribe', {id: event.id}) }}");
+            EM.subscriber.init(
+                    "{{ path('event_subscribe', {id: event.id}) }}",
+                    "{{ path('event_unsubscribe', {id: event.id}) }}",
+                    "{{ path('event_interested', {id: event.id}) }}",
+                    "{{ path('event_not_interested', {id: event.id}) }}"
+            );
+            EM.comment.init("{{ path('add_event_comment') }}");
         });
     </script>
 {% endblock %}

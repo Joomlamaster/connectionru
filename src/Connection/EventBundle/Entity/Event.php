@@ -132,10 +132,21 @@ class Event
     private $participants;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Connection\UserBundle\Entity\User", mappedBy="interestedInEvents")
+     **/
+    private $interesteds;
+
+    /**
      * @ORM\OneToOne(targetEntity="Connection\UserBundle\Entity\Profile\Image", inversedBy="event", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="image", referencedColumnName="id")
      **/
     private $image;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\OneToMany(targetEntity="Connection\EventBundle\Entity\EventComment", mappedBy="event", cascade={"persist", "remove"})
+     */
+    private $comments;
 
 
     /**
@@ -493,6 +504,30 @@ class Event
     }
 
     /**
+     * @param mixed $participants
+     */
+    public function setInterested ( User $user )
+    {
+        $this->interesteds[] = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInteresteds ()
+    {
+        return $this->interesteds;
+    }
+
+    public function hasInterested( User $user ) {
+        return ($this->getInteresteds()->contains($user));
+    }
+
+    public function countInteresteds() {
+        return count($this->getInteresteds());
+    }
+
+    /**
      * @param mixed $image
      */
     public function setImage ( $image )
@@ -517,5 +552,25 @@ class Event
         if ( $this->getImage() && !$this->getImage()->getEvent() ) {
             $this->getImage()->setEvent($this);
         }
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $comments
+     */
+    public function setComments ( $comments )
+    {
+        $this->comments = $comments;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getComments ()
+    {
+        return $this->comments;
+    }
+
+    public function countComments() {
+        return count($this->getComments());
     }
 }
