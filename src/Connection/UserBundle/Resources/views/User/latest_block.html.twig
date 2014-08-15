@@ -3,7 +3,7 @@
         {% for user in users %}
             <div class="face">
                 {% if user.profile.avatar is defined and user.profile.avatar is not empty %}
-                    <img style="position: absolute;" width="83px" height="112" src="{{ user.profile.avatar }}">
+                    <img style="position: absolute;" width="83px" height="112px" src="{{ user.profile.avatar }}">
                 {% endif %}
                 <div class="info">
                     <p class="name">{{ user.userName }}</p>

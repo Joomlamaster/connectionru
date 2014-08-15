@@ -21,7 +21,7 @@ class CommentController extends Controller
 {
     public function addCommentFormAction( Event $event )
     {
-        if ( !$user = $this->getUser() || !$event ) {
+        if ( (!$user = $this->getUser()) || !$event) {
             throw new AccessDeniedException();
         }
 

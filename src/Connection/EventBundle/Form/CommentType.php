@@ -18,7 +18,7 @@ class CommentType extends AbstractType
         $builder
             ->add('author', 'entity', array(
                 'class' => 'ConnectionUserBundle:User',
-                'property' => 'id',
+                'property' => 'username',
             ))
             ->add('event', 'entity', array(
                 'class' => 'ConnectionEventBundle:Event',
