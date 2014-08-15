@@ -124,11 +124,13 @@ body {
   background: url('/bundles/connectionweb/img/test-face.png') no-repeat;
   width: 92px;
   border: 5px solid #CAECFB;
+  min-height: 121px;
   border-radius: 5px;
   margin: 6px 6px;
 }
 .jumbotron .people .face .info {
   display: none;
+  min-height: 112px;
 }
 .jumbotron .people .face:hover {
   border-color: #ffffff;
