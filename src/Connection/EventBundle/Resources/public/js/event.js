@@ -52,6 +52,7 @@ EM = {
                     dataType: "html",
                     data: form,
                     success: function (data) {
+                        $('.comments').removeClass('hidden');
                         $('.add-comment-form textarea').removeClass('comment-content-error').val('');
                         $(data).appendTo(".comments");
                     },
