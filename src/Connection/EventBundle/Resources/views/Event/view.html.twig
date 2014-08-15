@@ -4,6 +4,7 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/connectionevent/css/event.css') }}" type="text/css" />
+    <link href="{{ asset('bundles/connectionevent/css/google/map.css') }}" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block breadcrumbs %}
@@ -11,7 +12,7 @@
         <ul>
             <li><a href="{{ path('connection_homepage') }}">Main page</a></li>
             <li>Event</li>
-            <li>New York Philharmonic</li>
+            <li>{{ event.title }}</li>
         </ul>
     </div>
 {% endblock breadcrumbs %}
@@ -43,7 +44,7 @@
                                 <strong>Venue</strong><br>
                                 {{ event.country.name is defined ? event.country.name : "" }}<br>
                                 {{ event.state.name is defined ? event.state.name : "" }}<br>
-                                <em><a href="#">Info</a> and <a href="#">map</a></em>
+                                <em><a href="#">Info</a> and <a class="show-event-map" href="#">map</a></em>
                             </address>
                             <a class="return" href="{{ path('event') }}"><div class="sprite sprite-return-events"></div>Return to events</a>
 
@@ -184,9 +185,13 @@
             </div>
         </div>
     </div>
+    <div class="event-map hidden">
+        <div id="map_canvas"></div>
+    </div>
 {% endblock %}
 {% block javascript %}
     {{ parent() }}
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
     <script type="text/javascript" src="{{ asset('bundles/connectionevent/js/event.js') }}"></script>
     <script type="text/javascript">
         $(function() {
@@ -197,6 +202,7 @@
                     "{{ path('event_not_interested', {id: event.id}) }}"
             );
             EM.comment.init("{{ path('add_event_comment') }}");
+            google.maps.event.addDomListener(window, 'load', EM.map.init("{{ event.lat }}", "{{ event.lng }}"));
         });
     </script>
 {% endblock %}

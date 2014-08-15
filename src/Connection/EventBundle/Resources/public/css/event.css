@@ -50,3 +50,12 @@
 .people .face.postet-by {
     height: auto;
 }
+
+.event-map {
+    border: 1px solid #D6D6D6;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    z-index: 100;
+}

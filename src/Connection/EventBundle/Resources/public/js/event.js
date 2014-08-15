@@ -62,5 +62,61 @@ EM = {
                 });
             });
         }
+    },
+    'map': {
+        'initialized': false,
+        'init': function(lat, lng) {
+            $("a.show-event-map").on('click', function(e) {
+                e.preventDefault();
+                if (!EM.map.initialized) {
+                    lat = lat ? lat : 40.7127837;
+                    lng = lng ? lng : -74.00594130000002;
+
+                    var haightAshbury = new google.maps.LatLng(lat, lng);
+                    var mapOptions = {
+                        zoom: 8,
+                        center: haightAshbury
+                    };
+                    map = new google.maps.Map(document.getElementById('map_canvas'),
+                        mapOptions);
+
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(lat, lng)
+                    });
+
+                    marker.setMap(map);
+                    map.panTo( marker.position );
+                    EM.map.initialized = true;
+                }
+                EM.map.show();
+            });
+        },
+        'show': function() {
+            EM.map.showOverlay();
+            $('div.event-map').removeClass('hidden').center();
+        },
+        'hide': function() {
+            EM.map.hideOverlay();
+            $('div.event-map').addClass('hidden');
+        },
+        'showOverlay': function() {
+            var overlay = jQuery('<div id="overlay"> </div>');
+            overlay.appendTo(document.body)
+            overlay.on('click', function() {
+                EM.map.hide();
+            });
+        },
+        'hideOverlay': function() {
+            $("#overlay").remove();
+        }
     }
 };
+
+jQuery.fn.center = function () {
+    this.css("position","absolute");
+    this.css("top", Math.max(0, (($(window).height() - $(this).outerHeight()) / 2) +
+        $(window).scrollTop()) + "px");
+    this.css("left", Math.max(0, (($(window).width() - $(this).outerWidth()) / 2) +
+        $(window).scrollLeft()) + "px");
+    return this;
+}
