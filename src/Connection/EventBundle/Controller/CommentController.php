@@ -39,6 +39,10 @@ class CommentController extends Controller
      */
     public function viewAction( Request $request )
     {
+        if ( !$user = $this->getUser() || !$event ) {
+            throw new AccessDeniedException();
+        }
+
         $comment = new EventComment();
         $form    = $this->createForm( new CommentType(), $comment );
         $form->handleRequest($request);

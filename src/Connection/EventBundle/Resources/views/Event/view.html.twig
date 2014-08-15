@@ -76,9 +76,11 @@
                                     {% endfor %}
                                 {% endif %}
                             </div>
-                            <div class="add-comment-form">
-                                {{ render(controller("ConnectionEventBundle:Comment:addCommentForm", {'id': event.id})) }}
-                            </div>
+                            {% if is_granted('ROLE_USER') %}
+                                <div class="add-comment-form">
+                                    {{ render(controller("ConnectionEventBundle:Comment:addCommentForm", {'id': event.id})) }}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                     {#<div class="row">#}
