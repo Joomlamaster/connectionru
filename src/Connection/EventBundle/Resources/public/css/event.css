@@ -46,3 +46,7 @@
 .comment-content-error {
     border-color: red !important;
 }
+
+.people .face.postet-by {
+    height: auto;
+}
