@@ -123,14 +123,13 @@ EM = {
         },
         'goingInterested': {
             'listen': function() {
+                $goingInterested = $('.going-interested');
                 $(".going-counter").on('click', function() {
-                    $going = $('.going-interested');
-                    EM.user.ajax($going, EM.user.goingUrl);
+                    EM.user.ajax($goingInterested, EM.user.goingUrl);
                 });
 
                 $(".interested-counter").on('click', function() {
-                    $interested = $('.going-interested');
-                    EM.user.ajax($interested, EM.user.interestedUrl);
+                    EM.user.ajax($goingInterested, EM.user.interestedUrl);
                 })
             }
         },
