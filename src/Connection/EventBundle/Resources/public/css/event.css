@@ -65,3 +65,34 @@
     float: none;
     margin-bottom: 3px;
 }
+
+.event-stats div {
+    margin-bottom: 8px;
+}
+
+.event-stats div.ajax-stat {
+    cursor: pointer;
+    color: #00a0e3;
+}
+
+.going-interested {
+    width: 591px;
+    height: 360px;
+    overflow-y: scroll;
+    background-color: #fff;
+    padding: 25px;
+    z-index: 100;
+}
+
+.going-interested .author {
+    display: block;
+    float: left;
+    margin: 4px;
+    padding: 8px !important;
+}
+
+.going-interested .author:hover {
+    border: 2px solid #D6D6D6;
+    padding: 6px !important;
+    border-radius: 4px;
+}

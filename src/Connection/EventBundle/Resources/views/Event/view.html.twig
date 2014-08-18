@@ -107,17 +107,22 @@
                             </div>
                         </div>
                         <div class="event-stats">
-                            view<br/>
-                            {{ event.viewed is defined ? event.viewed: "" }}<br/>
-                            <br/>
-                            comment<br/>
-                            {{ event.countComments }}<br/>
-                            <br/>
-                            going<br/>
-                            {{ event.countParticipants }}<br/>
-                            <br/>
-                            interested<br/>
-                            {{ event.countInteresteds }}<br/>
+                            <div>
+                                view<br/>
+                                {{ event.viewed is defined ? event.viewed: "" }}
+                            </div>
+                            <div>
+                                comment<br/>
+                                {{ event.countComments }}
+                            </div>
+                            <div {{ event.countParticipants > 0 ? 'class="going-counter ajax-stat"': "" }} >
+                                going<br/>
+                                {{ event.countParticipants }}
+                            </div>
+                            <div {{ event.countInteresteds > 0 ? 'class="going-counter ajax-stat"': "" }} >
+                                interested<br/>
+                                {{ event.countInteresteds }}
+                            </div>
                         </div>
                     </div>
                 {% endif %}
@@ -183,9 +188,13 @@
             </div>
         </div>
     </div>
+{% endblock %}
+{% block popup %}
+    {{ parent() }}
     <div class="event-map hidden">
-        <div id="map_canvas"></div>
+        {{ include('ConnectionEventBundle:Popup:google_map.html.twig') }}
     </div>
+    <div class="going-interested hidden"></div>
 {% endblock %}
 {% block javascript %}
     {{ parent() }}
@@ -195,6 +204,7 @@
     <script type="text/javascript">
         $(function() {
             EM.social.share.facebook();
+            EM.user.init("{{ path('event_ajax_going', {'id': event.id}) }}", "{{ path('event_ajax_interested', {'id': event.id}) }}");
             EM.subscriber.init(
                     "{{ path('event_subscribe', {id: event.id}) }}",
                     "{{ path('event_unsubscribe', {id: event.id}) }}",

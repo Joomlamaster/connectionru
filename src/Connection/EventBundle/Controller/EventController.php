@@ -165,4 +165,30 @@ class EventController extends Controller
         }
         return new JsonResponse();
     }
+
+    /**
+     * @Route("/ajax-going/{id}", name="event_ajax_going", requirements={"id" = "\d+"})
+     * @Template("ConnectionEventBundle:Event:going_interested.html.twig")
+     * @ParamConverter("Event", class="ConnectionEventBundle:Event")
+     */
+    public function goingAjaxAction( Event $event, Request $request )
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException();
+        }
+        return array('participants' => $event->getParticipants()) ;
+    }
+
+    /**
+     * @Route("/ajax-interested/{id}", name="event_ajax_interested", requirements={"id" = "\d+"})
+     * @Template("ConnectionEventBundle:Event:going_interested.html.twig")
+     * @ParamConverter("Event", class="ConnectionEventBundle:Event")
+     */
+    public function interestedAjaxAction( Event $event, Request $request )
+    {
+        if (!$request->isXmlHttpRequest()) {
+            throw new AccessDeniedException();
+        }
+        return array('participants' => $event->getInteresteds()) ;
+    }
 }

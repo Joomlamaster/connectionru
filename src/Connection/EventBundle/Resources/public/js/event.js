@@ -92,22 +92,12 @@ EM = {
             });
         },
         'show': function() {
-            EM.map.showOverlay();
+            EM.showOverlay();
             $('div.event-map').removeClass('hidden').center();
         },
         'hide': function() {
-            EM.map.hideOverlay();
+            EM.hideOverlay();
             $('div.event-map').addClass('hidden');
-        },
-        'showOverlay': function() {
-            var overlay = jQuery('<div id="overlay"> </div>');
-            overlay.appendTo(document.body)
-            overlay.on('click', function() {
-                EM.map.hide();
-            });
-        },
-        'hideOverlay': function() {
-            $("#overlay").remove();
         }
     },
     'social': {
@@ -122,6 +112,57 @@ EM = {
                 }(document, 'script', 'facebook-jssdk'));
             }
         }
+    },
+    'user': {
+        'goingUrl': false,
+        'interestedUrl': false,
+        'init': function (goingUrl, interestedUrl) {
+            EM.user.goingUrl        = goingUrl;
+            EM.user.interestedUrl   = interestedUrl;
+            EM.user.goingInterested.listen();
+        },
+        'goingInterested': {
+            'listen': function() {
+                $(".going-counter").on('click', function() {
+                    $going = $('.going-interested');
+                    EM.user.ajax($going, EM.user.goingUrl);
+                });
+
+                $(".interested-counter").on('click', function() {
+                    $interested = $('.going-interested');
+                    EM.user.ajax($interested, EM.user.interestedUrl);
+                })
+            }
+        },
+        'ajax': function($popup, url) {
+            EM.showOverlay();
+            $.ajax({
+                type: "POST",
+                url: url,
+                dataType: "html",
+                success: function (data) {
+                    $popup.html(data).removeClass('hidden').center();
+                },
+                error: function () {
+                    EM.hideOverlay();
+                }
+            });
+        },
+        'closePopup': function() {
+            $('.going-interested').html("").addClass('hidden');
+        }
+    },
+    'showOverlay': function() {
+        var overlay = jQuery('<div id="overlay"> </div>');
+        overlay.appendTo(document.body)
+        overlay.on('click', function() {
+            EM.map.hide();
+            EM.user.closePopup();
+        });
+    },
+    'hideOverlay': function() {
+        EM.user.closePopup();
+        $("#overlay").remove();
     }
 };
 
