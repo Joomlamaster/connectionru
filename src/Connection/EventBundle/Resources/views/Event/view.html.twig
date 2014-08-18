@@ -31,7 +31,7 @@
                                     <div class="fb-share-button" data-type="button_count" data-href="{{ path('view_event', {'id': event.id}, true) }}"></div>
                                 </a>
                                 <a href="#">
-                                    {{ app.request.uri | pinterest(event.image.absoluteDir is defined ? event.image.absoluteDir : "") | raw }}
+                                    {{ app.request.uri | pinterest(event.image.absoluteDir is defined ? event.image.absoluteDir : "", event.title is defined ? event.title : "") | raw }}
                                 </a>
                             </div>
                         </div>
