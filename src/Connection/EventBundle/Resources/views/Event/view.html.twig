@@ -24,19 +24,16 @@
                     <h4>{{ event.title is defined ? event.title : "" }}</h4>
                     <div class="row">
                         <div class="col-xs-5">
-                            {#<img class="event-image" src="/bundles/connectionweb/img/test-event-pic.png" alt=""/>#}
                             <img class="event-image img-rounded" width="190" src="{{ event.image.path is defined ? event.image.path : "" }}" alt=""/>
                             <strong>Share this event</strong>
-                            <a href="#">
-                                <div class="fb-share-button share" data-href="{{ path('view_event', {'id': event.id}, true) }}"></div>
-                            </a>
-                            <a href="#">
-                                {{ app.request.uri | pinterest(event.image.absoluteDir is defined ? event.image.absoluteDir : "") | raw }}
-                                {#<div class="share"><div class="sprite sprite-pinterest"></div>Share</div>#}
-                            </a>
-                            <a href="#">
-                                <div class="share"><div class="sprite sprite-instagram"></div>Share</div>
-                            </a>
+                            <div class="social-share">
+                                <a href="#">
+                                    <div class="fb-share-button" data-type="button_count" data-href="{{ path('view_event', {'id': event.id}, true) }}"></div>
+                                </a>
+                                <a href="#">
+                                    {{ app.request.uri | pinterest(event.image.absoluteDir is defined ? event.image.absoluteDir : "") | raw }}
+                                </a>
+                            </div>
                         </div>
                         <div class="col-xs-7 details">
                             <time>{{ event.eventDate is defined ? event.eventDate|date : "" }}</time>

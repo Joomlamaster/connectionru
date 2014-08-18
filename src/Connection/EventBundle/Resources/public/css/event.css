@@ -59,3 +59,9 @@
     background-color: #fff;
     z-index: 100;
 }
+
+.social-share a{
+    display: block;
+    float: none;
+    margin-bottom: 3px;
+}
