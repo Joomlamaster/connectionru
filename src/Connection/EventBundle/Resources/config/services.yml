@@ -2,3 +2,8 @@ services:
     connection_user.event_images_namer:
         class: Connection\EventBundle\Service\EventImageNamer
         arguments: [ @service_container ]
+
+    connection.twig.social_extension:
+        class: Connection\EventBundle\Twig\SocialExtension
+        tags:
+            - { name: twig.extension }

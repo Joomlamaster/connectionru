@@ -126,6 +126,11 @@ class Image
         return __DIR__.'/../../../../../web' . $this->getPath();
     }
 
+    public function getAbsoluteDir()
+    {
+        return "http://".$_SERVER['HTTP_HOST'] . $this->getPath();
+    }
+
     /**
      * @ORM\PreRemove()
      */
