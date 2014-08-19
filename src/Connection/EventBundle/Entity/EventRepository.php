@@ -12,4 +12,28 @@ use Doctrine\ORM\EntityRepository;
  */
 class EventRepository extends EntityRepository
 {
+
+    public function getUpcomingEvents( Event $event )
+    {
+        $countryId  = ($event->getCountry()) ? $event->getCountry()->getId() : false;
+        $stateId    = ($event->getState())   ? $event->getState()->getId()   : false;
+
+        $qb = $this->createQueryBuilder('e')
+            ->where('e.eventDate > :event_date')
+            ->andWhere('e.eventDate > :current_date')
+            ->setParameter('event_date', $event->getEventDate(), \Doctrine\DBAL\Types\Type::DATETIME)
+            ->setParameter('current_date', new \DateTime(), \Doctrine\DBAL\Types\Type::DATETIME);
+
+        if ($stateId) {
+            $qb->join('e.state', 's')
+                ->andWhere('s.id = :state_id')
+                ->setParameter('state_id', $stateId);
+        } elseif ($countryId) {
+            $qb->join('e.country', 'c')
+                ->andWhere('c.id = :country_id')
+                ->setParameter('country_id', $countryId);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 }

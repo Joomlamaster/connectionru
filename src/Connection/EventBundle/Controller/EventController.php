@@ -29,9 +29,26 @@ class EventController extends Controller
         $em->persist($event);
         $em->flush();
 
+        $upcomingEvents = $em->getRepository('ConnectionEventBundle:Event')->getUpcomingEvents($event);
+
         return array(
-            'event'   => $event,
-            'owner'   => $event->getUser()
+            'event'             => $event,
+            'owner'             => $event->getUser(),
+            'upcomingEvents'    => $upcomingEvents
+        );
+    }
+
+    /**
+     * @Route("/upcoming/{id}", name="view_upcoming_events", requirements={"id" = "\d+"})
+     * @Template("ConnectionEventBundle:Event:view_upcoming.html.twig")
+     * @ParamConverter("Event", class="ConnectionEventBundle:Event")
+     */
+    public function viewUpcomingAction( Event $event)
+    {
+        $upcomingEvents = $this->getDoctrine()->getRepository('ConnectionEventBundle:Event')->getUpcomingEvents($event);
+
+        return array(
+            'upcomingEvents'    => $upcomingEvents
         );
     }
 

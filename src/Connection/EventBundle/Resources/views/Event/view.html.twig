@@ -37,7 +37,6 @@
                         </div>
                         <div class="col-xs-7 details">
                             <time>{{ event.eventDate is defined ? event.eventDate|date : "" }}</time>
-                            {#<h5>New York Philharmonic</h5>#}
                             <address>
                                 <strong>Venue</strong><br>
                                 {{ event.country.name is defined ? event.country.name : "" }}<br>
@@ -64,38 +63,31 @@
                     </div>
                     <div class="row">
                         <div class="col-sx-12">
-                            <div class="block-title"><h4>Comments:</h4></div>
-                            {% if event.comments is defined and event.comments is not empty %}
-                            <div class="comments">
-                                    {% for comment in event.comments %}
-                                        <div class="comment" >
-                                            <div class="author"><a href="#">{{ comment.author.username }} | {{ comment.createdAt|date }}</a></div>
-                                            <div class="content">{{ comment.comment }}</div>
-                                        </div>
-                                    {% endfor %}
-                            </div>
-                            {% else %}
-                                <div class="comments hidden"></div>
-                            {% endif %}
-                            {% if is_granted('ROLE_USER') %}
-                                <div class="add-comment-form">
-                                    {{ render(controller("ConnectionEventBundle:Comment:addCommentForm", {'id': event.id})) }}
+                            <div class="add-comment-container">
+                                {% if event.comments is defined and event.comments is not empty %}
+                                <div class="block-title"><h4>Comments:</h4></div>
+                                <div class="comments">
+                                        {% for comment in event.comments %}
+                                            <div class="comment" >
+                                                <div class="author"><a href="#">{{ comment.author.username }} | {{ comment.createdAt|date }}</a></div>
+                                                <div class="content">{{ comment.comment }}</div>
+                                            </div>
+                                        {% endfor %}
                                 </div>
-                            {% endif %}
+                                {% else %}
+                                    {% if is_granted('ROLE_USER') %}
+                                        <div class="block-title"><h4>Comments:</h4></div>
+                                    {% endif %}
+                                    <div class="comments hidden"></div>
+                                {% endif %}
+                                {% if is_granted('ROLE_USER') %}
+                                    <div class="add-comment-form">
+                                        {{ render(controller("ConnectionEventBundle:Comment:addCommentForm", {'id': event.id})) }}
+                                    </div>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
-                    {#<div class="row">#}
-                        {#<div class="col-sx-12">#}
-                            {#<div class="block-title">1 people interested:</div>#}
-                            {#<div class="people">#}
-                                {#<div class="people">#}
-                                    {#<div class="face">#}
-                                        {#<p class="name">Mara stone</p>#}
-                                    {#</div>#}
-                                {#</div>#}
-                            {#</div>#}
-                        {#</div>#}
-                    {#</div>#}
                 </div>
                 {% if owner is defined and owner is not empty %}
                     <div class="col-xs-2 author">
@@ -128,65 +120,9 @@
                 {% endif %}
             </div>
         </div>
-
-        <div class="col-xs-4 upcoming">
-            <div class="row">
-                <div class="block-title">Related upcoming events:</div>
-            </div>
-            <div class="row">
-                <div class="event-small">
-                    <div class="col-xs-4">
-                        <img src="/bundles/connectionweb/img/test-event-pic.png" alt=""/>
-                    </div>
-                    <div class="col-xs-8">
-                        <time>15.06.2014</time>
-                        <a class="title" href="#">OFFICE & Residential</a>
-                        <em>(NYC) pic map</em><br/>
-                        <a href="#" class="btn-gradient">View</a>
-                        <br/>
-                        <em>Posted:</em>
-                        <a href="#" class="name">Joshua Bell</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="event-small">
-                    <div class="col-xs-4">
-                        <img src="/bundles/connectionweb/img/test-event-pic.png" alt=""/>
-                    </div>
-                    <div class="col-xs-8">
-                        <time>15.06.2014</time>
-                        <a class="title" href="#">OFFICE & Residential</a>
-                        <em>(NYC) pic map</em><br/>
-                        <a href="#" class="btn-gradient">View</a>
-                        <br/>
-                        <em>Posted:</em>
-                        <a href="#" class="name">Joshua Bell</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="event-small">
-                    <div class="col-xs-4">
-                        <img src="/bundles/connectionweb/img/test-event-pic.png" alt=""/>
-                    </div>
-                    <div class="col-xs-8">
-                        <time>15.06.2014</time>
-                        <a class="title" href="#">OFFICE & Residential</a>
-                        <em>(NYC) pic map</em><br/>
-                        <a href="#" class="btn-gradient">View</a>
-                        <br/>
-                        <em>Posted:</em>
-                        <a href="#" class="name">Joshua Bell</a>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <a href="#">
-                    <div class="more">View all / others</div>
-                </a>
-            </div>
-        </div>
+        {% if upcomingEvents is defined and upcomingEvents is not empty %}
+            {{ include('ConnectionEventBundle:Event:upcoming_events.html.twig', {'upcomingEvents': upcomingEvents, 'eventId': event.id}) }}
+        {% endif %}
     </div>
 {% endblock %}
 {% block popup %}

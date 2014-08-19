@@ -1,0 +1,82 @@
+{% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
+
+{% block theme %}view-event{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/connectionevent/css/event.css') }}" type="text/css" />
+{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="container breadcrumbs">
+        <ul>
+            <li><a href="{{ path('connection_homepage') }}">Main page</a></li>
+            <li>Event</li>
+            <li>Upcoming</li>
+        </ul>
+    </div>
+{% endblock breadcrumbs %}
+{% block content %}
+    {% if upcomingEvents is defined and upcomingEvents is not empty %}
+        {% for event in upcomingEvents %}
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="row">
+                        <div class="col-xs-10">
+                            <h4>{{ event.title is defined ? event.title : "" }}</h4>
+                            <div class="row">
+                                <div class="col-xs-5">
+                                    <a href="{{ path('view_event', {'id': event.id}) }}">
+                                        <img class="event-image img-rounded" width="190" src="{{ event.image.path is defined ? event.image.path : "" }}" alt=""/>
+                                    </a>
+                                </div>
+                                <div class="col-xs-7 details">
+                                    <time>{{ event.eventDate is defined ? event.eventDate|date : "" }}</time>
+                                    <address>
+                                        <strong>Venue</strong><br>
+                                        {{ event.country.name is defined ? event.country.name : "" }}<br>
+                                        {{ event.state.name is defined ? event.state.name : "" }}<br>
+                                    </address>
+
+                                    <h6>Event Description:</h6>
+                                    <em>
+                                        {{ event.description is defined ? event.description : "" }}
+                                    </em>
+                                </div>
+                            </div>
+                        </div>
+                        {% if event.user is defined and event.user is not empty %}
+                            {% set owner = event.user %}
+                            <div class="col-xs-2 author">
+                                <div class="block-title">Posted:</div>
+                                <div class="people clearfix">
+                                    <div class="face postet-by">
+                                        <p class="name"><a href="{{ path('view_profile', {'id': owner.profile.id}) }}">{{ owner.username }}</a></p>
+                                        <img width="82px" src="{{ owner.profile.avatar }}">
+                                    </div>
+                                </div>
+                                <div class="event-stats">
+                                    <div>
+                                        view<br/>
+                                        {{ event.viewed is defined ? event.viewed: "" }}
+                                    </div>
+                                    <div>
+                                        comment<br/>
+                                        {{ event.countComments }}
+                                    </div>
+                                    <div>
+                                        going<br/>
+                                        {{ event.countParticipants }}
+                                    </div>
+                                    <div>
+                                        interested<br/>
+                                        {{ event.countInteresteds }}
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div><hr/>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
