@@ -3,3 +3,8 @@ services:
         class: Connection\WebBundle\Twig\UserExtension
         tags:
             - { name: twig.extension }
+
+    connection.web.form_extension:
+        class: Connection\WebBundle\Twig\BootstrapFormExtension
+        tags:
+            - { name: twig.extension }

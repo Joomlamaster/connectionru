@@ -1,4 +1,5 @@
 {% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
+{% form_theme form 'ConnectionUserBundle:Search:fields.html.twig' %}
 
 {% block theme %}search-event{% endblock %}
 
@@ -14,32 +15,22 @@
     <h4>Search</h4>
     <div class="row">
         <div class="search-form">
-            {{ form_start(form, {'action': path('search_user_result'), 'attr': {'class': 'search-result master_slave'}}) }}
+            {{ form_start(form, {'action': path('search_user_result'), 'attr': {'class': 'search-result master_slave '}}) }}
                 <div class="form-inline">
-                    <label class="radio-inline">
-                        Gender: {{ form_widget(form.gender) }}
-                    </label>
-                    <label class="radio-inline">
-                        Seek: {{ form_widget(form.seek) }}
-                    </label>
-                    <label class="select-inline">
-                        Age: {{ form_widget(form.age) }}
-                    </label>
-                    <label class="select-inline">
-                        Looking for: {{ form_widget(form.lookingFor) }}
-                    </label>
+                    {{ form_row(form.gender, {'attr': { 'class': 'radio-inline'} }) }}
+                    {{ form_row(form.seek, {'attr': { 'class': 'radio-inline'} }) }}
+                    {{ form_row(form.age, {'attr': { 'class': 'select-inline'} }) }}
+                    {{ form_row(form.lookingFor, {'attr': { 'class': 'select-inline'} }) }}
                 </div>
                 <div class="form-inline">
                     <div class="master_slave">
                         <div>
-                            <label class="select-inline">
-                                Country: {{ form_widget(form.country) }}
-                            </label>
+                            {{ form_row(form.country, {'attr': { 'class': 'select-inline'} }) }}
                         </div>
                         {% if (form.state is defined) %}
                             <div class="slave_block">
                                 <label class="select-inline">
-                                    State: {{ form_widget(form.state) }}
+                                    State: {{ form_widget(form.state, { 'attr': { 'class': 'form-control' }}) }}
                                 </label>
                             </div>
                         {% endif %}
