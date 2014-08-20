@@ -70,6 +70,33 @@ class SocialUserService {
         $em->persist($user);
         $em->flush();
 
+        if(!empty($socialProfile['email'])){
+            //send informative mail to user
+            $username = 'user';
+            if(!empty($socialProfile['username'])){
+                $username = $socialProfile['username'];
+            }
+
+            $sender   = $this->container->getParameter('mailer_user');
+            $sendTo   = array();
+            $sendTo[] = $socialProfile['email'];
+            $message  = \Swift_Message::newInstance()
+                ->setSubject('ConnectionRu registration note')
+                ->setContentType('text/html')
+                ->setFrom($sender)
+                ->setTo($sendTo)
+                ->setBody($this->container->get('templating')->render('ConnectionWebBundle:Frontend/Mail:SocialRegistrationNote.html.twig',array(
+                    'username' => $username,
+                    'email'    => $socialProfile['email'],
+                    'password' => $password
+                )));
+
+            $mailer = $this->container->get('mailer');
+            $mailer->send($message);
+            $mailer->getTransport()->getSpool()->flushQueue($this->container->get('swiftmailer.transport.real'));
+            $this->container->get('session')->getFlashBag()->add('notice', 'An informative mail regarding registration on ConnectionRu has been sent to you.');
+        }
+
         return $user;
     }
 
