@@ -2,9 +2,6 @@
 
 {% block fos_user_content %}
     <form class="navbar-form navbar-right" action="{{ path("fos_user_security_check") }}" role="form" id='login-form' method="post">
-        {% if error %}
-            <div class="alert alert-danger hlogin-error" role="alert">{{ error|trans }}</div>
-        {% endif %}
 
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
         <div class="form-group">
@@ -20,6 +17,9 @@
         <label class="forgot">
             <a href="{{ path('fos_user_resetting_request') }}">Forgot password ?</a>
         </label>
+        {% if error %}
+            <div class="alert alert-danger hlogin-error" role="alert">{{ error|trans }}</div>
+        {% endif %}
     </form>
     {#<script type="text/javascript">#}
         {#function headerLoginLoad() {#}

@@ -768,4 +768,10 @@ button.btn-gradient {
 .blue {
   color: #00a0e3;
 }
+
+.hlogin-error {
+    padding: 2px;
+    margin: 19px 0px 5px 0px;
+    text-align: center;
+}
 /* Mixins */
