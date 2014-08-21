@@ -51,15 +51,51 @@ class EventRepository extends EntityRepository
 
     public function search( $filter = array(), $limit = false, $offset = false )
     {
+
         $qb = $this->createQueryBuilder('e');
-        if ($limit) {
+
+        //  Search text field
+        if ( !empty($filter['search']) and (strlen($filter['search']) > 3) ) {
+            $qb->andWhere('e.title LIKE :search OR e.description LIKE :search')->setParameter('search', "%{$filter['search']}%");
+        }
+
+        //  Event Date From
+        if ( !empty($filter['eventDateFrom'])) {
+            $qb->andWhere('e.eventDate >= :event_date_from')
+                ->setParameter('event_date_from', $filter['eventDateFrom'], \Doctrine\DBAL\Types\Type::DATETIME);
+        }
+
+        //  Event Date To
+        if ( !empty($filter['eventDateTo'])) {
+            $qb->andWhere('e.eventDate <= :event_date_to')
+                ->setParameter('event_date_to', $filter['eventDateTo'], \Doctrine\DBAL\Types\Type::DATETIME);
+        }
+
+
+        if (!empty($filter['category'])) {
+            if ($categories = $this->filterCategory($filter['category'])) {
+                $qb->join('e.category', 'ec')->andWhere('ec.id IN(:categories)')->setParameter('categories', $categories);
+            }
+        }
+
+        if ( $limit ) {
             $qb->setMaxResults($limit);
         }
 
-        if ($offset) {
+        if ( $offset ) {
             $qb->setFirstResult($offset);
         }
 
         return $qb->orderBy("e.eventDate", "ASC")->getQuery()->getResult();
+    }
+
+    private function filterCategory($categories)
+    {
+        $result = array();
+        foreach ($categories as $category) {
+            $result[] = $category->getId();
+        }
+
+        return (empty($result) ? false : $result);
     }
 }

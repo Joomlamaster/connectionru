@@ -4,6 +4,7 @@ namespace Connection\EventBundle\Controller;
 
 use Connection\EventBundle\Entity\Event;
 use Connection\EventBundle\Form\EventType;
+use Connection\EventBundle\Form\SearchType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -23,6 +24,8 @@ class SearchController extends Controller
      */
     public function searchAction( Request $request, $page )
     {
+        $filter     = array();
+        $filteredBy = array();
         $topLimit   = $this->container->getParameter('search.event.top.per_page');
         $limit      = $this->container->getParameter('search.event.per_page');
 
@@ -32,18 +35,37 @@ class SearchController extends Controller
         $total      = $this->getDoctrine()->getRepository('ConnectionEventBundle:Event')->countAll();
         $pages      = ceil( ($total / ($topLimit + $limit)) );
 
+        $form = $this->createForm( new SearchType() );
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $filter = $form->getData();
+            $filteredBy = $this->filteredBy($filter);
+        }
+
         $topEvents = $this->getDoctrine()
             ->getRepository('ConnectionEventBundle:Event')
-            ->search( array(), $topLimit, $topOffset );
+            ->search( $filter, $topLimit, $topOffset );
 
         $events    = $this->getDoctrine()
-            ->getRepository('ConnectionEventBundle:Event')->search( array(), $limit, $offset );
+            ->getRepository('ConnectionEventBundle:Event')->search( $filter, $limit, $offset );
 
         return array(
             'topEvents'     => $topEvents,
             'events'        => $events,
             'pages'         => $pages,
-            'currentPage'   => $page
+            'currentPage'   => $page,
+            'form'          => $form->createView(),
+            'filteredBy'    => $filteredBy
         );
+    }
+
+    private function filteredBy($formData) {
+        $filteredBy = array();
+
+        $filteredBy['Date From'] = $formData['eventDateFrom']->format('Y-m-d');
+
+        var_dump($filteredBy);die;
+        return true;
     }
 }
