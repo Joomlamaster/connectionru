@@ -39,8 +39,8 @@ class SocialUserService {
         $user            = new User();
         $profile         = new Profile();
         $tokenGenerator  = $this->container->get('fos_user.util.token_generator');
-        $password        = substr($tokenGenerator->generateToken(), 0, 12);
-        $passwordHash    = $this->generatePassword($password, $user);
+        $plainPassword   = substr($tokenGenerator->generateToken(), 0, 12);
+        $password        = $this->generatePassword($plainPassword, $user);
 
         $profile->setSocialId($type,$socialProfile['id']);
         $user->setEnabled(true);
@@ -66,33 +66,12 @@ class SocialUserService {
             $user->setEmail($socialProfile['email']);
         }
 
-        $user->setPassword($passwordHash);
+        $user->setPassword($password);
         $user->setProfile($profile);
         $em->persist($user);
         $em->flush();
-
-        if(!empty($socialProfile['email'])) {
-            //send informative mail to user
-            $username = $user->getUsername();
-
-            $sender   = $this->container->getParameter('mailer_user');
-            $sendTo   = array($user->getEmail());
-            $message  = \Swift_Message::newInstance()
-                ->setSubject('ConnectionRu registration note')
-                ->setContentType('text/html')
-                ->setFrom($sender)
-                ->setTo($sendTo)
-                ->setBody($this->container->get('templating')->render('ConnectionWebBundle:Frontend/Mail:SocialRegistrationNote.html.twig',array(
-                    'username' => $username,
-                    'email'    => $user->getEmail(),
-                    'password' => $password
-                )));
-
-            $mailer = $this->container->get('mailer');
-            $mailer->send($message);
-            $mailer->getTransport()->getSpool()->flushQueue($this->container->get('swiftmailer.transport.real'));
-            $this->container->get('session')->getFlashBag()->add('notice', 'An informative mail regarding registration on ConnectionRu has been sent to you.');
-        }
+        //  Send Confirmation Email
+        $this->sendEmail($user, $plainPassword);
 
         return $user;
     }
@@ -111,7 +90,30 @@ class SocialUserService {
         $this->container->get("event_dispatcher")->dispatch("security.interactive_login", $event);
     }
 
-    public function sendEmail() {
+    public function sendEmail($user, $password)
+    {
+        $username = $user->getUsername();
+        $email    = $user->getEmail();
 
+        if (!empty($email)) {
+            $sender   = $this->container->getParameter('mailer_user');
+            $sendTo   = array($user->getEmail());
+
+            $message  = \Swift_Message::newInstance()
+                ->setSubject('ConnectionRu registration note')
+                ->setContentType('text/html')
+                ->setFrom($sender)
+                ->setTo($sendTo)
+                ->setBody($this->container->get('templating')->render('ConnectionWebBundle:Frontend/Mail:SocialRegistrationNote.html.twig', array(
+                    'username' => $username,
+                    'email'    => $user->getEmail(),
+                    'password' => $password
+                )));
+
+            $mailer = $this->container->get('mailer');
+            $mailer->send($message);
+            $mailer->getTransport()->getSpool()->flushQueue($this->container->get('swiftmailer.transport.real'));
+            $this->container->get('session')->getFlashBag()->add('notice', 'An informative mail regarding registration on ConnectionRu has been sent to you.');
+        }
     }
 }
