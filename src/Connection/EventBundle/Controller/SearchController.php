@@ -40,7 +40,6 @@ class SearchController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $filter = $form->getData();
-            $filteredBy = $this->filteredBy($filter);
         }
 
         $topEvents = $this->getDoctrine()
@@ -58,14 +57,5 @@ class SearchController extends Controller
             'form'          => $form->createView(),
             'filteredBy'    => $filteredBy
         );
-    }
-
-    private function filteredBy($formData) {
-        $filteredBy = array();
-
-        $filteredBy['Date From'] = $formData['eventDateFrom']->format('Y-m-d');
-
-        var_dump($filteredBy);die;
-        return true;
     }
 }
