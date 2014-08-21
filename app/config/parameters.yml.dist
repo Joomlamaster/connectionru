@@ -25,3 +25,4 @@ parameters:
     search.user.per_page: 5
     search.event.per_page: 6
     search.event.top.per_page: 6
+    event.upcoming.block.limit: 3

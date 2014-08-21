@@ -21,7 +21,7 @@ class EventRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function getUpcomingEvents( Event $event )
+    public function getUpcomingEvents( Event $event, $limit = false )
     {
         $countryId  = ($event->getCountry()) ? $event->getCountry()->getId() : false;
         $stateId    = ($event->getState())   ? $event->getState()->getId()   : false;
@@ -40,6 +40,10 @@ class EventRepository extends EntityRepository
             $qb->join('e.country', 'c')
                 ->andWhere('c.id = :country_id')
                 ->setParameter('country_id', $countryId);
+        }
+
+        if ($limit) {
+            $qb->setMaxResults($limit);
         }
 
         return $qb->getQuery()->getResult();

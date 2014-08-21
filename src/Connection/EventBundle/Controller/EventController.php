@@ -29,7 +29,8 @@ class EventController extends Controller
         $em->persist($event);
         $em->flush();
 
-        $upcomingEvents = $em->getRepository('ConnectionEventBundle:Event')->getUpcomingEvents($event);
+        $limit          = $this->container->getParameter('event.upcoming.block.limit');
+        $upcomingEvents = $em->getRepository('ConnectionEventBundle:Event')->getUpcomingEvents($event, $limit);
 
         return array(
             'event'             => $event,

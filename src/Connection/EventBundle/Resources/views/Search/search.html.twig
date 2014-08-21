@@ -128,12 +128,13 @@
                     </div>
                     <div class="row">
                         <time>{{ event.eventDate|date }}</time>
-                        <a class="title" href="#">OFFICE & Residential</a>
-                        <em>(NYC) pic map</em><br/>
-                        <a href="#" class="btn-gradient">View</a>
+                        <a class="title" href="{{ path('view_event', {'id': event.id}) }}">{{ event.title }}</a>
+                        <a href="{{ path('view_event', {'id': event.id}) }}" class="btn-gradient">View</a>
                         <br/>
-                        <em>Posted:</em>
-                        <a href="#" class="name">Joshua Bell</a>
+                        {% if event.user.profile.id is defined and event.user.username is defined %}
+                            <em>Posted:</em>
+                            <a href="{{ path('view_profile', {'id': event.user.profile.id}) }}" class="name">{{ event.user.username }}</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -150,12 +151,13 @@
                         </div>
                         <div class="col-xs-8">
                             <time>{{ event.eventDate|date }}</time>
-                            <a class="title" href="#">OFFICE & Residential</a>
-                            <em>(NYC) pic map</em><br/>
-                            <a href="#" class="btn-gradient">View</a>
+                            <a class="title" href="{{ path('view_event', {'id': event.id}) }}">{{ event.title }}</a>
+                            <a href="{{ path('view_event', {'id': event.id}) }}" class="btn-gradient">View</a>
                             <br/>
-                            <em>Posted:</em>
-                            <a href="#" class="name">Joshua Bell</a>
+                            {% if event.user.profile.id is defined and event.user.username is defined %}
+                                <em>Posted:</em>
+                                <a href="{{ path('view_profile', {'id': event.user.profile.id}) }}" class="name">{{ event.user.username }}</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
