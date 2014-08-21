@@ -76,7 +76,7 @@ class SocialUserService {
             $username = (empty($user->getUsername())) ? $user->getEmail() : $user->getUsername();
 
             $sender   = $this->container->getParameter('mailer_user');
-            $sendTo   = array($socialProfile['email']);
+            $sendTo   = array($user->getEmail());
             $message  = \Swift_Message::newInstance()
                 ->setSubject('ConnectionRu registration note')
                 ->setContentType('text/html')
