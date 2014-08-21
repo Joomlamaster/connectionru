@@ -68,11 +68,13 @@ class ProfileType extends AbstractType
             ->add('gender', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Gender',
                 'property' => 'name',
+                'label' => 'I am'
             ))
 
             ->add('seek', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Gender',
                 'property' => 'name',
+                'label' => 'Seeking'
             ))
 
             ->add('lookingFor', 'entity', array(

@@ -83,17 +83,115 @@ class UserRepository extends EntityRepository
             $qb->join('p.lookingFor', 'lf')->andWhere('lf.id = :looking_for')->setParameter('looking_for', $filter['lookingFor']);
         }
 
-        //  Filter By Age
-        if ( !empty($filter['age']) ) {
-            $age = explode("_", $filter['age']);
-            if ( !empty($age[0]) && !empty($age[1]) ) {
-                $to     = new \DateTime("-{$age[0]} years");
-                $from   = new \DateTime("-{$age[1]} years");
-
-                $qb->andWhere('p.birthdate < :age_to')->setParameter('age_to', $to);
-                $qb->andWhere('p.birthdate > :age_from')->setParameter('age_from', $from);
-            }
+        //  Filter By ageFrom
+        if ( !empty($filter['ageFrom'])) {
+            $from = new \DateTime("-{$filter['ageFrom']} years");
+            $qb->andWhere('p.birthdate <= :age_from')->setParameter('age_from', $from);
         }
+
+        //  Filter By ageTo
+        if ( !empty($filter['ageTo'])) {
+            $to = new \DateTime("-{$filter['ageTo']} years");
+            $qb->andWhere('p.birthdate >= :age_to')->setParameter('age_to', $to);
+        }
+
+        //  Filter By languages
+        if ( !empty($filter['languages']) && !$filter['languages']->isEmpty()) {
+            $langs = $filter['languages']->toArray();
+            $qb->join('p.languages', 'l')->andWhere('l.id IN (:languages)')->setParameter('languages', $filter['languages']->toArray());
+        }
+
+        //  Filter By education
+        if ( !empty($filter['education'])) {
+            $qb->andWhere('p.education = :education')->setParameter('education', $filter['education']);
+        }
+
+        //  Filter By profession
+        if ( !empty($filter['profession'])) {
+            $qb->andWhere('p.profession = :profession')->setParameter('profession', $filter['profession']);
+        }
+
+        //  Filter By income
+        if ( !empty($filter['income'])) {
+            $qb->andWhere('p.income >= :income')->setParameter('income', $filter['income']);
+        }
+
+        //  Filter By religion
+        if ( !empty($filter['religion'])) {
+            $qb->andWhere('p.religion = :religion')->setParameter('religion', $filter['religion']);
+        }
+
+        //  Filter By maritalStatus
+        if ( !empty($filter['maritalStatus'])) {
+            $qb->andWhere('p.maritalStatus = :maritalStatus')->setParameter('maritalStatus', $filter['maritalStatus']);
+        }
+
+        //  Filter By heightFrom
+        if ( !empty($filter['heightFrom'])) {
+            $qb->andWhere('p.height >= :heightFrom')->setParameter('heightFrom', $filter['heightFrom']);
+        }
+
+        //  Filter By heightTo
+        if ( !empty($filter['heightTo'])) {
+            $qb->andWhere('p.height <= :heightTo')->setParameter('heightTo', $filter['heightTo']);
+        }
+
+        //  Filter By weightFrom
+        if ( !empty($filter['weightFrom'])) {
+            $qb->andWhere('p.weight >= :weightFrom')->setParameter('weightFrom', $filter['weightFrom']);
+        }
+
+        //  Filter By weightTo
+        if ( !empty($filter['weightTo'])) {
+            $qb->andWhere('p.weight <= :weightTo')->setParameter('weightTo', $filter['weightTo']);
+        }
+
+        //  Filter By eyeColor
+        if ( !empty($filter['eyeColor'])) {
+            $qb->andWhere('p.eyeColor = :eyeColor')->setParameter('eyeColor', $filter['eyeColor']);
+        }
+
+        //  Filter By hairColor
+        if ( !empty($filter['hairColor'])) {
+            $qb->andWhere('p.hairColor = :hairColor')->setParameter('hairColor', $filter['hairColor']);
+        }
+
+        //  Filter By smoking
+        if ( !empty($filter['smoking'])) {
+            $qb->andWhere('p.smoking = :smoking')->setParameter('smoking', $filter['smoking']);
+        }
+
+        //  Filter By drinking
+        if ( !empty($filter['drinking'])) {
+            $qb->andWhere('p.drinking = :drinking')->setParameter('drinking', $filter['drinking']);
+        }
+
+        //  Filter By haveChildren
+        if ( !empty($filter['haveChildren'])) {
+            $qb->andWhere('p.haveChildren = :haveChildren')->setParameter('haveChildren', $filter['haveChildren']);
+        }
+
+        //  Filter By wantChildren
+        if ( !empty($filter['wantChildren'])) {
+            $qb->andWhere('p.wantChildren = :wantChildren')->setParameter('wantChildren', $filter['wantChildren']);
+        }
+
+        //  Filter By livesWithChildren
+        if ( !empty($filter['livesWithChildren'])) {
+            $qb->andWhere('p.livesWithChildren = :livesWithChildren')->setParameter('livesWithChildren', $filter['livesWithChildren']);
+        }
+
+        //  Filter By openToPersonWithKids
+        if ( !empty($filter['openToPersonWithKids'])) {
+            $qb->andWhere('p.openToPersonWithKids = :openToPersonWithKids')->setParameter('openToPersonWithKids', $filter['openToPersonWithKids']);
+        }
+
+        //  Filter By etnicity
+        if ( !empty($filter['etnicity'])) {
+            $qb->andWhere('p.etnicity = :etnicity')->setParameter('etnicity', $filter['etnicity']);
+        }
+
+
 
         $qb->setMaxResults($limit);
         $qb->setFirstResult($offset);

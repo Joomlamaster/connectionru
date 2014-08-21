@@ -46,9 +46,13 @@ class SearchController extends Controller
         $form       = $this->createForm( new SearchType() );
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $sessionSearch = $this->prepareSearchDataForSession($form->getData());
-            $session->set('search', $sessionSearch);
+        if ($form->isSubmitted()) {
+            if($form->isValid()){
+                $sessionSearch = $this->prepareSearchDataForSession($form->getData());
+                $session->set('search', $sessionSearch);
+            } else {
+                $sessionSearch  = $session->get('search');
+            }
         } else {
             $sessionSearch  = $session->get('search');
             $data           = $this->mapSearchClass($sessionSearch);
@@ -108,6 +112,7 @@ class SearchController extends Controller
             'wantChildren'          => 'ConnectionUserBundle:Profile\WantChildren',
             'country'               => 'ConnectionCoreBundle:Country',
             'state'                 => 'ConnectionCoreBundle:State',
+            'languages'             => 'ConnectionCoreBundle:Language'
         );
 
         $result = array();

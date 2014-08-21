@@ -2,6 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="140d7765-525e-4f1e-b86e-5b16ac49f160" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Connection/UserBundle/Service/SocialUserService.php" afterPath="$PROJECT_DIR$/src/Connection/UserBundle/Service/SocialUserService.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/composer.lock" afterPath="$PROJECT_DIR$/composer.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/config/config_dev.yml" afterPath="$PROJECT_DIR$/app/config/config_dev.yml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assets/compiled/frontend.css" afterPath="$PROJECT_DIR$/web/assets/compiled/frontend.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assets/compiled/frontend_main_2.css" afterPath="$PROJECT_DIR$/web/assets/compiled/frontend_main_2.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/web/assets/compiled/frontend_sprite_3.css" afterPath="$PROJECT_DIR$/web/assets/compiled/frontend_sprite_3.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Connection/UserBundle/Resources/views/Registration/register_content.html.twig" afterPath="$PROJECT_DIR$/src/Connection/UserBundle/Resources/views/Registration/register_content.html.twig" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="ConnectionRu.iws" />
@@ -25,28 +32,66 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="RegistrationType.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Form/Type/RegistrationType.php">
+      <file leaf-file-name="SocialUserService.php" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Service/SocialUserService.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="143" column="34" selection-start="5773" selection-end="5773" vertical-scroll-proportion="-0.0" vertical-offset="2431" max-vertical-offset="2975">
+            <state line="89" column="58" selection-start="3555" selection-end="3555" vertical-scroll-proportion="-15.038462" vertical-offset="1020" max-vertical-offset="2023">
+              <folding>
+                <element signature="e#3376#3444#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SocialRegistrationNote.html.twig" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Connection/WebBundle/Resources/views/Frontend/Mail/SocialRegistrationNote.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="31" selection-start="175" selection-end="175" vertical-scroll-proportion="-3.9230769" vertical-offset="0" max-vertical-offset="272">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="classes.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/cache/dev/classes.php">
+      <file leaf-file-name="layout.html.twig" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Connection/WebBundle/Resources/views/Frontend/layout.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1747" column="0" selection-start="51509" selection-end="51509" vertical-scroll-proportion="0.0" vertical-offset="29699" max-vertical-offset="111877">
+            <state line="44" column="100" selection-start="2005" selection-end="2011" vertical-scroll-proportion="-13.076923" vertical-offset="408" max-vertical-offset="1972">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RegistrationAddressType.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Form/Type/RegistrationAddressType.php">
+      <file leaf-file-name="parameters.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="45" selection-start="2424" selection-end="2424" vertical-scroll-proportion="0.0" vertical-offset="1241" max-vertical-offset="1768">
+            <state line="13" column="42" selection-start="416" selection-end="416" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="routing.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="15" column="24" selection-start="392" selection-end="392" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FacebookController.php" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Controller/FacebookController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="13" column="11" selection-start="358" selection-end="358" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="1054">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="config_dev.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="41" column="31" selection-start="985" selection-end="985" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="833">
               <folding />
             </state>
           </provider>
@@ -55,54 +100,25 @@
       <file leaf-file-name="RegistrationController.php" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Controller/RegistrationController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="0" selection-start="1287" selection-end="1287" vertical-scroll-proportion="4.576923" vertical-offset="663" max-vertical-offset="2975">
-              <folding>
-                <element signature="e#306#339#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AppKernel.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="30" selection-start="920" selection-end="920" vertical-scroll-proportion="-14.384615" vertical-offset="0" max-vertical-offset="816">
+            <state line="50" column="65" selection-start="2013" selection-end="2013" vertical-scroll-proportion="-12.692307" vertical-offset="333" max-vertical-offset="1020">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="composer.json" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/composer.json">
+      <file leaf-file-name="config.yml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/config/config.yml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="6" selection-start="1891" selection-end="1891" vertical-scroll-proportion="0.64294046" vertical-offset="163" max-vertical-offset="1020">
+            <state line="18" column="22" selection-start="526" selection-end="526" vertical-scroll-proportion="0.0" vertical-offset="1220" max-vertical-offset="2074">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="properties.yml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Connection/CoreBundle/Resources/config/properties.yml">
+      <file leaf-file-name="index.html.twig" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Connection/WebBundle/Resources/views/Frontend/index.html.twig">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="142" column="21" selection-start="2332" selection-end="2332" vertical-scroll-proportion="0.0" vertical-offset="2414" max-vertical-offset="2533">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserLanguage.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Connection/CoreBundle/Entity/UserLanguage.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="127" column="18" selection-start="2191" selection-end="2191" vertical-scroll-proportion="0.0" vertical-offset="2441" max-vertical-offset="2992">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Language.php" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Connection/CoreBundle/Entity/Language.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="82" column="21" selection-start="1254" selection-end="1254" vertical-scroll-proportion="0.0" vertical-offset="1394" max-vertical-offset="1547">
+            <state line="25" column="85" selection-start="1320" selection-end="1320" vertical-scroll-proportion="-15.038462" vertical-offset="34" max-vertical-offset="799">
               <folding />
             </state>
           </provider>
@@ -117,9 +133,6 @@
   </component>
   <component name="FrameworkCommandLineHistory">
     <commandsHistory>
-      <command text="s assetic:dump " />
-      <command text="s cache:clear" />
-      <command text="s doctrine:schema:update --force" />
       <command text="s doctrine:generate:entities --namespace=Connection/CoreBundle" />
       <command text="s doctrine:generate:entities" />
       <command text="s doctrine:generate:entities ConnectionCoreBundle" />
@@ -142,16 +155,20 @@
       <command text="symfony2 doctrine:fixtures:load" />
       <command text="symfony2 doctrine:generate:entities ConnectionCoreBundle" />
       <command text="symfony2 doctrine:schema:update --force" />
+      <command text="symfony2 assets:install --symlink" />
+      <command text="symfony2 assets:install" />
+      <command text="symfony2 assetic:dump " />
     </commandsHistory>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.txt" root0="SKIP_INSPECTION" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/Connection/WebBundle/Resources/views/Default/index.html.twig" />
-        <option value="$PROJECT_DIR$/src/Connection/WebBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/Connection/WebBundle/Resources/config/routing/routing.yml" />
         <option value="$PROJECT_DIR$/web/assets/compiled/frontend_frontend_1.css" />
         <option value="$PROJECT_DIR$/web/assets/compiled/frontend.css" />
@@ -193,18 +210,27 @@
         <option value="$PROJECT_DIR$/src/Connection/CoreBundle/Entity/Language.php" />
         <option value="$PROJECT_DIR$/app/Resources/translations/FOSUserBundle.en.yml" />
         <option value="$PROJECT_DIR$/src/Connection/CoreBundle/Resources/config/properties.yml" />
-        <option value="$PROJECT_DIR$/src/Connection/UserBundle/Resources/views/Registration/register_content.html.twig" />
         <option value="$PROJECT_DIR$/src/Connection/CoreBundle/Entity/User.php" />
         <option value="$PROJECT_DIR$/src/Connection/UserBundle/Form/Type/RegistrationType.php" />
         <option value="$PROJECT_DIR$/app/AppKernel.php" />
         <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/src/Connection/UserBundle/Form/Type/ProfileType.php" />
+        <option value="$PROJECT_DIR$/src/Connection/UserBundle/Resources/views/Registration/register_content.html.twig" />
+        <option value="$PROJECT_DIR$/src/Connection/WebBundle/Resources/views/Frontend/Mail/SocialRegistrationNote.html.twig" />
+        <option value="$PROJECT_DIR$/src/Connection/UserBundle/Service/SocialUserService.php" />
+        <option value="$PROJECT_DIR$/app/config/config_dev.yml" />
+        <option value="$PROJECT_DIR$/app/config/parameters.yml" />
       </list>
     </option>
   </component>
-  <component name="PhpDebugGeneral" xdebug_force_break_when_no_path_mapping="false" xdebug_force_break_when_outside_project="false" />
+  <component name="PhpDebugGeneral" xdebug_debug_port="9001" xdebug_force_break_when_outside_project="false" />
   <component name="PhpServers">
     <option name="servers">
-      <server host="connection.localhost" name="ConnectionRu" />
+      <server host="connectionru.optimum-web.com" name="ConnectionRu" use_path_mappings="true">
+        <path_mappings>
+          <path_mapping local_path="$PROJECT_DIR$" remote_path="$PROJECT_DIR$/../../../connectionru.optimum-web.com/ " />
+        </path_mappings>
+      </server>
     </option>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" interpreter_name="Xdebug" />
@@ -274,6 +300,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -342,141 +369,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="UserBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ConnectionRu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ConnectionRu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Connection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UserBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Form" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Type" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ConnectionRu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ConnectionRu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Connection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UserBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Controller" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ConnectionRu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ConnectionRu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Connection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="CoreBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ConnectionRu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ConnectionRu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Connection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CoreBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Entity" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ConnectionRu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ConnectionRu" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Connection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CoreBundle" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="DataFixtures" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ORM" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -494,16 +387,33 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ConnectionRu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ConnectionRu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="config" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="FullScreen" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="reference.webide.settings.project.settings.php.zend.framework.tool" />
+    <property name="options.lastSelected" value="Configurable.PHP.Debug" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -535,10 +445,10 @@
     <configuration default="true" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" browser="FIREFOX" server_name="ConnectionRu" start_url="/app_dev.php">
       <method />
     </configuration>
-    <configuration default="true" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request" server_name="ConnectionRu">
+    <configuration default="true" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug">
       <method />
     </configuration>
-    <configuration default="true" type="PhpRemoteDebugRunConfigurationType" factoryName="PHP Remote Debug">
+    <configuration default="true" type="PhpHttpRequestRunConfigurationType" factoryName="PHP HTTP Request" server_name="ConnectionRu">
       <method />
     </configuration>
     <configuration default="true" type="PhpLocalRunConfigurationType" factoryName="PHP Console">
@@ -554,7 +464,9 @@
       <method />
     </configuration>
     <configuration default="false" name="ConnectionRu - Homepage" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" browser="FIREFOX" server_name="ConnectionRu" start_url="/app_dev.php">
+      <RunnerSettings RunnerId="PhpRunner" />
       <RunnerSettings RunnerId="PhpWebAppDebugRunner" />
+      <ConfigurationWrapper RunnerId="PhpRunner" />
       <ConfigurationWrapper RunnerId="PhpWebAppDebugRunner" />
       <method />
     </configuration>
@@ -590,27 +502,29 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1279" y="-4" width="1282" height="1029" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.31330472" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23515625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Framework" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Symfony2" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2607296" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32939914" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22578125" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32939914" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3111588" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32939914" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Command Line Tools Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32832617" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -630,60 +544,20 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/Connection/UserBundle/Form/Type/RegistrationType.php</url>
-          <line>141</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/Connection/UserBundle/Form/Type/RegistrationType.php</url>
-          <line>148</line>
-          <option name="timeStamp" value="39" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/src/Connection/UserBundle/Controller/RegistrationController.php</url>
-          <line>56</line>
-          <option name="timeStamp" value="40" />
+          <line>22</line>
+          <option name="timeStamp" value="41" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/Connection/UserBundle/Controller/FacebookController.php</url>
+          <line>32</line>
+          <option name="timeStamp" value="42" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="41" />
+      <option name="time" value="43" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Controller/SecurityController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="0" selection-start="538" selection-end="538" vertical-scroll-proportion="-10.307693" vertical-offset="72" max-vertical-offset="1088" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="66" selection-start="83" selection-end="83" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="187" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/security.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="56" selection-start="613" selection-end="613" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="646" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Connection/WebBundle/Resources/views/Frontend/layout.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="35" selection-start="2162" selection-end="2162" vertical-scroll-proportion="0.0" vertical-offset="522" max-vertical-offset="1462" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Connection/WebBundle/Resources/assets/css/frontend.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="46" selection-start="366" selection-end="366" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Entity/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="612" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Controller/RegistrationController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="71" column="33" selection-start="2700" selection-end="2700" vertical-scroll-proportion="0.0" vertical-offset="1207" max-vertical-offset="2703" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/views/Registration/register.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="618" />
@@ -694,19 +568,9 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="598" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Connection/WebBundle/Controller/FrontendController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="77" selection-start="382" selection-end="382" vertical-scroll-proportion="0.32692307" vertical-offset="0" max-vertical-offset="572" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Resources/views/Registration/register.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="550" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/views/Registration/register_content.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="0" selection-start="314" selection-end="314" vertical-scroll-proportion="0.25325885" vertical-offset="0" max-vertical-offset="537" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/views/layout.html.twig">
@@ -724,13 +588,6 @@
         <state line="6" column="31" selection-start="148" selection-end="148" vertical-scroll-proportion="0.17677642" vertical-offset="0" max-vertical-offset="577" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Connection/CoreBundle/Util/Location.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="33" selection-start="257" selection-end="257" vertical-scroll-proportion="-5.8846154" vertical-offset="0" max-vertical-offset="272">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Connection/WebBundle/Resources/views/Frontend/Parts/_header.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="14" selection-start="310" selection-end="310" vertical-scroll-proportion="0.18511796" vertical-offset="0" max-vertical-offset="551" />
@@ -739,11 +596,6 @@
     <entry file="file://$PROJECT_DIR$/src/Connection/WebBundle/Resources/views/Frontend/Parts/_topNavbar.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="12" selection-start="12" selection-end="12" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="551" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Connection/WebBundle/Resources/views/Frontend/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="14" selection-start="197" selection-end="197" vertical-scroll-proportion="-0.04275093" vertical-offset="125" max-vertical-offset="663" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Resources/views/Default/_headerLogin.html.twig">
@@ -756,22 +608,12 @@
         <state line="10" column="84" selection-start="214" selection-end="214" vertical-scroll-proportion="-0.0" vertical-offset="170" max-vertical-offset="2924" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Resources/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="61" selection-start="830" selection-end="830" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/bootstrap.php.cache">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2961" column="0" selection-start="88406" selection-end="88406" vertical-scroll-proportion="-7.6923075" vertical-offset="50137" max-vertical-offset="52309" />
       </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Connection/CoreBundle/Repository/CountryRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="23" selection-start="786" selection-end="786" vertical-scroll-proportion="-16.346153" vertical-offset="0" max-vertical-offset="578" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Form/AbstractType.php">
@@ -804,11 +646,6 @@
         <state line="895" column="0" selection-start="29110" selection-end="29110" vertical-scroll-proportion="-7.1153846" vertical-offset="14758" max-vertical-offset="19244" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="10" selection-start="58" selection-end="68" vertical-scroll-proportion="0.030630631" vertical-offset="0" max-vertical-offset="555" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Connection/CoreBundle/Resources/config/services.yml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="554" />
@@ -819,41 +656,9 @@
         <state line="6" column="41" selection-start="382" selection-end="382" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="357" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Connection/CoreBundle/Util/UserProperties.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="21" selection-start="279" selection-end="313" vertical-scroll-proportion="-9.153846" vertical-offset="0" max-vertical-offset="799" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="31" selection-start="577" selection-end="577" vertical-scroll-proportion="0.0" vertical-offset="306" max-vertical-offset="1445" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Connection/CoreBundle/Entity/UserImage.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="2" selection-start="0" selection-end="3054" vertical-scroll-proportion="-5.230769" vertical-offset="0" max-vertical-offset="3060" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Connection/CoreBundle/DataFixtures/ORM/LoadLanguageData.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="26" selection-start="969" selection-end="969" vertical-scroll-proportion="0.0" vertical-offset="544" max-vertical-offset="680" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Connection/CoreBundle/Entity/Image.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="11" selection-start="156" selection-end="156" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="1700" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Connection/CoreBundle/Entity/UserLanguage.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="127" column="18" selection-start="2191" selection-end="2191" vertical-scroll-proportion="0.0" vertical-offset="2441" max-vertical-offset="2992">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Connection/CoreBundle/Entity/Language.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="21" selection-start="1254" selection-end="1254" vertical-scroll-proportion="0.0" vertical-offset="928" max-vertical-offset="1547">
+        <state line="94" column="21" selection-start="1511" selection-end="1511" vertical-scroll-proportion="0.0" vertical-offset="1598" max-vertical-offset="1751">
           <folding />
         </state>
       </provider>
@@ -863,65 +668,9 @@
         <state line="102" column="28" selection-start="2748" selection-end="2772" vertical-scroll-proportion="0.0" vertical-offset="1282" max-vertical-offset="1853" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Resources/views/Registration/register_content.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="34" selection-start="364" selection-end="364" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="1785" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Connection/CoreBundle/Entity/User.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="356" column="27" selection-start="7411" selection-end="7411" vertical-scroll-proportion="0.0" vertical-offset="6052" max-vertical-offset="23341" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Form/Type/RegistrationAddressType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="45" selection-start="2424" selection-end="2424" vertical-scroll-proportion="0.0" vertical-offset="1241" max-vertical-offset="1768">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Connection/CoreBundle/Resources/config/properties.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="142" column="21" selection-start="2332" selection-end="2332" vertical-scroll-proportion="0.0" vertical-offset="254" max-vertical-offset="2533">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/cache/dev/classes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1747" column="0" selection-start="51509" selection-end="51509" vertical-scroll-proportion="0.0" vertical-offset="29699" max-vertical-offset="111877">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Form/Type/RegistrationType.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="143" column="34" selection-start="5773" selection-end="5773" vertical-scroll-proportion="0.0" vertical-offset="2431" max-vertical-offset="2975">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Controller/RegistrationController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="0" selection-start="1287" selection-end="1287" vertical-scroll-proportion="4.576923" vertical-offset="663" max-vertical-offset="2975">
-          <folding>
-            <element signature="e#306#339#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="30" selection-start="920" selection-end="920" vertical-scroll-proportion="-14.384615" vertical-offset="0" max-vertical-offset="816">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/composer.lock">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="30243">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="30243" />
       </provider>
       <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
         <state />
@@ -929,7 +678,207 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/composer.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="6" selection-start="1891" selection-end="1891" vertical-scroll-proportion="0.64294046" vertical-offset="163" max-vertical-offset="1020">
+        <state line="10" column="34" selection-start="299" selection-end="299" vertical-scroll-proportion="0.29668412" vertical-offset="0" max-vertical-offset="1054">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/AppKernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="30" selection-start="1151" selection-end="1151" vertical-scroll-proportion="0.22862129" vertical-offset="311" max-vertical-offset="884">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Resources/config/fos_user_bundle.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="599">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/EventListener/FileUploadListener.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-3.067857" vertical-offset="1718" max-vertical-offset="2329">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Connection/WebBundle/Form/Type/JcropType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="599">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/friendsofsymfony/user-bundle/FOS/UserBundle/Resources/views/Registration/register_content.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="0" selection-start="314" selection-end="314" vertical-scroll-proportion="0.2527881" vertical-offset="0" max-vertical-offset="538">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Form/Type/ProfileType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="88" column="0" selection-start="3022" selection-end="3022" vertical-scroll-proportion="-7.8461537" vertical-offset="1071" max-vertical-offset="3196">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Resources/views/Profile/Part/personal_info.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="99" column="37" selection-start="2822" selection-end="2822" vertical-scroll-proportion="-7.3846154" vertical-offset="1491" max-vertical-offset="2499">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Form/Type/RegistrationType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="54" selection-start="665" selection-end="665" vertical-scroll-proportion="-12.423077" vertical-offset="0" max-vertical-offset="833">
+          <folding>
+            <element signature="e#134#182#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Connection/WebBundle/Controller/FrontendController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="46" selection-start="380" selection-end="380" vertical-scroll-proportion="0.2972028" vertical-offset="0" max-vertical-offset="765">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Resources/views/Registration/register_content.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="34" selection-start="423" selection-end="423" vertical-scroll-proportion="0.21288015" vertical-offset="0" max-vertical-offset="559">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Service/ProfileImageNamer.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="598">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Service/FacebookSdkService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-2.375671" vertical-offset="1328" max-vertical-offset="1887">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Service/SocialServiceInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="598">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Service/TwitterSdkService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-2.0715563" vertical-offset="1158" max-vertical-offset="1717">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Connection/WebBundle/Resources/views/Frontend/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="85" selection-start="1320" selection-end="1320" vertical-scroll-proportion="-15.038462" vertical-offset="34" max-vertical-offset="799">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="22" selection-start="526" selection-end="526" vertical-scroll-proportion="0.0" vertical-offset="1220" max-vertical-offset="2074">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Controller/RegistrationController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="65" selection-start="2013" selection-end="2013" vertical-scroll-proportion="-12.692307" vertical-offset="333" max-vertical-offset="1020">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Connection/WebBundle/Resources/views/Frontend/layout.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="100" selection-start="2005" selection-end="2011" vertical-scroll-proportion="-13.076923" vertical-offset="408" max-vertical-offset="1972">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/TwigBundle/Debug/TimedTwigEngine.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="20" selection-start="1367" selection-end="1367" vertical-scroll-proportion="0.5102421" vertical-offset="321" max-vertical-offset="884">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Connection/WebBundle/Resources/views/Frontend/Mail/SocialRegistrationNote.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="31" selection-start="175" selection-end="175" vertical-scroll-proportion="-3.9230769" vertical-offset="0" max-vertical-offset="272">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Service/SocialUserService.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="89" column="58" selection-start="3555" selection-end="3555" vertical-scroll-proportion="-15.038462" vertical-offset="1020" max-vertical-offset="2023">
+          <folding>
+            <element signature="e#3376#3444#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/config_dev.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="31" selection-start="985" selection-end="985" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="833">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml.dist">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="50" selection-start="265" selection-end="292" vertical-scroll-proportion="0.2866779" vertical-offset="0" max-vertical-offset="593">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/routing_dev.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="593">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="42" selection-start="416" selection-end="416" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="24" selection-start="392" selection-end="392" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Connection/UserBundle/Controller/FacebookController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="11" selection-start="358" selection-end="358" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="1054">
           <folding />
         </state>
       </provider>

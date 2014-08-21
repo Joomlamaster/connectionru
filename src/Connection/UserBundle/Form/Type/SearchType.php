@@ -21,8 +21,23 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class SearchType extends AbstractType
 {
+    //age range
+    public static $ageFrom             = 18;
+    public static $ageTo               = 99;
+    public static $defaultSelectedFrom = 24;
+    public static $defaultSelectedTo   = 40;
+
+    //height range
+    public static $heightFrom  = 1;
+    public static $heightTo    = 99;
+
+    //weight range
+    public static $weightFrom  = 1;
+    public static $weightTo    = 99;
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+
         $builder->add('country', 'entity', array(
             'class' => 'ConnectionCoreBundle:Country',
             'property' => 'name',
@@ -72,7 +87,8 @@ class SearchType extends AbstractType
                 'property' => 'name',
                 'expanded' =>  true,
                 'empty_value' => false,
-                'required' => true
+                'required' => true,
+                'label' => 'I am'
             ))
 
             ->add('seek', 'entity', array(
@@ -80,25 +96,170 @@ class SearchType extends AbstractType
                 'class' => 'ConnectionUserBundle:Profile\Gender',
                 'property' => 'name',
                 'expanded' =>  true,
+                'required' => true,
+                'label' => 'Seeking'
+
+            ));
+
+            $values = range(self::$ageFrom, self::$ageTo);
+            $ageArray = array_combine($values, $values);
+
+            $builder->add('ageFrom', 'choice', array(
+                'constraints' => new NotBlank(),
+                'choices'   => $ageArray,
+                'data' => self::$defaultSelectedFrom,
                 'required' => true
             ))
 
-            ->add('age', 'choice', array(
+            ->add('ageTo', 'choice', array(
                 'constraints' => new NotBlank(),
-                'choices'   => array(
-                    '18_25'   => '18 - 25',
-                    '25_30' => '25 - 30',
-                    '30_40'   => '30 - 40',
-                ),
+                'choices'   => $ageArray,
+                'data' => self::$defaultSelectedTo,
                 'required' => true
             ))
 
-                ->add('lookingFor', 'entity', array(
-                'constraints' => new NotBlank(),
+            ->add('lookingFor', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\LookingFor',
                 'property' => 'name',
-                'required' => true
+                'empty_value' =>'Anything',
+                'required' => false
             ))
+
+            ->add('languages', 'entity', array(
+                'class' => 'ConnectionCoreBundle:Language',
+                'property' => 'name',
+                'multiple' => true,
+                'required' => false
+            ))
+
+            ->add('education', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\Education',
+                'property' => 'name',
+                'empty_value' =>'Any education',
+                'required' => false,
+            ))
+
+            ->add('profession', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\Profession',
+                'property' => 'name',
+                'empty_value' =>'Any profession',
+                'required' => false
+            ))
+
+            ->add('income', 'number', array(
+                'required' => false
+            ))
+
+            ->add('religion', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\Religion',
+                'property' => 'name',
+                'label' => 'My religion',
+                'empty_value' =>'Any religion',
+                'required' => false
+            ))
+
+            ->add('maritalStatus', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\MaritalStatus',
+                'property' => 'name',
+                'expanded' => true
+            ));
+
+            $heightValues = range(self::$heightFrom, self::$heightTo);
+            $heightArray = array_combine($heightValues, $heightValues);
+            $builder->add('heightFrom', 'choice', array(
+                'choices'   => $heightArray,
+                'empty_value' =>'Select height from',
+                'required' => false
+            ))
+
+            ->add('heightTo', 'choice', array(
+                'choices'   => $heightArray,
+                'empty_value' =>'Select height to',
+                'required' => false
+            ));
+
+            $weightValues = range(self::$weightFrom, self::$weightTo);
+            $weightArray = array_combine($weightValues, $weightValues);
+            $builder->add('weightFrom', 'choice', array(
+                'choices'   => $weightArray,
+                'empty_value' =>'Select weight from',
+                'required' => false
+            ))
+
+            ->add('weightTo', 'choice', array(
+                'choices'   => $weightArray,
+                'empty_value' =>'Select weight to',
+                'required' => false
+            ))
+
+            ->add('eyeColor', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\EyeColor',
+                'property' => 'name',
+                'empty_value' =>'Any color',
+                'required' => false
+            ))
+
+            ->add('hairColor', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\HairColor',
+                'property' => 'name',
+                'empty_value' =>'Any color',
+                'required' => false
+            ))
+
+            ->add('smoking', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\Smoking',
+                'property' => 'name',
+                'label' => 'Smoking?',
+                'empty_value' =>'Not important',
+                'required' => false
+            ))
+
+            ->add('drinking', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\Drinking',
+                'property' => 'name',
+                'label' => 'Drinking?',
+                'empty_value' =>'Not important',
+                'required' => false
+            ))
+
+            ->add('haveChildren', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\HaveChildren',
+                'property' => 'name',
+                'label' => 'Do you have children?',
+                'empty_value' =>'Not important',
+                'required' => false
+            ))
+
+            ->add('wantChildren', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\WantChildren',
+                'property' => 'name',
+                'label' => 'Do you want children?',
+                'empty_value' =>'Not important',
+                'required' => false
+            ))
+
+            ->add('livesWithChildren', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\LivesWithChildren',
+                'property' => 'name',
+                'label' => 'Do you live with your children?',
+                'empty_value' =>'Not important',
+                'required' => false
+            ))
+
+            ->add('openToPersonWithKids', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\OpenToPersonWithKids',
+                'property' => 'name',
+                'label' => 'Are you open to dating a person with kids?',
+                'empty_value' =>'No preference',
+                'required' => false
+            ))
+
+            ->add('ethnicity', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\Ethnicity',
+                'property' => 'name',
+                'empty_value' =>'Any ethnicity',
+                'required' => false
+            ));
 
 //            ->add('zipCode', 'text', array(
 //                'required' => true
@@ -122,7 +283,7 @@ class SearchType extends AbstractType
 //                ),
 //                'required' => true
 //            ))
-            ->add('search', 'submit');
+            $builder->add('search', 'submit');
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
