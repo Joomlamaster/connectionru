@@ -71,9 +71,9 @@ class SocialUserService {
         $em->persist($user);
         $em->flush();
 
-        if(!empty($user->getEmail())){
+        if(!empty($socialProfile['email'])) {
             //send informative mail to user
-            $username = (empty($user->getUsername())) ? $user->getEmail() : $user->getUsername();
+            $username = $user->getUsername();
 
             $sender   = $this->container->getParameter('mailer_user');
             $sendTo   = array($user->getEmail());
