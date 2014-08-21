@@ -1,7 +1,7 @@
 {% trans_default_domain 'FOSUserBundle' %}
 {% form_theme form 'ConnectionUserBundle:Registration:fields.html.twig' %}
 
-{{ form_start(form, {'action': path('search_quick_form'), 'attr': {'class': 'fos_user_registration_register master_slave form-horizontal'}}) }}
+{{ form_start(form, {'action': path('user_search_quick_form'), 'attr': {'class': 'fos_user_registration_register master_slave form-horizontal'}}) }}
     {{ form_errors(form) }}
     {{ form_row(form.gender) }}
     {{ form_row(form.seek) }}

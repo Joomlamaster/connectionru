@@ -15,7 +15,7 @@
     <h4>Search</h4>
     <div class="row">
         <div class="search-form">
-            {{ form_start(form, {'action': path('search_user_result'), 'attr': {'class': 'search-result master_slave '}}) }}
+            {{ form_start(form, {'action': path('user_search'), 'attr': {'class': 'search-result master_slave '}}) }}
                 <div class="form-inline">
                     {{ form_row(form.gender, {'attr': { 'class': 'radio-inline'} }) }}
                     {{ form_row(form.seek, {'attr': { 'class': 'radio-inline'} }) }}
@@ -65,6 +65,6 @@
         {% endif %}
     </div>
     <div class="row">
-        <a class="btn btn-info pull-right" href="{{ path('search_user_result', {'page': nextPage}) }}">Next Page</a>
+        <a class="btn btn-info pull-right" href="{{ path('user_search', {'page': nextPage}) }}">Next Page</a>
     </div>
 {% endblock %}

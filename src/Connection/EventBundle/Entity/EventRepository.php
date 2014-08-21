@@ -13,6 +13,14 @@ use Doctrine\ORM\EntityRepository;
 class EventRepository extends EntityRepository
 {
 
+    public function countAll()
+    {
+        return $this->createQueryBuilder('e')
+            ->select('COUNT(e.id) AS total')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     public function getUpcomingEvents( Event $event )
     {
         $countryId  = ($event->getCountry()) ? $event->getCountry()->getId() : false;
@@ -35,5 +43,19 @@ class EventRepository extends EntityRepository
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function search( $filter = array(), $limit = false, $offset = false )
+    {
+        $qb = $this->createQueryBuilder('e');
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+
+        if ($offset) {
+            $qb->setFirstResult($offset);
+        }
+
+        return $qb->orderBy("e.eventDate", "ASC")->getQuery()->getResult();
     }
 }

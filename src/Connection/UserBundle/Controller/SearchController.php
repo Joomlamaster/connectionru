@@ -16,7 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class SearchController extends Controller
 {
     /**
-     * @Route("/quick-form", name="search_quick_form")
+     * @Route("/quick-form", name="user_search_quick_form")
      * @Template()
      */
     public function quickAction( Request $request )
@@ -28,7 +28,7 @@ class SearchController extends Controller
             $session = $request->getSession();
             $search  = $this->prepareSearchDataForSession($form->getData());
             $session->set('search', $search);
-            return $this->redirect( $this->generateUrl('search_user_result') );
+            return $this->redirect( $this->generateUrl('user_search') );
         }
 
         return $this->render('ConnectionUserBundle:Search:quick.html.twig', array(
@@ -37,7 +37,7 @@ class SearchController extends Controller
     }
 
     /**
-     * @Route("/user/{page}", name="search_user_result", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/user/{page}", name="user_search", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Template()
      */
     public function searchResultAction( Request $request, $page )

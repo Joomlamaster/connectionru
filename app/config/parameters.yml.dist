@@ -23,3 +23,5 @@ parameters:
     twitter.secret: 9m5DqquPbP52Hxklx23Oxm8HQLHirFT6H1gbT63vOfgpdWjGAV
 
     search.user.per_page: 5
+    search.event.per_page: 6
+    search.event.top.per_page: 6

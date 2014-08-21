@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 
 /**
- * @Route("/event/image")
+ * @Route("/image")
  */
 class ImageController extends Controller
 {

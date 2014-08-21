@@ -13,7 +13,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
- * @Route("/event")
+ * @Route("/")
  */
 class EventController extends Controller
 {
@@ -86,18 +86,6 @@ class EventController extends Controller
             'id' => $id,
             'form' => $form->createView(),
             'event' => $event
-        );
-    }
-
-    /**
-     * @Route("/", name="event")
-     * @Template()
-     */
-    public function searchAction()
-    {
-        $events = $this->getDoctrine()->getRepository('ConnectionEventBundle:Event')->findAll();
-        return array(
-            'events' => $events,
         );
     }
 

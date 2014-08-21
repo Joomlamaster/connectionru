@@ -13,7 +13,7 @@ use Connection\EventBundle\Form\CategoryType;
 /**
  * Category controller.
  *
- * @Route("/event/category")
+ * @Route("/category")
  */
 class CategoryController extends Controller
 {
