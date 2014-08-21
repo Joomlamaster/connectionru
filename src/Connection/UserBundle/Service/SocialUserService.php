@@ -39,7 +39,8 @@ class SocialUserService {
         $user            = new User();
         $profile         = new Profile();
         $tokenGenerator  = $this->container->get('fos_user.util.token_generator');
-        $password        = $this->generatePassword(substr($tokenGenerator->generateToken(), 0, 12), $user);
+        $password        = substr($tokenGenerator->generateToken(), 0, 12);
+        $passwordHash    = $this->generatePassword($password, $user);
 
         $profile->setSocialId($type,$socialProfile['id']);
         $user->setEnabled(true);
@@ -65,10 +66,33 @@ class SocialUserService {
             $user->setEmail($socialProfile['email']);
         }
 
-        $user->setPassword($password);
+        $user->setPassword($passwordHash);
         $user->setProfile($profile);
         $em->persist($user);
         $em->flush();
+
+        if(!empty($user->getEmail())){
+            //send informative mail to user
+            $username = (empty($user->getUsername())) ? $user->getEmail() : $user->getUsername();
+
+            $sender   = $this->container->getParameter('mailer_user');
+            $sendTo   = array($user->getEmail());
+            $message  = \Swift_Message::newInstance()
+                ->setSubject('ConnectionRu registration note')
+                ->setContentType('text/html')
+                ->setFrom($sender)
+                ->setTo($sendTo)
+                ->setBody($this->container->get('templating')->render('ConnectionWebBundle:Frontend/Mail:SocialRegistrationNote.html.twig',array(
+                    'username' => $username,
+                    'email'    => $user->getEmail(),
+                    'password' => $password
+                )));
+
+            $mailer = $this->container->get('mailer');
+            $mailer->send($message);
+            $mailer->getTransport()->getSpool()->flushQueue($this->container->get('swiftmailer.transport.real'));
+            $this->container->get('session')->getFlashBag()->add('notice', 'An informative mail regarding registration on ConnectionRu has been sent to you.');
+        }
 
         return $user;
     }
