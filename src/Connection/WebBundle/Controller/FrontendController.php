@@ -39,4 +39,15 @@ class FrontendController extends Controller
         return $this->render('ConnectionWebBundle:Frontend/Parts:_topNavbar.html.twig');
     }
 
+    public function backgroundAction()
+    {
+        $background = $this->getDoctrine()
+                           ->getRepository('ConnectionAdminBundle:Background')
+                           ->findOneBy(array('isDefault' => 1));
+        return $this->render('ConnectionWebBundle:Frontend/Parts:background.html.twig', array(
+            'background' => $background
+        ));
+
+    }
+
 }

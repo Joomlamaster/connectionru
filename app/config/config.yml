@@ -108,6 +108,10 @@ oneup_uploader:
                 directory: %kernel.root_dir%/../web/uploads/user/event
             frontend: dropzone
             namer: connection_user.event_images_namer
+        admin:
+            storage:
+                directory: %kernel.root_dir%/../web/uploads/admin/background
+            frontend: dropzone
 
 fos_message:
     db_driver: orm

@@ -29,6 +29,7 @@ class AppKernel extends Kernel
             new FOS\MessageBundle\FOSMessageBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),
             new Connection\MessageBundle\ConnectionMessageBundle(),
+            new Connection\AdminBundle\ConnectionAdminBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

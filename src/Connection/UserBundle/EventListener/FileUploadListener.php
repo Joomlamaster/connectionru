@@ -2,6 +2,7 @@
 
 namespace Connection\UserBundle\EventListener;
 
+use Connection\AdminBundle\Entity\Background;
 use Connection\UserBundle\Entity\Profile\Image;
 use Oneup\UploaderBundle\Event\PostPersistEvent;
 use Symfony\Component\HttpFoundation\File\File;
@@ -37,6 +38,10 @@ class FileUploadListener
 
         if ( 'connection_user.event_images_namer' == $config['namer'] ) {
             $this->processEventImage($event);
+        }
+
+        if ( 'oneup_uploader.namer.uniqid' == $config['namer'] ) {
+            $this->processAdminBackgroundImage($event);
         }
     }
 
@@ -116,9 +121,28 @@ class FileUploadListener
         }
     }
 
+    private function processAdminBackgroundImage($event)
+    {
+        $file   = $event->getFile();
+        $config = $event->getConfig();
+
+        if ( !$file instanceof File ) {
+            throw new \Exception('Not instance of File');
+        }
+
+        $fileDir = str_replace($this->container->get('kernel')->getRootDir() . '/../web', "", $config['storage']['directory']);
+        $image   = new Background();
+        $image->setName($file->getFilename());
+        $image->setPath($fileDir. "/" . $file->getFilename());
+
+        $em = $this->container->get('doctrine')->getManager();
+        $em->persist($image);
+        $em->flush();
+
+    }
+
     private function cropImage($file, $options)
     {
-
         $coordinates = $options->get('jcrop');
 
         if ( empty($coordinates) ) {

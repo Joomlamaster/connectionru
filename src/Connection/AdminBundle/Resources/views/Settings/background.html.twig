@@ -1,0 +1,49 @@
+{% extends 'ConnectionAdminBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/connectionadmin/js/dropzone/css/dropzone.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/connectionadmin/css/background.css') }}" type="text/css" />
+{% endblock %}
+
+{% block content %}
+    <div class="row" id="dropzone">
+        <form action="{{ oneup_uploader_endpoint('admin') }}" class="dropzone dz-clickable" id="admin_settings_background">
+            <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
+        </form>
+    </div>
+    <div class="row">
+        {% if images is defined and images is not empty %}
+            {% for image in images %}
+                <div class="image-container {{ image.isDefault ? "default": "" }}">
+                    <img src="{{ image.path }}" class="img-thumbnail">
+                    <div class="toolbar">
+                        <div class="dropdown pull-right">
+                            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                                <span class="glyphicon glyphicon-cog"></span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="{{ path('admin_settings_background_set', {'id': image.id}) }}">
+                                        Set as default background
+                                    </a>
+                                </li>
+                                <li role="presentation">
+                                    <a role="menuitem" tabindex="-1" href="{{ path('admin_settings_background_delete', {'id': image.id}) }}">
+                                        Delete
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/connectionadmin/js/dropzone/dropzone.js') }}"></script>
+{% endblock %}

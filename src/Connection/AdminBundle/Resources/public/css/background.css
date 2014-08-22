@@ -1,0 +1,21 @@
+.image-container {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px;
+    display: block;
+    float: left;
+    margin: 4px;
+}
+
+.image-container.default {
+    background-color: green;
+}
+
+.image-container img {
+    width: 300px;
+    overflow-y: hidden;
+}
+
+.image-container .toolbar {
+    padding: 5px;
+}
