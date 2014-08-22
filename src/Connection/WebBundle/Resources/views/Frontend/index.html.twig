@@ -6,6 +6,9 @@
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/connectionuser/css/search.css') }}" type="text/css" />
 {% endblock %}
+{% block background %}
+    {{ render( controller('ConnectionWebBundle:Frontend:background') ) }}
+{% endblock %}
 
 {% block content %}
         <div class="row main-block">

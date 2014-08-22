@@ -55,7 +55,9 @@
         {% block main %}
 
             {# <div> With Background image will be generated here#}
-            {{ render( controller('ConnectionWebBundle:Frontend:background') ) }}
+            {% block background %}
+                <div class="jumbotron">
+            {% endblock %}
                 {% block breadcrumbs %}{% endblock %}
                 <div class="container">
                     {% block content %}
