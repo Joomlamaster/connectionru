@@ -153,7 +153,7 @@ class SearchType extends AbstractType
             ->add('religion', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Religion',
                 'property' => 'name',
-                'label' => 'My religion',
+                'label' => 'User religion',
                 'empty_value' =>'Any religion',
                 'required' => false
             ))
@@ -164,31 +164,30 @@ class SearchType extends AbstractType
                 'expanded' => true
             ));
 
-            $heightValues = range(self::$heightFrom, self::$heightTo);
-            $heightArray = array_combine($heightValues, $heightValues);
-            $builder->add('heightFrom', 'choice', array(
+            $heightArray = $this->_getHeightArray();
+            $builder->add('minimumHeight', 'choice', array(
                 'choices'   => $heightArray,
-                'empty_value' =>'Select height from',
+                'empty_value' =>'Any height',
                 'required' => false
             ))
 
-            ->add('heightTo', 'choice', array(
+            ->add('maximumHeight', 'choice', array(
                 'choices'   => $heightArray,
-                'empty_value' =>'Select height to',
+                'empty_value' =>'Any height',
                 'required' => false
             ));
 
             $weightValues = range(self::$weightFrom, self::$weightTo);
-            $weightArray = array_combine($weightValues, $weightValues);
-            $builder->add('weightFrom', 'choice', array(
+            $weightArray = $this->_getWeightArray();
+            $builder->add('minimumWeight', 'choice', array(
                 'choices'   => $weightArray,
-                'empty_value' =>'Select weight from',
+                'empty_value' =>'Any weight',
                 'required' => false
             ))
 
-            ->add('weightTo', 'choice', array(
+            ->add('maximumWeight', 'choice', array(
                 'choices'   => $weightArray,
-                'empty_value' =>'Select weight to',
+                'empty_value' =>'Any weight',
                 'required' => false
             ))
 
@@ -225,7 +224,7 @@ class SearchType extends AbstractType
             ->add('haveChildren', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\HaveChildren',
                 'property' => 'name',
-                'label' => 'Do you have children?',
+                'label' => 'User has children?',
                 'empty_value' =>'Not important',
                 'required' => false
             ))
@@ -233,7 +232,7 @@ class SearchType extends AbstractType
             ->add('wantChildren', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\WantChildren',
                 'property' => 'name',
-                'label' => 'Do you want children?',
+                'label' => 'User wants children?',
                 'empty_value' =>'Not important',
                 'required' => false
             ))
@@ -241,7 +240,7 @@ class SearchType extends AbstractType
             ->add('livesWithChildren', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\LivesWithChildren',
                 'property' => 'name',
-                'label' => 'Do you live with your children?',
+                'label' => 'User lives with children?',
                 'empty_value' =>'Not important',
                 'required' => false
             ))
@@ -249,7 +248,7 @@ class SearchType extends AbstractType
             ->add('openToPersonWithKids', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\OpenToPersonWithKids',
                 'property' => 'name',
-                'label' => 'Are you open to dating a person with kids?',
+                'label' => 'User is open to dating a person with kids?',
                 'empty_value' =>'No preference',
                 'required' => false
             ))
@@ -258,6 +257,12 @@ class SearchType extends AbstractType
                 'class' => 'ConnectionUserBundle:Profile\Ethnicity',
                 'property' => 'name',
                 'empty_value' =>'Any ethnicity',
+                'required' => false
+            ))
+            ->add('zodiacSign', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\Zodiac',
+                'property' => 'name',
+                'empty_value' =>'Any sign',
                 'required' => false
             ));
 
@@ -296,5 +301,66 @@ class SearchType extends AbstractType
     public function getName()
     {
         return 'search';
+    }
+
+    /**
+     * Get height values inch/cm.
+     *
+     * @return array
+     */
+    private function _getHeightArray(){
+        return array(
+            "0" => "< 5' (< 152 cm)",
+            "152" => "5' 0\" (152 cm)",
+            "155" => "5' 1\" (155 cm)",
+            "157" => "5' 2\" (157 cm)",
+            "160" => "5' 3\" (160 cm)",
+            "163" => "5' 4\" (163 cm)",
+            "165" => "5' 5\" (165 cm)",
+            "168" => "5' 6\" (168 cm)",
+            "170" => "5' 7\" (170 cm)",
+            "173" => "5' 8\" (173 cm)",
+            "175" => "5' 9\" (175 cm)",
+            "178" => "5' 10\" (178 cm)",
+            "180" => "5' 11\" (180 cm)",
+            "183" => "6' 0\" (183 cm)",
+            "185" => "6' 1\" (185 cm)",
+            "188" => "6' 2\" (188 cm)",
+            "191" => "6' 3\" (191 cm)",
+            "193" => "6' 4\" (193 cm)",
+            "196" => "6' 5\" (196 cm)",
+            "198" => "6' 6\" (198 cm)",
+            "201" => "6' 7\" (201 cm)",
+            "203" => "6' 8\" (203 cm)",
+            "206" => "6' 9\" (206 cm)",
+            "208" => "6' 10\" (208 cm)",
+            "211" => "6' 11\" (211 cm)",
+            "213" => "7' 0\" (213 cm)",
+            "999" => "> 7' (> 213 cm)"
+        );
+    }
+
+    /**
+     * Get weight values kg/pounds.
+     *
+     * @return array
+     */
+    private function _getWeightArray(){
+        return array(
+            "0" => "< 48 kg (< 105.6 pounds)",
+            "48" => "48 kg (105.6 pounds)",
+            "53" => "53 kg (105.6 pounds)",
+            "56" => "56 kg (123.3 pounds)",
+            "58" => "58 kg (116.6 pounds)",
+            "62" => "62 kg (123.2 pounds)",
+            "63" => "63 kg (127.6 pounds)",
+            "69" => "69 kg (138.6 pounds)",
+            "75" => "75 kg (151.8 pounds)",
+            "77" => "77 kg (151.8 pounds)",
+            "85" => "85 kg (169.4 pounds)",
+            "94" => "94 kg (187 pounds)",
+            "105" => "105 kg (206.8 pounds)",
+            "999" => ">105 kg (> 206.8 pounds)"
+        );
     }
 }

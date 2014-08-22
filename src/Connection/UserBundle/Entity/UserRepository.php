@@ -127,23 +127,23 @@ class UserRepository extends EntityRepository
         }
 
         //  Filter By heightFrom
-        if ( !empty($filter['heightFrom'])) {
-            $qb->andWhere('p.height >= :heightFrom')->setParameter('heightFrom', $filter['heightFrom']);
+        if ( !empty($filter['minimumHeight'])) {
+            $qb->andWhere('p.height >= :minimumHeight')->setParameter('minimumHeight', $filter['minimumHeight']);
         }
 
         //  Filter By heightTo
-        if ( !empty($filter['heightTo'])) {
-            $qb->andWhere('p.height <= :heightTo')->setParameter('heightTo', $filter['heightTo']);
+        if ( !empty($filter['maximumHeight'])) {
+            $qb->andWhere('p.height <= :maximumHeight')->setParameter('maximumHeight', $filter['maximumHeight']);
         }
 
         //  Filter By weightFrom
-        if ( !empty($filter['weightFrom'])) {
-            $qb->andWhere('p.weight >= :weightFrom')->setParameter('weightFrom', $filter['weightFrom']);
+        if ( !empty($filter['minimumWeight'])) {
+            $qb->andWhere('p.weight >= :minimumWeight')->setParameter('minimumWeight', $filter['minimumWeight']);
         }
 
         //  Filter By weightTo
-        if ( !empty($filter['weightTo'])) {
-            $qb->andWhere('p.weight <= :weightTo')->setParameter('weightTo', $filter['weightTo']);
+        if ( !empty($filter['maximumWeight'])) {
+            $qb->andWhere('p.weight <= :maximumWeight')->setParameter('maximumWeight', $filter['maximumWeight']);
         }
 
         //  Filter By eyeColor
@@ -189,6 +189,11 @@ class UserRepository extends EntityRepository
         //  Filter By etnicity
         if ( !empty($filter['etnicity'])) {
             $qb->andWhere('p.etnicity = :etnicity')->setParameter('etnicity', $filter['etnicity']);
+        }
+
+        //  Filter By zodiac
+        if ( !empty($filter['zodiacSign'])) {
+            $qb->andWhere('p.zodiac = :zodiacSign')->setParameter('zodiacSign', $filter['zodiacSign']);
         }
 
 

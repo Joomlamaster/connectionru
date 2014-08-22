@@ -58,22 +58,12 @@
                     {{ form_row(form.maritalStatus, {'attr': { 'class': 'radio-inline'} }) }}
                 </div>
                 <div class="form-inline">
-                    <div class="form-group">
-                        <label class="select-inline">
-                        Height From {{ form_widget(form.heightFrom) }}
-                        </label>
-                        <label class="select-inline">
-                            To{{ form_widget(form.heightTo) }}
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <label class="select-inline">
-                        Weight From {{ form_widget(form.weightFrom) }}
-                        </label>
-                        <label class="select-inline">
-                            To{{ form_widget(form.weightTo) }}
-                        </label>
-                    </div>
+                    {{ form_row(form.minimumHeight, {'attr': { 'class': 'select-inline'} }) }}
+                    {{ form_row(form.maximumHeight, {'attr': { 'class': 'select-inline'} }) }}
+                </div>
+                <div class="form-inline">
+                    {{ form_row(form.minimumWeight, {'attr': { 'class': 'select-inline'} }) }}
+                    {{ form_row(form.maximumWeight, {'attr': { 'class': 'select-inline'} }) }}
                 </div>
                 <div class="form-inline">
                     {{ form_row(form.eyeColor, {'attr': { 'class': 'select-inline'} }) }}
@@ -89,6 +79,7 @@
                 </div>
                 <div class="form-inline">
                     {{ form_row(form.ethnicity, {'attr': { 'class': 'select-inline'} }) }}
+                    {{ form_row(form.zodiacSign, {'attr': { 'class': 'select-inline'} }) }}
                 </div>
                 <div class="form-inline text-center">
                     <button type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>

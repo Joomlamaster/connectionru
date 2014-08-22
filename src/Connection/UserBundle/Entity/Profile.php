@@ -237,6 +237,12 @@ class Profile
     protected $avatar;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\Zodiac", inversedBy="profile")
+     * @ORM\JoinColumn(name="zodiac", referencedColumnName="id")
+     **/
+    protected $zodiac;
+
+    /**
      * @return int
      */
     public function getId ()
@@ -790,5 +796,21 @@ class Profile
     public function getAvatar ()
     {
         return $this->avatar;
+    }
+
+    /**
+     * @param string $zodiac
+     */
+    public function setZodiac ( $zodiac )
+    {
+        $this->zodiac = $zodiac;
+    }
+
+    /**
+     * @return string
+     */
+    public function getZodiac ()
+    {
+        return $this->zodiac;
     }
 }
