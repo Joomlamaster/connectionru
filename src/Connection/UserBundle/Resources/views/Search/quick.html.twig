@@ -5,7 +5,15 @@
     {{ form_errors(form) }}
     {{ form_row(form.gender) }}
     {{ form_row(form.seek) }}
-    {{ form_row(form.age) }}
+    {{ form_row(form.ageFrom) }}
+    <div class="clear-filter form-inline">
+        <label class="select-inline">
+        Age From {{ form_widget(form.ageFrom) }}
+        </label>
+        <label class="select-inline">
+            To{{ form_widget(form.ageTo) }}
+        </label>
+    </div>
     {{ form_row(form.lookingFor) }}
     <div class="master_slave">
         <div>
@@ -17,5 +25,5 @@
             </div>
         {% endif %}
     </div>
-{{ form_end(form) }}
+{{ form_end(form, {'render_rest': false}) }}
 {#{{ form_end(form, {'render_rest': false}) }}#}
