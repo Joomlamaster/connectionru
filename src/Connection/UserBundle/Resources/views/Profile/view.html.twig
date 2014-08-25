@@ -26,7 +26,7 @@
                         <a href="{{ path('message_new', {id: user.id}) }}" class="btn btn-info">Message</a>
                     </div>
                 </div>
-                {% if app.user != user %}
+                {% if app.user and app.user != user %}
                     {% if app.user.hasFavoriteUser(user) %}
                         <div>
                             <a href="{{path('favorite_user_remove',{'id':user.id} )}}" class="btn btn-xs btn-info" title="Remove user from favorites">

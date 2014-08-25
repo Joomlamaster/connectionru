@@ -3,6 +3,7 @@
 namespace Connection\WebBundle\Controller;
 
 use Connection\WebBundle\Form\Type\ContactType;
+use Connection\UserBundle\Form\Type\SearchType;
 use Connection\WebBundle\Form\Type\TellAFriendType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,9 +20,20 @@ class FrontendController extends Controller
     public function indexAction()
     {
         $formFactory = $this->container->get('fos_user.registration.form.factory');
-        $form = $formFactory->createForm();
+        $registrationForm = $formFactory->createForm();
+
+        //check if form was forwarded
+        $searchForm = $this->getRequest()->get('searchForm');
+        if(!isset($searchForm)){
+            $searchForm       = $this->createForm( new SearchType() );
+            //remove captcha from quick search
+            $searchForm->remove('captcha');
+        }
+
+
         return $this->render('ConnectionWebBundle:Frontend:index.html.twig', array(
-            'form' => $form->createView()
+            'registrationForm' => $registrationForm->createView(),
+            'searchForm' => $searchForm->createView()
         ));
     }
 

@@ -22,6 +22,10 @@ class SearchController extends Controller
     public function quickAction( Request $request )
     {
         $form               = $this->createForm( new SearchType() );
+
+        //remove captcha from quick search
+        $form->remove('captcha');
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -31,9 +35,12 @@ class SearchController extends Controller
             return $this->redirect( $this->generateUrl('user_search') );
         }
 
-        return $this->render('ConnectionUserBundle:Search:quick.html.twig', array(
-            'form' => $form->createView()
+        return $this->forward('ConnectionWebBundle:Frontend:index', array(
+            'searchForm' => $form
         ));
+//        return $this->render('ConnectionUserBundle:Search:quick.html.twig', array(
+//            'form' => $form->createView()
+//        ));
     }
 
     /**
