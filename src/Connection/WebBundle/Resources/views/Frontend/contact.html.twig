@@ -1,0 +1,28 @@
+{% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
+
+{% block theme %}content-page{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="container breadcrumbs">
+        <ul>
+            <li><a href="{{ path('connection_homepage') }}">Main page</a></li>
+            <li>About Us</li>
+        </ul>
+    </div>
+{% endblock breadcrumbs %}
+{% block content %}
+    <div class="row">
+        <div class="col-xs-8">
+            <h4>About us</h4>
+            {% if saved is defined and saved %}
+                <h5>ConnectionRu.com - <span class="blue">Thank you for contacting us, your request will be processed sup.</span></h5>
+            {% else %}
+                {{ form_start(form) }}
+                {{ form_end(form) }}
+            {% endif %}
+        </div>
+        <div class="col-xs-4">
+            <img src="/bundles/connectionweb/img/about-us.png" alt="About us"/>
+        </div>
+    </div>
+{% endblock %}
