@@ -28,7 +28,7 @@
                         </ul>
                     </li>
                     {% if not is_granted('ROLE_USER') %}
-                        <li><a href="#">Register</a></li>
+                        <li><a href="{{ path('fos_user_extended_register') }}">Register</a></li>
                     {% endif %}
                 </ul>
             </form>

@@ -22,7 +22,8 @@
                 <div class="tab-content">
                     {% if not is_granted('ROLE_USER') %}
                         <div class="tab-pane" id="registration">
-                            {{ render(controller("ConnectionUserBundle:Registration:register")) }}
+                            {{ include("FOSUserBundle:Registration:register_content.html.twig", {'form': form}) }}
+
                         </div>
                     {% endif %}
                     <div class="tab-pane active" id="search">

@@ -14,6 +14,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class RegistrationController extends BaseController
 {
@@ -62,5 +63,17 @@ class RegistrationController extends BaseController
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.'.$this->getEngine(), array(
             'form' => $form->createView(),
         ));
+    }
+
+    /**
+     * @Route("/extended-register", name="fos_user_extended_register")
+     */
+    public function registerExtendedAction()
+    {
+        $formFactory = $this->container->get('fos_user.registration.form.factory');
+        $form        = $formFactory->createForm();
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:extended_register.html.'.$this->getEngine(), array(
+                    'form' => $form->createView(),
+                ));
     }
 }

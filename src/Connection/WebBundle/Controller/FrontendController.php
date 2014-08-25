@@ -15,7 +15,11 @@ class FrontendController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('ConnectionWebBundle:Frontend:index.html.twig');
+        $formFactory = $this->container->get('fos_user.registration.form.factory');
+        $form = $formFactory->createForm();
+        return $this->render('ConnectionWebBundle:Frontend:index.html.twig', array(
+            'form' => $form->createView()
+        ));
     }
 
     /**
