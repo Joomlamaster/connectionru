@@ -110,7 +110,9 @@
             {% endfor %}
         {% endif %}
     </div>
+    {% if nextPage %}
     <div class="row">
         <a class="btn btn-info pull-right" href="{{ path('user_search', {'page': nextPage}) }}">Next Page</a>
     </div>
+    {% endif %}
 {% endblock %}
