@@ -124,5 +124,4 @@ class FrontendController extends Controller
             'form' => $form->createView()
         ));
     }
-
 }

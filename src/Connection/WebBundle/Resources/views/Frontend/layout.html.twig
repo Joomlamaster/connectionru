@@ -95,6 +95,8 @@
             </footer>
         </div>
         {% block popup %}
+        {% endblock %}
+        {% block tellAFriend %}
             {{ render(controller("ConnectionWebBundle:Frontend:tellAFriendEndPoint", {'link': app.request.uri})) }}
         {% endblock %}
 
