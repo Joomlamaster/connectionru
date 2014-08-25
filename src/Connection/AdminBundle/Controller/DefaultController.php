@@ -16,4 +16,14 @@ class DefaultController extends Controller
     {
         return array();
     }
+
+    /**
+     * @Route("/contact-us", name="admin_contact_us")
+     * @Template()
+     */
+    public function contactAction()
+    {
+        $contacts = $this->getDoctrine()->getRepository('ConnectionWebBundle:ContactUs')->findAll();
+        return array('contacts'=> $contacts);
+    }
 }
