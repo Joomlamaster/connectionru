@@ -579,6 +579,16 @@ body.search-event .search-form input {
   margin-right: 5px;
   vertical-align: middle;
 }
+body.search-event .search-form input[type=checkbox] {
+  margin: 0px 2px 0px 12px;
+}
+body.search-event .search-form input[type=date] {
+  margin: 0 12px;
+}
+body.search-event .search-form input#event_search_search {
+  width: 60%;
+  margin-bottom: 8px;
+}
 body.search-event .search-form select.form-control {
   padding-left: 0;
 }

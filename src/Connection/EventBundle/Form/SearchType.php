@@ -65,14 +65,14 @@ class SearchType extends AbstractType
                 'required' => false
             ))
             ->add('eventDateFrom', 'date', array(
-                'widget'    => 'choice',
+                'widget'    => 'single_text',
                 'attr'      => array(
                     'class' => 'input-append date'
                 ),
                 'required' => false
             ))
             ->add('eventDateTo', 'date', array(
-                'widget'    => 'choice',
+                'widget'    => 'single_text',
                 'attr'      => array(
                     'class' => 'input-append date'
                 ),
