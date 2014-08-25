@@ -325,6 +325,10 @@ body.manage-event .jumbotron input[type="date"] {
 }
 body.create-profile .jumbotron input[type="text"],
 body.manage-event .jumbotron input[type="text"],
+body.create-profile .jumbotron input[type="email"],
+body.manage-event .jumbotron input[type="email"],
+body.create-profile .jumbotron input[type="password"],
+body.manage-event .jumbotron input[type="password"],
 body.create-profile .jumbotron textarea.form-control,
 body.manage-event .jumbotron textarea.form-control {
   display: block;
@@ -405,6 +409,16 @@ body.content-page p {
   font-size: 14px;
   padding-right: 10px;
   line-height: 1.3;
+}
+/* Contact Us */
+body.contact-us .form-group input.form-control,
+body.contact-us .form-group textarea.form-control {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+}
+body.contact-us .form-group textarea {
+  height: 160px;
 }
 /* View Event */
 body.view-event .details {
