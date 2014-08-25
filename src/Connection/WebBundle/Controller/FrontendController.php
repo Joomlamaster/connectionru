@@ -100,10 +100,14 @@ class FrontendController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
+
+                $sender   = $this->container->getParameter('mailer_user');
+                $sendTo   = array($form->get('email')->getData());
                 $message  = \Swift_Message::newInstance()
                     ->setSubject('ConnectionRu, share link')
                     ->setContentType('text/html')
-                    ->setTo($form->get('email')->getData())
+                    ->setFrom($sender)
+                    ->setTo($sendTo)
                     ->setBody($this->container->get('templating')->render('ConnectionWebBundle:Frontend/Mail:tell-a-friend.html.twig', array(
                         'link' => $form->get('link')->getData(),
                         'message' => $form->get('message')->getData()
