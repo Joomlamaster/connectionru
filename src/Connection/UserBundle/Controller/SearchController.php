@@ -61,7 +61,7 @@ class SearchController extends Controller
 
         $limit      = $this->container->getParameter('search.user.per_page');
         $offset     = ($page * $limit) - $limit;
-        $total      = $this->getDoctrine()->getRepository('ConnectionUserBundle:User')->countAll();
+        $total      = count($this->getDoctrine()->getRepository('ConnectionUserBundle:User')->search($sessionSearch));
         $nextPage   = (($total/$limit) > $page) ? ++$page : false;
         $users      = $this->getDoctrine()->getRepository('ConnectionUserBundle:User')->search($sessionSearch, $limit, $offset);
 
