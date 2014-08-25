@@ -37,12 +37,12 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <div id="master_slave">
+            <div class="master_slave">
                 <div>
                     {{ form_row(form.profile.country) }}
                 </div>
                 {% if (form.profile.state is defined) %}
-                    <div id="slave_block">
+                    <div class="slave_block">
                         {{ form_row(form.profile.state) }}
                     </div>
                 {% endif %}

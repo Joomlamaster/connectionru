@@ -34,13 +34,11 @@
                 <div class="form-inline">
                     <div class="master_slave">
                         <div>
-                            {{ form_row(form.country, {'attr': { 'class': 'select-inline'} }) }}
+                            {{ form_row(form.country) }}
                         </div>
                         {% if (form.state is defined) %}
                             <div class="slave_block">
-                                <label class="select-inline">
-                                    State {{ form_widget(form.state, { 'attr': { 'class': 'form-control' }}) }}
-                                </label>
+                                {{ form_row(form.state) }}
                             </div>
                         {% endif %}
                     </div>
