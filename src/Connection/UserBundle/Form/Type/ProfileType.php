@@ -198,6 +198,9 @@ class ProfileType extends AbstractType
             ));
 
             $builder->add('aboutMe', 'textarea');
+            $builder->add('lookingForDescription', 'textarea', array(
+                'label' => "What I’m looking for"
+            ));
         ;
     }
 
