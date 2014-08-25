@@ -279,7 +279,8 @@ footer .bottom-right-menu li a {
 .form-inline label:first-child {
   color: #00A0E3;
 }
-button[type=submit] {
+button[type=submit],
+button[type=reset] {
   width: 90px;
   height: 22px;
   background-color: #858585;
@@ -581,6 +582,10 @@ body.search-event .search-form input {
 body.search-event .search-form select.form-control {
   padding-left: 0;
 }
+body.search-event .search-form select.form-control[multiple=multiple] {
+  height: 80px;
+  padding-left: 10px;
+}
 body.search-event .search-form .or {
   font-size: 12px;
   padding-left: 30px;
@@ -590,11 +595,21 @@ body.search-event .search-form button[type=submit] {
   margin-top: 10px;
   background-image: linear-gradient(to bottom, #3fa5e4 0%, #3283b5 100%);
 }
+body.search-event .search-form button[type=reset] {
+  margin-top: 10px;
+  background-image: linear-gradient(to bottom, #777777 0%, #565656 100%);
+}
+body.search-event .search-form form > .row {
+  margin-top: 15px;
+}
 body.search-event .search-form .form-inline {
   color: #333;
 }
 body.search-event .search-form .form-inline label {
   margin-top: 0;
+}
+body.search-event .search-form .form-inline [type=text] {
+  margin-left: 5px;
 }
 body.search-event .search-form .form-inline .radio-inline {
   padding-left: 0;
