@@ -81,7 +81,7 @@
                 </div>
                 <div class="form-inline text-center">
                     <button type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
-                    <button type="reset"><span class="glyphicon glyphicon-trash"></span> Reset</button>
+                    <button type="reset" onclick="resetForm($(this).parents('form'))"><span class="glyphicon glyphicon-trash"></span> Reset</button>
                 </div>
             {{ form_end(form, {'render_rest': false}) }}
         </div>
@@ -113,4 +113,10 @@
         <a class="btn btn-info pull-right" href="{{ path('user_search', {'page': nextPage}) }}">Next Page</a>
     </div>
     {% endif %}
+    <script type="text/javascript">
+        function resetForm(form){
+            $(form).find('input[type="radio"]').removeAttr('checked');
+            $(form).find('option').removeAttr('selected');
+        }
+    </script>
 {% endblock %}
