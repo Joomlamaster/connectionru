@@ -5,7 +5,6 @@
     {{ form_errors(form) }}
     {{ form_row(form.gender) }}
     {{ form_row(form.seek) }}
-    {{ form_row(form.ageFrom) }}
     <div class="clear-filter form-inline">
         <label class="select-inline">
         Age From {{ form_widget(form.ageFrom) }}
@@ -24,6 +23,12 @@
                 {{ form_row(form.state) }}
             </div>
         {% endif %}
+    </div>
+    <div class="row">
+        {{ form_row(form.captcha) }}
+    </div>
+    <div class="row">
+        {{ form_row(form.search) }}
     </div>
 {{ form_end(form, {'render_rest': false}) }}
 {#{{ form_end(form, {'render_rest': false}) }}#}

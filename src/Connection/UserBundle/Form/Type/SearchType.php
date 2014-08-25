@@ -288,6 +288,7 @@ class SearchType extends AbstractType
 //                ),
 //                'required' => true
 //            ))
+            $builder->add('captcha', 'captcha');
             $builder->add('search', 'submit');
     }
 
