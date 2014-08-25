@@ -26,6 +26,21 @@
                         <a href="{{ path('message_new', {id: user.id}) }}" class="btn btn-info">Message</a>
                     </div>
                 </div>
+                {% if app.user != user %}
+                    {% if app.user.hasFavoriteUser(user) %}
+                        <div>
+                            <a href="{{path('favorite_user_remove',{'id':user.id} )}}" class="btn btn-xs btn-info" title="Remove user from favorites">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                            </a>
+                        </div>
+                    {% else %}
+                        <div>
+                            <a href="{{path('favorite_user_add',{'id':user.id} )}}" class="btn btn-xs btn-info" title="Add user to favorites">
+                                <span class="glyphicon glyphicon-star"></span>
+                            </a>
+                        </div>
+                    {% endif %}
+                {% endif %}
             </div>
             <div class="col-xs-5">
                 <div class="row">

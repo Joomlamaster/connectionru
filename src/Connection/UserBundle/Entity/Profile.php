@@ -221,6 +221,13 @@ class Profile
     /**
      * @var string
      * @ORM\Column(name="about_me", type="string", length=600, nullable=true)
+     * @Assert\Length(
+     *      groups={"profile"},
+     *      min = "3",
+     *      max = "1000",
+     *      minMessage = "This field must be at least 3 characters length",
+     *      maxMessage = "This field cannot be longer than 1000 characters length"
+     * )
      */
     protected $aboutMe;
 

@@ -96,6 +96,13 @@ class User extends BaseUser implements ParticipantInterface
     private $interestedInEvents;
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\ManyToMany(targetEntity="Connection\UserBundle\Entity\User", inversedBy="id")
+     * @ORM\JoinTable(name="favorite_users")
+     **/
+    private $favoriteUsers;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -373,5 +380,38 @@ class User extends BaseUser implements ParticipantInterface
         if (  $this->getProfile() && !$this->hasRole('ROLE_VERIFIED_USER') ) {
             $this->setRoles(array('ROLE_VERIFIED_USER'));
         }
+    }
+
+    /**
+     *
+     * @param \Connection\UserBundle\Entity\User $user
+     */
+    public function addFavoriteUser(User $user){
+        $this->favoriteUsers->add($user);
+        return $this;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getFavoriteUsers(){
+        $this->favoriteUsers;
+    }
+
+    /**
+     *
+     * @param \Connection\UserBundle\Entity\User $user
+     */
+    public function removeFavoriteUser(User $user){
+        $this->favoriteUsers->removeElement($user);
+        return $this;
+    }
+
+    /**
+     *
+     * @param \Connection\UserBundle\Entity\User $user
+     */
+    public function hasFavoriteUser(User $user){
+        return $this->favoriteUsers->contains($user);
     }
 }

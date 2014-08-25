@@ -17,6 +17,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Doctrine\ORM\EntityRepository;
 use Connection\CoreBundle\Entity\Country;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class ProfileType extends AbstractType
 {
@@ -24,6 +25,12 @@ class ProfileType extends AbstractType
     {
         $builder->add('country', 'entity', array(
             'class' => 'ConnectionCoreBundle:Country',
+            'query_builder' => function(EntityRepository $er) {
+                    return $er
+                        ->createQueryBuilder('c')
+                        ->orderBy('c.priority', 'DESC');
+
+                },
             'property' => 'name',
             'attr' => array('class' => 'master')
         ));
@@ -87,10 +94,16 @@ class ProfileType extends AbstractType
                 'years' => range(date('Y'), date('Y') - 100),
                 'input'  => 'datetime',
                 'widget' => 'choice',
-            ))
+            ));
 
-            ->add('languages', 'entity', array(
+            $builder->add('languages', 'entity', array(
                 'class' => 'ConnectionCoreBundle:Language',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er
+                        ->createQueryBuilder('l')
+                        ->orderBy('l.priority', 'DESC');
+
+                },
                 'property' => 'name',
                 'multiple' => true
             ))
@@ -125,9 +138,13 @@ class ProfileType extends AbstractType
                 'expanded' => true
             ))
 
-            ->add('height', 'number')
+            ->add('height', 'number', array(
+                'required' => false
+            ))
 
-            ->add('weight', 'number')
+            ->add('weight', 'number', array(
+                'required' => false
+            ))
 
             ->add('eyeColor', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\EyeColor',
@@ -178,16 +195,16 @@ class ProfileType extends AbstractType
             ->add('ethnicity', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Ethnicity',
                 'property' => 'name',
-            ))
+            ));
 
-            ->add('aboutMe', 'textarea')
+            $builder->add('aboutMe', 'textarea');
         ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Connection\UserBundle\Entity\Profile'
+            'data_class' => 'Connection\UserBundle\Entity\Profile',
         ));
     }
 

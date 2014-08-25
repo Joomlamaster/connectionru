@@ -36,6 +36,13 @@ class Language
     private $code;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="priority", type="integer", nullable=true)
+     */
+    private $priority;
+
+    /**
      * @ORM\ManyToMany(targetEntity="Connection\UserBundle\Entity\Profile", mappedBy="languages")
      **/
     private $profile;
@@ -48,7 +55,7 @@ class Language
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -71,11 +78,34 @@ class Language
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set priority
+     *
+     * @param integer priority
+     * @return Language
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    /**
+     * Get priority
+     *
+     * @return integer
+     */
+    public function getPriority()
+    {
+        return $this->priority;
     }
 
     public function __toString(){
