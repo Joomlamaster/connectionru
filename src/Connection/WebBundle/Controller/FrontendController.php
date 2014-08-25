@@ -3,6 +3,7 @@
 namespace Connection\WebBundle\Controller;
 
 use Connection\WebBundle\Form\Type\ContactType;
+use Connection\WebBundle\Form\Type\TellAFriendType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -75,6 +76,40 @@ class FrontendController extends Controller
         return $this->render('ConnectionWebBundle:Frontend:contact.html.twig', array(
             'form' => $form->createView(),
             'saved' => $saved
+        ));
+    }
+
+    /**
+     * @Route("/tell-a-friend", name="connection_tell_a_friend")
+     */
+    public function tellAFriendEndPointAction( Request $request, $link = false )
+    {
+        $form = $this->createForm( new TellAFriendType() );
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $message  = \Swift_Message::newInstance()
+                    ->setSubject('ConnectionRu, share link')
+                    ->setContentType('text/html')
+                    ->setTo($form->get('email')->getData())
+                    ->setBody($this->container->get('templating')->render('ConnectionWebBundle:Frontend/Mail:tell-a-friend.html.twig', array(
+                        'link' => $form->get('link')->getData(),
+                        'message' => $form->get('message')->getData()
+                    )));
+
+                $mailer = $this->container->get('mailer');
+                $mailer->send($message);
+
+                return $this->redirect($form->get('link')->getData());
+            }
+        } else {
+            if (!$link) {
+                throw new \Exception('Link should be specified');
+            }
+            $form->get('link')->setData($link);
+        }
+        return $this->render('ConnectionWebBundle:Frontend:tell_a_friend.html.twig', array(
+            'form' => $form->createView()
         ));
     }
 
