@@ -12,7 +12,6 @@
     border: 1px solid #cccccc;
     padding: 5px;
 }
-@import "../../../Resources/public/css/sprite.css";
 body {
   font-family: 'PT Sans', sans-serif;
   background-color: #f2f2f2;
@@ -57,12 +56,12 @@ body {
   margin-top: 0;
 }
 .navbar.navbar-first .navbar-right .forgot {
-    margin-bottom: 0;
-    color: #3FA4E4;
-    position: absolute;
-    font-size: 10px;
-    top: 25px;
-    left: 160px;
+  margin-bottom: 0;
+  color: #3FA4E4;
+  position: absolute;
+  font-size: 10px;
+  top: 25px;
+  left: 160px;
 }
 .navbar.navbar-second {
   min-height: 90px;
@@ -99,7 +98,7 @@ body {
   width: 135px;
 }
 .jumbotron .main-block .nav-tabs li:first-child {
-  width: 231px;
+  width: 200px;
 }
 .jumbotron .main-block .nav-tabs li a {
   color: #4d4d4d;
@@ -111,7 +110,7 @@ body {
   background-color: #4d4d4d;
 }
 .jumbotron .main-block .tab-content {
-  width: 365px;
+  width: 333px;
   background-color: #ededed;
   opacity: 0.9;
   border: 5px solid #CAECFB;
@@ -126,14 +125,7 @@ body {
 .jumbotron .main-block .people {
   margin: 7px 0 0 48px;
 }
-.jumbotron .block-title {
-  font-style: italic;
-  color: #858585;
-  font-size: 11px;
-  padding-left: 26px;
-  margin-top: 25px;
-}
-.jumbotron .people .face {
+.jumbotron .main-block .people .face {
   float: left;
   background: url('/bundles/connectionweb/img/test-face.png') no-repeat;
   width: 92px;
@@ -142,45 +134,45 @@ body {
   border-radius: 5px;
   margin: 6px 6px;
 }
-.jumbotron .people .face .info {
+.jumbotron .main-block .people .face .info {
   display: none;
 }
-.jumbotron .people .face:hover {
+.jumbotron .main-block .people .face:hover {
   border-color: #ffffff;
 }
-.jumbotron .people .face:hover .info {
+.jumbotron .main-block .people .face:hover .info {
   background: #000000;
   opacity: 0.8;
   display: block;
   height: 100%;
 }
-.jumbotron .people .face:hover .info p {
+.jumbotron .main-block .people .face:hover .info p {
   font-size: 10px;
   color: #ffffff;
   padding-top: 3px;
   padding-left: 4px;
   margin-bottom: 0;
 }
-.jumbotron .people .face:hover .info p.name {
+.jumbotron .main-block .people .face:hover .info p.name {
   font-size: 12px;
   color: #00A0E3;
   padding-top: 3px;
   margin-bottom: 6px;
   font-weight: bold;
 }
-.jumbotron .people .face:hover .info p.blue {
+.jumbotron .main-block .people .face:hover .info p.blue {
   font-size: 12px;
   color: #00A0E3;
   line-height: 1.2;
 }
-.jumbotron .people .face:hover .info a {
+.jumbotron .main-block .people .face:hover .info a {
   color: #ffffff;
   text-decoration: underline;
   font-style: italic;
   font-size: 10px;
   margin-left: 3px;
 }
-.jumbotron .people .more {
+.jumbotron .main-block .people .more {
   background-color: #3FA4E4;
   color: #FFF;
   margin: 4px 19px;
@@ -300,7 +292,8 @@ footer .bottom-right-menu li a {
 .form-inline label:first-child {
   color: #00A0E3;
 }
-button[type=submit] {
+button[type=submit],
+button[type=reset] {
   width: 90px;
   height: 22px;
   background-color: #858585;
@@ -401,6 +394,9 @@ body.create-profile h5 {
 body.create-profile h6 {
   font-size: 14px;
   margin-top: 3px;
+}
+body.create-profile select.form-control[multiple=multiple] {
+  height: 145px;
 }
 /* Content Page */
 body.content-page h4 {
@@ -556,6 +552,27 @@ body.view-event .upcoming .row .more {
   border-radius: 6px;
   text-decoration: none;
 }
+/* View Profile */
+body.view-profile h4 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+body.view-profile #add-photo {
+  background-color: #FFF;
+  border: 5px solid #CAECFB;
+  color: #484848;
+  margin-top: 14px;
+  margin-bottom: 10px;
+  border-radius: 13px;
+  height: 200px;
+  width: 150px;
+}
+body.view-profile #add-photo .msg {
+  padding-top: 75px;
+}
+body.view-profile #add-photo .msg .sprite {
+  margin: 0 auto 12px auto;
+}
 body.search-event .search-form {
   background: #bcb9b8;
   background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #e6e6e6), color-stop(1, #ffffff));
@@ -578,8 +595,22 @@ body.search-event .search-form input {
   margin-right: 5px;
   vertical-align: middle;
 }
+body.search-event .search-form input[type=checkbox] {
+  margin: 0px 2px 0px 12px;
+}
+body.search-event .search-form input[type=date] {
+  margin: 0 12px;
+}
+body.search-event .search-form input#event_search_search {
+  width: 60%;
+  margin-bottom: 8px;
+}
 body.search-event .search-form select.form-control {
   padding-left: 0;
+}
+body.search-event .search-form select.form-control[multiple=multiple] {
+  height: 80px;
+  padding-left: 10px;
 }
 body.search-event .search-form .or {
   font-size: 12px;
@@ -589,6 +620,37 @@ body.search-event .search-form .or {
 body.search-event .search-form button[type=submit] {
   margin-top: 10px;
   background-image: linear-gradient(to bottom, #3fa5e4 0%, #3283b5 100%);
+}
+body.search-event .search-form button[type=reset] {
+  margin-top: 10px;
+  background-image: linear-gradient(to bottom, #777777 0%, #565656 100%);
+}
+body.search-event .search-form form > .row {
+  margin-top: 15px;
+}
+body.search-event .search-form .form-inline {
+  color: #333;
+}
+body.search-event .search-form .form-inline label {
+  margin-top: 0;
+}
+body.search-event .search-form .form-inline [type=text] {
+  margin-left: 5px;
+}
+body.search-event .search-form .form-inline .radio-inline {
+  padding-left: 0;
+  padding-right: 1px;
+}
+body.search-event .search-form .form-inline .radio-inline input[type=radio] {
+  margin-left: 10px;
+  margin-top: 0;
+}
+body.search-event .search-form .form-inline .radio-inline label {
+  display: inline-block;
+  color: #333;
+}
+body.search-event .search-form .form-inline .radio-inline .radio {
+  margin-bottom: 2px;
 }
 body.search-event .found-1 {
   text-align: center;

@@ -5,15 +5,12 @@
     {{ form_errors(form) }}
     {{ form_row(form.gender) }}
     {{ form_row(form.seek) }}
-    {{ form_row(form.ageFrom) }}
-    <div class="clear-filter form-inline">
-        <label class="select-inline">
-        Age From {{ form_widget(form.ageFrom) }}
-        </label>
-        <label class="select-inline">
-            To{{ form_widget(form.ageTo) }}
-        </label>
+
+    <div class="clearfix form-inline">
+        <label for="search_age" class="required">Age</label>
+        {{ form_widget(form.ageFrom, { 'attr': {'class': 'form-control'} }) }} - {{ form_widget(form.ageTo, { 'attr': {'class': 'form-control'} }) }}
     </div>
+
     {{ form_row(form.lookingFor) }}
     <div class="master_slave">
         <div>
@@ -26,4 +23,3 @@
         {% endif %}
     </div>
 {{ form_end(form, {'render_rest': false}) }}
-{#{{ form_end(form, {'render_rest': false}) }}#}
