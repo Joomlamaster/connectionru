@@ -41,7 +41,7 @@ class SearchController extends Controller
     }
 
     /**
-     * @Route("/user/{page}", name="user_search", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/{page}", name="user_search", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Template()
      */
     public function searchResultAction( Request $request, $page )

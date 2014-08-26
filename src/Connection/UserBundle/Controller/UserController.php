@@ -11,9 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Connection\UserBundle\Entity\User;
 
 
-/**
- * @Route("/user")
- */
 class UserController extends Controller
 {
     public function latestAction()
