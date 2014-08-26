@@ -978,7 +978,6 @@ button.btn-gradient {
     color: #00a0e3;
 }
 
-/* Mixins */
 .bw-gradient(@color: #F5F5F5, @start: 0, @stop: 255) {
     background: @color;
     background: -webkit-gradient(linear,
@@ -996,3 +995,25 @@ button.btn-gradient {
     rgb(@start,@start,@start));
     filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",rgb(@stop,@stop,@stop),rgb(@start,@start,@start)));
 }
+
+.tell-a-friend {
+    width: 385px;
+    padding: 25px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 100;
+
+    input, textarea {
+        width: 300px !important;
+        max-width: none !important;
+    }
+
+    button {
+        margin: 10px 0px 0px 0px;
+    }
+}
+
+
