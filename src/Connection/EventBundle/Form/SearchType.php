@@ -74,8 +74,7 @@ class SearchType extends AbstractType
             ->add('eventDateTo', 'date', array(
                 'widget'    => 'single_text',
                 'attr'      => array(
-                    'data-provide' => 'datepicker',
-                    'class' => 'input-append'
+                    'class' => 'input-append datepicker'
                 ),
                 'required' => false
             ))
