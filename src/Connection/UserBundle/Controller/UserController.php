@@ -23,7 +23,6 @@ class UserController extends Controller
 
     /**
      * @Route("/favorite/add/{id}", name="favorite_user_add", requirements={"id" = "\d+"})
-     * @Template("ConnectionUserBundle:Profile:view.html.twig")
      * @ParamConverter("User", class="ConnectionUserBundle:User")
      */
     public function addFavoriteUserAction(User $userToAdd){
@@ -36,9 +35,7 @@ class UserController extends Controller
             $em->flush();
             $this->container->get('session')->getFlashBag()->add('notice', 'User '.$userToAdd->getUsername().' added successfully to yor favorite users');
         }
-
-        return array( 'user'   => $userToAdd );
-
+        return $this->redirect( $this->generateUrl('view_profile', array('id' => $userToAdd->getProfile()->getId())) );
     }
 
     /**
@@ -56,8 +53,7 @@ class UserController extends Controller
             $em->flush();
             $this->container->get('session')->getFlashBag()->add('notice', 'User '.$userToRemove->getUsername().' removed successfully from yor favorite users');
         }
-
-        return array( 'user'   => $userToRemove );
+        return $this->redirect( $this->generateUrl('view_profile', array('id' => $userToRemove->getProfile()->getId())) );
 
     }
 }

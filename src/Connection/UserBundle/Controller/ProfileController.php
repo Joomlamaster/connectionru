@@ -28,7 +28,13 @@ class ProfileController extends Controller
      */
     public function viewAction( Profile $profile )
     {
-        return array( 'user'   => $profile->getUser() );
+        $user = $profile->getUser();
+        $userPhotos = $this->getDoctrine()->getRepository('ConnectionUserBundle:Profile\Image')->getGroupedByGalleryImages($user->getId());
+        return array(
+            'user'       => $user,
+            'userPhotos' => $userPhotos,
+            'events'     => $user->getEvents()
+        );
     }
 
     /**
@@ -57,7 +63,9 @@ class ProfileController extends Controller
         return array(
             'form'       => $form->createView(),
             'user'       => $user,
-            'userPhotos' => $userPhotos
+            'userPhotos' => $userPhotos,
+            'favourites' => $user->getFavoriteUsers(),
+            'events'     => $user->getEvents()
         );
     }
 
