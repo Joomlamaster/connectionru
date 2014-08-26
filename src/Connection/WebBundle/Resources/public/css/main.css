@@ -269,6 +269,10 @@ footer .bottom-right-menu li a {
   height: 20px;
   width: 78px;
 }
+.form-group input.form-control[type=password],
+.form-inline input.form-control[type=password] {
+  padding: 0 12px;
+}
 .form-group label,
 .form-inline label {
   opacity: 1;
