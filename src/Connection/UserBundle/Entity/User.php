@@ -395,7 +395,7 @@ class User extends BaseUser implements ParticipantInterface
      * @return \Doctrine\Common\Collections\ArrayCollection
      */
     public function getFavoriteUsers(){
-        $this->favoriteUsers;
+        return $this->favoriteUsers;
     }
 
     /**

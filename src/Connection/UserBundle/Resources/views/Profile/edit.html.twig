@@ -40,24 +40,40 @@
                 <ul class="nav nav-tabs" id="profile-tabs">
                     <li class="active"><a href="#profile">Profile</a></li>
                     <li><a href="#gallery">Gallery</a></li>
+                    {% if favourites is defined and favourites is not empty %}
+                        <li><a href="#favourites">Favourites</a></li>
+                    {% endif %}
+                    {% if events is defined and events is not empty %}
+                        <li><a href="#events">Events</a></li>
+                    {% endif %}
                 </ul>
 
                 <div class="tab-content">
                     <div class="tab-pane active" id="profile">
                         <div class="col-xs-10">
-                            {{ include('ConnectionUserBundle:Profile/Part:personal_info.html.twig', {form: form}) }}
+                            {{ include('ConnectionUserBundle:Profile/Part/Edit:personal_info.html.twig', {form: form}) }}
                         </div>
                     </div>
                     <div class="tab-pane" id="gallery">
-                        {{ include('ConnectionUserBundle:Profile/Part:gallery.html.twig', {userPhotos: userPhotos}) }}
+                        {{ include('ConnectionUserBundle:Profile/Part/Edit:gallery.html.twig', {userPhotos: userPhotos}) }}
                     </div>
+                    {% if favourites is defined and favourites is not empty %}
+                        <div class="tab-pane" id="favourites">
+                            {{ include('ConnectionUserBundle:Profile/Part/Edit:favourites.html.twig', {favourites: favourites}) }}
+                        </div>
+                    {% endif %}
+                    {% if events is defined and events is not empty %}
+                        <div class="tab-pane" id="events">
+                            {{ include('ConnectionUserBundle:Profile/Part/Edit:events.html.twig', {events: events}) }}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
 {% endblock %}
 {% block popup %}
     {{ include('ConnectionUserBundle:Profile/Popup:add_profile_image_popup.html.twig') }}
-    {{ include('ConnectionUserBundle:Profile/Popup:view_profile_image_popup.html.twig') }}
+    {{ include('ConnectionUserBundle:Profile/Popup:view_profile_image_popup.html.twig', {'navbar': true}) }}
 {% endblock %}
 {% block javascript %}
     {{ parent() }}

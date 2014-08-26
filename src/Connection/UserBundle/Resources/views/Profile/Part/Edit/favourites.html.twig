@@ -1,0 +1,9 @@
+<div class="row profile-gallery">
+    {% for favourite in favourites %}
+        <div class="profile-image-box">
+            <a class="title" href="{{ path('view_profile', {'id': favourite.profile.id}) }}">
+                <img src="{{ favourite.profile.avatar is defined ? favourite.profile.avatar : ""  }}" alt=""/>
+            </a>
+        </div>
+    {% endfor %}
+</div>

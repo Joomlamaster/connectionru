@@ -1,9 +1,11 @@
 <div class="fm-popup hidden" id="view-profile-image">
     <div class="fm-content"></div>
-    <div class="fm-nav-container">
-        <div class="fm-nav">
-            <button href="#" class="btn btn-success pull-right update-profile-image">Set as profile photo</button>
+    {% if navbar is defined and navbar %}
+        <div class="fm-nav-container">
+            <div class="fm-nav">
+                    <button href="#" class="btn btn-success pull-right update-profile-image">Set as profile photo</button>
+            </div>
         </div>
-    </div>
+    {% endif %}
 </div>
 <div class="view-photo-overlay"></div>

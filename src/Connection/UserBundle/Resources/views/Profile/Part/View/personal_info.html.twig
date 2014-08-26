@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-xs-6">
+        <h4>{{ user.userName }}</h4>
+        <h6>
+            {{ user.profile.birthdate|userAge}}
+            {{ user.profile.country.name is defined ? ", " ~ user.profile.country.name : ""}}
+            {{ user.profile.state.name is defined ? ", " ~ user.profile.state.name : ""}}
+        </h6>
+        {% if user.profile.lookingFor.name is defined %}
+            <span>Looking for: {{ user.profile.lookingFor.name }}</span>
+        {% endif %}
+    </div>
+    <div class="col-xs-6">
+        {% if user.profile.seek.name is defined and user.profile.seek.name is not empty %}
+            <h6><b>Seeking</b>: {{ user.profile.seek.name }}</h6>
+        {% endif %}
+        {% if user.profile.height is defined and user.profile.height is not empty %}
+            <h6><b>Height</b>: {{ user.profile.height }}</h6>
+        {% endif %}
+        {% if user.profile.weight is defined and user.profile.weight is not empty %}
+            <h6><b>Weight</b>: {{ user.profile.weight }}</h6>
+        {% endif %}
+        {% if user.profile.eyeColor.name is defined and user.profile.eyeColor.name is not empty %}
+            <h6><b>Eye Color</b>: {{ user.profile.eyeColor.name }}</h6>
+        {% endif %}
+        {% if user.profile.hairColor.name is defined and user.profile.hairColor.name is not empty %}
+            <h6><b>Hair Color</b>: {{ user.profile.hairColor.name }}</h6>
+        {% endif %}
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        <h4>About Me:</h4>
+        {{ user.profile.aboutMe }}
+    </div>
+    <div class="col-xs-6">
+        {% if user.profile.interestsAndHobbies is defined %}
+            <h4>Interests and hobbies:</h4>
+            {{ user.profile.interestsAndHobbies }}
+        {% endif %}
+    </div>
+</div>
