@@ -23,9 +23,6 @@ class SearchController extends Controller
     {
         $form               = $this->createForm( new SearchType() );
 
-        //remove captcha from quick search
-        $form->remove('captcha');
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
