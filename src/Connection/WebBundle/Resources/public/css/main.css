@@ -1,4 +1,3 @@
-@import "sprite.css";
 body {
   font-family: 'PT Sans', sans-serif;
   background-color: #f2f2f2;
@@ -279,7 +278,8 @@ footer .bottom-right-menu li a {
 .form-inline label:first-child {
   color: #00A0E3;
 }
-button[type=submit] {
+button[type=submit],
+button[type=reset] {
   width: 90px;
   height: 22px;
   background-color: #858585;
@@ -325,6 +325,10 @@ body.manage-event .jumbotron input[type="date"] {
 }
 body.create-profile .jumbotron input[type="text"],
 body.manage-event .jumbotron input[type="text"],
+body.create-profile .jumbotron input[type="email"],
+body.manage-event .jumbotron input[type="email"],
+body.create-profile .jumbotron input[type="password"],
+body.manage-event .jumbotron input[type="password"],
 body.create-profile .jumbotron textarea.form-control,
 body.manage-event .jumbotron textarea.form-control {
   display: block;
@@ -349,6 +353,14 @@ body.create-profile .jumbotron #map_canvas,
 body.manage-event .jumbotron #map_canvas {
   margin: 30px 0;
   width: 100%;
+}
+body.create-profile .jumbotron .birthdate label,
+body.manage-event .jumbotron .birthdate label {
+  display: block;
+}
+body.create-profile .jumbotron .birthdate select,
+body.manage-event .jumbotron .birthdate select {
+  display: inline-block;
 }
 /* Homepage */
 body.homepage .jumbotron {
@@ -381,6 +393,9 @@ body.create-profile h6 {
   font-size: 14px;
   margin-top: 3px;
 }
+body.create-profile select.form-control[multiple=multiple] {
+  height: 145px;
+}
 /* Content Page */
 body.content-page h4 {
   padding-bottom: 8px;
@@ -394,6 +409,16 @@ body.content-page p {
   font-size: 14px;
   padding-right: 10px;
   line-height: 1.3;
+}
+/* Contact Us */
+body.contact-us .form-group input.form-control,
+body.contact-us .form-group textarea.form-control {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+}
+body.contact-us .form-group textarea {
+  height: 160px;
 }
 /* View Event */
 body.view-event .details {
@@ -535,6 +560,27 @@ body.view-event .upcoming .row .more {
   border-radius: 6px;
   text-decoration: none;
 }
+/* View Profile */
+body.view-profile h4 {
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+body.view-profile #add-photo {
+  background-color: #FFF;
+  border: 5px solid #CAECFB;
+  color: #484848;
+  margin-top: 14px;
+  margin-bottom: 10px;
+  border-radius: 13px;
+  height: 200px;
+  width: 150px;
+}
+body.view-profile #add-photo .msg {
+  padding-top: 75px;
+}
+body.view-profile #add-photo .msg .sprite {
+  margin: 0 auto 12px auto;
+}
 body.search-event .search-form {
   background: #bcb9b8;
   background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #e6e6e6), color-stop(1, #ffffff));
@@ -557,8 +603,22 @@ body.search-event .search-form input {
   margin-right: 5px;
   vertical-align: middle;
 }
+body.search-event .search-form input[type=checkbox] {
+  margin: 0px 2px 0px 12px;
+}
+body.search-event .search-form input[type=date] {
+  margin: 0 12px;
+}
+body.search-event .search-form input#event_search_search {
+  width: 60%;
+  margin-bottom: 8px;
+}
 body.search-event .search-form select.form-control {
   padding-left: 0;
+}
+body.search-event .search-form select.form-control[multiple=multiple] {
+  height: 80px;
+  padding-left: 10px;
 }
 body.search-event .search-form .or {
   font-size: 12px;
@@ -569,11 +629,21 @@ body.search-event .search-form button[type=submit] {
   margin-top: 10px;
   background-image: linear-gradient(to bottom, #3fa5e4 0%, #3283b5 100%);
 }
+body.search-event .search-form button[type=reset] {
+  margin-top: 10px;
+  background-image: linear-gradient(to bottom, #777777 0%, #565656 100%);
+}
+body.search-event .search-form form > .row {
+  margin-top: 15px;
+}
 body.search-event .search-form .form-inline {
   color: #333;
 }
 body.search-event .search-form .form-inline label {
   margin-top: 0;
+}
+body.search-event .search-form .form-inline [type=text] {
+  margin-left: 5px;
 }
 body.search-event .search-form .form-inline .radio-inline {
   padding-left: 0;
@@ -767,12 +837,6 @@ button.btn-gradient {
 }
 .blue {
   color: #00a0e3;
-}
-
-.hlogin-error {
-    padding: 2px;
-    margin: 19px 0px 5px 0px;
-    text-align: center;
 }
 /* Mixins */
 
