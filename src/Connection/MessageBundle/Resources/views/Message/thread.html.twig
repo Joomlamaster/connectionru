@@ -21,7 +21,7 @@
 
     <form class="reply" action="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}" method="post">
         {{ form_widget(form) }}
-        <input class="btn btn-success" type="submit" />
+        <button class="btn-gradient" type="submit">Send</button>
     </form>
 
 {% endblock %}

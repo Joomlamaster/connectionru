@@ -24,23 +24,19 @@
                     {% endif %}
                 </div>
                 <div class="text-center">
-                    <a href="{{ path('message_new', {id: user.id}) }}" class="btn btn-info">Message</a>
-                </div>
-                {% if app.user and app.user != user %}
-                    {% if app.user.hasFavoriteUser(user) %}
-                        <div>
+                    {% if app.user and app.user != user %}
+                        {% if app.user.hasFavoriteUser(user) %}
                             <a href="{{path('favorite_user_remove',{'id':user.id} )}}" class="btn btn-xs btn-info" title="Remove user from favorites">
                                 <span class="glyphicon glyphicon-remove-circle"></span>
                             </a>
-                        </div>
-                    {% else %}
-                        <div>
+                        {% else %}
                             <a href="{{path('favorite_user_add',{'id':user.id} )}}" class="btn btn-xs btn-info" title="Add user to favorites">
                                 <span class="glyphicon glyphicon-star"></span>
                             </a>
-                        </div>
+                        {% endif %}
                     {% endif %}
-                {% endif %}
+                    <a href="{{ path('message_new', {id: user.id}) }}" class="btn btn-info">Message</a>
+                </div>
             </div>
             <div class="col-xs-5">
                 <div class="row">

@@ -1,21 +1,27 @@
 .messenger-container {
     padding: 10px;
     border: 1px solid #ccc;
+    border-radius: 4px;
 }
 
 .messenger-container ul {
     list-style: none;
+    padding-left: 10%;
+    padding-top: 10%;
+    font-size: 18px;
+    font-weight: bold;
+}
+.messenger-container ul a {
+    text-decoration: none;
 }
 
-.messenger-container .messenger-content {
-    border-top: 2px solid #ccc;
-}
 
 .messenger-container .messenger-content h2 {
     color: #00A0E3;
     text-transform: uppercase;
     font-weight: bold;
     font-size: 14px;
+    margin-top: 15px;
 }
 
 .messenger-container .messenger-content .messenger_thread_message .alert {
@@ -32,9 +38,15 @@
     padding: 5px;
 }
 
+.messenger-container .messenger-content form.reply input, .messenger-container .messenger-content form.new-thread input {
+    width: 50%;
+    max-width: none;
+}
+
 .messenger-container .messenger-content form.reply textarea, .messenger-container .messenger-content form.new-thread textarea {
-    width:100%;
+    width: 50%;
     height: 75px;
+    max-width: none;
 }
 
 .messenger-container .messenger-content form.reply div#message label {
