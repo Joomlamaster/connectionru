@@ -38,8 +38,8 @@
                                 <span class="glyphicon glyphicon-star"></span>
                             </a>
                         {% endif %}
+                        <a href="{{ path('message_new', {id: user.id}) }}" class="btn btn-info">Message</a>
                     {% endif %}
-                    <a href="{{ path('message_new', {id: user.id}) }}" class="btn btn-info">Message</a>
                 </div>
             </div>
             <div class="col-xs-10">
