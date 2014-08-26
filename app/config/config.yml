@@ -118,3 +118,7 @@ fos_message:
     thread_class: Connection\MessageBundle\Entity\Thread
     message_class: Connection\MessageBundle\Entity\Message
 
+gregwar_captcha:
+    width: 100
+    height: 30
+    quality: 60

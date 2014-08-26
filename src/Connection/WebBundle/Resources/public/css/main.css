@@ -107,6 +107,7 @@ body {
 .jumbotron .main-block .tab-content .tab-pane {
   padding-left: 37px;
   padding-top: 10px;
+  padding-bottom: 10px;
 }
 .jumbotron .main-block .people {
   margin: 7px 0 0 48px;
@@ -252,6 +253,8 @@ footer .bottom-right-menu li a {
 .form-inline select.form-control {
   border: 0;
   height: 26px;
+  padding-left: 0;
+  padding-right: 0;
 }
 .form-group select.form-control[multiple=multiple],
 .form-inline select.form-control[multiple=multiple] {
@@ -265,6 +268,10 @@ footer .bottom-right-menu li a {
   padding: 6px 12px;
   height: 20px;
   width: 78px;
+}
+.form-group input.form-control[type=password],
+.form-inline input.form-control[type=password] {
+  padding: 0 12px;
 }
 .form-group label,
 .form-inline label {
@@ -830,32 +837,43 @@ button.btn-gradient {
   width: auto;
   color: #000000;
 }
+button.btn-gradient.wide {
+  width: auto;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+/* FOSUserBundle */
 .fos_user_registration_register label {
   width: 98px;
   white-space: nowrap;
   margin-right: 2px;
 }
+.container .fos-custom-registration-container {
+  padding-top: 60px;
+  padding-left: 115px;
+}
 .blue {
   color: #00a0e3;
 }
-/* Mixins */
-
 .tell-a-friend {
-    width: 385px;
-    padding: 25px;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    z-index: 100;
+  width: 385px;
+  padding: 25px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  z-index: 100;
 }
-
-.tell-a-friend input, .tell-a-friend textarea {
-    width: 300px !important;
-    max-width: none !important;
+.tell-a-friend input,
+.tell-a-friend textarea {
+  width: 300px !important;
+  max-width: none !important;
 }
-
 .tell-a-friend button {
-    margin: 10px 0px 0px 0px;
+  margin: 10px 0px 0px 0px;
+}
+/* jQuery UI */
+div.ui-datepicker {
+  font-size: 10px;
 }
