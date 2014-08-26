@@ -3,6 +3,8 @@
 namespace Connection\WebBundle\Controller;
 
 use Connection\WebBundle\Form\Type\ContactType;
+use Connection\UserBundle\Form\Type\SearchType;
+use Connection\WebBundle\Form\Type\TellAFriendType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -18,9 +20,20 @@ class FrontendController extends Controller
     public function indexAction()
     {
         $formFactory = $this->container->get('fos_user.registration.form.factory');
-        $form = $formFactory->createForm();
+        $registrationForm = $formFactory->createForm();
+
+        //check if form was forwarded
+        $searchForm = $this->getRequest()->get('searchForm');
+        if(!isset($searchForm)){
+            $searchForm       = $this->createForm( new SearchType() );
+            //remove captcha from quick search
+            $searchForm->remove('captcha');
+        }
+
+
         return $this->render('ConnectionWebBundle:Frontend:index.html.twig', array(
-            'form' => $form->createView()
+            'registrationForm' => $registrationForm->createView(),
+            'searchForm' => $searchForm->createView()
         ));
     }
 
@@ -78,4 +91,41 @@ class FrontendController extends Controller
         ));
     }
 
+    /**
+     * @Route("/tell-a-friend", name="connection_tell_a_friend")
+     */
+    public function tellAFriendEndPointAction( Request $request, $link = false )
+    {
+        $form = $this->createForm( new TellAFriendType() );
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+
+                $sender   = $this->container->getParameter('mailer_user');
+                $sendTo   = array($form->get('email')->getData());
+                $message  = \Swift_Message::newInstance()
+                    ->setSubject('ConnectionRu, share link')
+                    ->setContentType('text/html')
+                    ->setFrom($sender)
+                    ->setTo($sendTo)
+                    ->setBody($this->container->get('templating')->render('ConnectionWebBundle:Frontend/Mail:tell-a-friend.html.twig', array(
+                        'link' => $form->get('link')->getData(),
+                        'message' => $form->get('message')->getData()
+                    )));
+
+                $mailer = $this->container->get('mailer');
+                $mailer->send($message);
+
+                return $this->redirect($form->get('link')->getData());
+            }
+        } else {
+            if (!$link) {
+                throw new \Exception('Link should be specified');
+            }
+            $form->get('link')->setData($link);
+        }
+        return $this->render('ConnectionWebBundle:Frontend:tell_a_friend.html.twig', array(
+            'form' => $form->createView()
+        ));
+    }
 }

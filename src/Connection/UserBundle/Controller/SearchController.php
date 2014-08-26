@@ -22,6 +22,7 @@ class SearchController extends Controller
     public function quickAction( Request $request )
     {
         $form               = $this->createForm( new SearchType() );
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -31,13 +32,16 @@ class SearchController extends Controller
             return $this->redirect( $this->generateUrl('user_search') );
         }
 
-        return $this->render('ConnectionUserBundle:Search:quick.html.twig', array(
-            'form' => $form->createView()
+        return $this->forward('ConnectionWebBundle:Frontend:index', array(
+            'searchForm' => $form
         ));
+//        return $this->render('ConnectionUserBundle:Search:quick.html.twig', array(
+//            'form' => $form->createView()
+//        ));
     }
 
     /**
-     * @Route("/user/{page}", name="user_search", requirements={"page" = "\d+"}, defaults={"page" = 1})
+     * @Route("/{page}", name="user_search", requirements={"page" = "\d+"}, defaults={"page" = 1})
      * @Template()
      */
     public function searchResultAction( Request $request, $page )
@@ -61,8 +65,8 @@ class SearchController extends Controller
 
         $limit      = $this->container->getParameter('search.user.per_page');
         $offset     = ($page * $limit) - $limit;
-        $total      = $this->getDoctrine()->getRepository('ConnectionUserBundle:User')->countAll();
-        $nextPage   = (($total/$limit) > $page) ? ++$page : 1;
+        $total      = count($this->getDoctrine()->getRepository('ConnectionUserBundle:User')->search($sessionSearch));
+        $nextPage   = (($total/$limit) > $page) ? ++$page : false;
         $users      = $this->getDoctrine()->getRepository('ConnectionUserBundle:User')->search($sessionSearch, $limit, $offset);
 
         return $this->render('ConnectionUserBundle:Search:result.html.twig', array(

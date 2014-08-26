@@ -1,3 +1,4 @@
+{% trans_default_domain 'FOSUserBundle' %}
 <div class="navbar navbar-first" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -16,9 +17,8 @@
                 <p style="color: #ffffff" class="navbar-form navbar-right">
                     <a href="{{ path('message_inbox') }}">Messages <span class="badge">{{ fos_message_nb_unread() }}</span></a>
                 </p>
-
             {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
-                {{ render(controller("ConnectionUserBundle:Security:login", {'request': app.request})) }}
+                {% include 'ConnectionUserBundle:Default:login_form.html.twig' %}
             {% endif %}
         </div>
     </div>

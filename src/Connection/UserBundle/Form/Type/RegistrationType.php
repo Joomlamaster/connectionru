@@ -30,6 +30,7 @@ class RegistrationType extends BaseType
                 'required'  => true,
                 'mapped'    => false
             ))
+            ->add('captcha', 'captcha')
             ->add('submit', 'submit');
     }
 

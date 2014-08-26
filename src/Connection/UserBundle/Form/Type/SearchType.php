@@ -40,6 +40,12 @@ class SearchType extends AbstractType
 
         $builder->add('country', 'entity', array(
             'class' => 'ConnectionCoreBundle:Country',
+            'query_builder' => function(EntityRepository $er) {
+                    return $er
+                        ->createQueryBuilder('c')
+                        ->orderBy('c.priority', 'DESC');
+
+                },
             'property' => 'name',
             'attr' => array('class' => 'master')
         ));
@@ -127,6 +133,12 @@ class SearchType extends AbstractType
 
             ->add('languages', 'entity', array(
                 'class' => 'ConnectionCoreBundle:Language',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er
+                        ->createQueryBuilder('l')
+                        ->orderBy('l.priority', 'DESC');
+
+                },
                 'property' => 'name',
                 'multiple' => true,
                 'required' => false

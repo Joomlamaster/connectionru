@@ -22,12 +22,12 @@
                 <div class="tab-content">
                     {% if not is_granted('ROLE_USER') %}
                         <div class="tab-pane" id="registration">
-                            {{ include("FOSUserBundle:Registration:register_content.html.twig", {'form': form}) }}
+                            {{ include("FOSUserBundle:Registration:register_content.html.twig", {'form': registrationForm}) }}
 
                         </div>
                     {% endif %}
                     <div class="tab-pane active" id="search">
-                        {{ render(controller("ConnectionUserBundle:Search:quick")) }}
+                        {{ include('ConnectionUserBundle:Search:quick.html.twig', {'form':searchForm}) }}
                     </div>
                 </div>
             </div>

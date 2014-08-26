@@ -95,7 +95,11 @@
                 </div>
             </footer>
         </div>
-        {% block popup %}{% endblock %}
+        {% block popup %}
+        {% endblock %}
+        {% block tellAFriend %}
+            {{ render(controller("ConnectionWebBundle:Frontend:tellAFriendEndPoint", {'link': app.request.uri})) }}
+        {% endblock %}
 
         {# javascript... #}
         {% block javascript %}
@@ -103,6 +107,7 @@
             <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/bootstrap.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jquery-ui.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/connectionuser/js/registration.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/tell-a-friend.js') }}"></script>
             <script type="text/javascript"> $(function() { FormAjaxFields.init(); }) </script>
 
             {% javascripts output='assets/compiled/frontend.js'

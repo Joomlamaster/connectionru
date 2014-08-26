@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new Oneup\UploaderBundle\OneupUploaderBundle(),
             new Connection\MessageBundle\ConnectionMessageBundle(),
             new Connection\AdminBundle\ConnectionAdminBundle(),
+            new Gregwar\CaptchaBundle\GregwarCaptchaBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

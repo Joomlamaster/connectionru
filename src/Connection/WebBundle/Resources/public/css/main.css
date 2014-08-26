@@ -839,3 +839,23 @@ button.btn-gradient {
   color: #00a0e3;
 }
 /* Mixins */
+
+.tell-a-friend {
+    width: 385px;
+    padding: 25px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 100;
+}
+
+.tell-a-friend input, .tell-a-friend textarea {
+    width: 300px !important;
+    max-width: none !important;
+}
+
+.tell-a-friend button {
+    margin: 10px 0px 0px 0px;
+}

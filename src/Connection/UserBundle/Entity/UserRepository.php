@@ -53,7 +53,7 @@ class UserRepository extends EntityRepository
             ->getSingleScalarResult();
     }
 
-    public function search($filter, $limit, $offset)
+    public function search($filter, $limit = false, $offset = false)
     {
         $qb = $this->createQueryBuilder('u')
             ->join('u.profile', 'p');
@@ -197,9 +197,13 @@ class UserRepository extends EntityRepository
         }
 
 
+        if($limit){
+            $qb->setMaxResults($limit);
+        }
 
-        $qb->setMaxResults($limit);
-        $qb->setFirstResult($offset);
+        if($offset){
+            $qb->setFirstResult($offset);
+        }
 
         return $qb->getQuery()->getResult();
     }

@@ -221,8 +221,28 @@ class Profile
     /**
      * @var string
      * @ORM\Column(name="about_me", type="string", length=600, nullable=true)
+     * @Assert\Length(
+     *      groups={"profile"},
+     *      min = "3",
+     *      max = "1000",
+     *      minMessage = "This field must be at least 3 characters length",
+     *      maxMessage = "This field cannot be longer than 1000 characters length"
+     * )
      */
     protected $aboutMe;
+
+    /**
+     * @var string
+     * @ORM\Column(name="looking_for_description", type="string", length=600, nullable=true)
+     * @Assert\Length(
+     *      groups={"profile"},
+     *      min = "3",
+     *      max = "1000",
+     *      minMessage = "This field must be at least 3 characters length",
+     *      maxMessage = "This field cannot be longer than 1000 characters length"
+     * )
+     */
+    protected $lookingForDescription;
 
     /**
      * @ORM\OneToOne(targetEntity="Connection\UserBundle\Entity\User", inversedBy="profile")
@@ -812,5 +832,21 @@ class Profile
     public function getZodiac ()
     {
         return $this->zodiac;
+    }
+
+    /**
+     * @param string $lookingForDescription
+     */
+    public function setLookingForDescription ( $lookingForDescription )
+    {
+        $this->lookingForDescription = $lookingForDescription;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLookingForDescription ()
+    {
+        return $this->lookingForDescription;
     }
 }
