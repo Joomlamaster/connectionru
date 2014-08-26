@@ -1,7 +1,15 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+var Common = (function($) {
+    return {
+        handleDatepicker: function() {
+            var datepicker = $.fn.datepicker.noConflict(); // return $.fn.datepicker to previously assigned value
+            $.fn.bootstrapDP = datepicker;                 // give $().bootstrapDP the bootstrap-datepicker functionality
 
+            $.fn.bootstrapDP.defaults.format = "mm/dd/yyyy";
+            $.fn.bootstrapDP.defaults.autoclose = true;
 
+            $('[data-provide="datepicker"]').attr('type', 'text');
+        }
+    }
+}(jQuery));
+
+Common.handleDatepicker();
