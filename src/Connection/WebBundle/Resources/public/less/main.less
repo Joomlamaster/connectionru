@@ -133,6 +133,7 @@ body {
             .tab-pane {
                 padding-left: 37px;
                 padding-top: 10px;
+                padding-bottom: 10px;
 
                 &#registration {
 
@@ -311,6 +312,8 @@ footer {
     select.form-control {
         border: 0;
         height: 26px;
+        padding-left: 0;
+        padding-right: 0;
 
         &[multiple=multiple] {
             height: 100px;
@@ -323,6 +326,10 @@ footer {
         padding: 6px 12px;
         height: 20px;
         width: 78px;
+
+        &[type=password] {
+            padding: 0 12px;
+        }
     }
 
     label {
@@ -961,8 +968,15 @@ button.btn-gradient {
     margin: 0;
     width: auto;
     color: #000000;
+
+    &.wide {
+        width: auto;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
 }
 
+/* FOSUserBundle */
 .fos_user_registration_register {
     label {
         width: 98px;
@@ -970,12 +984,15 @@ button.btn-gradient {
         margin-right: 2px;
     }
 }
+.container .fos-custom-registration-container {
+    padding-top: 60px;
+    padding-left: 115px;
+}
 
 .blue {
     color: #00a0e3;
 }
 
-/* Mixins */
 .bw-gradient(@color: #F5F5F5, @start: 0, @stop: 255) {
     background: @color;
     background: -webkit-gradient(linear,
@@ -992,4 +1009,29 @@ button.btn-gradient {
     background: -o-linear-gradient(rgb(@stop,@stop,@stop),
     rgb(@start,@start,@start));
     filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",rgb(@stop,@stop,@stop),rgb(@start,@start,@start)));
+}
+
+.tell-a-friend {
+    width: 385px;
+    padding: 25px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    z-index: 100;
+
+    input, textarea {
+        width: 300px !important;
+        max-width: none !important;
+    }
+
+    button {
+        margin: 10px 0px 0px 0px;
+    }
+}
+
+/* jQuery UI */
+div.ui-datepicker{
+    font-size:10px;
 }
