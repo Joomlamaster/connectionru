@@ -121,4 +121,10 @@ fos_message:
 gregwar_captcha:
     width: 100
     height: 30
-    quality: 60
+    quality: 60    
+    text_color: [237, 237, 237]
+    background_color: [77, 77, 77]
+    as_url: true
+    reload: true    
+    distortion: false
+    disabled: true
