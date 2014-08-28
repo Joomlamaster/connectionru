@@ -267,11 +267,21 @@ footer .bottom-right-menu li a {
   border-radius: 15px;
   padding: 6px 12px;
   height: 20px;
-  width: 78px;
+  width: 100%;
+  max-width: 175px;
 }
 .form-group input.form-control[type=password],
-.form-inline input.form-control[type=password] {
+.form-inline input.form-control[type=password],
+.form-group input.form-control[type=text],
+.form-inline input.form-control[type=text],
+.form-group input.form-control[type=email],
+.form-inline input.form-control[type=email] {
   padding: 0 12px;
+}
+.form-group input.form-control.captcha,
+.form-inline input.form-control.captcha {
+  width: 75px;
+  margin-left: 5px;
 }
 .form-group label,
 .form-inline label {
@@ -486,9 +496,10 @@ body.view-event .details .controls .going {
   background-color: #00a0e3;
 }
 body.view-event .details .controls .going input {
-  vertical-align: sub;
-  margin-top: 0;
+  margin-bottom: 2px;
   margin-right: 5px;
+  margin-top: 0;
+  vertical-align: middle;
 }
 body.view-event .details .controls .comment {
   background-image: linear-gradient(to bottom right, #f2efed 0%, #bab7b6 100%);
@@ -570,6 +581,16 @@ body.view-event .upcoming .row .more {
   padding: 4px 10px;
   border-radius: 6px;
   text-decoration: none;
+}
+body.view-event .add-comment-form {
+  border: 0;
+  padding-top: 0;
+  padding-left: 0;
+}
+body.view-event .add-comment-form .add-comment-button {
+  margin-top: 7px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 /* View Profile */
 body.view-profile h4 {
