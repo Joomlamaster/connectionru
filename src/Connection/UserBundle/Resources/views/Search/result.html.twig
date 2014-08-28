@@ -1,5 +1,6 @@
 {% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
-{% form_theme form 'ConnectionUserBundle:Search:fields.html.twig' %}
+{% form_theme qform 'ConnectionUserBundle:Search:fields.html.twig' %}
+{% form_theme eform 'ConnectionUserBundle:Search:fields.html.twig' %}
 
 {% block theme %}search-event{% endblock %}
 
@@ -12,150 +13,226 @@
     </div>
 {% endblock breadcrumbs %}
 {% block content %}
-    <h4>Search</h4>
-        <div class="search-form">
-            {{ form_start(form, {'action': path('user_search'), 'attr': {'class': 'search-result master_slave '}}) }}
-            <div class="row">
-                <div class="col-xs-4">
-                    <div class="form-inline">
-                        <div class="row">
-                            {{ form_row(form.gender, {'attr': { 'class': 'radio-inline'} }) }}
-                        </div>
-                        <div class="row">
-                            {{ form_row(form.seek, {'attr': { 'class': 'radio-inline'} }) }}
-                        </div>
-                        <div class="row">
-                            {{ form_row(form.ageFrom, {'attr': { 'class': 'select-inline' }, 'label': 'Age from' }) }}
-                            {{ form_row(form.ageTo, {'attr': { 'class': 'select-inline' }, 'label': 'to' }) }}
-                        </div>
-                        <div class="row">
-                            {{ form_row(form.lookingFor, {'attr': { 'class': 'select-inline'} }) }}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-inline">
-                        <div class="row">
-                            <div class="master_slave">
-                                <div>
-                                    {{ form_row(form.country, {'attr': { 'class': 'select-inline master'} }) }}
-                                </div>
-                                {% if (form.state is defined) %}
-                                    <div class="slave_block">
-                                        <label class="select-inline">
-                                            State {{ form_widget(form.state, { 'attr': { 'class': 'form-control slave' }}) }}
-                                        </label>
-                                    </div>
-                                {% endif %}
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="{% if searchType == 'quick' %}active{% endif %}"><a href="#quick-search-tab" role="tab" data-toggle="tab">Quick Search</a></li>
+        <li class="{% if searchType == 'extended' %}active{% endif %}"><a href="#extended-search-tab" role="tab" data-toggle="tab">Extended Search</a></li>
+    </ul>
+
+
+    {# tab panes #}
+    <div class="tab-content">
+
+        {# quick search tab #}
+        <div class="tab-pane {% if searchType == 'quick' %}active{% endif %}" id="quick-search-tab">
+            <div class="search-form">
+                {# <h4>Quick Search</h4> #}
+                {{ form_start(qform, {'action': path('user_search'), 'attr': {'class': 'search-result master_slavel'}}) }}
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="form-inline">
+                            <div class="row">
+                                {{ form_row(qform.gender, {'attr': { 'class': 'radio-inline'} }) }}
+                            </div>
+                            <div class="row">
+                                {{ form_row(qform.seek, {'attr': { 'class': 'radio-inline'} }) }}
                             </div>
                         </div>
-                        <div class="row">
-                            {{ form_row(form.education, {'attr': { 'class': 'select-inline'} }) }}
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-inline">
+                            <div class="row">
+                            {{ form_row(qform.ageFrom, {'attr': { 'class': 'select-inline' }, 'label': 'Age from' }) }}
+                            {{ form_row(qform.ageTo, {'attr': { 'class': 'select-inline' }, 'label': 'to' }) }}
+                            </div>
+                            <div class="row">
+                                {{ form_row(qform.lookingFor, {'attr': { 'class': 'select-inline'} }) }}
+                            </div>
                         </div>
-                        <div class="row">
-                            {{ form_row(form.profession, {'attr': { 'class': 'select-inline'} }) }}
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-inline">
+                            <div class="row">
+                                <div class="master_slave">
+                                    <div>
+                                        {{ form_row(qform.country, {'attr': { 'class': 'select-inline'} }) }}
+                                    </div>
+                                    {% if (qform.state is defined) %}
+                                        <div class="slave_block">
+                                            <label class="select-inline">
+                                                State {{ form_widget(qform.state, { 'attr': { 'class': 'form-control' }}) }}
+                                            </label>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-4">
-                    <div class="form-inline">
-                        {{ form_row(form.languages, {'attr': { 'class': 'select-inline'} }) }}
+                {{ form_row(qform.searchType, {'value': 'quick'}) }}
+                <div class="row">
+                    <div class="form-inline text-center">
+                        <button type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
+                        <button type="reset" onclick="resetForm($(this).parents('form'))"><span class="glyphicon glyphicon-trash"></span> Reset</button>
                     </div>
                 </div>
+                {{ form_end(qform, {'render_rest': false}) }}
             </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-inline">
-                        <div class="row">
-                            {{ form_row(form.maritalStatus, {'attr': { 'class': 'radio-inline'} }) }}
+        </div>
+        {#end quick search tab#}
+
+        {#extended search tab#}
+        <div class="tab-pane {% if searchType == 'extended' %}active{% endif %}" id="extended-search-tab">
+            {#<h4>Extended Search</h4>#}
+                <div class="search-form">
+                    {{ form_start(eform, {'action': path('user_search'), 'attr': {'class': 'search-result master_slave '}}) }}
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="form-inline">
+                                <div class="row">
+                                    {{ form_row(eform.gender, {'attr': { 'class': 'radio-inline'} }) }}
+                                </div>
+                                <div class="row">
+                                    {{ form_row(eform.seek, {'attr': { 'class': 'radio-inline'} }) }}
+                                </div>
+                                <div class="row">
+                                    {{ form_row(eform.ageFrom, {'attr': { 'class': 'select-inline' }, 'label': 'Age from' }) }}
+                                    {{ form_row(eform.ageTo, {'attr': { 'class': 'select-inline' }, 'label': 'to' }) }}
+                                </div>
+                                <div class="row">
+                                    {{ form_row(eform.lookingFor, {'attr': { 'class': 'select-inline'} }) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-inline">
+                                <div class="row">
+                                    <div class="master_slave">
+                                        <div>
+                                            {{ form_row(eform.country, {'attr': { 'class': 'select-inline'} }) }}
+                                        </div>
+                                        {% if (eform.state is defined) %}
+                                            <div class="slave_block">
+                                                <label class="select-inline">
+                                                    State {{ form_widget(eform.state, { 'attr': { 'class': 'form-control' }}) }}
+                                                </label>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    {{ form_row(eform.education, {'attr': { 'class': 'select-inline'} }) }}
+                                </div>
+                                <div class="row">
+                                    {{ form_row(eform.profession, {'attr': { 'class': 'select-inline'} }) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
+                            <div class="form-inline">
+                                {{ form_row(eform.languages, {'attr': { 'class': 'select-inline'} }) }}
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-inline">
+                                <div class="row">
+                                    {{ form_row(eform.maritalStatus, {'attr': { 'class': 'radio-inline'} }) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="form-inline">
+                                <div class="row">
+                                    {{ form_row(eform.minimumHeight, {'attr': { 'class': 'select-inline'} }) }}
+                                </div>
+                                <div class="row">
+                                    {{ form_row(eform.maximumHeight, {'attr': { 'class': 'select-inline'} }) }}
+                                </div>
+                                <div class="row">
+                                    {{ form_row(eform.minimumWeight, {'attr': { 'class': 'select-inline'} }) }}
+                                </div>
+                                <div class="row">
+                                    {{ form_row(eform.maximumWeight, {'attr': { 'class': 'select-inline'} }) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-5">
+                            <div class="form-inline">
+                                <div class="row">
+                                    {{ form_row(eform.eyeColor, {'attr': { 'class': 'select-inline'} }) }}
+                                </div>
+                                <div class="row">
+                                    {{ form_row(eform.hairColor, {'attr': { 'class': 'select-inline'} }) }}
+                                </div>
+                                <div class="row">
+                                    {{ form_row(eform.smoking, {'attr': { 'class': 'select-inline'} }) }}
+                                </div>
+                                <div class="row">
+                                    {{ form_row(eform.drinking, {'attr': { 'class': 'select-inline'} }) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="form-inline">
+                                <div class="row">
+                                    {{ form_row(eform.income, {'attr': { 'class': 'inline-labels'} }) }}
+                                </div>
+                                <div class="row">
+                                    {{ form_row(eform.religion, {'attr': { 'class': 'select-inline'} }) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <div class="form-inline">
+                                <div class="row">
+                                    {{ form_row(eform.haveChildren, {'attr': { 'class': 'select-inline'} }) }}
+                                </div>
+                                <div class="row">
+                                    {{ form_row(eform.wantChildren, {'attr': { 'class': 'select-inline'} }) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-5">
+                            <div class="form-inline">
+                                <div class="row">
+                                    {{ form_row(eform.livesWithChildren, {'attr': { 'class': 'select-inline'} }) }}
+                                </div>
+                                <div class="row">
+                                    {{ form_row(eform.openToPersonWithKids, {'attr': { 'class': 'select-inline'} }) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="form-inline">
+                                <div class="row">
+                                    {{ form_row(eform.ethnicity, {'attr': { 'class': 'select-inline'} }) }}
+                                </div>
+                                <div class="row">
+                                    {{ form_row(eform.zodiacSign, {'attr': { 'class': 'select-inline'} }) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-inline text-center">
+                            <button type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
+                            <button type="reset" onclick="resetForm($(this).parents('form'))"><span class="glyphicon glyphicon-trash"></span> Reset</button>
+                        </div>
+                    </div>
+                {{ form_row(eform.searchType, {'value': 'extended'}) }}
+                {{ form_end(eform, {'render_rest': false}) }}
             </div>
-            <div class="row">
-                <div class="col-xs-4">
-                    <div class="form-inline">
-                        <div class="row">
-                            {{ form_row(form.minimumHeight, {'attr': { 'class': 'select-inline'} }) }}
-                        </div>
-                        <div class="row">
-                            {{ form_row(form.maximumHeight, {'attr': { 'class': 'select-inline'} }) }}
-                        </div>
-                        <div class="row">
-                            {{ form_row(form.minimumWeight, {'attr': { 'class': 'select-inline'} }) }}
-                        </div>
-                        <div class="row">
-                            {{ form_row(form.maximumWeight, {'attr': { 'class': 'select-inline'} }) }}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-5">
-                    <div class="form-inline">
-                        <div class="row">
-                            {{ form_row(form.eyeColor, {'attr': { 'class': 'select-inline'} }) }}
-                        </div>
-                        <div class="row">
-                            {{ form_row(form.hairColor, {'attr': { 'class': 'select-inline'} }) }}
-                        </div>
-                        <div class="row">
-                            {{ form_row(form.smoking, {'attr': { 'class': 'select-inline'} }) }}
-                        </div>
-                        <div class="row">
-                            {{ form_row(form.drinking, {'attr': { 'class': 'select-inline'} }) }}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="form-inline">
-                        <div class="row">
-                            {{ form_row(form.income, {'attr': { 'class': 'inline-labels'} }) }}
-                        </div>
-                        <div class="row">
-                            {{ form_row(form.religion, {'attr': { 'class': 'select-inline'} }) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-4">
-                    <div class="form-inline">
-                        <div class="row">
-                            {{ form_row(form.haveChildren, {'attr': { 'class': 'select-inline'} }) }}
-                        </div>
-                        <div class="row">
-                            {{ form_row(form.wantChildren, {'attr': { 'class': 'select-inline'} }) }}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-5">
-                    <div class="form-inline">
-                        <div class="row">
-                            {{ form_row(form.livesWithChildren, {'attr': { 'class': 'select-inline'} }) }}
-                        </div>
-                        <div class="row">
-                            {{ form_row(form.openToPersonWithKids, {'attr': { 'class': 'select-inline'} }) }}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-3">
-                    <div class="form-inline">
-                        <div class="row">
-                            {{ form_row(form.ethnicity, {'attr': { 'class': 'select-inline'} }) }}
-                        </div>
-                        <div class="row">
-                            {{ form_row(form.zodiacSign, {'attr': { 'class': 'select-inline'} }) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="form-inline text-center">
-                    <button type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
-                    <button type="reset"><span class="glyphicon glyphicon-trash"></span> Reset</button>
-                </div>
-            </div>
-        {{ form_end(form, {'render_rest': false}) }}
+        </div>
+        {#end extended search tab#}
+
     </div>
+    {#end tab panes#}
+
     <div class="row results-line"><span>results found</span></div>
     <div class="row found-1">
         {% if users is defined and users is not empty %}
@@ -183,4 +260,12 @@
             <a class="btn btn-info pull-right" href="{{ path('user_search', {'page': nextPage}) }}">Next Page</a>
         {% endif %}
     </div>
+    <script type="text/javascript">
+        window.onload = function(){
+            resetForm = function(form){
+                $(form).find('input[type="radio"]').removeAttr('checked');
+                $(form).find('select option').removeAttr('selected');
+            }
+        }
+    </script>
 {% endblock %}

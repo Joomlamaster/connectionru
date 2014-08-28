@@ -300,6 +300,7 @@ class SearchType extends AbstractType
 //                ),
 //                'required' => true
 //            ))
+            $builder->add('searchType', 'hidden');
             $builder->add('search', 'submit');
     }
 
