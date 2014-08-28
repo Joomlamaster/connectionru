@@ -10,6 +10,7 @@ DropZoneStoreage = {
                 });
 
                 this.on("addedfile", function(file) {
+                    $('.dz-upload-message').addClass('hidden');
                     setTimeout(function() {
                         $('.fm-popup').trigger('dz.added.file', { context: "dz.added.file" });
                         initJCrop();
@@ -17,8 +18,15 @@ DropZoneStoreage = {
                 });
 
                 $('#profile-images').on('fm.close.profile.popup', function() {
+                    $('.dz-upload-message').removeClass('hidden');
                     profileImageDropzone.removeAllFiles();
                 });
+
+                $("a.dz-upload-image").on('click', function(e){
+                    e.preventDefault();
+                    $(".fm-show-popup").trigger('click');
+                });
+
             },
             'removedfile': function(file) {
                 if (file.id) {

@@ -35,6 +35,15 @@
                         {% endif %}
                     </div>
                 </div>
+                <div class="text-center">
+                    <div class="profile-image-button">
+                        {% if app.user.profile.avatar is defined and app.user.profile.avatar is not empty %}
+                            <a href="#" class="btn btn-success dz-upload-image">Change Photo</a>
+                        {% else %}
+                            <a href="#" class="btn btn-success dz-upload-image">+ Add photo</a>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
             <div class="col-xs-10">
                 <ul class="nav nav-tabs" id="profile-tabs">
