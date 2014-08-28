@@ -4,6 +4,11 @@
 {% block fos_user_content %}
     <div class="fos-custom-registration-container">
         <form action="{{ path("fos_user_security_check") }}" role="form" id='login-form' method="post" class="fos_user_registration_register">
+            <div class="clearfix form-inline">
+                {% if error %}
+                    <div class="alert alert-danger hlogin-error" role="alert">{{ error|trans }}</div>
+                {% endif %}
+            </div>
             <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
             <div class="clearfix form-inline">
                 <label for="username">Username or email</label>
@@ -12,11 +17,6 @@
             <div class="clearfix form-inline">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="_password" required="required" placeholder="Password" class="form-control">
-            </div>
-            <div class="clearfix form-inline">
-                {% if error %}
-                    <div class="alert alert-danger hlogin-error" role="alert">{{ error|trans }}</div>
-                {% endif %}
             </div>
             <div class="clearfix form-inline">
                 <label class="remember">
