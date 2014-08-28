@@ -24,31 +24,59 @@
 
         {# quick search tab #}
         <div class="tab-pane {% if searchType == 'quick' %}active{% endif %}" id="quick-search-tab">
-            {# <h4>Quick Search</h4> #}
-            {{ form_start(qform, {'action': path('user_search'), 'attr': {'class': 'fos_user_registration_register master_slave form-horizontal'}}) }}
-            {{ form_errors(qform) }}
-            {{ form_row(qform.gender) }}
-            {{ form_row(qform.seek) }}
-
-            <div class="clearfix form-inline">
-                <label for="search_age" class="required">Age</label>
-                {{ form_widget(qform.ageFrom, { 'attr': {'class': 'form-control'} }) }} - {{ form_widget(qform.ageTo, { 'attr': {'class': 'form-control'} }) }}
-            </div>
-
-            {{ form_row(qform.lookingFor) }}
-            <div class="master_slave">
-                <div>
-                    {{ form_row(qform.country) }}
-                </div>
-                {% if (qform.state is defined) %}
-                    <div class="slave_block">
-                        {{ form_row(qform.state) }}
+            <div class="search-form">
+                {# <h4>Quick Search</h4> #}
+                {{ form_start(qform, {'action': path('user_search'), 'attr': {'class': 'search-result master_slavel'}}) }}
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="form-inline">
+                            <div class="row">
+                                {{ form_row(qform.gender, {'attr': { 'class': 'radio-inline'} }) }}
+                            </div>
+                            <div class="row">
+                                {{ form_row(qform.seek, {'attr': { 'class': 'radio-inline'} }) }}
+                            </div>
+                        </div>
                     </div>
-                {% endif %}
+                    <div class="col-xs-4">
+                        <div class="form-inline">
+                            <div class="row">
+                            {{ form_row(qform.ageFrom, {'attr': { 'class': 'select-inline' }, 'label': 'Age from' }) }}
+                            {{ form_row(qform.ageTo, {'attr': { 'class': 'select-inline' }, 'label': 'to' }) }}
+                            </div>
+                            <div class="row">
+                                {{ form_row(qform.lookingFor, {'attr': { 'class': 'select-inline'} }) }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="form-inline">
+                            <div class="row">
+                                <div class="master_slave">
+                                    <div>
+                                        {{ form_row(qform.country, {'attr': { 'class': 'select-inline'} }) }}
+                                    </div>
+                                    {% if (qform.state is defined) %}
+                                        <div class="slave_block">
+                                            <label class="select-inline">
+                                                State {{ form_widget(qform.state, { 'attr': { 'class': 'form-control' }}) }}
+                                            </label>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{ form_row(qform.searchType, {'value': 'quick'}) }}
+                <div class="row">
+                    <div class="form-inline text-center">
+                        <button type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
+                        <button type="reset" onclick="resetForm($(this).parents('form'))"><span class="glyphicon glyphicon-trash"></span> Reset</button>
+                    </div>
+                </div>
+                {{ form_end(qform, {'render_rest': false}) }}
             </div>
-        {{ form_row(qform.searchType, {'value': 'quick'}) }}
-        {{ form_row(qform.search) }}
-        {{ form_end(qform, {'render_rest': false}) }}
         </div>
         {#end quick search tab#}
 
@@ -193,7 +221,7 @@
                     <div class="row">
                         <div class="form-inline text-center">
                             <button type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
-                            <button type="reset"><span class="glyphicon glyphicon-trash"></span> Reset</button>
+                            <button type="reset" onclick="resetForm($(this).parents('form'))"><span class="glyphicon glyphicon-trash"></span> Reset</button>
                         </div>
                     </div>
                 {{ form_row(eform.searchType, {'value': 'extended'}) }}
@@ -232,4 +260,12 @@
             <a class="btn btn-info pull-right" href="{{ path('user_search', {'page': nextPage}) }}">Next Page</a>
         {% endif %}
     </div>
+    <script type="text/javascript">
+        window.onload = function(){
+            resetForm = function(form){
+                $(form).find('input[type="radio"]').removeAttr('checked');
+                $(form).find('select option').removeAttr('selected');
+            }
+        }
+    </script>
 {% endblock %}
