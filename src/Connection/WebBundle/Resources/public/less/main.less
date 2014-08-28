@@ -325,10 +325,16 @@ footer {
         border-radius: 15px;
         padding: 6px 12px;
         height: 20px;
-        width: 78px;
+        width: 100%;
+        max-width: 175px;
 
-        &[type=password] {
+        &[type=password], &[type=text], &[type=email] {
             padding: 0 12px;
+        }
+
+        &.captcha {
+            width: 75px;
+            margin-left: 5px;
         }
     }
 
@@ -570,11 +576,13 @@ body.view-event {
                 background-color: #00a0e3;
 
                 input {
-                    vertical-align: sub;
-                    margin-top: 0;
+                    margin-bottom: 2px;
                     margin-right: 5px;
+                    margin-top: 0;
+                    vertical-align: middle;
                 }
             }
+
             .comment {
                 background-image: linear-gradient(to bottom right, #F2EFED 0%, #BAB7B6 100%);
                 margin: 0;
@@ -663,6 +671,17 @@ body.view-event {
                 border-radius: 6px;
                 text-decoration: none;
             }
+        }
+    }
+    .add-comment-form {
+        border: 0;
+        padding-top: 0;
+        padding-left: 0;
+
+        .add-comment-button {
+            margin-top: 7px;
+            padding-left: 10px;
+            padding-right: 10px;
         }
     }
 }
