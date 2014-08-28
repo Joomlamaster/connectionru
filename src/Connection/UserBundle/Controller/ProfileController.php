@@ -55,6 +55,7 @@ class ProfileController extends Controller
             $em->persist($form->getData());
             $em->flush();
 
+            $this->container->get('session')->getFlashBag()->add('notice', 'Your profile information was successfully updated.');
             return $this->redirect( $this->generateUrl('edit_user_profile') );
         }
 
