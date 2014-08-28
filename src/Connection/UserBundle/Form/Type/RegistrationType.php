@@ -20,8 +20,6 @@ class RegistrationType extends BaseType
 
         // add your custom field
         $builder
-            ->add('firstName', 'text')
-            ->add('lastName', 'text')
             ->add('profile', new ProfileType(), array(
                 'required' => false
             ))
@@ -30,7 +28,10 @@ class RegistrationType extends BaseType
                 'required'  => true,
                 'mapped'    => false
             ))
-            ->add('captcha', 'captcha')
+//            ->add('captcha', 'captcha')
+            ->add('registrationType', 'hidden', array(
+                'mapped' => false
+            ))
             ->add('submit', 'submit');
     }
 

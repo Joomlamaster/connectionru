@@ -19,7 +19,8 @@
             {% endif %}
         </div>
         {{ form_row(form.profile.ethnicity) }}
-        {{ form_row(form.captcha, { 'attr': { 'class' : 'captcha' } } ) }}
+{#        {{ form_row(form.captcha, { 'attr': { 'class' : 'captcha' } } ) }}#}
         {{ form_row(form.agree) }}
+        {{ form_row(form.registrationType, {'value':'quick'}) }}
         {{ form_row(form.submit) }}
 {{ form_end(form, {'render_rest': false}) }}

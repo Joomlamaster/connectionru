@@ -18,8 +18,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 class RegistrationController extends BaseController
 {
+
     public function registerAction(Request $request)
     {
+
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->container->get('fos_user.registration.form.factory');
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
@@ -60,9 +62,16 @@ class RegistrationController extends BaseController
             }
         }
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.'.$this->getEngine(), array(
-            'form' => $form->createView(),
-        ));
+        $registrationType = $form->get('registrationType')->getData();
+        if ($registrationType == 'quick') {
+            return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.' . $this->getEngine(), array(
+                        'form' => $form->createView(),
+            ));
+        } else {
+            return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:extended_register.html.' . $this->getEngine(), array(
+                        'form' => $form->createView(),
+            ));
+        }
     }
 
     /**
@@ -71,9 +80,10 @@ class RegistrationController extends BaseController
     public function registerExtendedAction()
     {
         $formFactory = $this->container->get('fos_user.registration.form.factory');
-        $form        = $formFactory->createForm();
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:extended_register.html.'.$this->getEngine(), array(
+        $form = $formFactory->createForm();
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:extended_register.html.' . $this->getEngine(), array(
                     'form' => $form->createView(),
-                ));
+        ));
     }
+
 }

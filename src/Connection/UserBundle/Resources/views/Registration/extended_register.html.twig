@@ -24,14 +24,6 @@
             </div>
             <div class="row">
                 <div class="col-xs-6">
-                    {{ form_row(form.firstName) }}
-                </div>
-                <div class="col-xs-6">
-                    {{ form_row(form.lastName) }}
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6">
                     {{ form_row(form.profile.aboutMe) }}
                 </div>
                 <div class="col-xs-6">
@@ -131,11 +123,11 @@
                     {{ form_row(form.profile.ethnicity) }}
                 </div>
             </div>
-            <div class="row">
+            {#<div class="row">
                 <div class="col-xs-12">
                     {{ form_row(form.captcha) }}
                 </div>
-            </div>
+            </div>#}
             <div class="row">
                 <div class="col-xs-12">
                     {{ form_row(form.agree) }}
@@ -149,6 +141,7 @@
                 </div>
             </div>
             <div class="col-xs-5"></div>
+            {{ form_row(form.registrationType, {'value':'extended'}) }}
             {{ form_end(form, {'render_rest': false}) }}
         </div>
     {% endif %}

@@ -127,4 +127,4 @@ gregwar_captcha:
     as_url: true
     reload: true    
     distortion: false
-    disabled: true
+    disabled: true    
