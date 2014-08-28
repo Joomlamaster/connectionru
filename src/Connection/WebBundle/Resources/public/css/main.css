@@ -369,6 +369,10 @@ body.create-profile .jumbotron .birthdate select,
 body.manage-event .jumbotron .birthdate select {
   display: inline-block;
 }
+body.create-profile .jumbotron input[type=checkbox]#fos_user_registration_form_agree,
+body.manage-event .jumbotron input[type=checkbox]#fos_user_registration_form_agree {
+  vertical-align: middle;
+}
 /* Homepage */
 body.homepage .jumbotron {
   background: url('/bundles/connectionweb/img/main-background.png') center 0 no-repeat;
