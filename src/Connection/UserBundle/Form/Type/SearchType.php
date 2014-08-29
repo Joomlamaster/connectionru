@@ -44,14 +44,14 @@ class SearchType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-
+        $profileCountryIso = $this->profileCountryIso;
         $builder->add('country', 'entity', array(
             'class' => 'ConnectionCoreBundle:Country',
-            'query_builder' => function(EntityRepository $er) {
+            'query_builder' => function(EntityRepository $er) use ($profileCountryIso) {
                     return $er
                         ->createQueryBuilder('c')
                         ->andWhere('c.iso IN (:iso)')
-                        ->setParameter('iso', $this->profileCountryIso)
+                        ->setParameter('iso', $profileCountryIso)
                         ->orderBy('c.priority', 'DESC');
 
                 },
