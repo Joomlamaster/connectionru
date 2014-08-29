@@ -281,7 +281,7 @@ class SearchType extends AbstractType
                 'empty_value' =>'Any ethnicity',
                 'required' => false
             ))
-            ->add('zodiacSign', 'entity', array(
+            ->add('zodiac', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Zodiac',
                 'property' => 'name',
                 'empty_value' =>'Any sign',
