@@ -33,13 +33,10 @@ class ProfileType extends AbstractType
         $builder->add('country', 'entity', array(
             'class' => 'ConnectionCoreBundle:Country',
             'query_builder' => function(EntityRepository $er) {
-                    $qb = $er->createQueryBuilder('c');
-                    if(!empty($this->profileCountryIso)){
-                        $qb->where('c.iso IN (:iso)')
-                        ->setParameter('iso', $this->profileCountryIso);
-                    }
-                    return $qb->orderBy('c.priority', 'DESC');
-
+                    return $er->createQueryBuilder('c')
+                        ->where('c.iso IN (:iso)')
+                        ->setParameter('iso', $this->profileCountryIso)
+                        ->orderBy('c.priority', 'DESC');
                 },
             'property' => 'name',
             'attr' => array('class' => 'master')
