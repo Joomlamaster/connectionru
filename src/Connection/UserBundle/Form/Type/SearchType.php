@@ -31,10 +31,6 @@ class SearchType extends AbstractType
     public static $heightFrom  = 1;
     public static $heightTo    = 99;
 
-    //weight range
-    public static $weightFrom  = 1;
-    public static $weightTo    = 99;
-
     private $profileCountryIso = array();
 
     public function __construct($profileCountryIso = array())
@@ -197,19 +193,13 @@ class SearchType extends AbstractType
                 'choices'   => $heightArray,
                 'empty_value' =>'Any height',
                 'required' => false
-            ));
-
-            $weightValues = range(self::$weightFrom, self::$weightTo);
-            $weightArray = $this->_getWeightArray();
-            $builder->add('minimumWeight', 'choice', array(
-                'choices'   => $weightArray,
-                'empty_value' =>'Any weight',
-                'required' => false
             ))
 
-            ->add('maximumWeight', 'choice', array(
-                'choices'   => $weightArray,
-                'empty_value' =>'Any weight',
+
+            ->add('bodyType', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\BodyType',
+                'property' => 'name',
+                'empty_value' =>'Anything',
                 'required' => false
             ))
 
@@ -360,30 +350,6 @@ class SearchType extends AbstractType
             "211" => "6' 11\" (211 cm)",
             "213" => "7' 0\" (213 cm)",
             "999" => "> 7' (> 213 cm)"
-        );
-    }
-
-    /**
-     * Get weight values kg/pounds.
-     *
-     * @return array
-     */
-    private function _getWeightArray(){
-        return array(
-            "0" => "< 48 kg (< 105.6 pounds)",
-            "48" => "48 kg (105.6 pounds)",
-            "53" => "53 kg (105.6 pounds)",
-            "56" => "56 kg (123.3 pounds)",
-            "58" => "58 kg (116.6 pounds)",
-            "62" => "62 kg (123.2 pounds)",
-            "63" => "63 kg (127.6 pounds)",
-            "69" => "69 kg (138.6 pounds)",
-            "75" => "75 kg (151.8 pounds)",
-            "77" => "77 kg (151.8 pounds)",
-            "85" => "85 kg (169.4 pounds)",
-            "94" => "94 kg (187 pounds)",
-            "105" => "105 kg (206.8 pounds)",
-            "999" => ">105 kg (> 206.8 pounds)"
         );
     }
 }
