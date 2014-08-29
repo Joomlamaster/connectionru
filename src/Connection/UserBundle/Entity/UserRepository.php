@@ -105,6 +105,11 @@ class UserRepository extends EntityRepository
             $qb->andWhere('p.education = :education')->setParameter('education', $filter['education']);
         }
 
+        //  Filter By educationIvyLeague
+        if ( !empty($filter['educationIvyLeague'])) {
+            $qb->andWhere('p.educationIvyLeague = :educationIvyLeague')->setParameter('educationIvyLeague', $filter['educationIvyLeague']);
+        }
+
         //  Filter By profession
         if ( !empty($filter['profession'])) {
             $qb->andWhere('p.profession = :profession')->setParameter('profession', $filter['profession']);
