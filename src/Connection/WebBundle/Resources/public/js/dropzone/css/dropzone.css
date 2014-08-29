@@ -397,3 +397,8 @@
         background-position: -7px -400px;
     }
 }
+
+div.dz-preview.dz-image-preview img {
+    height: auto;
+    max-width: 600px;
+}

@@ -5,6 +5,7 @@ namespace Connection\UserBundle\EventListener;
 use Connection\AdminBundle\Entity\Background;
 use Connection\UserBundle\Entity\Profile\Image;
 use Oneup\UploaderBundle\Event\PostPersistEvent;
+use Oneup\UploaderBundle\Event\PreUploadEvent;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -151,6 +152,12 @@ class FileUploadListener
 
         try {
             $simpleImage = new SimpleImage($file->getPath(). "/" . $file->getFileName());
+
+            if ($simpleImage->get_width() > 600) {
+                $simpleImage->fit_to_width(600);
+                $simpleImage->save();
+            }
+
             $simpleImage->crop($coordinates['x'], $coordinates['y'], $coordinates['x2'], $coordinates['y2']);
             $simpleImage->save();
             return true;
