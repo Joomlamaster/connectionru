@@ -5,7 +5,7 @@ namespace Connection\UserBundle\Entity\Profile;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Image
+ * Gallery
  *
  * @ORM\Table(name="user_gallery")
  * @ORM\Entity(repositoryClass="Connection\UserBundle\Entity\Profile\GalleryRepository")

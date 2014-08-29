@@ -5,12 +5,12 @@ namespace Connection\UserBundle\Entity\Profile;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Gender
+ * BodyType
  *
- * @ORM\Table(name="user_gender")
+ * @ORM\Table(name="user_body_type")
  * @ORM\Entity
  */
-class Gender
+class BodyType
 {
     /**
      * @var integer
@@ -30,15 +30,9 @@ class Gender
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
-     * @ORM\OneToMany(targetEntity="Connection\UserBundle\Entity\Profile", mappedBy="gender")
+     * @ORM\OneToMany(targetEntity="Connection\UserBundle\Entity\Profile", mappedBy="bodyType")
      */
     private $profile;
-
-    /**
-     * @var \Doctrine\Common\Collections\ArrayCollection
-     * @ORM\OneToMany(targetEntity="Connection\UserBundle\Entity\Profile", mappedBy="seek")
-     */
-    private $seek;
 
     /**
      * @return int
@@ -78,21 +72,5 @@ class Gender
     public function getProfile ()
     {
         return $this->profile;
-    }
-
-    /**
-     * @param \Doctrine\Common\Collections\ArrayCollection $seek
-     */
-    public function setSeek ( $seek )
-    {
-        $this->seek = $seek;
-    }
-
-    /**
-     * @return \Doctrine\Common\Collections\ArrayCollection
-     */
-    public function getSeek ()
-    {
-        return $this->seek;
     }
 }

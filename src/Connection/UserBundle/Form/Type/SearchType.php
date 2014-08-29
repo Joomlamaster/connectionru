@@ -35,6 +35,13 @@ class SearchType extends AbstractType
     public static $weightFrom  = 1;
     public static $weightTo    = 99;
 
+    private $profileCountryIso = array();
+
+    public function __construct($profileCountryIso = array())
+    {
+        $this->profileCountryIso = $profileCountryIso;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
 
@@ -43,6 +50,8 @@ class SearchType extends AbstractType
             'query_builder' => function(EntityRepository $er) {
                     return $er
                         ->createQueryBuilder('c')
+                        ->andWhere('c.iso IN (:iso)')
+                        ->setParameter('iso', $this->profileCountryIso)
                         ->orderBy('c.priority', 'DESC');
 
                 },
@@ -141,6 +150,7 @@ class SearchType extends AbstractType
                 },
                 'property' => 'name',
                 'multiple' => true,
+                'expanded' => true,
                 'required' => false
             ))
 
@@ -313,7 +323,7 @@ class SearchType extends AbstractType
 
     public function getName()
     {
-        return 'search';
+        return 'connection_search';
     }
 
     /**

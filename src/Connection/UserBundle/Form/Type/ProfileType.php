@@ -21,9 +21,31 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class ProfileType extends AbstractType
 {
+    private $profileCountryIso = array();
+
+    public function __construct($profileCountryIso = array())
+    {
+        $this->profileCountryIso = $profileCountryIso;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('country', 'entity', array(
+            'class' => 'ConnectionCoreBundle:Country',
+            'query_builder' => function(EntityRepository $er) {
+                    $qb = $er->createQueryBuilder('c');
+                    if(!empty($this->profileCountryIso)){
+                        $qb->where('c.iso IN (:iso)')
+                        ->setParameter('iso', $this->profileCountryIso);
+                    }
+                    return $qb->orderBy('c.priority', 'DESC');
+
+                },
+            'property' => 'name',
+            'attr' => array('class' => 'master')
+        ));
+
+        $builder->add('originallyFrom', 'entity', array(
             'class' => 'ConnectionCoreBundle:Country',
             'query_builder' => function(EntityRepository $er) {
                     return $er
@@ -109,12 +131,20 @@ class ProfileType extends AbstractType
 
                 },
                 'property' => 'name',
-                'multiple' => true
+                'multiple' => true,
+                'expanded' => true
+
             ))
 
             ->add('education', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Education',
                 'property' => 'name',
+            ))
+
+            ->add('educationIvyLeague', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\EducationIvyLeague',
+                'label' => 'Ivy league educated',
+                'property' => 'name'
             ))
 
             ->add('profession', 'entity', array(
@@ -146,8 +176,9 @@ class ProfileType extends AbstractType
                 'required' => false
             ))
 
-            ->add('weight', 'number', array(
-                'required' => false
+            ->add('bodyType', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\BodyType',
+                'property' => 'name',
             ))
 
             ->add('eyeColor', 'entity', array(
@@ -199,19 +230,25 @@ class ProfileType extends AbstractType
             ->add('ethnicity', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Ethnicity',
                 'property' => 'name',
+            ))
+            ->add('zodiacSign', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\Zodiac',
+                'property' => 'name'
             ));
 
             $builder->add('aboutMe', 'textarea');
             $builder->add('lookingForDescription', 'textarea', array(
                 'label' => "What I’m looking for"
             ));
-        ;
+
+
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'Connection\UserBundle\Entity\Profile',
+            'validation_groups' => array('profile')
         ));
     }
 

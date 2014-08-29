@@ -22,7 +22,7 @@ class EditProfileType extends AbstractType
         $builder
             ->add('firstName', 'text')
             ->add('lastName', 'text')
-            ->add('profile', new ProfileType(array('validation_groups' => array('profile'))))
+            ->add('profile', 'connection_user_profile')
             ->add('submit', 'submit');
     }
 

@@ -57,6 +57,12 @@ class Profile
     protected $country;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Connection\CoreBundle\Entity\Country", inversedBy="profile")
+     * @ORM\JoinColumn(name="originally_from", referencedColumnName="id")
+     **/
+    protected $originallyFrom;
+
+    /**
      * @Assert\NotNull(groups={"profile"})
      * @ORM\ManyToOne(targetEntity="Connection\CoreBundle\Entity\State", inversedBy="profile")
      * @ORM\JoinColumn(name="state", referencedColumnName="id")
@@ -68,6 +74,12 @@ class Profile
      * @ORM\JoinColumn(name="education", referencedColumnName="id")
      **/
     protected $education;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\EducationIvyLeague", inversedBy="profile")
+     * @ORM\JoinColumn(name="education_ivy_league", referencedColumnName="id")
+     **/
+    protected $educationIvyLeague;
 
     /**
      * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\Profession", inversedBy="profile")
@@ -129,12 +141,11 @@ class Profile
      */
     protected $height;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="weight", type="integer", nullable=true)
-     */
-    protected $weight;
+     /**
+     * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\BodyType", inversedBy="profile")
+     * @ORM\JoinColumn(name="body_type", referencedColumnName="id")
+     **/
+    protected $bodyType;
 
     /**
      * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\EyeColor", inversedBy="profile")
@@ -294,6 +305,22 @@ class Profile
     }
 
     /**
+     * @param mixed $originallyFrom
+     */
+    public function setOriginallyFrom ( $originallyFrom )
+    {
+        $this->originallyFrom = $originallyFrom;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOriginallyFrom ()
+    {
+        return $this->originallyFrom;
+    }
+
+    /**
      * @param string $aboutMe
      */
     public function setAboutMe ( $aboutMe )
@@ -359,6 +386,22 @@ class Profile
     public function setEducation ( $education )
     {
         $this->education = $education;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEducationIvyLeague ()
+    {
+        return $this->educationIvyLeague;
+    }
+
+    /**
+     * @param mixed $educationIvyLeague
+     */
+    public function setEducationIvyLeague ( $educationIvyLeague )
+    {
+        $this->educationIvyLeague = $educationIvyLeague;
     }
 
     /**
@@ -722,19 +765,19 @@ class Profile
     }
 
     /**
-     * @param int $weight
+     * @param mixed $bodyType
      */
-    public function setWeight ( $weight )
+    public function setBodyType ( $bodyType )
     {
-        $this->weight = $weight;
+        $this->bodyType = $bodyType;
     }
 
     /**
-     * @return int
+     * @return mixed
      */
-    public function getWeight ()
+    public function getBodyType ()
     {
-        return $this->weight;
+        return $this->bodyType;
     }
 
     /**

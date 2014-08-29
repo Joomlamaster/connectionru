@@ -20,7 +20,7 @@ class RegistrationType extends BaseType
 
         // add your custom field
         $builder
-            ->add('profile', new ProfileType(), array(
+            ->add('profile', 'connection_user_profile', array(
                 'required' => false
             ))
             ->add('agree', 'checkbox', array(

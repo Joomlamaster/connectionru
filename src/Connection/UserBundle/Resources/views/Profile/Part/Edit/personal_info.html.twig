@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-6">
+        <div class="col-xs-4">
             <div id="master_slave">
                 <div>
                     {{ form_row(form.profile.country) }}
@@ -38,6 +38,11 @@
                         {{ form_row(form.profile.state) }}
                     </div>
                 {% endif %}
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div>
+                {{ form_row(form.profile.originallyFrom) }}
             </div>
         </div>
     </div>
@@ -57,7 +62,7 @@
             {{ form_row(form.profile.height) }}
         </div>
         <div class="col-xs-3">
-            {{ form_row(form.profile.weight) }}
+            {{ form_row(form.profile.bodyType) }}
         </div>
         <div class="col-xs-3">
             {{ form_row(form.profile.eyeColor) }}

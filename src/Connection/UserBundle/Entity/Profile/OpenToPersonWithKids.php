@@ -5,7 +5,7 @@ namespace Connection\UserBundle\Entity\Profile;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Address
+ * OpenToPersonWithKids
  *
  * @ORM\Table(name="user_open_to_person_with_kids")
  * @ORM\Entity
