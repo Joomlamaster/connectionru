@@ -3,7 +3,7 @@
         <div class="author">
             <div class="people clearfix">
                 <div class="face postet-by">
-                    <a href="{{ path('view_profile', {'id': participant.profile.id}) }}">
+                    <a target="_blank" href="{{ path('view_profile', {'id': participant.profile.id}) }}">
                         <p class="name">{{ participant.username }}</p>
                         <img width="82px" src="{{ participant.profile.avatar }}">
                     </a>
