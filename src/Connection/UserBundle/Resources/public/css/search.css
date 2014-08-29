@@ -1,13 +1,25 @@
-#search_gender, #search_seek {
+#connection_search_gender,
+#connection_search_seek,
+#fos_user_registration_form_profile_gender,
+#fos_user_registration_form_profile_seek
+{
     border: none;
     padding-left: 3px;
 }
 
-#search_gender label, #search_seek label {
+#connection_search_gender label,
+#connection_search_seek label,
+#fos_user_registration_form_profile_gender label,
+#fos_user_registration_form_profile_seek label
+{
     display: inline;
     color: #4d4d4d;
 }
 
-#search_gender input, #search_seek input {
+#connection_search_gender input,
+#connection_search_seek input,
+#fos_user_registration_form_profile_gender input,
+#fos_user_registration_form_profile_seek input
+{
     margin: 8px 4px 0px 3px;
 }

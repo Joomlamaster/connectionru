@@ -36,7 +36,6 @@ FormAjaxFields = {
     'init': function() {
         $(function() {
             $("form.master_slave .master").on('change', function() {
-                console.log('asdasdasd');
                 $form = $(this).closest('form');
                 if ( $form.length ) {
                     master = $(this);
