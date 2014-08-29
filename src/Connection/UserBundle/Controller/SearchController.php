@@ -51,7 +51,7 @@ class SearchController extends Controller
     public function searchResultAction( Request $request, $page )
     {
         $session    = $request->getSession();
-        $form       = $this->createForm( new SearchType() );
+        $form       = $this->createForm('connection_search');
         $qform       = clone($form);
         $eform       = clone($form);
         $form->handleRequest($request);
