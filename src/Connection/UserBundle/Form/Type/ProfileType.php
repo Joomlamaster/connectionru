@@ -231,7 +231,7 @@ class ProfileType extends AbstractType
                 'class' => 'ConnectionUserBundle:Profile\Ethnicity',
                 'property' => 'name',
             ))
-            ->add('zodiacSign', 'entity', array(
+            ->add('zodiac', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Zodiac',
                 'property' => 'name'
             ));
