@@ -25,7 +25,7 @@ class FrontendController extends Controller
         //check if form was forwarded
         $searchForm = $this->getRequest()->get('searchForm');
         if(!isset($searchForm)){
-            $searchForm       = $this->createForm( new SearchType() );
+            $searchForm       = $this->createForm('connection_search');
             //remove captcha from quick search
             $searchForm->remove('captcha');
         }

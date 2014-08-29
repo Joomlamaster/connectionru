@@ -26,3 +26,7 @@ parameters:
     search.event.per_page: 6
     search.event.top.per_page: 6
     event.upcoming.block.limit: 3
+    
+    # Country form field for search/register forms will be 
+    # limited to this values
+    profile_country_iso: [US, CA, UK, IT, FR, DE, DK, AU, BR, MC, RU]

@@ -5,7 +5,7 @@ namespace Connection\UserBundle\Entity\Profile;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Address
+ * Religion
  *
  * @ORM\Table(name="user_religion")
  * @ORM\Entity

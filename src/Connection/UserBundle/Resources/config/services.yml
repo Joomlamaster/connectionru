@@ -35,3 +35,17 @@ services:
             container: @service_container
             appId: %twitter.key%
             secret: %twitter.secret%
+            
+    connection_user.profile.type:
+        class: Connection\UserBundle\Form\Type\ProfileType
+        arguments:            
+            profileCountryIso: %profile_country_iso%    
+        tags:
+          - { name: form.type, alias: connection_user_profile }
+          
+    connection_user.search.type:
+        class: Connection\UserBundle\Form\Type\SearchType
+        arguments:            
+            profileCountryIso: %profile_country_iso%    
+        tags:
+          - { name: form.type, alias: connection_search }

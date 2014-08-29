@@ -5,7 +5,7 @@ namespace Connection\UserBundle\Entity\Profile;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Address
+ * LookingFor
  *
  * @ORM\Table(name="user_looking_for")
  * @ORM\Entity

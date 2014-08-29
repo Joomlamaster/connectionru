@@ -21,7 +21,7 @@ class SearchController extends Controller
      */
     public function quickAction( Request $request )
     {
-        $form               = $this->createForm( new SearchType() );
+        $form = $this->createForm('connection_search');
 
         $form->handleRequest($request);
 
