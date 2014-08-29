@@ -63,7 +63,7 @@ class RegistrationController extends BaseController
         }
 
         $registrationType = $form->get('registrationType')->getData();
-        if ($registrationType == 'quick') {
+        if (empty($registrationType) || $registrationType == 'quick') {
             return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.' . $this->getEngine(), array(
                         'form' => $form->createView(),
             ));

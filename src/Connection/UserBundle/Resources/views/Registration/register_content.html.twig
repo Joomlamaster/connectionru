@@ -3,11 +3,12 @@
 
 {{ form_start(form, {'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register master_slave form-horizontal'}}) }}
         {{ form_errors(form) }}
+        {{ form_row(form.profile.gender) }}
+        {{ form_row(form.profile.seek) }}
+        {{ form_row(form.profile.birthdate) }}
         {{ form_row(form.username) }}
         {{ form_row(form.plainPassword) }}
         {{ form_row(form.email) }}
-        {{ form_row(form.profile.birthdate) }}
-        {{ form_row(form.profile.gender) }}
         <div class="master_slave">
             <div>
                 {{ form_row(form.profile.country) }}
