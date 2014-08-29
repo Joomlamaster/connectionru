@@ -60,7 +60,9 @@
                     {% if event.image %}
                         <div class="row">
                             <div class="col-xs-12">
-                                <img src="{{ event.image.path }}" alt=""/>
+                                <a class="title" href="{{ path('view_event', {'id': event.id}) }}">
+                                    <img src="{{ event.image.path }}" alt=""/>
+                                </a>
                             </div>
                         </div>
                     {% endif %}

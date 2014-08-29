@@ -902,3 +902,7 @@ button.btn-gradient.wide {
 div.ui-datepicker {
   font-size: 10px;
 }
+
+.badge.color-red {
+    background-color: red;
+}
