@@ -27,6 +27,9 @@
                             <img class="event-image img-rounded" width="190" src="{{ event.image.path is defined ? event.image.path : "" }}" alt=""/>
                             <strong>Share this event</strong>
                             <div class="social-share">
+                                <a id="tell-a-friend" href="#" class="btn btn-xs btn-info" title="Share with a friend">
+                                    <span class="glyphicon glyphicon-share"></span>
+                                </a>
                                 <a href="#">
                                     <div class="fb-share-button" data-type="button_count" data-href="{{ path('view_event', {'id': event.id}, true) }}"></div>
                                 </a>

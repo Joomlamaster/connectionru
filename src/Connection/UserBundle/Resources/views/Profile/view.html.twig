@@ -38,7 +38,12 @@
                                 <span class="glyphicon glyphicon-star"></span>
                             </a>
                         {% endif %}
-                        <a href="{{ path('message_new', {id: user.id}) }}" class="btn btn-info">Message</a>
+                        <a href="{{ path('message_new', {id: user.id}) }}" class="btn btn-xs btn-info">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                        </a>
+                        <a id="tell-a-friend" href="#" class="btn btn-xs btn-info" title="Share with a friend">
+                            <span class="glyphicon glyphicon-share"></span>
+                        </a>
                     {% endif %}
                 </div>
             </div>
