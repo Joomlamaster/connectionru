@@ -187,7 +187,9 @@ class SearchType extends AbstractType
             ->add('maritalStatus', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\MaritalStatus',
                 'property' => 'name',
-                'expanded' => true
+                'expanded' => true,
+                'empty_value' =>'Any status',
+                'required' => false
             ));
 
             $heightArray = $this->_getHeightArray();
