@@ -93,6 +93,7 @@ class ProfileType extends AbstractType
         // add your custom field
         $builder
             ->add('city', 'text')
+            ->add('zip', 'text')
 
             ->add('gender', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Gender',

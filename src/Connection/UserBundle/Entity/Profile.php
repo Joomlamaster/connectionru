@@ -77,6 +77,13 @@ class Profile
     protected $city;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="zip", type="string", length=50, nullable=true)
+     */
+    protected $zip;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\Education", inversedBy="profile")
      * @ORM\JoinColumn(name="education", referencedColumnName="id")
      **/
@@ -921,5 +928,21 @@ class Profile
     public function getCity ()
     {
         return $this->city;
+    }
+
+    /**
+     * @param string $zip
+     */
+    public function setZip ( $zip )
+    {
+        $this->zip = $zip;
+    }
+
+    /**
+     * @return string
+     */
+    public function getZip ()
+    {
+        return $this->zip;
     }
 }
