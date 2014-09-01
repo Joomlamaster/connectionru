@@ -52,13 +52,7 @@ class SearchController extends Controller
     {
         $session    = $request->getSession();
         $form       = $this->createForm('connection_search');
-        $qform       = clone($form);
-        $eform       = clone($form);
         $form->handleRequest($request);
-        $searchType = $form->get('searchType')->getData();
-        if(empty($searchType)){
-            $searchType = 'quick';
-        }
 
         if ($form->isSubmitted()) {
             if($form->isValid()){
@@ -73,12 +67,6 @@ class SearchController extends Controller
             $form->setData($data);
         }
 
-        if($searchType == 'quick'){
-            $qform = $form;
-        } else if($searchType == 'extended') {
-            $eform = $form;
-        }
-
         $limit      = $this->container->getParameter('search.user.per_page');
         $offset     = ($page * $limit) - $limit;
         $total      = count($this->getDoctrine()->getRepository('ConnectionUserBundle:User')->search($sessionSearch));
@@ -86,9 +74,7 @@ class SearchController extends Controller
         $users      = $this->getDoctrine()->getRepository('ConnectionUserBundle:User')->search($sessionSearch, $limit, $offset);
 
         return $this->render('ConnectionUserBundle:Search:result.html.twig', array(
-            'qform'  => $qform->createView(),
-            'eform'  => $eform->createView(),
-            'searchType' => $searchType,
+            'form'  => $form->createView(),
             'users' => $users,
             'nextPage' => $nextPage
         ));

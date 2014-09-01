@@ -97,13 +97,17 @@ class UserRepository extends EntityRepository
 
         //  Filter By languages
         if ( !empty($filter['languages']) && !$filter['languages']->isEmpty()) {
-            $langs = $filter['languages']->toArray();
             $qb->join('p.languages', 'l')->andWhere('l.id IN (:languages)')->setParameter('languages', $filter['languages']->toArray());
         }
 
         //  Filter By education
         if ( !empty($filter['education'])) {
             $qb->andWhere('p.education = :education')->setParameter('education', $filter['education']);
+        }
+
+        //  Filter By educationIvyLeague
+        if ( !empty($filter['educationIvyLeague'])) {
+            $qb->andWhere('p.educationIvyLeague = :educationIvyLeague')->setParameter('educationIvyLeague', $filter['educationIvyLeague']);
         }
 
         //  Filter By profession
@@ -136,14 +140,9 @@ class UserRepository extends EntityRepository
             $qb->andWhere('p.height <= :maximumHeight')->setParameter('maximumHeight', $filter['maximumHeight']);
         }
 
-        //  Filter By weightFrom
-        if ( !empty($filter['minimumWeight'])) {
-            $qb->andWhere('p.weight >= :minimumWeight')->setParameter('minimumWeight', $filter['minimumWeight']);
-        }
-
-        //  Filter By weightTo
-        if ( !empty($filter['maximumWeight'])) {
-            $qb->andWhere('p.weight <= :maximumWeight')->setParameter('maximumWeight', $filter['maximumWeight']);
+        //  Filter By bodyType
+        if ( !empty($filter['eyeColor'])) {
+            $qb->andWhere('p.bodyType = :bodyType')->setParameter('bodyType', $filter['bodyType']);
         }
 
         //  Filter By eyeColor
