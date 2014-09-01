@@ -23,7 +23,7 @@
 
 
     {# tab panes #}
-{{ form_start(form, {'action': path('user_search'), 'attr': {'class': 'search-result master_slave'}}) }}
+{{ form_start(form, {'action': path('user_search'), 'attr': {'class': 'search-result master_slave', 'id': 'search-form'}}) }}
 <div class="tab-content search-form">
 
     {# quick search tab #}
@@ -224,17 +224,48 @@
 </div>
 <script type="text/javascript">
     window.onload = function() {
+        var userGender = '{%if app.user %}{% if app.user.profile.gender.id == '1'%}1{%elseif app.user.profile.gender.id == '2'%}2{%endif%}{%endif%}';
+        var userSeek = '{%if app.user %}{% if app.user.profile.seek.id == '1'%}1{%elseif app.user.profile.seek.id == '2'%}2{%endif%}{%endif%}';
         resetForm = function(form) {
             $(form).find('input[type="radio"]').removeAttr('checked');
-            $(form).find('select option').removeAttr('selected');        }
-            $('#quick-search-btn').click(function(){
-                $('#{{form.searchType.vars.id}}').val('quick');
-                $('#extended-search-tab').hide();
-            });
-            $('#extended-search-btn').click(function(){
-                $('#{{form.searchType.vars.id}}').val('extended');
-                $('#extended-search-tab').show();
-            });
+            $(form).find('#{{form.maritalStatus.vars.id}} input:first').attr('checked', 'checked');
+            $(form).find('select option').removeAttr('selected');
+            updateGender(form);
+            updateSeek(form);
+        }
+
+        updateGender = function(form){
+            if(userGender === '2'){
+                $(form).find('#{{form.gender.vars.id}} input:nth-child(1)').attr('checked', 'checked');
+            } else {
+                $(form).find('#{{form.gender.vars.id}} input:first').attr('checked', 'checked');
+            }
+        }
+
+        updateSeek = function(form){
+            if(!userSeek || userSeek === '2'){
+                $(form).find('#{{form.seek.vars.id}} input:nth-child(1)').attr('checked', 'checked');
+            } else {
+                $(form).find('#{{form.seek.vars.id}} input:first').attr('checked', 'checked');
+            }
+        }
+
+        if('{{form.gender.vars.data is empty}}'){
+            updateGender('#search-form');
+        }
+        if('{{form.seek.vars.data is empty}}'){
+            updateSeek('#search-form');
+        }
+
+
+        $('#quick-search-btn').click(function(){
+            $('#{{form.searchType.vars.id}}').val('quick');
+            $('#extended-search-tab').hide();
+        });
+        $('#extended-search-btn').click(function(){
+            $('#{{form.searchType.vars.id}}').val('extended');
+            $('#extended-search-tab').show();
+        });
     }
 </script>
 {% endblock %}
