@@ -692,6 +692,12 @@ body.search-event .search-form .form-inline .radio-inline label {
 body.search-event .search-form .form-inline .radio-inline .radio {
   margin-bottom: 2px;
 }
+body.search-event .search-form .form-inline .checkbox {
+  width: 33%;
+}
+body.search-event .search-form .form-inline .checkbox label {
+  color: #555;
+}
 body.search-event .found-1 {
   text-align: center;
 }
@@ -898,11 +904,10 @@ button.btn-gradient.wide {
 .tell-a-friend button {
   margin: 10px 0px 0px 0px;
 }
+.badge.color-red {
+  background-color: red;
+}
 /* jQuery UI */
 div.ui-datepicker {
   font-size: 10px;
-}
-
-.badge.color-red {
-    background-color: red;
 }
