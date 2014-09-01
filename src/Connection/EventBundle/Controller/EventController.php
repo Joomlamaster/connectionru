@@ -64,8 +64,13 @@ class EventController extends Controller
         }
         $em      = $this->getDoctrine()->getManager();
         $imageId = $request->get('image_id');
+
         if ( !$id || !$event = $em->getRepository('ConnectionEventBundle:Event')->find($id) ) {
             $event  = new Event();
+        } else {
+            if ($user->getId() !=  $event->getUser()->getId() ) {
+                return $this->redirect( $this->generateUrl('connection_homepage') );
+            }
         }
 
         $form = $this->createForm(new EventType(), $event);
