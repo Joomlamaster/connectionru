@@ -70,6 +70,13 @@ class Profile
     protected $state;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=50, nullable=true)
+     */
+    protected $city;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\Education", inversedBy="profile")
      * @ORM\JoinColumn(name="education", referencedColumnName="id")
      **/
@@ -898,5 +905,21 @@ class Profile
     public function getLookingForDescription ()
     {
         return $this->lookingForDescription;
+    }
+
+    /**
+     * @param string $city
+     */
+    public function setCity ( $city )
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCity ()
+    {
+        return $this->city;
     }
 }
