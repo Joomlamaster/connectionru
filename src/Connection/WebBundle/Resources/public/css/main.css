@@ -692,10 +692,10 @@ body.search-event .search-form .form-inline .radio-inline label {
 body.search-event .search-form .form-inline .radio-inline .radio {
   margin-bottom: 2px;
 }
-body.search-event .search-form .form-inline .checkbox {
+body.search-event .search-form .form-inline #connection_search_languages .checkbox {
   width: 33%;
 }
-body.search-event .search-form .form-inline .checkbox label {
+body.search-event .search-form .form-inline #connection_search_languages .checkbox label {
   color: #555;
 }
 body.search-event .found-1 {
