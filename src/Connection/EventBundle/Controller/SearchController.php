@@ -25,7 +25,6 @@ class SearchController extends Controller
     public function searchAction( Request $request, $page )
     {
         $filter     = array();
-        $filteredBy = array();
         $topLimit   = $this->container->getParameter('search.event.top.per_page');
         $limit      = $this->container->getParameter('search.event.per_page');
 
@@ -54,8 +53,7 @@ class SearchController extends Controller
             'events'        => $events,
             'pages'         => $pages,
             'currentPage'   => $page,
-            'form'          => $form->createView(),
-            'filteredBy'    => $filteredBy
+            'form'          => $form->createView()
         );
     }
 }
