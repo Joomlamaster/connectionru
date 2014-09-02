@@ -44,6 +44,9 @@
                         <a id="tell-a-friend" href="#" class="btn btn-xs btn-info" title="Share with a friend">
                             <span class="glyphicon glyphicon-share"></span>
                         </a>
+                        <a id="tell-a-friend" href="#" class="btn btn-xs btn-info  fos-message hi-message" title="Send 'Hi' message">
+                            <span class="glyphicon">Hi!</span>
+                        </a>
                     {% endif %}
                 </div>
             </div>
@@ -83,6 +86,7 @@
 {% block javascript %}
     {{ parent() }}
     <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/popup/popup.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionuser/js/fos_message.js') }}"></script>
     <script type="text/javascript">
         {# PopUp Listener (Upload/View/Update) #}
         FM.popUp.listen("{{ path('update_profile_image') }}");
@@ -91,5 +95,7 @@
             e.preventDefault();
             $(this).tab('show');
         });
+
+        FosMessage.init("{{ path('user_message_hi', {'id': user.id}) }}");
     </script>
 {% endblock %}
