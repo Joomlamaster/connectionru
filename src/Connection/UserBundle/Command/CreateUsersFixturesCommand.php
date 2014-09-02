@@ -11,6 +11,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Connection\UserBundle\Entity\User;
 use Connection\UserBundle\Entity\Profile;
 use Connection\EventBundle\Entity\Event;
+use Connection\UserBundle\Entity\Profile\Gallery;
+use Connection\UserBundle\Entity\Profile\Image;
 
 /**
  * Description of CreateUsersFixturesCommand
@@ -37,9 +39,12 @@ class CreateUsersFixturesCommand extends ContainerAwareCommand
         $eventCategoryRepo = $em->getRepository('ConnectionEventBundle:Category');
         $userManager = $this->getContainer()->get('fos_user.user_manager');
 
+        $rootDir = $this->getContainer()->get('kernel')->getRootDir().'/../web/';
+
         $userArray = $this->_getUserArray();
 
         foreach ($userArray as $userItem) {
+            $output->writeln('Creating user: '.$userItem['username']);
             $user = $userRepo->findOneBy(array('username' => $userItem['username']));
             if($user){
                 $em->remove($user);
@@ -83,10 +88,43 @@ class CreateUsersFixturesCommand extends ContainerAwareCommand
 
                 }
                 $event->setCategory($collection);
+
+                $image = new Image();
+                $imageName = $userItem['username'].'Event.jpeg';
+                $imagePath = 'uploads/user/event/'.$user->getId();
+                $pathFrom = $rootDir.'uploads/user/fixtures/'.$imageName;
+                $pathTo = $rootDir.$imagePath.'/'.$imageName;
+                mkdir($rootDir.$imagePath);
+                copy($pathFrom, $pathTo);
+                $image->setName($imageName);
+                $image->setPath('/'.$imagePath.'/'.$imageName);
+                $event->setImage($image);
                 $em->persist($event);
                 $em->flush();
             }
 
+            $gallery = $user->getGalleries()->first();
+            $gallery->setUser($user);
+            $gallery->setTitle('Profile Images');
+            $gallery->setDefault(true);
+
+            $image = new Image();
+            $imageName = $userItem['username'].'.jpeg';
+            $imagePath = 'uploads/user/profile/'.$user->getId();
+            $pathFrom = $rootDir.'uploads/user/fixtures/'.$imageName;
+            $pathTo = $rootDir.$imagePath.'/'.$imageName;
+            mkdir($rootDir.$imagePath);
+            copy($pathFrom, $pathTo);
+            $image->setName($imageName);
+            $image->setPath('/'.$imagePath.'/'.$imageName);
+            $profile->setAvatar('/'.$imagePath.'/'.$imageName);
+            $image->setGallery($gallery);
+
+            $collection = new ArrayCollection();
+            $collection->add($image);
+            $gallery->setImages($collection);
+            $em->persist($gallery);
+            $em->flush();
         }
     }
 
@@ -104,7 +142,7 @@ class CreateUsersFixturesCommand extends ContainerAwareCommand
                 ),
                 'events' => array(
                     0 => array(
-                        'title' => 'New Event',
+                        'title' => 'Surfing',
                         'description' => 'Event description',
                         'categories' => array(
                             '1' => 'General',
@@ -127,7 +165,7 @@ class CreateUsersFixturesCommand extends ContainerAwareCommand
                 ),
                 'events' => array(
                     0 => array(
-                        'title' => 'New Event',
+                        'title' => 'Dance Party',
                         'description' => 'Event description',
                         'categories' => array(
                             '1' => 'General'
@@ -137,7 +175,7 @@ class CreateUsersFixturesCommand extends ContainerAwareCommand
                 )
             ),
             2 => array(
-                'username' => 'Will',
+                'username' => 'WillSmith',
                 'profile' => array(
                     'gender' => 1,
                     'seek' => 2,
@@ -147,7 +185,7 @@ class CreateUsersFixturesCommand extends ContainerAwareCommand
                 ),
                 'events' => array(
                     0 => array(
-                        'title' => 'New Event',
+                        'title' => 'Stars Party',
                         'description' => 'Event description',
                         'categories' => array(
                             '1' => 'General'
@@ -157,17 +195,17 @@ class CreateUsersFixturesCommand extends ContainerAwareCommand
                 )
             ),
             3 => array(
-                'username' => 'George',
+                'username' => 'Samantha',
                 'profile' => array(
-                    'gender' => 1,
-                    'seek' => 2,
+                    'gender' => 2,
+                    'seek' => 1,
                     'birthdate' => \DateTime::createFromFormat('Y-m-d', '1983-04-05'),
                     'country' => 'US',
                     'state' => 'Arkansas'
                 ),
                 'events' => array(
                     0 => array(
-                        'title' => 'New Event',
+                        'title' => 'Fashion Show',
                         'description' => 'Event description',
                         'categories' => array(
                             '1' => 'General'
@@ -177,9 +215,9 @@ class CreateUsersFixturesCommand extends ContainerAwareCommand
                 )
             ),
             4 => array(
-                'username' => 'Aziz',
+                'username' => 'Angelina',
                 'profile' => array(
-                    'gender' => 1,
+                    'gender' => 2,
                     'seek' => 1,
                     'birthdate' => \DateTime::createFromFormat('Y-m-d', '1985-04-05'),
                     'country' => 'US',
@@ -187,7 +225,7 @@ class CreateUsersFixturesCommand extends ContainerAwareCommand
                 ),
                 'events' => array(
                     0 => array(
-                        'title' => 'White Sensation',
+                        'title' => 'Hollywood Party',
                         'description' => 'Event description',
                         'categories' => array(
                             '1' => 'General'
@@ -197,9 +235,9 @@ class CreateUsersFixturesCommand extends ContainerAwareCommand
                 )
             ),
             5 => array(
-                'username' => 'Moiseev',
+                'username' => 'Avril',
                 'profile' => array(
-                    'gender' => 1,
+                    'gender' => 2,
                     'seek' => 1,
                     'birthdate' => \DateTime::createFromFormat('Y-m-d', '1975-04-05'),
                     'country' => 'US',
@@ -207,7 +245,7 @@ class CreateUsersFixturesCommand extends ContainerAwareCommand
                 ),
                 'events' => array(
                     0 => array(
-                        'title' => 'Blue Moon Party',
+                        'title' => 'Avril Lavigne Concert',
                         'description' => 'Event description',
                         'categories' => array(
                             '1' => 'General'
@@ -217,17 +255,17 @@ class CreateUsersFixturesCommand extends ContainerAwareCommand
                 )
             ),
             6 => array(
-                'username' => 'Lisa',
+                'username' => 'HewLorry',
                 'profile' => array(
-                    'gender' => 2,
-                    'seek' => 1,
+                    'gender' => 1,
+                    'seek' => 2,
                     'birthdate' => \DateTime::createFromFormat('Y-m-d', '1989-04-05'),
                     'country' => 'US',
                     'state' => 'Arkansas'
                 ),
                 'events' => array(
                     0 => array(
-                        'title' => 'Girl Party',
+                        'title' => 'Chirurgy Party',
                         'description' => 'Event description',
                         'categories' => array(
                             '1' => 'General'
@@ -247,7 +285,7 @@ class CreateUsersFixturesCommand extends ContainerAwareCommand
                 ),
                 'events' => array(
                     0 => array(
-                        'title' => 'Birthday Party',
+                        'title' => 'Girls Party',
                         'description' => 'Event description',
                         'categories' => array(
                             '1' => 'General'
@@ -257,7 +295,7 @@ class CreateUsersFixturesCommand extends ContainerAwareCommand
                 )
             ),
             8 => array(
-                'username' => 'Monica',
+                'username' => 'Sarha',
                 'profile' => array(
                     'gender' => 2,
                     'seek' => 1,
@@ -267,7 +305,7 @@ class CreateUsersFixturesCommand extends ContainerAwareCommand
                 ),
                 'events' => array(
                     0 => array(
-                        'title' => 'Geburtstagsparty',
+                        'title' => 'Party On The Beach',
                         'description' => 'Event description',
                         'categories' => array(
                             '1' => 'General'
@@ -276,7 +314,7 @@ class CreateUsersFixturesCommand extends ContainerAwareCommand
                     )
                 )
             ),
-            8 => array(
+            9 => array(
                 'username' => 'Eveline',
                 'profile' => array(
                     'gender' => 2,
@@ -287,56 +325,17 @@ class CreateUsersFixturesCommand extends ContainerAwareCommand
                 ),
                 'events' => array(
                     0 => array(
-                        'title' => 'Music Party',
+                        'title' => 'Party Night',
                         'description' => 'Event description',
                         'categories' => array(
                             '1' => 'General'
                         ),
                         'date' => \DateTime::createFromFormat('Y-m-d', '2014-10-01'),
-                    )
-                )
-            ),
-            8 => array(
-                'username' => 'Ana',
-                'profile' => array(
-                    'gender' => 2,
-                    'seek' => 2,
-                    'birthdate' => \DateTime::createFromFormat('Y-m-d', '1990-04-05'),
-                    'country' => 'FR',
-                    'state' => 'Centre'
-                ),
-                'events' => array(
-                    0 => array(
-                        'title' => 'Girls Party',
-                        'description' => 'Event description',
-                        'categories' => array(
-                            '1' => 'General'
-                        ),
-                        'date' => \DateTime::createFromFormat('Y-m-d', '2014-10-01'),
-                    )
-                )
-            ),
-            9 => array(
-                'username' => 'Veronique',
-                'profile' => array(
-                    'gender' => 2,
-                    'seek' => 2,
-                    'birthdate' => \DateTime::createFromFormat('Y-m-d', '1989-04-05'),
-                    'country' => 'FR',
-                    'state' => 'Corsica'
-                ),
-                'events' => array(
-                    0 => array(
-                        'title' => 'Beach Party',
-                        'description' => 'Event description',
-                        'categories' => array(
-                            '1' => 'General'
-                        ),
-                        'date' => \DateTime::createFromFormat('Y-m-d', '2015-07-01'),
                     )
                 )
             ),
         );
     }
+
 
 }
