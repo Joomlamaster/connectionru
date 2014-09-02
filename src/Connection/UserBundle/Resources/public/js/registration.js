@@ -21,7 +21,6 @@ FormAjaxFields = {
             type: $form.attr('method'),
             data : data,
             success: function(html) {
-                console.log($(html).find(FormAjaxFields.cfg.slave.elem));
                 if ( $form.find(FormAjaxFields.cfg.slave.elem).length ) {
                     $form.find(FormAjaxFields.cfg.slave.elem).replaceWith(
                         $(html).find(FormAjaxFields.cfg.slave.elem)
