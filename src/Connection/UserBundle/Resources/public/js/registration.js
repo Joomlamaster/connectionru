@@ -45,7 +45,9 @@ FormAjaxFields = {
 
                 }
             });
-            $("form.master_slave .master").trigger('change');
+            if ( $(".slave_block").length == 0 ) {
+                $("form.master_slave .master").trigger('change');
+            }
         });
     }
 };
