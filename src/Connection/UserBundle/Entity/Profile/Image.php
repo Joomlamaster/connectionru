@@ -135,7 +135,18 @@ class Image
      * @ORM\PreRemove()
      */
     public function removeFiles() {
-        unlink($this->getUploadRootDir());
+        $imagePath = $this->getUploadRootDir();
+        if(file_exists($imagePath)){
+            unlink($imagePath);
+        }
+        $dirParts = explode('/', $imagePath);
+        unset($dirParts[count($dirParts)-1]);
+        $dirPath = join('/', $dirParts);
+        if(is_dir($dirPath)){
+            if(count(glob($dirPath."/*")) === 0){
+                rmdir($dirPath);
+            }
+        }
     }
 
     /**
