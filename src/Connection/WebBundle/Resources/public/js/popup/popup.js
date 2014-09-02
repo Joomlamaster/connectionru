@@ -7,6 +7,9 @@ FM = {
             FM.updateProfileImageUrl = updateProfileImageUrl;
             FM.popUp.addProfileImage();
             FM.popUp.viewProfileImage();
+            $('.fm-close-popup').on('click', function(){
+                FM.popUp.closePopup();
+            });
         },
         'addProfileImage': function() {
             $('.fm-show-popup').on('click', function() {

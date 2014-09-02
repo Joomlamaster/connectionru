@@ -37,3 +37,21 @@
     top: 185px;
     left: 50px;
 }
+
+.add-image {
+    margin: 10px;
+    border: 1px solid #ccc;
+    float: left;
+    text-align: center;
+    height: 195px;
+    width: 120px;
+    cursor: pointer;
+}
+
+.add-image img {
+    padding:2px;
+    width: 100px;
+    float: none;
+    display: block;
+    margin: 35px 0px 0px 10px;
+}

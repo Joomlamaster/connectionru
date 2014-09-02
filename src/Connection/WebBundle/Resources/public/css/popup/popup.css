@@ -75,3 +75,13 @@
     opacity: 0.5;
     z-index: 10;
 }
+
+.fm-close-popup {
+    position: absolute;
+    right: 0px;
+    cursor: pointer;
+    top: 0px;
+    background: url('/bundles/connectionweb/img/close.png') no-repeat;
+    width: 30px;
+    height: 30px;
+}
