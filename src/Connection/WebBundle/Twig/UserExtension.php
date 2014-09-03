@@ -5,11 +5,17 @@ namespace Connection\WebBundle\Twig;
 
 class UserExtension extends \Twig_Extension
 {
+    private $converter;
+    public function __construct($converter)
+    {
+        $this->converter = $converter;
+    }
     public function getFilters()
     {
         return array(
             new \Twig_SimpleFilter('userAge', array($this, 'userAge')),
             new \Twig_SimpleFilter('userCountry', array($this, 'userCountry')),
+            new \Twig_SimpleFilter('cmToFootViewFormat', array($this, 'cmToFootViewFormat')),
         );
     }
 
@@ -22,6 +28,11 @@ class UserExtension extends \Twig_Extension
         $now    = new \DateTime();
         $diff   = $now->diff($value);
         return $diff->y;
+    }
+
+    public function cmToFootViewFormat($cm)
+    {
+        return $this->converter->footViewFormat($this->converter->cmToFoot($cm));
     }
 
     public function getName()

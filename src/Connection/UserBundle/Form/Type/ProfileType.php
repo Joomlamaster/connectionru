@@ -22,10 +22,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 class ProfileType extends AbstractType
 {
     private $profileCountryIso = array();
+    private $converter;
 
-    public function __construct($profileCountryIso = array())
+    public function __construct($profileCountryIso = array(), $converter)
     {
         $this->profileCountryIso = $profileCountryIso;
+        $this->converter = $converter;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -173,8 +175,8 @@ class ProfileType extends AbstractType
                 'expanded' => true
             ))
 
-            ->add('height', 'number', array(
-                'required' => false
+            ->add('height', 'choice', array(
+                'choices' => $this->height()
             ))
 
             ->add('bodyType', 'entity', array(
@@ -256,5 +258,15 @@ class ProfileType extends AbstractType
     public function getName()
     {
         return 'connection_user_profile';
+    }
+
+    private function height()
+    {
+        $result = array();
+        for ($i = 100; $i <= 220; $i++) {
+            $result[$i] = $this->converter->footViewFormat($this->converter->cmToFoot($i));
+        }
+
+        return array_unique($result);
     }
 }

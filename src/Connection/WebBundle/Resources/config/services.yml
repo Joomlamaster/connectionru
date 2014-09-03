@@ -1,6 +1,8 @@
 services:
     connection.web.user_extension:
         class: Connection\WebBundle\Twig\UserExtension
+        arguments:
+            converter: @connection_user.converter
         tags:
             - { name: twig.extension }
 

@@ -15,7 +15,7 @@
             <h6><b>Seeking</b>: {{ user.profile.seek.name }}</h6>
         {% endif %}
         {% if user.profile.height is defined and user.profile.height is not empty %}
-            <h6><b>Height</b>: {{ user.profile.height }}</h6>
+            <h6><b>Height</b>: {{ user.profile.height|cmToFootViewFormat }}</h6>
         {% endif %}
         {% if user.profile.weight is defined and user.profile.weight is not empty %}
             <h6><b>Weight</b>: {{ user.profile.weight }}</h6>

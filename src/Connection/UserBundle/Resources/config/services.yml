@@ -39,7 +39,8 @@ services:
     connection_user.profile.type:
         class: Connection\UserBundle\Form\Type\ProfileType
         arguments:            
-            profileCountryIso: %profile_country_iso%    
+            profileCountryIso: %profile_country_iso%
+            converter: @connection_user.converter
         tags:
           - { name: form.type, alias: connection_user_profile }
           
@@ -49,3 +50,6 @@ services:
             profileCountryIso: %profile_country_iso%    
         tags:
           - { name: form.type, alias: connection_search }
+
+    connection_user.converter:
+            class: Connection\UserBundle\Service\ConverterService
