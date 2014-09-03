@@ -10,17 +10,18 @@
         </div>
         <div class="navbar-collapse collapse">
             {% if is_granted('ROLE_USER') %}
-                <h4 class="navbar-form navbar-right" style="color:#fff;">
-                    Hello <a href="{{ path('edit_user_profile') }}">{{ app.user.username }}</a>
-                    <a href="{{ path('fos_user_security_logout') }}">| Logout</a>
-                </h4>
-                <p style="color: #ffffff" class="navbar-form navbar-right">
-                    <a href="{{ path('message_inbox') }}">Messages
-                        <span class="badge {{ fos_message_nb_unread() > 0 ? "color-red": "" }}">
-                            {{ fos_message_nb_unread() }}
-                        </span>
-                    </a>
-                </p>
+                <ul class="nav navbar-nav pull-right">
+                    <li class="dropdown search-item">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-user"></span> {{ app.user.username }}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ path('edit_user_profile') }}">My Profile</a></li>
+                            <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
             {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
                 {% include 'ConnectionUserBundle:Default:login_form.html.twig' %}
             {% endif %}
