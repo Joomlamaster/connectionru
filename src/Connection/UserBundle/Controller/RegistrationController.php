@@ -86,4 +86,43 @@ class RegistrationController extends BaseController
         ));
     }
 
+    /**
+     * Receive the confirmation token from user email provider, login the user
+     */
+    public function confirmAction(Request $request, $token)
+    {
+        /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
+        $userManager = $this->container->get('fos_user.user_manager');
+
+        $user = $userManager->findUserByConfirmationToken($token);
+
+        if (null === $user) {
+            throw new NotFoundHttpException(sprintf('The user with confirmation token "%s" does not exist', $token));
+        }
+
+        /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
+        $dispatcher = $this->container->get('event_dispatcher');
+
+        $user->setConfirmationToken(null);
+        $user->setEnabled(true);
+
+        $event = new GetResponseUserEvent($user, $request);
+        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRM, $event);
+
+        $userManager->updateUser($user);
+
+        if (null === $response = $event->getResponse()) {
+            $url = $this->container->get('router')->generate('edit_user_profile');
+            $request->getSession()->getFlashBag()->add(
+                'notice',
+                'Registration Complete, Please fill out your profile information.'
+            );
+            $response = new RedirectResponse($url);
+        }
+
+        $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRMED, new FilterUserResponseEvent($user, $request, $response));
+
+        return $response;
+    }
+
 }
