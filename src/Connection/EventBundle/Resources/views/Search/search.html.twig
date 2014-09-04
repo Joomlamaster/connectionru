@@ -9,10 +9,17 @@
 
 {% block breadcrumbs %}
     <div class="container breadcrumbs">
-        <ul>
-            <li><a href="{{ path('connection_homepage') }}">Main page</a></li>
-            <li>Search Event</li>
-        </ul>
+        <div class="col-xs-6">
+            <ul class="col-xs-6">
+                <li><a href="{{ path('connection_homepage') }}">Main page</a></li>
+                <li>Search Event</li>
+            </ul>
+        </div>
+        <div class="col-xs-6">
+            <a href="{{ path('event_manage') }}" class="btn btn-info pull-right" style="margin-top: 5px;">
+                <span class="glyphicon glyphicon-plus-sign"></span> Add Event
+            </a>
+        </div>
     </div>
 {% endblock breadcrumbs %}
 {% block content %}

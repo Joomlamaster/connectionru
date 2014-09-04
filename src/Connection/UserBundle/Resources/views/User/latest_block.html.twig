@@ -5,7 +5,7 @@
                 {% if user.profile.avatar is defined and user.profile.avatar is not empty %}
                     <img style="position: absolute;" width="83px" height="112px" src="{{ user.profile.avatar }}">
                 {% endif %}
-                <div class="info">
+                <div class="info redirect" data-href="{{ path('view_profile', {id: user.profile.id}) }}">
                     <p class="name">{{ user.userName }}</p>
                     <p>{{ user.profile.birthdate|userAge}} {{ user.profile.state.name is defined ? "," ~ user.profile.state.name : ""}}</p>
 

@@ -9,6 +9,8 @@ DropZoneStoreage = {
                     return;
                 });
 
+                $('.dz-upload-message').on('click', function(){ $(this).parent().trigger('click')});
+
                 this.on("addedfile", function(file) {
                     $('.dz-upload-message').addClass('hidden');
                     setTimeout(function() {

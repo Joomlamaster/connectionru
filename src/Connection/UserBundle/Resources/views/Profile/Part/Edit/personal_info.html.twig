@@ -1,13 +1,13 @@
 {% if form is defined %}
     {{ form_start(form, {'action': path('edit_user_profile'), 'method': 'POST', 'attr': {'class': 'master_slave'}}) }}
-    <div class="row">
-        <div class="col-xs-6">
-            {{ form_row(form.firstName) }}
-        </div>
-        <div class="col-xs-6">
-            {{ form_row(form.lastName) }}
-        </div>
-    </div>
+    {#<div class="row">#}
+        {#<div class="col-xs-6">#}
+            {#{{ form_row(form.firstName) }}#}
+        {#</div>#}
+        {#<div class="col-xs-6">#}
+            {#{{ form_row(form.lastName) }}#}
+        {#</div>#}
+    {#</div>#}
     <div class="row">
         <div class="col-xs-6">
             {{ form_row(form.profile.aboutMe) }}

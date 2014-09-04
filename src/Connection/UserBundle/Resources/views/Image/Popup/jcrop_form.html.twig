@@ -4,18 +4,8 @@
             <label form="profile_default_image">Set as default profile image
                 <input name="profile_default_image" type="checkbox" checked="checked" value="1">
             </label>
-            {#{% if galleries is defined %}#}
-                {#<label form="profile_default_image">Gallery#}
-                    {#<select name="gallery">#}
-                        {#{% for gallery in galleries %}#}
-                            {#<option value="{{ gallery.id }}">{{ gallery.title }}</option>#}
-                        {#{% endfor %}#}
-                    {#</select>#}
-                {#</label>#}
-            {#{% endif %}#}
         </div>
         {{ form_rest(form) }}
-        {#<input type="hidden" name="property_id" value="{{ property.id }}">#}
-    <div class="dz-upload-message" style="font-size: 23px;"><span>Drop file here to upload (or click)</span></div>
+        <div class="dz-upload-message" style="font-size: 23px;"><span>Click here to browse a photo (or drop)</span></div>
     </form>
 </div>

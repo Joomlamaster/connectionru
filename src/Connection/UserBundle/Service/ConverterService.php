@@ -30,4 +30,12 @@ class ConverterService {
         $formatted = number_format($foot, 1, "'", '');
         return $formatted . '"';
     }
+
+    public function cmViewFormat($cm)
+    {
+        if (empty($cm) || !is_numeric($cm)) {
+            throw new \Exception('Cannot format, invalid value');
+        }
+        return $cm . ' cm';
+    }
 }

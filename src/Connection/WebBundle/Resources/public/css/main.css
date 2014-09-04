@@ -132,6 +132,7 @@ body {
   opacity: 0.8;
   display: block;
   height: 100%;
+  cursor: pointer;
 }
 .jumbotron .main-block .people .face:hover .info p {
   font-size: 10px;

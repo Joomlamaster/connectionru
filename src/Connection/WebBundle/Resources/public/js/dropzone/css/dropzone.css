@@ -15,6 +15,10 @@
 .dropzone.dz-clickable {
     cursor: pointer;
 }
+
+.dz-clickable {
+    cursor: pointer;
+}
 .dropzone.dz-clickable .dz-message,
 .dropzone.dz-clickable .dz-message span {
     cursor: pointer;

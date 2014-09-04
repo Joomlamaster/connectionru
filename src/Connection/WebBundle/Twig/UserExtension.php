@@ -16,6 +16,7 @@ class UserExtension extends \Twig_Extension
             new \Twig_SimpleFilter('userAge', array($this, 'userAge')),
             new \Twig_SimpleFilter('userCountry', array($this, 'userCountry')),
             new \Twig_SimpleFilter('cmToFootViewFormat', array($this, 'cmToFootViewFormat')),
+            new \Twig_SimpleFilter('cmViewFormat', array($this, 'cmViewFormat')),
         );
     }
 
@@ -28,6 +29,11 @@ class UserExtension extends \Twig_Extension
         $now    = new \DateTime();
         $diff   = $now->diff($value);
         return $diff->y;
+    }
+
+    public function cmViewFormat($cm)
+    {
+        return $this->converter->cmViewFormat($cm);
     }
 
     public function cmToFootViewFormat($cm)
