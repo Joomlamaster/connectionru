@@ -52,7 +52,9 @@ class SearchType extends AbstractType
 
                 },
             'property' => 'name',
-            'attr' => array('class' => 'master')
+            'attr' => array('class' => 'master'),
+            'empty_value' => 'Any',
+            'required' => false
         ));
 
         $formModifier = function (FormInterface $form, Country $country = null) {
@@ -116,17 +118,17 @@ class SearchType extends AbstractType
             $ageArray = array_combine($values, $values);
 
             $builder->add('ageFrom', 'choice', array(
-                'constraints' => new NotBlank(),
                 'choices'   => $ageArray,
                 'data' => self::$defaultSelectedFrom,
-                'required' => true
+                'empty_value' => 'Any',
+                'required' => false
             ))
 
             ->add('ageTo', 'choice', array(
-                'constraints' => new NotBlank(),
                 'choices'   => $ageArray,
                 'data' => self::$defaultSelectedTo,
-                'required' => true
+                'empty_value' => 'Any',
+                'required' => false
             ))
 
             ->add('lookingFor', 'entity', array(
