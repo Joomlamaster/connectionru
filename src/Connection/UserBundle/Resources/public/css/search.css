@@ -23,3 +23,24 @@
 {
     margin: 8px 4px 0px 3px;
 }
+
+/*Search Profile Page*/
+.search-result-profile {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 2px;
+    border-radius: 3px;
+}
+
+.search-result-profile-photo {
+    padding: 0px;
+    width: auto;
+}
+
+.search-result-profile-info {
+    padding:10px;
+}
+
+.search-result-profile-container {
+    padding: 0px;
+}

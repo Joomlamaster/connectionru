@@ -3,8 +3,9 @@
         <h4>{{ user.userName }}</h4>
         <h6>
             {{ user.profile.birthdate|userAge}}
-            {{ user.profile.country.name is defined ? ", " ~ user.profile.country.name : ""}}
+            {{ user.profile.city is defined and user.profile.city is not empty  ? ", " ~ user.profile.city : ""}}
             {{ user.profile.state.name is defined ? ", " ~ user.profile.state.name : ""}}
+            {{ user.profile.country.name is defined ? ", " ~ user.profile.country.name : ""}}
         </h6>
         {% if user.profile.seek.name is defined and user.profile.seek.name is not empty %}
             <h6><b>Seeking</b>: {{ user.profile.seek.name }}</h6>
@@ -14,7 +15,6 @@
         {% endif %}
     </div>
     <div class="col-xs-6">
-        <h4>About Me:</h4>
         {% if user.profile.religion is defined and user.profile.religion is not empty %}
             <h6><b>Religion</b>: {{ user.profile.religion.name }}</h6>
         {% endif %}
@@ -34,4 +34,18 @@
             <h6><b>Languages spoken</b>: {{ user.profile.languages|join(', ') }}</h6>
         {% endif %}
     </div>
+</div>
+<div class="row">
+    {% if user.profile.aboutMe is defined and user.profile.aboutMe is not empty %}
+        <div class="col-xs-6">
+            <h4>About Me:</h4>
+            {{ user.profile.aboutMe }}
+        </div>
+    {% endif %}
+    {% if user.profile.interestsAndHobbies is defined and user.profile.interestsAndHobbies is not empty %}
+        <div class="col-xs-6">
+                <h4>Interests and hobbies:</h4>
+                {{ user.profile.interestsAndHobbies }}
+        </div>
+    {% endif %}
 </div>
