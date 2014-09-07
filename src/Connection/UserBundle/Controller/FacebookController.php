@@ -35,6 +35,7 @@ class FacebookController extends Controller
         $socialUserService   = $this->get('connection_user.social.user');
         //  Get Session From Facebook Redirect
         $faceBookprofile     = $faceBookSdkService->prepareProfile()->getProfile();
+        $redirectUrl         = $this->generateUrl('connection_homepage');
 
         if ( $faceBookprofile ) {
             //  Check If We already have such user (by email address)
@@ -54,8 +55,9 @@ class FacebookController extends Controller
             }
 
             $socialUserService->loginUser($user);
+            $redirectUrl = $this->generateUrl('user_search');
         }
 
-        return $this->redirect( $this->generateUrl('connection_homepage') );
+        return $this->redirect( $redirectUrl );
     }
 }

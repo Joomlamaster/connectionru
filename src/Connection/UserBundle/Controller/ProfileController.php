@@ -105,7 +105,7 @@ class ProfileController extends Controller
 
                 $socialUserService->loginUser($user);
                 $session->remove('link_account');
-                return $this->redirect( $this->generateUrl('connection_homepage') );
+                return $this->redirect( $this->generateUrl('user_search') );
             }
 
             $form->get('password')->addError(new FormError('Invalid Password'));
