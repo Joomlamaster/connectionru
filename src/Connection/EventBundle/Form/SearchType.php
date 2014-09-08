@@ -64,6 +64,11 @@ class SearchType extends AbstractType
                 ),
                 'required' => false
             ))
+            ->add('eventDatePeriod', 'choice', array(
+                'choices'   => $this->getEventPeriods(),
+                'empty_value' => 'Any',
+                'required' => false,
+            ))
             ->add('eventDateFrom', 'date', array(
                 'widget'    => 'single_text',
                 'format'    => 'MM/dd/yyyy',
@@ -109,5 +114,18 @@ class SearchType extends AbstractType
     public function getName()
     {
         return 'event_search';
+    }
+
+    private function getEventPeriods()
+    {
+        return array(
+            'now'        => 'Today',
+            'this_week'  => 'This Week',
+            'next_week'  => 'Next Week',
+            'last_week'  => 'Last Week',
+            'this_moth'  => 'This Month',
+            'next_moth'  => 'Next Month',
+            'last_month' => 'Last Month'
+        );
     }
 }

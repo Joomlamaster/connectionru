@@ -60,17 +60,18 @@ class EventRepository extends EntityRepository
         }
 
         //  Event Date From
-        if ( !empty($filter['eventDateFrom'])) {
-            $qb->andWhere('e.eventDate >= :event_date_from')
-                ->setParameter('event_date_from', $filter['eventDateFrom'], \Doctrine\DBAL\Types\Type::DATETIME);
-        }
+        $eventDate = $this->getEventDate($filter);
+        if (!empty($eventDate)) {
+            if (!empty($eventDate['from'])) {
+                $qb->andWhere('e.eventDate >= :event_date_from')
+                    ->setParameter('event_date_from', $eventDate['from']);
+            }
 
-        //  Event Date To
-        if ( !empty($filter['eventDateTo'])) {
-            $qb->andWhere('e.eventDate <= :event_date_to')
-                ->setParameter('event_date_to', $filter['eventDateTo'], \Doctrine\DBAL\Types\Type::DATETIME);
+            if (!empty($eventDate['to'])) {
+                $qb->andWhere('e.eventDate <= :event_date_to')
+                    ->setParameter('event_date_to', $eventDate['to']);
+            }
         }
-
 
         if (!empty($filter['category'])) {
             if ($categories = $this->filterCategory($filter['category'])) {
@@ -97,5 +98,88 @@ class EventRepository extends EntityRepository
         }
 
         return (empty($result) ? false : $result);
+    }
+
+    private function getEventDate($filter)
+    {
+        $result = array();
+        if ( empty($filter['eventDateFrom']) && empty($filter['eventDateTo']) && empty($filter['eventDatePeriod']) ) {
+            return $result;
+        }
+
+        if ( !empty($filter['eventDatePeriod']) ) {
+            $result = $this->getDateByPeriod($filter['eventDatePeriod']);
+        }
+
+        if ( !empty($filter['eventDateFrom']) && !empty($filter['eventDateTo']) ) {
+            $result = array(
+                'from' => $filter['eventDateFrom']->format('Y-m-d 00:00:00'),
+                'to' => $filter['eventDateTo']->format('Y-m-d 23:59:59')
+            );
+        }
+
+        return $result;
+    }
+
+    private function getDateByPeriod($period)
+    {
+        switch ($period) {
+            case 'now':
+                $date   = new \DateTime();
+                $result = array(
+                    'from' => $date->format('Y-m-d 00:00:00'),
+                    'to'   => $date->format('Y-m-d 23:59:59')
+                );
+                break;
+            case 'this_week':
+                $from   = new \DateTime();
+                $to     = new \DateTime();
+                $result = array(
+                    'from' => $from->modify('this week')->format('Y-m-d 00:00:00'),
+                    'to'   => $to->modify('this week +6 days')->format('Y-m-d 23:59:59')
+                );
+                break;
+            case 'next_week':
+                $from   = new \DateTime();
+                $to     = new \DateTime();
+                $result = array(
+                    'from' => $from->modify('next week')->format('Y-m-d 00:00:00'),
+                    'to'   => $to->modify('next week +6 days')->format('Y-m-d 23:59:59')
+                );
+                break;
+            case 'last_week':
+                $from   = new \DateTime();
+                $to     = new \DateTime();
+                $result = array(
+                    'from' => $from->modify('last week')->format('Y-m-d 00:00:00'),
+                    'to'   => $to->modify('last week +6 days')->format('Y-m-d 23:59:59')
+                );
+                break;
+            case 'this_moth':
+                $from   = new \DateTime();
+                $to     = new \DateTime();
+                $result = array(
+                    'from' => $from->modify('this month')->format('Y-m-01 00:00:00'),
+                    'to'   => $to->modify('this month')->format('Y-m-t 23:59:59')
+                );
+                break;
+            case 'next_moth':
+                $from   = new \DateTime();
+                $to     = new \DateTime();
+                $result = array(
+                    'from' => $from->modify('next month')->format('Y-m-01 00:00:00'),
+                    'to'   => $to->modify('next month')->format('Y-m-t 23:59:59')
+                );
+                break;
+            case 'last_month':
+                $from   = new \DateTime();
+                $to     = new \DateTime();
+                $result = array(
+                    'from' => $from->modify('last month')->format('Y-m-01 00:00:00'),
+                    'to'   => $to->modify('last month')->format('Y-m-t 23:59:59')
+                );
+                break;
+        }
+        return $result;
     }
 }
