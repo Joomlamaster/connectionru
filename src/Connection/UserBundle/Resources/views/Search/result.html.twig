@@ -1,5 +1,17 @@
 {% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
 {% form_theme form 'ConnectionUserBundle:Search:fields.html.twig' %}
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/connectionuser/js/search.js') }}"></script>
+    <script type="text/javascript">
+        window.onload = function(){
+            $('#search-form').formInit({
+                'userGender': '{{ app.user.profile.gender.id|default('0')}}',
+                'userSeek': '{{ app.user.profile.seek.id|default('0')}}'
+            });
+        }
+    </script>
+{% endblock %}
 
 {% block theme %}search-event{% endblock %}
 
@@ -37,10 +49,10 @@
             <div class="col-xs-4">
                 <div class="form-inline">
                     <div class="row">
-                        {{ form_row(form.gender, {'attr': { 'class': 'radio-inline'} }) }}
+                        {{ form_row(form.gender, {'attr': { 'class': 'radio-inline gender'} }) }}
                     </div>
                     <div class="row">
-                        {{ form_row(form.seek, {'attr': { 'class': 'radio-inline'} }) }}
+                        {{ form_row(form.seek, {'attr': { 'class': 'radio-inline seek'} }) }}
                     </div>
                 </div>
             </div>
@@ -63,7 +75,7 @@
                                 {{ form_row(form.country) }}
                             </div>
                                 {% if (form.state is defined) %}
-                                    <div class="slave_block">
+                                    <div class="slave_block state">
                                         {{ form_row(form.state) }}
                                     </div>
                                 {% endif %}
@@ -106,7 +118,7 @@
             <div class="col-xs-12">
                 <div class="form-inline">
                     <div class="row">
-                        {{ form_row(form.maritalStatus, {'attr': { 'class': 'radio-inline'} }) }}
+                        {{ form_row(form.maritalStatus, {'attr': { 'class': 'radio-inline marital-status'} }) }}
                     </div>
                 </div>
             </div>
@@ -185,12 +197,12 @@
             </div>
         </div>
 
-        {{ form_row(form.searchType) }}
+        {{ form_row(form.searchType, {'attr': { 'class': 'search-type'} }) }}
     </div>
     <div class="row">
         <div class="form-inline text-center">
             <button type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
-            <button type="reset" onclick="resetForm($(this).parents('form'))"><span class="glyphicon glyphicon-trash"></span> Reset</button>
+            <button type="reset" ><span class="glyphicon glyphicon-trash"></span> Reset</button>
         </div>
     </div>
         {#end extended search tab#}
@@ -264,51 +276,4 @@
     <a class="btn btn-info pull-right" href="{{ path('user_search', {'page': nextPage}) }}">Next Page</a>
         {% endif %}
 </div>
-<script type="text/javascript">
-    window.onload = function() {
-        var userGender = '{%if app.user %}{% if app.user.profile.gender.id == '1'%}1{%elseif app.user.profile.gender.id == '2'%}2{%endif%}{%endif%}';
-        var userSeek = '{%if app.user %}{% if app.user.profile.seek.id == '1'%}1{%elseif app.user.profile.seek.id == '2'%}2{%endif%}{%endif%}';
-        resetForm = function(form) {
-            $(form).find('input[type="radio"]').removeAttr('checked');
-            $(form).find('#{{form.maritalStatus.vars.id}} input:first').attr('checked', 'checked');
-            $(form).find('#connection_search_country').trigger('change');
-            $(form).find('select option').removeAttr('selected');
-            updateGender(form);
-            updateSeek(form);
-        }
-
-        updateGender = function(form){
-            if(userGender === '2'){
-                $(form).find('#{{form.gender.vars.id}} input:nth-child(1)').attr('checked', 'checked');
-            } else {
-                $(form).find('#{{form.gender.vars.id}} input:first').attr('checked', 'checked');
-            }
-        }
-
-        updateSeek = function(form){
-            if(!userSeek || userSeek === '2'){
-                $(form).find('#{{form.seek.vars.id}} input:nth-child(1)').attr('checked', 'checked');
-            } else {
-                $(form).find('#{{form.seek.vars.id}} input:first').attr('checked', 'checked');
-            }
-        }
-
-        if('{{form.gender.vars.data is empty}}'){
-            updateGender('#search-form');
-        }
-        if('{{form.seek.vars.data is empty}}'){
-            updateSeek('#search-form');
-        }
-
-
-        $('#quick-search-btn').click(function(){
-            $('#{{form.searchType.vars.id}}').val('quick');
-            $('#extended-search-tab').hide();
-        });
-        $('#extended-search-btn').click(function(){
-            $('#{{form.searchType.vars.id}}').val('extended');
-            $('#extended-search-tab').show();
-        });
-    }
-</script>
 {% endblock %}
