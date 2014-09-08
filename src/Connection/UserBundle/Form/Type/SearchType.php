@@ -68,8 +68,9 @@ class SearchType extends AbstractType
                                 ->createQueryBuilder('s')
                                 ->where('s.country = :country')
                                 ->setParameter('country', $country)
+                                ->orderBy('s.priority', 'DESC')
                                 ;
-                        }
+                        },
                 ));
             }
         };

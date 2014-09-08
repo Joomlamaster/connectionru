@@ -328,4 +328,20 @@ class Country
     {
         return $this->priority;
     }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $state
+     */
+    public function setState ( $state )
+    {
+        $this->state = $state;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getState ()
+    {
+        return $this->state;
+    }
 }

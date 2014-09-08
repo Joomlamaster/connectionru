@@ -1,18 +1,5 @@
 {% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
 {% form_theme form 'ConnectionUserBundle:Search:fields.html.twig' %}
-{% block javascript %}
-    {{ parent() }}
-    <script type="text/javascript" src="{{ asset('bundles/connectionuser/js/search.js') }}"></script>
-    <script type="text/javascript">
-        window.onload = function(){
-            $('#search-form').formInit({
-                'userGender': '{{ app.user.profile.gender.id|default('0')}}',
-                'userSeek': '{{ app.user.profile.seek.id|default('0')}}'
-            });
-        }
-    </script>
-{% endblock %}
-
 {% block theme %}search-event{% endblock %}
 
 {% block breadcrumbs %}
@@ -272,8 +259,20 @@
             {% endfor %}
         {% endif %}
 <div class="row">
-        {% if nextPage is defined and nextPage %}
-    <a class="btn btn-info pull-right" href="{{ path('user_search', {'page': nextPage}) }}">Next Page</a>
-        {% endif %}
+    {% if nextPage is defined and nextPage %}
+        <a class="btn btn-info pull-right" href="{{ path('user_search', {'page': nextPage}) }}">Next Page</a>
+    {% endif %}
 </div>
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/connectionuser/js/search.js') }}"></script>
+    <script type="text/javascript">
+        window.onload = function(){
+            $('#search-form').formInit({
+                'userGender': '{{ app.user.profile.gender.id|default('0')}}',
+                'userSeek': '{{ app.user.profile.seek.id|default('0')}}'
+            });
+        }
+    </script>
 {% endblock %}
