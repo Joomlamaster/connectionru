@@ -22,6 +22,13 @@
                         </ul>
                     </li>
                 </ul>
+                <p style="color: #ffffff; padding: 7px 20px 0px 0px;" class="navbar-form navbar-right">
+                    <a href="{{ path('message_inbox') }}">Messages
+                        <span class="badge {{ fos_message_nb_unread() > 0 ? "color-red": "" }}">
+                            {{ fos_message_nb_unread() }}
+                        </span>
+                    </a>
+                </p>
             {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
                 {% include 'ConnectionUserBundle:Default:login_form.html.twig' %}
             {% endif %}
