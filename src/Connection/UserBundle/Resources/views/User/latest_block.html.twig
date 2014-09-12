@@ -7,7 +7,11 @@
                 {% endif %}
                 <div class="info redirect" data-href="{{ path('view_profile', {id: user.profile.id}) }}">
                     <p class="name">{{ user.userName }}</p>
-                    <p>{{ user.profile.birthdate|userAge}} {{ user.profile.state.name is defined ? "," ~ user.profile.state.name : ""}}</p>
+                    <p>
+                        {{ user.profile.birthdate|userAge}}
+                        {{ user.profile.gender.name is defined ? "," ~ user.profile.gender.name : ""}}
+                        {{ user.profile.state.name is defined ? "," ~ user.profile.state.name : ""}}
+                    </p>
 
                     {% if user.profile.lookingFor.name is defined %}
                         <p>Looking for:</p>

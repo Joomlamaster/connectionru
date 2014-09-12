@@ -3,6 +3,7 @@
         <h4>{{ user.userName }}</h4>
         <h6>
             {{ user.profile.birthdate|userAge}}
+            {{ user.profile.gender.name is defined ? ", " ~ user.profile.gender.name : ""}}
             {{ user.profile.city is defined and user.profile.city is not empty  ? ", " ~ user.profile.city : ""}}
             {{ user.profile.state.name is defined ? ", " ~ user.profile.state.name : ""}}
             {{ user.profile.country.name is defined ? ", " ~ user.profile.country.name : ""}}
