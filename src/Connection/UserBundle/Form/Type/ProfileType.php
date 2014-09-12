@@ -47,9 +47,11 @@ class ProfileType extends AbstractType
 
         $builder->add('originallyFrom', 'entity', array(
             'class' => 'ConnectionCoreBundle:Country',
-            'query_builder' => function(EntityRepository $er) {
+            'query_builder' => function(EntityRepository $er) use ($profileCountryIso) {
                     return $er
                         ->createQueryBuilder('c')
+                        ->where('c.iso IN (:iso)')
+                        ->setParameter('iso', $profileCountryIso)
                         ->orderBy('c.priority', 'DESC');
 
                 },
@@ -118,6 +120,8 @@ class ProfileType extends AbstractType
                 'class' => 'ConnectionUserBundle:Profile\LookingFor',
                 'property' => 'name',
                 'expanded' =>  true,
+                'empty_value' =>'Anything',
+                'required' => false
             ))
 
             ->add('birthdate', 'date', array(

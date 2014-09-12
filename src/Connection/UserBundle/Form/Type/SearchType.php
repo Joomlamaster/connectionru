@@ -71,6 +71,8 @@ class SearchType extends AbstractType
                                 ->orderBy('s.priority', 'DESC')
                                 ;
                         },
+                    'empty_value' => 'Any',
+                    'required' => false
                 ));
             }
         };
