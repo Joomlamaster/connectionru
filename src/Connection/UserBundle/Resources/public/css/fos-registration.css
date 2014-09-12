@@ -7,3 +7,7 @@ form div.error {
     color: red;
 }
 
+.quick-register-page .form-group {
+    margin-bottom: 10px;
+}
+

@@ -82,7 +82,19 @@ class RegistrationController extends BaseController
         $formFactory = $this->container->get('fos_user.registration.form.factory');
         $form = $formFactory->createForm();
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:extended_register.html.' . $this->getEngine(), array(
-                    'form' => $form->createView(),
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/quick-register", name="fos_user_quick_register")
+     */
+    public function registerQuickAction()
+    {
+        $formFactory = $this->container->get('fos_user.registration.form.factory');
+        $form = $formFactory->createForm();
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:quick_register.html.' . $this->getEngine(), array(
+            'form' => $form->createView(),
         ));
     }
 
