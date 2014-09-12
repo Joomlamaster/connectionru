@@ -13,14 +13,29 @@ use Connection\CoreBundle\Entity\Country;
 
 class EventType extends AbstractType
 {
+    private $profileCountryIso;
+
+    public function __construct($profileCountryIso = array())
+    {
+        $this->profileCountryIso = $profileCountryIso;
+    }
+
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $profileCountryIso = $this->profileCountryIso;
         $builder->add('country', 'entity', array(
             'class' => 'ConnectionCoreBundle:Country',
+            'query_builder' => function(EntityRepository $er) use ($profileCountryIso) {
+                    return $er->createQueryBuilder('c')
+                        ->where('c.iso IN (:iso)')
+                        ->setParameter('iso', $profileCountryIso)
+                        ->orderBy('c.priority', 'DESC');
+                },
             'property' => 'name',
             'attr' => array('class' => 'master')
         ));
@@ -107,6 +122,6 @@ class EventType extends AbstractType
      */
     public function getName()
     {
-        return 'connection_eventbundle_event';
+        return 'connection_event_type';
     }
 }

@@ -73,7 +73,7 @@ class EventController extends Controller
             }
         }
 
-        $form = $this->createForm(new EventType(), $event);
+        $form = $this->createForm('connection_event_type', $event);
         $form->handleRequest($request);
 
         if ( $form->isSubmitted() && $form->isValid() ) {

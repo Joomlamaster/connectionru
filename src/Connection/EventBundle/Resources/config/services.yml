@@ -7,3 +7,10 @@ services:
         class: Connection\EventBundle\Twig\SocialExtension
         tags:
             - { name: twig.extension }
+
+    connection_event.event.type:
+        class: Connection\EventBundle\Form\EventType
+        arguments:
+            profileCountryIso: %profile_country_iso%
+        tags:
+          - { name: form.type, alias: connection_event_type }
