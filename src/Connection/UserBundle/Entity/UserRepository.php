@@ -3,6 +3,7 @@
 namespace Connection\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Connection\UserBundle\Service\ConverterService;
 
 /**
  * eventRepository
@@ -55,6 +56,8 @@ class UserRepository extends EntityRepository
 
     public function search($filter, $limit = false, $offset = false)
     {
+        $converterService = new ConverterService();
+
         $qb = $this->createQueryBuilder('u')
             ->join('u.profile', 'p');
 
@@ -85,13 +88,14 @@ class UserRepository extends EntityRepository
 
         //  Filter By ageFrom
         if ( !empty($filter['ageFrom'])) {
-            $from = new \DateTime("-{$filter['ageFrom']} years");
+            $from = $converterService->ageToDate($filter['ageFrom'], 2);
             $qb->andWhere('p.birthdate <= :age_from')->setParameter('age_from', $from);
         }
 
+
         //  Filter By ageTo
         if ( !empty($filter['ageTo'])) {
-            $to = new \DateTime("-{$filter['ageTo']} years");
+            $to = $converterService->ageToDate($filter['ageTo'], 1);
             $qb->andWhere('p.birthdate >= :age_to')->setParameter('age_to', $to);
         }
 
@@ -141,7 +145,7 @@ class UserRepository extends EntityRepository
         }
 
         //  Filter By bodyType
-        if ( !empty($filter['eyeColor'])) {
+        if ( !empty($filter['bodyType'])) {
             $qb->andWhere('p.bodyType = :bodyType')->setParameter('bodyType', $filter['bodyType']);
         }
 

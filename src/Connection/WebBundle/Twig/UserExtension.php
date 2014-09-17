@@ -2,6 +2,7 @@
 
 // src/Acme/DemoBundle/Twig/AcmeExtension.php
 namespace Connection\WebBundle\Twig;
+use Connection\UserBundle\Service\ConverterService;
 
 class UserExtension extends \Twig_Extension
 {
@@ -22,13 +23,7 @@ class UserExtension extends \Twig_Extension
 
     public function userAge($value)
     {
-        if (empty($value)) {
-            return "";
-        }
-
-        $now    = new \DateTime();
-        $diff   = $now->diff($value);
-        return $diff->y;
+        return $this->converter->dateToAge($value);
     }
 
     public function cmViewFormat($cm)

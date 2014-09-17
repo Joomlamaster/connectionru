@@ -38,4 +38,36 @@ class ConverterService {
         }
         return $cm . ' cm';
     }
+
+    public function dateToAge($date){
+        if (empty($date)) {
+            return "";
+        }
+
+        $now    = new \DateTime();
+        $diff   = $now->diff($date);
+        return $diff->y;
+    }
+
+    /**
+     *
+     * @param type $age
+     * @param type $roudTo
+     *     1 - first day of the year,
+     *     2- last day of the year
+     * @return \DateTime|string
+     */
+    public function ageToDate($age, $roundTo = false){
+        if (empty($age)) {
+            return "";
+        }
+        $date = new \DateTime('today -'.$age.' years');
+        if($roundTo == 1){
+            $date = new \DateTime($date->format('Y-01-01'));
+        }
+        else if($roundTo == 2){
+            $date = new \DateTime($date->format('Y-12-31'));
+        }
+        return $date;
+    }
 }
