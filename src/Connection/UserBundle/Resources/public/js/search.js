@@ -25,8 +25,13 @@
             updateSeek(form);
         });
         
-        updateGender(form);
-        updateSeek(form);
+        if(opts.userGenderField === ''){
+            updateGender(form);
+        }
+        
+        if(opts.userSeekField === ''){
+            updateSeek(form);
+        }
     };
 
     $.fn.formUpdate = function() {

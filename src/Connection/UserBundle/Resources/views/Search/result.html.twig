@@ -272,7 +272,9 @@
         window.onload = function(){
             $('#search-form').formInit({
                 'userGender': '{{ app.user.profile.gender.id|default('0')}}',
-                'userSeek': '{{ app.user.profile.seek.id|default('0')}}'
+                'userSeek': '{{ app.user.profile.seek.id|default('0')}}',
+                'userGenderField': '{{ form.gender.vars.data.id|default('0')}}',
+                'userSeekField': '{{ form.seek.vars.data.id|default('0') }}'
             });
         }
     </script>
