@@ -11,6 +11,7 @@
 
 .profile-image-box {
     margin: 10px;
+    height: 200px;
     border: 1px solid #ccc;
     float: left;
     text-align: center;
