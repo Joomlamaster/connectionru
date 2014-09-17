@@ -96,6 +96,13 @@ class Profile
     protected $educationIvyLeague;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="ivy_League_university", type="string", length=255, nullable=true)
+     */
+    protected $ivyLeagueUniversity;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\Profession", inversedBy="profile")
      * @ORM\JoinColumn(name="profession", referencedColumnName="id")
      **/
@@ -416,6 +423,22 @@ class Profile
     public function setEducationIvyLeague ( $educationIvyLeague )
     {
         $this->educationIvyLeague = $educationIvyLeague;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIvyLeagueUniversity ()
+    {
+        return $this->ivyLeagueUniversity;
+    }
+
+    /**
+     * @param mixed $educationIvyLeague
+     */
+    public function setIvyLeagueUniversity ( $ivyLeagueUniversity )
+    {
+        $this->ivyLeagueUniversity = $ivyLeagueUniversity;
     }
 
     /**

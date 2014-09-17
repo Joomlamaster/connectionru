@@ -15,13 +15,21 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Connection\UserBundle\Entity\User;
 
 class RegistrationController extends BaseController
 {
 
     public function registerAction(Request $request)
     {
-
+        //if authenticated redirect to homepage
+        if($request->isMethod('GET')){
+            $authenticated = $this->_isUserAuthenticated($request);
+            if($authenticated){
+                $url = $this->container->get('router')->generate('connection_homepage');
+                return new RedirectResponse($url);
+            }
+        }
         /** @var $formFactory \FOS\UserBundle\Form\Factory\FactoryInterface */
         $formFactory = $this->container->get('fos_user.registration.form.factory');
         /** @var $userManager \FOS\UserBundle\Model\UserManagerInterface */
@@ -77,8 +85,16 @@ class RegistrationController extends BaseController
     /**
      * @Route("/extended-register", name="fos_user_extended_register")
      */
-    public function registerExtendedAction()
+    public function registerExtendedAction(Request $request)
     {
+        //if authenticated redirect to homepage
+        if($request->isMethod('GET')){
+            $authenticated = $this->_isUserAuthenticated($request);
+            if($authenticated){
+                $url = $this->container->get('router')->generate('connection_homepage');
+                return new RedirectResponse($url);
+            }
+        }
         $formFactory = $this->container->get('fos_user.registration.form.factory');
         $form = $formFactory->createForm();
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:extended_register.html.' . $this->getEngine(), array(
@@ -135,6 +151,17 @@ class RegistrationController extends BaseController
         $dispatcher->dispatch(FOSUserEvents::REGISTRATION_CONFIRMED, new FilterUserResponseEvent($user, $request, $response));
 
         return $response;
+    }
+
+    function _isUserAuthenticated(Request $request){
+
+        /* @var $session \Symfony\Component\HttpFoundation\Session\Session */
+        $user = $this->container->get('security.context')->getToken()->getUser();
+        if($user instanceof User){
+            return true;
+        }
+
+        return false;
     }
 
 }

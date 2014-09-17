@@ -151,9 +151,12 @@ class ProfileType extends AbstractType
 
             ->add('educationIvyLeague', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\EducationIvyLeague',
-                'label' => 'Ivy league educated',
-                'property' => 'name'
+                'label' => 'Ivy league educated?',
+                'property' => 'name',
+                'expanded' => true
             ))
+
+            ->add('ivyLeagueUniversity', 'text')
 
             ->add('profession', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Profession',

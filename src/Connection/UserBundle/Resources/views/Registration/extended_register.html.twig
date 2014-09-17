@@ -116,6 +116,9 @@
                     {{ form_row(form.profile.educationIvyLeague) }}
                 </div>
                 <div class="col-xs-3">
+                    {{ form_row(form.profile.ivyLeagueUniversity) }}
+                </div>
+                <div class="col-xs-3">
                     {{ form_row(form.profile.profession) }}
                 </div>
             </div>
@@ -168,5 +171,12 @@
             {{ form_end(form, {'render_rest': false}) }}
         </div>
     {% endif %}
+
+    <script type="text/javascript">
+        window.onload = function(){
+           handleIvyLeague('#{{form.profile.educationIvyLeague.vars.id}}', '#{{form.profile.ivyLeagueUniversity.vars.id}}', '1');
+        }
+    </script>
+
 {% endblock %}
 

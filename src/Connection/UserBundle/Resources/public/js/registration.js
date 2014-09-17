@@ -51,3 +51,25 @@ FormAjaxFields = {
         });
     }
 };
+
+var ivyLeagueAfirmativeValue;
+function handleIvyLeague(select, input, afirmativeValue){
+    
+    ivyLeagueAfirmativeValue = afirmativeValue;
+    $(select).change(function(){
+        checkSelectState();
+    });
+    
+    
+    function checkSelectState(){
+        var selected = $(select).find('input[type="radio"]:checked');
+        if($(selected).val() === ivyLeagueAfirmativeValue){
+            $(input).parent().show();
+        } else {
+            $(input).parent().hide();
+        }
+    }
+    
+    checkSelectState();
+  
+}
