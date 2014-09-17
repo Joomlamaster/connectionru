@@ -9,6 +9,7 @@ use Connection\UserBundle\Form\Type\EditProfileType;
 use Connection\UserBundle\Form\Type\LinkAccountType;
 use Connection\UserBundle\Form\Type\RegistrationType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -29,6 +30,9 @@ class ProfileController extends Controller
     public function viewAction( Profile $profile )
     {
         $user = $profile->getUser();
+        if($this->getUser() == $user){
+            return new RedirectResponse($this->get('router')->generate('edit_user_profile'));
+        }
         $userPhotos = $this->getDoctrine()->getRepository('ConnectionUserBundle:Profile\Image')->getGroupedByGalleryImages($user->getId());
         return array(
             'user'       => $user,
