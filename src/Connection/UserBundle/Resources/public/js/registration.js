@@ -57,11 +57,11 @@ function handleIvyLeague(select, input, afirmativeValue){
     
     ivyLeagueAfirmativeValue = afirmativeValue;
     $(select).change(function(){
-        checkSelectState();
+        checkIvyLeagueState();
     });
     
     
-    function checkSelectState(){
+    function checkIvyLeagueState(){
         var selected = $(select).find('input[type="radio"]:checked');
         if($(selected).val() === ivyLeagueAfirmativeValue){
             $(input).parent().show();
@@ -70,6 +70,26 @@ function handleIvyLeague(select, input, afirmativeValue){
         }
     }
     
-    checkSelectState();
+    checkIvyLeagueState();
+  
+}
+
+function handleOriginallyFrom(select, input){    
+    
+    $(select).change(function(){
+        checkOriginallyFromState();
+    });
+    
+    
+    function checkOriginallyFromState(){
+        console.debug($(select).val());
+        if($(select).val() !== ''){
+            $(input).parent().show();
+        } else {
+            $(input).parent().hide();
+        }
+    }
+    
+    checkOriginallyFromState();
   
 }

@@ -69,6 +69,11 @@
                             {{ form_row(form.profile.originallyFrom) }}
                         </div>
                 </div>
+                <div class="col-xs-4">
+                        <div>
+                            {{ form_row(form.profile.originallyFromCity) }}
+                        </div>
+                </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
@@ -175,6 +180,7 @@
     <script type="text/javascript">
         window.onload = function(){
            handleIvyLeague('#{{form.profile.educationIvyLeague.vars.id}}', '#{{form.profile.ivyLeagueUniversity.vars.id}}', '1');
+           handleOriginallyFrom('#{{form.profile.originallyFrom.vars.id}}', '#{{form.profile.originallyFromCity.vars.id}}');
         }
     </script>
 

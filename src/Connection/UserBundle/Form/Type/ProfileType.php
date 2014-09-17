@@ -56,8 +56,9 @@ class ProfileType extends AbstractType
 
                 },
             'property' => 'name',
-            'attr' => array('class' => 'master')
-        ));
+            'empty_value' => 'Select country'
+        ))
+        ->add('originallyFromCity', 'text');
 
         $formModifier = function (FormInterface $form, Country $country = null) {
             if ( $country ) {

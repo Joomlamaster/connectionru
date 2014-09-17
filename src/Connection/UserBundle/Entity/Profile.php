@@ -63,6 +63,13 @@ class Profile
     protected $originallyFrom;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="originally_from_city", type="string", length=50, nullable=true)
+     */
+    protected $originallyFromCity;
+
+    /**
      * @Assert\NotNull(groups={"profile"})
      * @ORM\ManyToOne(targetEntity="Connection\CoreBundle\Entity\State", inversedBy="profile")
      * @ORM\JoinColumn(name="state", referencedColumnName="id")
@@ -951,6 +958,22 @@ class Profile
     public function getCity ()
     {
         return $this->city;
+    }
+
+    /**
+     * @param string $city
+     */
+    public function setOriginallyFromCity ( $city )
+    {
+        $this->originallyFromCity = $city;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOriginallyFromCity ()
+    {
+        return $this->originallyFromCity;
     }
 
     /**

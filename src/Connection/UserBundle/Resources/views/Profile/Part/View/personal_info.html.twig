@@ -3,7 +3,7 @@
         <h4>{{ user.userName }}</h4>
         {%if user.lastLogin is not empty%}
             <h6>
-                <b>Last login:</b> {{user.lastLogin|date('Y-M-d')}}
+                <b>Last login</b>: {{user.lastLogin|date('Y-M-d')}}
             </h6>
         {% endif %}
         <h6>
@@ -12,6 +12,10 @@
             {{ user.profile.city is defined and user.profile.city is not empty  ? ", " ~ user.profile.city : ""}}
             {{ user.profile.state.name is defined ? ", " ~ user.profile.state.name : ""}}
             {{ user.profile.country.name is defined ? ", " ~ user.profile.country.name : ""}}
+        </h6>
+        <h6>
+            <b>Originally from</b>: {{ user.profile.originallyFromCity is defined and user.profile.originallyFromCity is not empty  ? user.profile.originallyFromCity ~", " : ""}}
+            {{ user.profile.originallyFrom.name is defined ? user.profile.originallyFrom.name : ""}}
         </h6>
         {% if user.profile.seek.name is defined and user.profile.seek.name is not empty %}
             <h6><b>Seeking</b>: {{ user.profile.seek.name }}</h6>
