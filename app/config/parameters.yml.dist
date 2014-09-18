@@ -27,6 +27,10 @@ parameters:
     search.event.top.per_page: 6
     event.upcoming.block.limit: 3
     
-    # Country form field for search/register forms will be 
+    # Country field for search/register forms will be 
     # limited to this values
     profile_country_iso: [US, CA, UK, IT, FR, DE, DK, AU, BR, RU, TR, OTHER]
+
+    #Education Ivy League afirmative ID from database need to be indicated in order to 
+    #show/hide 'Ivy League university' additional input field on register/profile forms
+    ivy_league_afirmative_id: 1
