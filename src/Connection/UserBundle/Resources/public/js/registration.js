@@ -1,4 +1,5 @@
 FormAjaxFields = {};
+var ivyLeagueAfirmative;
 
 FormAjaxFields = {
     'cfg': {
@@ -52,10 +53,10 @@ FormAjaxFields = {
     }
 };
 
-var ivyLeagueAfirmativeValue;
-function handleIvyLeague(select, input, afirmativeValue){
+
+function handleIvyLeague(select, input, afirmative){
     
-    ivyLeagueAfirmativeValue = afirmativeValue;
+    ivyLeagueAfirmative = afirmative;
     $(select).change(function(){
         checkIvyLeagueState();
     });
@@ -63,7 +64,7 @@ function handleIvyLeague(select, input, afirmativeValue){
     
     function checkIvyLeagueState(){
         var selected = $(select).find('input[type="radio"]:checked');
-        if($(selected).val() === ivyLeagueAfirmativeValue){
+        if($(selected).val() === ivyLeagueAfirmative){
             $(input).parent().show();
         } else {
             $(input).parent().hide();

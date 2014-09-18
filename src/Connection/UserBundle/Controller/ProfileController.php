@@ -50,8 +50,12 @@ class ProfileController extends Controller
         if ( !$user = $this->getUser() ) {
             return $this->redirect( $this->generateUrl('connection_homepage') );
         }
-
+        $ivyLeagueAfirmativeId = $this->container->getParameter('ivy_league_afirmative_id');
         $form = $this->createForm( new EditProfileType(), $user);
+
+        $ivyLeagueEducationId = $form->get('profile')->get('educationIvyLeague')->getData()->getId();
+        if($ivyLeagueEducationId)
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -70,7 +74,8 @@ class ProfileController extends Controller
             'user'       => $user,
             'userPhotos' => $userPhotos,
             'favourites' => $user->getFavoriteUsers(),
-            'events'     => $user->getEvents()
+            'events'     => $user->getEvents(),
+            'ivyLeagueAfirmativeId' => $ivyLeagueAfirmativeId
         );
     }
 

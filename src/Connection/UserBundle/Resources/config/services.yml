@@ -41,6 +41,7 @@ services:
         arguments:            
             profileCountryIso: %profile_country_iso%
             converter: @connection_user.converter
+            ivyLeagueAfrimativeId: %ivy_league_afirmative_id%
         tags:
           - { name: form.type, alias: connection_user_profile }
           

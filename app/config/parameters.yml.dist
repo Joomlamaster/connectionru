@@ -29,4 +29,4 @@ parameters:
     
     # Country form field for search/register forms will be 
     # limited to this values
-    profile_country_iso: [US, CA, UK, IT, FR, DE, DK, AU, BR, MC, RU]
+    profile_country_iso: [US, CA, UK, IT, FR, DE, DK, AU, BR, RU, TR, OTHER]
