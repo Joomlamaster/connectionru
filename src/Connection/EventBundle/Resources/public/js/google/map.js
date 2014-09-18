@@ -12,9 +12,8 @@ MAP = {
         'zipCode'  : ''
     },
     'init': function() {
-        lat = $("#connection_eventbundle_event_lat").val();
-        lng = $("#connection_eventbundle_event_lng").val();
-
+        lat = $("#connection_event_type_lat").val();
+        lng = $("#connection_event_type_lng").val();        
         var haightAshbury = new google.maps.LatLng(40.7127837, -74.00594130000002);
         var mapOptions = {
             zoom: MAP.zoom,
@@ -81,27 +80,27 @@ MAP = {
     },
     'listen': function() {
         $("form.gmap")
-            .on('change', '#connection_eventbundle_event_country', function() {
-                $('#connection_eventbundle_event_state').val('');
+            .on('change', '#connection_event_type_country', function() {
+                $('#connection_event_type_state').val('');
                 MAP.zoom = 6;
                 MAP.setFields();
                 MAP.getGeoLoc();
             });
 
         $("form.gmap")
-            .on('change', '#connection_eventbundle_event_state', function() {
+            .on('change', '#connection_event_type_state', function() {
                 MAP.zoom = 10;
                 MAP.setFields();
                 MAP.getGeoLoc();
             });
     },
     'setFields': function() {
-        MAP.options.country  = $("#connection_eventbundle_event_country option:selected").text().trim();
-        MAP.options.state    = $("#connection_eventbundle_event_state option:selected").text().trim();
+        MAP.options.country  = $("#connection_event_type_country option:selected").text().trim();
+        MAP.options.state    = $("#connection_event_type_state option:selected").text().trim();
     },
     'setFormCoordinates': function(location) {
-        $("#connection_eventbundle_event_lat").val(location.lat());
-        $("#connection_eventbundle_event_lng").val(location.lng());
+        $("#connection_event_type_lat").val(location.lat());
+        $("#connection_event_type_lng").val(location.lng());
     },
     'buildQuery': function() {
         var options      = [];
