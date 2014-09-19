@@ -1,9 +1,14 @@
-<div class="row profile-gallery">
+<div class="row favorite-gallery">
     {% for favourite in favourites %}
-        <div class="profile-image-box">
-            <a class="title" href="{{ path('view_profile', {'id': favourite.profile.id}) }}">
-                <img src="{{ favourite.profile.avatar is defined ? favourite.profile.avatar : ""  }}" alt=""/>
-            </a>
+    <div class="favorite-image-box">
+        <div>
+        <a class="title" href="{{ path('view_profile', {'id': favourite.profile.id}) }}">
+            <img src="{{ favourite.profile.avatar is defined ? favourite.profile.avatar : ""  }}" alt=""/>
+        </a>
         </div>
+        <div class="text-center favorite-image-buttons">
+            {{ include('ConnectionUserBundle:Profile/Part/View:action_buttons.html.twig', {'user': favourite.profile.user}) }}
+        </div>
+    </div>
     {% endfor %}
 </div>

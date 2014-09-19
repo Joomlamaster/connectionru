@@ -1,6 +1,6 @@
 <div class="row profile-gallery">
     {% for event in events %}
-        <div class="profile-image-box">
+        <div class="event-image-box">
             <a class="title" href="{{ path('view_event', {'id': event.id}) }}">
                 <img src="{{ event.image.path is defined ? event.image.path : ""  }}" alt=""/>
             </a>

@@ -3,7 +3,7 @@
         {% for galleryName, images in gallery %}
             <div class="row profile-gallery">
                 {% for image in images %}
-                    <div class="profile-image-box">
+                    <div class="user-profile-image-box">
                         <img src="{{ image.path }}" data-image_id="{{ image.id }}">
                     </div>
                 {% endfor %}

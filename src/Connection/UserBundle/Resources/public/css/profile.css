@@ -7,11 +7,24 @@
     width: 120px;
     float: none;
     display: block;
+    height: 167px;
 }
 
+.profile-image-buttons {
+    width: 150px;
+    margin-top: 2px;
+}
 .profile-image-box {
     margin: 10px;
-    height: 200px;
+    height: 199px;
+    border: 1px solid #ccc;
+    float: left;
+    text-align: center;
+}
+
+.user-profile-image-box{
+    margin: 10px;
+    height: 169px;
     border: 1px solid #ccc;
     float: left;
     text-align: center;
@@ -20,7 +33,7 @@
 .profile-image-box a {
     font-size: 12px;
     height: 28px;
-    width: 120px;
+    width: 116px;
 }
 
 .profile-image-box:hover {
@@ -28,8 +41,56 @@
     cursor: pointer;
 }
 
-.profile-image-button {
-    padding: 3px;
+.event-image-box {
+    margin: 10px;
+    height: 169px;
+    border: 1px solid #ccc;
+    float: left;
+    text-align: center;
+}
+
+.event-image-box a {
+    font-size: 12px;
+    height: 28px;
+    width: 116px;
+}
+
+.event-image-box:hover {
+    border: 1px solid #484848;
+    cursor: pointer;
+}
+
+.favorite-gallery {
+    padding:14px;
+}
+
+.favorite-gallery img {
+    padding: 2px 2px 1px 2px;
+    width: 120px;
+    float: none;
+    display: block;
+    height: 167px;
+}
+
+.favorite-image-buttons {
+    width: 120px;
+}
+
+.favorite-image-box {
+    margin: 10px;
+    height: 194px;
+    border: 1px solid #ccc;
+    float: left;
+    text-align: center;
+}
+
+.favorite-image-box a {
+    font-size: 12px;
+}
+
+.favorite-image-box:hover {
+    border: 1px solid #484848;
+    cursor: pointer;
 }
 
 .dz-upload-message {
@@ -44,7 +105,7 @@
     border: 1px solid #ccc;
     float: left;
     text-align: center;
-    height: 195px;
+    height: 199px;
     width: 120px;
     cursor: pointer;
 }
@@ -52,6 +113,7 @@
 .add-image img {
     padding:2px;
     width: 100px;
+    height: auto;
     float: none;
     display: block;
     margin: 35px 0px 0px 10px;
