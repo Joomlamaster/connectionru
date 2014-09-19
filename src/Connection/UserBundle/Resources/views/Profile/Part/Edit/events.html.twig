@@ -1,9 +1,24 @@
-<div class="row profile-gallery">
+{%if app.user == events.first.user %}
+<div class="row event-gallery">
     {% for event in events %}
         <div class="event-image-box">
+            <a class="title" href="{{ path('view_event', {'id': event.id}) }}">
+                <img src="{{ event.image.path is defined ? event.image.path : ""  }}" alt=""/>
+            </a>
+            <a href="{{ path('event_manage', {id: event.id}) }}" class="btn btn-xs btn-info" title="Edit this event">
+                <span class="glyphicon glyphicon-edit"></span>
+            </a>
+        </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="row event-gallery">
+    {% for event in events %}
+        <div class="user-event-image-box">
             <a class="title" href="{{ path('view_event', {'id': event.id}) }}">
                 <img src="{{ event.image.path is defined ? event.image.path : ""  }}" alt=""/>
             </a>
         </div>
     {% endfor %}
 </div>
+{% endif %}

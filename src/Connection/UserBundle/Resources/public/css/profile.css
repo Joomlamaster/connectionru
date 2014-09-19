@@ -41,17 +41,36 @@
     cursor: pointer;
 }
 
+.event-gallery {
+    padding:14px;
+}
+
+.event-gallery img {
+    padding: 2px 2px 1px 2px;
+    width: 120px;
+    float: none;
+    display: block;
+    height: 167px;
+}
+
 .event-image-box {
     margin: 10px;
-    height: 169px;
+    height: 194px;
+    border: 1px solid #ccc;
+    float: left;
+    text-align: center;
+}
+
+.user-event-image-box{
+    margin: 10px;
+    height: 170px;
     border: 1px solid #ccc;
     float: left;
     text-align: center;
 }
 
 .event-image-box a {
-    font-size: 12px;
-    height: 28px;
+    font-size: 12px;    
     width: 116px;
 }
 
