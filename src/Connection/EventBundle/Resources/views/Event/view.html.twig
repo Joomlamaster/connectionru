@@ -98,7 +98,9 @@
                         <div class="people clearfix">
                             <div class="face postet-by">
                                 <p class="name"><a href="{{ path('view_profile', {'id': owner.profile.id}) }}">{{ owner.username }}</a></p>
-                                <img width="82px" src="{{ owner.profile.avatar }}">
+                                <a href="{{ path('view_profile', {'id': owner.profile.id}) }}">
+                                    <img width="82px" src="{{ owner.profile.avatar }}">
+                                </a>
                             </div>
                         </div>
                         <div class="event-stats">

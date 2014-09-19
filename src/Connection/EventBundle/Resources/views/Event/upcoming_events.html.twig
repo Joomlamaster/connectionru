@@ -6,7 +6,9 @@
     <div class="row">
         <div class="event-small">
             <div class="col-xs-4">
-                <img src="{{ event.image.path is defined ? event.image.path : "" }}" alt=""/>
+                <a class="title" href="{{ path('view_event', {'id': event.id}) }}">
+                    <img src="{{ event.image.path is defined ? event.image.path : "" }}" alt=""/>
+                </a>
             </div>
             <div class="col-xs-8">
                 <time>{{ event.eventDate is defined ? event.eventDate|date : "" }}</time>

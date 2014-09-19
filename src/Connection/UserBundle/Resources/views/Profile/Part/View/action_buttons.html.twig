@@ -8,7 +8,7 @@
             <span class="glyphicon glyphicon-star"></span>
         </a>
     {% endif %}
-    <a href="{{ path('message_new', {id: user.id}) }}" class="btn btn-xs btn-info">
+    <a href="{{ path('message_new', {id: user.id}) }}" class="btn btn-xs btn-info" title="Send message to this user">
         <span class="glyphicon glyphicon-envelope"></span>
     </a>
     <a id="tell-a-friend" href="#" class="btn btn-xs btn-info" title="Share with a friend">
@@ -21,7 +21,7 @@
     <a href="{{path('fos_user_quick_register')}}" class="btn btn-xs btn-info" title="Add user to favorites">
         <span class="glyphicon glyphicon-star"></span>
     </a>
-    <a href="{{path('fos_user_quick_register')}}" class="btn btn-xs btn-info">
+    <a href="{{path('fos_user_quick_register')}}" class="btn btn-xs btn-info" title="Send message to this user">
         <span class="glyphicon glyphicon-envelope"></span>
     </a>
     <a href="{{path('fos_user_quick_register')}}" class="btn btn-xs btn-info" title="Share with a friend">
