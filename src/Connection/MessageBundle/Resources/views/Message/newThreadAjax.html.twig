@@ -1,0 +1,22 @@
+{% extends 'ConnectionMessageBundle::layoutAjax.html.twig' %}
+
+{% block fos_message_content %}
+
+<h2>{% trans from 'FOSMessageBundle' %}send_new{% endtrans %}</h2>
+
+<form class="new-thread" action="{{ url('fos_message_thread_new') }}" role="form" method="post">
+    {{ form_widget(form.recipient, { 'attr': {'class': 'hidden'} }) }}
+
+    <div class="form-group">
+        {{ form_row(form.subject, { 'attr': {'class': 'form-control'} }) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_row(form.body, { 'attr': {'class': 'form-control'} }) }}
+    </div>
+
+    <button class="btn-gradient" type="submit">Send</button>
+    {{ form_widget(form._token) }}
+</form>
+
+{% endblock %}

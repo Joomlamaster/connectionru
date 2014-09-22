@@ -106,6 +106,31 @@ class MessageController extends BaseMessageController
     }
 
     /**
+     * @Route("/ajax/new/{id}", name="ajax_message_new", requirements={"id" = "\d+"})
+     * @Template()
+     * @ParamConverter("User", class="ConnectionUserBundle:User")
+     */
+    public function newThreadUserAjaxAction(User $user)
+    {
+        $form = $this->container->get('fos_message.new_thread_form.factory')->create();
+        $formHandler = $this->container->get('fos_message.new_thread_form.handler');
+
+        $form->get('recipient')->setData($user);
+
+        if ($message = $formHandler->process($form)) {
+            return new RedirectResponse($this->container->get('router')->generate('fos_message_thread_view', array(
+                'threadId' => $message->getThread()->getId()
+            )));
+        }
+
+        return $this->container->get('templating')->renderResponse('ConnectionMessageBundle:Message:newThreadAjax.html.twig', array(
+            'form' => $form->createView(),
+            'data' => $form->getData(),
+            'user' => $user
+        ));
+    }
+
+    /**
      * Deletes a thread
      *
      * @param string $threadId the thread id
