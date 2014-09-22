@@ -28,6 +28,9 @@ class EventType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $profileCountryIso = $this->profileCountryIso;
+        if(!empty($options['data'])){
+            $country = $options['data']->getCountry();
+        }
         $builder->add('country', 'entity', array(
             'class' => 'ConnectionCoreBundle:Country',
             'query_builder' => function(EntityRepository $er) use ($profileCountryIso) {
@@ -37,7 +40,8 @@ class EventType extends AbstractType
                         ->orderBy('c.priority', 'DESC');
                 },
             'property' => 'name',
-            'attr' => array('class' => 'master')
+            'attr' => array('class' => 'master'),
+            'data' => $country
         ));
 
         $formModifier = function (FormInterface $form, Country $country = null) {

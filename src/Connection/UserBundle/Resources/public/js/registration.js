@@ -31,6 +31,9 @@ FormAjaxFields = {
                         $(html).find(FormAjaxFields.cfg.slave.block)
                     );
                 }
+                if(typeof loadCountryStateFeedback === 'function'){
+                    loadCountryStateFeedback();
+                }
             }
         });
     },

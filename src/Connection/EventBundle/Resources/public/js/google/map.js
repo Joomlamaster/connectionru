@@ -80,19 +80,14 @@ MAP = {
     },
     'listen': function() {
         $("form.gmap")
-            .on('change', '#connection_event_type_country', function() {
-                //$('#connection_event_type_state').val('');
-                MAP.zoom = 6;
-                MAP.setFields();
-                MAP.getGeoLoc();
-            });
-
-        $("form.gmap")
             .on('change', '#connection_event_type_state', function() {
-                MAP.zoom = 10;
-                MAP.setFields();
-                MAP.getGeoLoc();
+                MAP.update(10);
             });
+    },    
+    'update': function(zoom){
+        MAP.zoom = zoom;
+        MAP.setFields();
+        MAP.getGeoLoc();
     },
     'setFields': function() {
         MAP.options.country  = $("#connection_event_type_country option:selected").text().trim();
@@ -121,3 +116,8 @@ MAP = {
     }
 };
 google.maps.event.addDomListener(window, 'load', MAP.init());
+
+loadCountryStateFeedback = function(){
+    MAP.listen();
+    MAP.update(10);
+}
