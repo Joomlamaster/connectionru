@@ -102,7 +102,11 @@
                     "{{ path('profile_image') }}",
                     "{{ path('profile_image') }}"
             );
+
+            handleIvyLeague('#{{form.profile.educationIvyLeague.vars.id}}', '#{{form.profile.ivyLeagueUniversity.vars.id}}', '1');
+            handleOriginallyFrom('#{{form.profile.originallyFrom.vars.id}}', '#{{form.profile.originallyFromCity.vars.id}}');
         });
+        
         {# PopUp Listener (Upload/View/Update) #}
         FM.popUp.listen("{{ path('update_profile_image') }}");
         {# Tabs #}
