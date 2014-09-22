@@ -81,7 +81,7 @@ MAP = {
     'listen': function() {
         $("form.gmap")
             .on('change', '#connection_event_type_country', function() {
-                $('#connection_event_type_state').val('');
+                //$('#connection_event_type_state').val('');
                 MAP.zoom = 6;
                 MAP.setFields();
                 MAP.getGeoLoc();
