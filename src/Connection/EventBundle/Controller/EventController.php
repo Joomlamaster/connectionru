@@ -79,6 +79,11 @@ class EventController extends Controller
         if ( $form->isSubmitted() && $form->isValid() ) {
             if ( !empty($imageId) ) {
                 $image = $em->getRepository('ConnectionUserBundle:Profile\Image')->find($imageId);
+                /* @var $oldImage \Connection\UserBundle\Entity\Profile\Image */
+                $oldImage = $event->getImage();
+                if($oldImage){
+                    $oldImage->removeFiles();
+                }
                 $event->setImage($image);
             }
 
