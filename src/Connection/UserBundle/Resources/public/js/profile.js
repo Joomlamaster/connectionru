@@ -6,4 +6,3 @@ window.onload = function(){
         'btnCancelClass': 'btn-default'
     });
 }
-

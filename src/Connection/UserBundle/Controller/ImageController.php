@@ -68,7 +68,9 @@ class ImageController extends Controller
         $em->remove($image);
         $em->flush();
 
-        return $this->redirect( $this->generateUrl('edit_user_profile') );
+        return $this->redirect( $this->generateUrl('edit_user_profile', array(
+            'tab' => 'gallery'
+        )));
     }
 
     /**

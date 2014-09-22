@@ -53,7 +53,30 @@ class UserController extends Controller
             $em->flush();
             $this->container->get('session')->getFlashBag()->add('notice', 'User '.$userToRemove->getUsername().' removed successfully from yor favorite users');
         }
-        return $this->redirect( $this->generateUrl('view_profile', array('id' => $userToRemove->getProfile()->getId())) );
+        return $this->redirect( $this->generateUrl('view_profile', array(
+            'id' => $userToRemove->getProfile()->getId()
+        )) );
+
+    }
+
+    /**
+     * @Route("/favorite/remove2/{id}", name="profile_favorite_user_remove", requirements={"id" = "\d+"})
+     * @Template("ConnectionUserBundle:Profile:view.html.twig")
+     * @ParamConverter("User", class="ConnectionUserBundle:User")
+     */
+    public function removeProfileFavoriteUserAction(User $userToRemove){
+        /* @var $user \Connection\UserBundle\Entity\User */
+        $user = $this->getUser();
+        if($user->hasFavoriteUser($userToRemove)){
+            $em = $this->getDoctrine()->getManager();
+            $user->removeFavoriteUser($userToRemove);
+            $em->persist($user);
+            $em->flush();
+            $this->container->get('session')->getFlashBag()->add('notice', 'User '.$userToRemove->getUsername().' removed successfully from yor favorite users');
+        }
+        return $this->redirect( $this->generateUrl('edit_user_profile', array(
+            'tab' => 'favourites'
+        )) );
 
     }
 }

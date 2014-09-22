@@ -47,32 +47,32 @@
             </div>
             <div class="col-xs-10">
                 <ul class="nav nav-tabs" id="profile-tabs">
-                    <li class="active"><a href="#profile">Profile</a></li>
-                    <li><a href="#gallery">Gallery</a></li>
+                    <li class="{%if tab == '' or tab == 'profile' %}active{% endif %}"><a href="#profile">Profile</a></li>
+                    <li class="{%if tab and tab == 'gallery' %}active{% endif %}"><a href="#gallery">Gallery</a></li>
                     {% if favourites is defined and favourites is not empty %}
-                        <li><a href="#favourites">Favourites</a></li>
+                        <li class="{%if tab and tab == 'favourites' %}active{% endif %}"><a href="#favourites">Favourites</a></li>
                     {% endif %}
                     {% if events is defined and events is not empty %}
-                        <li><a href="#events">Events</a></li>
+                        <li class="{%if tab and tab == 'events' %}active{% endif %}"><a href="#events">Events</a></li>
                     {% endif %}
                 </ul>
 
                 <div class="tab-content">
-                    <div class="tab-pane active" id="profile">
+                    <div class="tab-pane {%if tab == '' or tab == 'profile' %}active{% endif %}" id="profile">
                         <div class="col-xs-10">
                             {{ include('ConnectionUserBundle:Profile/Part/Edit:personal_info.html.twig', {form: form}) }}
                         </div>
                     </div>
-                    <div class="tab-pane" id="gallery">
+                    <div class="tab-pane {%if tab and tab == 'gallery' %}active{% endif %}" id="gallery">
                         {{ include('ConnectionUserBundle:Profile/Part/Edit:gallery.html.twig', {userPhotos: userPhotos}) }}
                     </div>
                     {% if favourites is defined and favourites is not empty %}
-                        <div class="tab-pane" id="favourites">
+                        <div class="tab-pane {%if tab and tab == 'favourites' %}active{% endif %}" id="favourites">
                             {{ include('ConnectionUserBundle:Profile/Part/Edit:favourites.html.twig', {favourites: favourites}) }}
                         </div>
                     {% endif %}
                     {% if events is defined and events is not empty %}
-                        <div class="tab-pane" id="events">
+                        <div class="tab-pane {%if tab and tab == 'events' %}active{% endif %}" id="events">
                             {{ include('ConnectionUserBundle:Profile/Part/Edit:events.html.twig', {events: events}) }}
                         </div>
                     {% endif %}
@@ -89,6 +89,7 @@
     <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/dropzone/dropzone.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/dropzone/dropzone-custom.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/popup/popup.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionuser/js/fos_message.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jcorp/js/jquery.Jcrop.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jcorp/js/settings.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/bootstrap-tooltip.js') }}"></script>
@@ -109,6 +110,7 @@
             e.preventDefault();
             $(this).tab('show');
         });
+        FosMessage.init();
 
         $('.fm-popup').on('dz.upload.complete', function() {
             location.reload();

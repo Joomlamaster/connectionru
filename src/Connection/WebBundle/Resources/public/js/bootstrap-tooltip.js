@@ -253,7 +253,7 @@
   , fixTitle: function () {
       var $e = this.$element
       if ($e.attr('title') || typeof($e.attr('data-original-title')) != 'string') {
-        $e.attr('data-original-title', $e.attr('title') || '').attr('title', '')
+        $e.attr('data-original-title', $e.attr('title') || '');
       }
     }
 
@@ -274,7 +274,7 @@
         , $e = this.$element
         , o = this.options
 
-      title = $e.attr('data-original-title')
+      title = $e.attr('data-title')
         || (typeof o.title == 'function' ? o.title.call($e[0]) :  o.title)
 
       return title

@@ -50,6 +50,11 @@ class ProfileController extends Controller
         if ( !$user = $this->getUser() ) {
             return $this->redirect( $this->generateUrl('connection_homepage') );
         }
+
+        $tab = '';
+        if($request->isMethod('GET')){
+            $tab = $request->get('tab');
+        }
         $ivyLeagueAfirmativeId = $this->container->getParameter('ivy_league_afirmative_id');
         $form = $this->createForm( new EditProfileType(), $user);
 
@@ -72,7 +77,8 @@ class ProfileController extends Controller
             'userPhotos' => $userPhotos,
             'favourites' => $user->getFavoriteUsers(),
             'events'     => $user->getEvents(),
-            'ivyLeagueAfirmativeId' => $ivyLeagueAfirmativeId
+            'ivyLeagueAfirmativeId' => $ivyLeagueAfirmativeId,
+            'tab' =>$tab
         );
     }
 
