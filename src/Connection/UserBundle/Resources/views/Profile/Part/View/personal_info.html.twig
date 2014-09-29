@@ -59,7 +59,7 @@
         {% endif %}
         {% if user.profile.educationIvyLeague is defined and user.profile.educationIvyLeague is not empty %}
             <h6>
-                <b>Education Ivy League</b>: {{ user.profile.educationIvyLeague.name }}
+                <b>Education Ivy League</b>: {{ user.profile.educationIvyLeague is defined and user.profile.educationIvyLeague ? 'Yes' : 'No'  }}
                 {% if user.profile.ivyLeagueUniversity is defined and user.profile.ivyLeagueUniversity is not empty %}
                     <i class="muted">({{ user.profile.ivyLeagueUniversity }})</i>
                 {% endif %}

@@ -35,15 +35,20 @@ class UserRepository extends EntityRepository
             ->getOneOrNullResult();
     }
 
-    public function getLatest($limit)
+    public function getLatest($limit, $excludeUserId = false)
     {
-        return $this->createQueryBuilder('u')
-            ->select('u')
-            ->join('u.profile', 'p')
-            ->orderBy('u.createdAt')
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult();
+            $qb = $this->createQueryBuilder('u')
+                       ->select('u')
+                       ->join('u.profile', 'p');
+
+            if ( $excludeUserId ) {
+                $qb->where('u.id != :exclude_id')->setParameter('exclude_id', $excludeUserId);
+            }
+
+            return $qb->orderBy('u.createdAt')
+                      ->setMaxResults($limit)
+                      ->getQuery()
+                      ->getResult();
     }
 
     public function countAll()

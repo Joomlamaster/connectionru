@@ -97,10 +97,11 @@ class Profile
     protected $education;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\EducationIvyLeague", inversedBy="profile")
-     * @ORM\JoinColumn(name="education_ivy_league", referencedColumnName="id")
-     **/
-    protected $educationIvyLeague;
+     * @var \DateTime
+     *
+     * @ORM\Column(name="education_ivy_league", type="boolean")
+     */
+    protected $educationIvyLeague = 0;
 
     /**
      * @var string
