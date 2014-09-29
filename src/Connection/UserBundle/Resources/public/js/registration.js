@@ -86,7 +86,6 @@ function handleOriginallyFrom(select, input){
     
     
     function checkOriginallyFromState(){
-        console.debug($(select).val());
         if($(select).val() !== ''){
             $(input).parent().show();
         } else {
