@@ -60,7 +60,13 @@
                 <div class="tab-content">
                     <div class="tab-pane {%if tab == '' or tab == 'profile' %}active{% endif %}" id="profile">
                         <div class="col-xs-10">
-                            {{ include('ConnectionUserBundle:Profile/Part/Edit:personal_info.html.twig', {form: form}) }}
+                            {% if editPersonalInfo is defined and editPersonalInfo %}
+                                {{ include('ConnectionUserBundle:Profile/Part/Edit:personal_info.html.twig') }}
+                            {% else %}
+                                <br/>
+                                {{ include('ConnectionUserBundle:Profile/Part/View:personal_info.html.twig') }}<br/>
+                                <a href="{{ path('edit_user_profile_edit') }}" class="btn btn-info">Edit</a>
+                            {% endif %}
                         </div>
                     </div>
                     <div class="tab-pane {%if tab and tab == 'gallery' %}active{% endif %}" id="gallery">

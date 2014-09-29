@@ -130,6 +130,8 @@ class Background
      * @ORM\PreRemove()
      */
     public function removeFiles() {
-        unlink($this->getUploadRootDir());
+        if ( file_exists($this->getUploadRootDir()) ) {
+            unlink($this->getUploadRootDir());
+        }
     }
 }
