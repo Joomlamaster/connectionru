@@ -235,7 +235,9 @@ class ProfileType extends AbstractType
             ->add('livesWithChildren', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\LivesWithChildren',
                 'property' => 'name',
-                'label' => 'Do you live with your children?'
+                'label' => 'Do you live with your children?',
+                'empty_value' =>'Prefer not to say',
+                'required' => false,
             ))
 
             ->add('openToPersonWithKids', 'entity', array(
