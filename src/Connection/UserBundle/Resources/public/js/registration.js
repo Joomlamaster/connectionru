@@ -57,23 +57,18 @@ FormAjaxFields = {
 };
 
 
-function handleIvyLeague(select, input, afirmative){
-    
-    ivyLeagueAfirmative = afirmative;
-    $(select).change(function(){
+function handleIvyLeague(){
+    $(".ivy-league-checkbox").change(function(){
         checkIvyLeagueState();
     });
-    
-    
+
     function checkIvyLeagueState(){
-        var selected = $(select).find('input[type="radio"]:checked');
-        if($(selected).val() === ivyLeagueAfirmative){
-            $(input).parent().show();
+        if ( $(".ivy-league-checkbox").is(":checked") ) {
+            $(".ivy-league-text").removeClass('hidden');
         } else {
-            $(input).parent().hide();
+            $(".ivy-league-text").addClass('hidden');
         }
     }
-    
     checkIvyLeagueState();
   
 }
@@ -86,7 +81,6 @@ function handleOriginallyFrom(select, input){
     
     
     function checkOriginallyFromState(){
-        console.debug($(select).val());
         if($(select).val() !== ''){
             $(input).parent().show();
         } else {

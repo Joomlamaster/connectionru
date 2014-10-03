@@ -15,7 +15,8 @@ class UserController extends Controller
 {
     public function latestAction()
     {
-        $users = $this->getDoctrine()->getRepository('ConnectionUserBundle:User')->getLatest(6);
+        $currentUserId = ($user = $this->getUser()) ? $user->getId() : false;
+        $users         = $this->getDoctrine()->getRepository('ConnectionUserBundle:User')->getLatest(6, $currentUserId);
         return $this->render('ConnectionUserBundle:User:latest_block.html.twig', array(
             'users' => $users
         ));

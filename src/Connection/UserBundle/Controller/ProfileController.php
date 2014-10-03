@@ -43,6 +43,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/", name="edit_user_profile")
+     * @Route("/edit", name="edit_user_profile_edit")
      * @Template()
      */
     public function editAction( Request $request )
@@ -51,7 +52,9 @@ class ProfileController extends Controller
             return $this->redirect( $this->generateUrl('connection_homepage') );
         }
 
-        $tab = '';
+        $edit = ("edit_user_profile_edit" == $request->get('_route'));
+        $tab  = '';
+
         if($request->isMethod('GET')){
             $tab = $request->get('tab');
         }
@@ -75,10 +78,11 @@ class ProfileController extends Controller
             'form'       => $form->createView(),
             'user'       => $user,
             'userPhotos' => $userPhotos,
-            'favourtes' => $user->getFavoriteUsers(),
+            'favorites'  => $user->getFavoriteUsers(),
             'events'     => $user->getEvents(),
             'ivyLeagueAfirmativeId' => $ivyLeagueAfirmativeId,
-            'tab' =>$tab
+            'tab'                   =>$tab,
+            'editPersonalInfo'      => $edit
         );
     }
 

@@ -99,20 +99,6 @@ class ProfileType extends AbstractType
                 }
             }
         );
-        $builder->addEventListener(
-                FormEvents::POST_SET_DATA,
-                function (FormEvent $event) use ($ivyLeagueAfirmative) {
-                    $educationIvyLeague = $event->getForm()->get('educationIvyLeague')->getData();
-                    if(empty($educationIvyLeague)){
-                        return;
-                    }
-
-                    if($educationIvyLeague->getId() != $ivyLeagueAfirmative){
-                        $event->getForm()->get('ivyLeagueUniversity')->setData('');
-                    }
-
-                }
-            );
 
         // add your custom field
         $builder
@@ -168,11 +154,12 @@ class ProfileType extends AbstractType
                 'property' => 'name',
             ))
 
-            ->add('educationIvyLeague', 'entity', array(
-                'class' => 'ConnectionUserBundle:Profile\EducationIvyLeague',
+            ->add('educationIvyLeague', 'checkbox', array(
                 'label' => 'Ivy league educated?',
-                'property' => 'name',
-                'expanded' => true
+                'attr'  => array(
+                    'style' => 'width: auto;',
+                    'class' => 'ivy-league-checkbox'
+                )
             ))
 
             ->add('ivyLeagueUniversity', 'text')
@@ -248,7 +235,9 @@ class ProfileType extends AbstractType
             ->add('livesWithChildren', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\LivesWithChildren',
                 'property' => 'name',
-                'label' => 'Do you live with your children?'
+                'label' => 'Do you live with your children?',
+                'empty_value' =>'Prefer not to say',
+                'required' => false,
             ))
 
             ->add('openToPersonWithKids', 'entity', array(
