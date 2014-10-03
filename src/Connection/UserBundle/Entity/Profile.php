@@ -1001,7 +1001,8 @@ class Profile
      */
     public function prePersist(){
         //if not IvyLeagueEducated remove IvyLeagueUniversity
-        if(empty($this->getEducationIvyLeague())){
+        $ivyLeagueEducation = $this->getEducationIvyLeague();
+        if(empty($ivyLeagueEducation)){
             $this->ivyLeagueUniversity = null;
         }
     }
