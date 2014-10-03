@@ -91,7 +91,7 @@
                 <h6><b>Is open to dating a person with kids</b>: {{ user.profile.openToPersonWithKids.name }}</h6>
             {% endif %}
             {% if user.profile.income is defined and user.profile.income is not empty %}
-                <h6><b>Income</b>: {{ user.profile.income }}</h6>
+                <h6><b>Income</b>: {{ user.profile.income.name }}</h6>
             {% endif %}
     </div>
 </div><br/><br/>
