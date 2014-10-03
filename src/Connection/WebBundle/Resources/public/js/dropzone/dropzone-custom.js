@@ -26,6 +26,7 @@ DropZoneStoreage = {
 
                 $(".dz-upload-image").on('click', function(e){
                     e.preventDefault();
+                    $('.fm-popup label input').removeAttr('checked');
                     $(".fm-show-popup").trigger('click');
                 });
 
