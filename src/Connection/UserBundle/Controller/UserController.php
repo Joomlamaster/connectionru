@@ -75,7 +75,7 @@ class UserController extends Controller
             $this->container->get('session')->getFlashBag()->add('notice', 'User '.$userToRemove->getUsername().' removed successfully from yor favorite users');
         }
         return $this->redirect( $this->generateUrl('edit_user_profile', array(
-            'tab' => 'favourites'
+            'tab' => 'favorites'
         )) );
 
     }

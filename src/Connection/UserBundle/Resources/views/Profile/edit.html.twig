@@ -49,8 +49,8 @@
                 <ul class="nav nav-tabs" id="profile-tabs">
                     <li class="{%if tab == '' or tab == 'profile' %}active{% endif %}"><a href="#profile">Profile</a></li>
                     <li class="{%if tab and tab == 'gallery' %}active{% endif %}"><a href="#gallery">Gallery</a></li>
-                    {% if favourites is defined and favourites is not empty %}
-                        <li class="{%if tab and tab == 'favourites' %}active{% endif %}"><a href="#favourites">Favourites</a></li>
+                    {% if favorites is defined and favorites is not empty %}
+                        <li class="{%if tab and tab == 'favorites' %}active{% endif %}"><a href="#favorites">Favorites</a></li>
                     {% endif %}
                     {% if events is defined and events is not empty %}
                         <li class="{%if tab and tab == 'events' %}active{% endif %}"><a href="#events">Events</a></li>
@@ -66,9 +66,9 @@
                     <div class="tab-pane {%if tab and tab == 'gallery' %}active{% endif %}" id="gallery">
                         {{ include('ConnectionUserBundle:Profile/Part/Edit:gallery.html.twig', {userPhotos: userPhotos}) }}
                     </div>
-                    {% if favourites is defined and favourites is not empty %}
-                        <div class="tab-pane {%if tab and tab == 'favourites' %}active{% endif %}" id="favourites">
-                            {{ include('ConnectionUserBundle:Profile/Part/Edit:favourites.html.twig', {favourites: favourites}) }}
+                    {% if favorites is defined and favorites is not empty %}
+                        <div class="tab-pane {%if tab and tab == 'favorites' %}active{% endif %}" id="favorites">
+                            {{ include('ConnectionUserBundle:Profile/Part/Edit:favorites.html.twig', {favorites: favorites}) }}
                         </div>
                     {% endif %}
                     {% if events is defined and events is not empty %}
@@ -106,7 +106,7 @@
             handleIvyLeague('#{{form.profile.educationIvyLeague.vars.id}}', '#{{form.profile.ivyLeagueUniversity.vars.id}}', '1');
             handleOriginallyFrom('#{{form.profile.originallyFrom.vars.id}}', '#{{form.profile.originallyFromCity.vars.id}}');
         });
-        
+
         {# PopUp Listener (Upload/View/Update) #}
         FM.popUp.listen("{{ path('update_profile_image') }}");
         {# Tabs #}

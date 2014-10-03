@@ -75,7 +75,7 @@ class ProfileController extends Controller
             'form'       => $form->createView(),
             'user'       => $user,
             'userPhotos' => $userPhotos,
-            'favourites' => $user->getFavoriteUsers(),
+            'favourtes' => $user->getFavoriteUsers(),
             'events'     => $user->getEvents(),
             'ivyLeagueAfirmativeId' => $ivyLeagueAfirmativeId,
             'tab' =>$tab
