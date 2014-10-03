@@ -292,6 +292,16 @@ footer .bottom-right-menu li a {
   margin-top: 0;
   padding-right: 0;
 }
+
+.multi-column-select .form-control{
+    max-width: 145px;
+}
+.multi-column-select .form-control label{
+   width: 65px;
+   margin-right: 0px;   
+}
+
+
 .form-group label:first-child,
 .form-inline label:first-child {
   color: #00A0E3;

@@ -108,7 +108,15 @@ class RegistrationController extends BaseController
     public function registerQuickAction()
     {
         $formFactory = $this->container->get('fos_user.registration.form.factory');
+        $ethnicityId = $this->container->getParameter('quick_registration_ethnicity_id');
+        $em = $this->container->get('doctrine')->getManager();
+        $ethnicity = $em->getRepository('ConnectionUserBundle:Profile\Ethnicity')->findOneById($ethnicityId);
         $form = $formFactory->createForm();
+
+        if($ethnicity){
+            $form->get('profile')->get('ethnicity')->setData($ethnicity);
+        }
+
         return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:quick_register.html.' . $this->getEngine(), array(
             'form' => $form->createView(),
         ));

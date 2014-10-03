@@ -62,7 +62,9 @@ class ProfileType extends AbstractType
             'property' => 'name',
             'empty_value' => 'Select country'
         ))
-        ->add('originallyFromCity', 'text');
+        ->add('originallyFromCity', 'text', array(
+            'required' => false
+        ));
 
         $formModifier = function (FormInterface $form, Country $country = null) {
             if ( $country ) {
@@ -159,10 +161,13 @@ class ProfileType extends AbstractType
                 'attr'  => array(
                     'style' => 'width: auto;',
                     'class' => 'ivy-league-checkbox'
-                )
+                ),
+                'required' => false
             ))
 
-            ->add('ivyLeagueUniversity', 'text')
+            ->add('ivyLeagueUniversity', 'text', array(
+                'required' => false
+            ))
 
             ->add('profession', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Profession',

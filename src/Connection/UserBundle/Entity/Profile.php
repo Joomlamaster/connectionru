@@ -11,6 +11,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="user_profile")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
+ *
  */
 class Profile
 {
@@ -97,11 +99,11 @@ class Profile
     protected $education;
 
     /**
-     * @var \DateTime
+     * @var boolean
      *
-     * @ORM\Column(name="education_ivy_league", type="boolean")
+     * @ORM\Column(name="education_ivy_league", type="boolean", nullable=true)
      */
-    protected $educationIvyLeague = 0;
+    protected $educationIvyLeague = false;
 
     /**
      * @var string
@@ -991,5 +993,16 @@ class Profile
     public function getZip ()
     {
         return $this->zip;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function prePersist(){
+        //if not IvyLeagueEducated remove IvyLeagueUniversity
+        if(empty($this->getEducationIvyLeague())){
+            $this->ivyLeagueUniversity = null;
+        }
     }
 }
