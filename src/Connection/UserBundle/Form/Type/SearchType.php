@@ -177,7 +177,10 @@ class SearchType extends AbstractType
                 'required' => false
             ))
 
-            ->add('income', 'number', array(
+            ->add('income', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\Income',
+                'property' => 'name',
+                'empty_value' =>'Any income',
                 'required' => false
             ))
 

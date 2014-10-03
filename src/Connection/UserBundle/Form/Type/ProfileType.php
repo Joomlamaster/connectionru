@@ -174,7 +174,12 @@ class ProfileType extends AbstractType
                 'property' => 'name',
             ))
 
-            ->add('income', 'number')
+            ->add('income', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\Income',
+                'property' => 'name',
+                'empty_value' => 'Select income',
+                'required' => false
+            ))
 
             ->add('religion', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Religion',

@@ -119,10 +119,9 @@ class Profile
     protected $profession;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="income", type="integer", nullable=true)
-     */
+     * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\Income", inversedBy="profile")
+     * @ORM\JoinColumn(name="income", referencedColumnName="id")
+     **/
     protected $income;
 
     /**

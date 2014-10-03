@@ -7,11 +7,13 @@
             </h6>
         {% endif %}
         <h6>
-            {{ user.profile.birthdate|userAge}}
-            {{ user.profile.gender.name is defined ? ", " ~ user.profile.gender.name : ""}}
-            {{ user.profile.city is defined and user.profile.city is not empty  ? ", " ~ user.profile.city : ""}}
-            {{ user.profile.state.name is defined ? ", " ~ user.profile.state.name : ""}}
-            {{ user.profile.country.name is defined ? ", " ~ user.profile.country.name : ""}}
+            {% spaceless %}
+            <span>{{ user.profile.birthdate|userAge}}</span>
+            <span>{{ user.profile.gender.name is defined ? ", " ~ user.profile.gender.name : ""}}</span>
+            <span>{{ user.profile.city is defined and user.profile.city is not empty  ? ", " ~ user.profile.city : ""}}</span>
+            <span>{{ user.profile.state.name is defined ? ", " ~ user.profile.state.name : ""}}</span>
+            <span>{{ user.profile.country.name is defined ? ", " ~ user.profile.country.name : ""}}</span>
+            {% endspaceless %}
         </h6>
         <h6>
             <b>Seeking</b>: {{ user.profile.seek.name|default('') }}

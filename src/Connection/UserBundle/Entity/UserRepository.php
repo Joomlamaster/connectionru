@@ -126,7 +126,7 @@ class UserRepository extends EntityRepository
 
         //  Filter By income
         if ( !empty($filter['income'])) {
-            $qb->andWhere('p.income >= :income')->setParameter('income', $filter['income']);
+            $qb->andWhere('p.income = :income')->setParameter('income', $filter['income']);
         }
 
         //  Filter By religion
