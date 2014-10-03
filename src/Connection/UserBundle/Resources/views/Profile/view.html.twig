@@ -66,8 +66,11 @@
 {% endblock %}
 {% block javascript %}
     {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/bootstrap-tooltip.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/bootstrap-confirmation.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/popup/popup.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/connectionuser/js/fos_message.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionuser/js/profile.js') }}"></script>
     <script type="text/javascript">
         {# PopUp Listener (Upload/View/Update) #}
         FM.popUp.listen("{{ path('update_profile_image') }}");
