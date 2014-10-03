@@ -379,7 +379,7 @@ class Profile
     }
 
     /**
-     * @param \Connection\UserBundle\Entity\DateTime $birthdate
+     * @param \DateTime $birthdate
      */
     public function setBirthdate ( $birthdate )
     {
@@ -387,7 +387,7 @@ class Profile
     }
 
     /**
-     * @return \Connection\UserBundle\Entity\DateTime
+     * @return \DateTime
      */
     public function getBirthdate ()
     {
