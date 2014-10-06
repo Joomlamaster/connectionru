@@ -114,7 +114,7 @@ class Profile
 
     /**
      * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\Profession", inversedBy="profile")
-     * @ORM\JoinColumn(name="profession", referencedColumnName="id")
+     * @ORM\JoinColumn(name="profession", referencedColumnName="id", nullable=true)
      **/
     protected $profession;
 

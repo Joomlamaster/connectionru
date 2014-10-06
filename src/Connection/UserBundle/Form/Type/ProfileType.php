@@ -169,6 +169,8 @@ class ProfileType extends AbstractType
             ->add('profession', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Profession',
                 'property' => 'name',
+                'empty_value' => 'Other',
+                'required' => false
             ))
 
             ->add('income', 'entity', array(
