@@ -101,7 +101,7 @@ class EventType extends AbstractType
             ))
             ->add('contactName')
             ->add('email')
-            ->add('phone')
+//            ->add('phone')
             ->add('lat', 'hidden')
             ->add('lng', 'hidden')
             ->add('save', 'submit', array(
