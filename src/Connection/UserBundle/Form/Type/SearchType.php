@@ -162,12 +162,14 @@ class SearchType extends AbstractType
                 'required' => false,
             ))
 
-            ->add('educationIvyLeague', 'entity', array(
-                'class' => 'ConnectionUserBundle:Profile\EducationIvyLeague',
-                'property' => 'name',
-                'label' => 'Ivy league educated',
-                'empty_value' =>'Any education',
-                'required' => false,
+            ->add('educationIvyLeague', 'choice', array(
+                'label' => 'Ivy league educated?',
+                'choices' => array(
+                    0 => 'No',
+                    1 => 'Yes',
+                ),
+                'empty_value' =>'Not important',
+                'required' => false
             ))
 
             ->add('profession', 'entity', array(

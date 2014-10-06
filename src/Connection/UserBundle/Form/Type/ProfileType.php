@@ -23,19 +23,16 @@ class ProfileType extends AbstractType
 {
     private $profileCountryIso = array();
     private $converter;
-    private $ivyLeagueAfirmativeId;
 
-    public function __construct($profileCountryIso = array(), $converter, $ivyLeagueAfirmativeId)
+    public function __construct($profileCountryIso = array(), $converter)
     {
         $this->profileCountryIso = $profileCountryIso;
         $this->converter = $converter;
-        $this->ivyLeagueAfirmativeId = $ivyLeagueAfirmativeId;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $profileCountryIso = $this->profileCountryIso;
-        $ivyLeagueAfirmative = $this->ivyLeagueAfirmativeId;
 
         $builder->add('country', 'entity', array(
             'class' => 'ConnectionCoreBundle:Country',

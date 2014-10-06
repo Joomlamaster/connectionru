@@ -115,7 +115,7 @@ class UserRepository extends EntityRepository
         }
 
         //  Filter By educationIvyLeague
-        if ( !empty($filter['educationIvyLeague'])) {
+        if ( isset($filter['educationIvyLeague'])) {
             $qb->andWhere('p.educationIvyLeague = :educationIvyLeague')->setParameter('educationIvyLeague', $filter['educationIvyLeague']);
         }
 
