@@ -58,7 +58,6 @@ class ProfileController extends Controller
         if($request->isMethod('GET')){
             $tab = $request->get('tab');
         }
-        $ivyLeagueAfirmativeId = $this->container->getParameter('ivy_league_afirmative_id');
         $form = $this->createForm( new EditProfileType(), $user);
 
         $form->handleRequest($request);
@@ -80,7 +79,6 @@ class ProfileController extends Controller
             'userPhotos' => $userPhotos,
             'favorites'  => $user->getFavoriteUsers(),
             'events'     => $user->getEvents(),
-            'ivyLeagueAfirmativeId' => $ivyLeagueAfirmativeId,
             'tab'                   =>$tab,
             'editPersonalInfo'      => $edit
         );

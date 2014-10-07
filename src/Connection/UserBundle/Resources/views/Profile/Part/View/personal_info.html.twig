@@ -1,6 +1,10 @@
 <div class="row">
-    <div class="col-xs-4">
+    <div class="col-xs-8">
         <h4>{{ user.userName }}</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4">
         {%if user.lastLogin is not empty%}
             <h6>
                 <b>Last login</b>: {{user.lastLogin|date('Y-M-d')}}
@@ -22,27 +26,29 @@
             {% endif %}
         </h6>
     </div>
-    <div class="col-xs-8">
+    <div class="col-md-5">
         {% if user.profile.maritalStatus is defined and user.profile.maritalStatus is not empty %}
             <h6><b>Marital status</b>: {{ user.profile.maritalStatus.name }}</h6>
         {% endif %}
         {% if user.profile.religion is defined and user.profile.religion is not empty %}
             <h6><b>Religion</b>: {{ user.profile.religion.name }}</h6>
         {% endif %}
-        {% if user.profile.profession is defined and user.profile.profession is not empty %}
-            <h6><b>Profession</b>: {{ user.profile.profession.name }}</h6>
-        {% endif %}
-        {% if user.profile.height is defined and user.profile.height is not empty %}
-            <h6><b>Height</b>: {{ user.profile.height|cmToFootViewFormat }} ({{ user.profile.height|cmViewFormat }})</h6>
-        {% endif %}
         {% if user.profile.education is defined and user.profile.education is not empty %}
             <h6><b>Education</b>: {{ user.profile.education.name }}</h6>
         {% endif %}
-        {% if user.profile.zodiac is defined and user.profile.zodiac is not empty %}
-            <h6><b>Zodiac Sign</b>: {{ user.profile.zodiac.name }}</h6>
+        {% if user.profile.profession is defined and user.profile.profession is not empty %}
+            <h6><b>Profession</b>: {{ user.profile.profession.name }}</h6>
+        {% endif %}
+    </div>
+    <div class="col-xs-3">
+        {% if user.profile.height is defined and user.profile.height is not empty %}
+            <h6><b>Height</b>: {{ user.profile.height|cmToFootViewFormat }} ({{ user.profile.height|cmViewFormat }})</h6>
         {% endif %}
         {% if user.profile.languages is defined and user.profile.languages is not empty %}
             <h6><b>Languages spoken</b>: {{ user.profile.languages|join(', ') }}</h6>
+        {% endif %}
+        {% if user.profile.zodiac is defined and user.profile.zodiac is not empty %}
+            <h6><b>Zodiac Sign</b>: {{ user.profile.zodiac.name }}</h6>
         {% endif %}
     </div>
 </div><br/><br/>
@@ -53,6 +59,16 @@
             {{ user.profile.aboutMe }}
         </div>
     {% endif %}
+</div><br/><br/>
+<div class="row">
+    {% if user.profile.interestsAndHobbies is defined and user.profile.interestsAndHobbies is not empty %}
+        <div class="col-xs-12">
+            <h4>Interests and hobbies:</h4>
+            {{ user.profile.interestsAndHobbies }}
+        </div>
+    {% endif %}
+</div><br/><br/>
+<div class="row">
     <div class="col-xs-6">
             {% if user.profile.bodyType is defined and user.profile.bodyType is not empty %}
                 <h6><b>Body type</b>: {{ user.profile.bodyType.name }}</h6>
@@ -94,12 +110,4 @@
                 <h6><b>Income</b>: {{ user.profile.income.name }}</h6>
             {% endif %}
     </div>
-</div><br/><br/>
-<div class="row">
-    {% if user.profile.interestsAndHobbies is defined and user.profile.interestsAndHobbies is not empty %}
-        <div class="col-xs-12">
-            <h4>Interests and hobbies:</h4>
-            {{ user.profile.interestsAndHobbies }}
-        </div>
-    {% endif %}
 </div>

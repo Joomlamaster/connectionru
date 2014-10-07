@@ -44,3 +44,9 @@
 .search-result-profile-container {
     padding: 0px;
 }
+
+.see-more-link{
+    color: #428bca;
+    font-weight: bold;
+    font-size: 75%;
+}
