@@ -232,7 +232,7 @@
                                     {% if user.profile.aboutMe is defined and user.profile.aboutMe is not empty %}
                                         <h6>
                                             {% if user.profile.aboutMe|length > 100 %}
-                                                {{user.profile.aboutMe|slice(0, 100)}} <a href="{{ path('view_profile', {'id': user.profile.id}) }}"><span class="see-more-link">>></span>
+                                                {{user.profile.aboutMe|slice(0, 100)}} <a href="{{ path('view_profile', {'id': user.profile.id}) }}"><span class="see-more-link">>></span></a>
                                             {% else %}
                                                 {{user.profile.aboutMe}}
                                             {% endif %}
