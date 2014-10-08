@@ -120,7 +120,7 @@ class Profile
 
     /**
      * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\Income", inversedBy="profile")
-     * @ORM\JoinColumn(name="income", referencedColumnName="id")
+     * @ORM\JoinColumn(name="income", referencedColumnName="id", nullable=true)
      **/
     protected $income;
 
