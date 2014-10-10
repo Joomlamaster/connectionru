@@ -59,11 +59,11 @@
             {{ user.profile.aboutMe }}
         </div>
     {% endif %}
-</div><br/><br/>
+</div><br/>
 <div class="row">
     {% if user.profile.interestsAndHobbies is defined and user.profile.interestsAndHobbies is not empty %}
         <div class="col-xs-12">
-            <h4>Interests and hobbies:</h4>
+            <h6><b>Interests and hobbies</b>:</h6>
             {{ user.profile.interestsAndHobbies }}
         </div>
     {% endif %}
