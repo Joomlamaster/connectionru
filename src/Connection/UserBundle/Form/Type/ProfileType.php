@@ -57,7 +57,8 @@ class ProfileType extends AbstractType
 
                 },
             'property' => 'name',
-            'empty_value' => 'Select country'
+            'empty_value' => 'Select country',
+            'required' => false
         ))
         ->add('originallyFromCity', 'text', array(
             'required' => false
