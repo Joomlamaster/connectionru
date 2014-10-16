@@ -158,7 +158,9 @@ class SearchType extends AbstractType
             ->add('education', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Education',
                 'property' => 'name',
+                'multiple' => true,
                 'empty_value' =>'Any education',
+                'expanded' => true,
                 'required' => false,
             ))
 
