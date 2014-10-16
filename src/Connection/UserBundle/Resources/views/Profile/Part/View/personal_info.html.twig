@@ -100,12 +100,17 @@
             {% if user.profile.wantChildren is defined and user.profile.wantChildren is not empty %}
                 <h6><b>Wants children</b>: {{ user.profile.wantChildren.name }}</h6>
             {% endif %}
-            {% if user.profile.livesWithChildren is defined and user.profile.livesWithChildren is not empty %}
-                <h6><b>Lives with children</b>: {{ user.profile.livesWithChildren.name }}</h6>
-            {% endif %}
             {% if user.profile.openToPersonWithKids is defined and user.profile.openToPersonWithKids is not empty %}
                 <h6><b>Is open to dating a person with kids</b>: {{ user.profile.openToPersonWithKids.name }}</h6>
             {% endif %}
+            <h6>
+            {% spaceless %}
+                <b>Originally from</b>:
+                <span>{{ user.profile.originallyFromCity is defined and user.profile.originallyFromCity is not empty ? user.profile.originallyFromCity : ""}}</span>
+                <span>{{ user.profile.originallyFromCity is defined and user.profile.originallyFromCity is not empty  and  user.profile.originallyFrom is defined ? ", ": ""}}</span>
+                <span>{{ user.profile.originallyFrom is defined ? user.profile.originallyFrom.name : ""}}</span>
+            {% endspaceless %}
+            </h6>
             {% if user.profile.income is defined and user.profile.income is not empty %}
                 <h6><b>Income</b>: {{ user.profile.income.name }}</h6>
             {% endif %}
