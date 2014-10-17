@@ -16,6 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Profile
 {
+    public static $noAvatar =  "/bundles/connectionuser/img/noAvatar.jpg";
 //"divorced", "widowed", widow or widower, "cohabiting", "civil union", "domestic partnership" and "unmarried partners"
     /**
      * @var integer
@@ -911,7 +912,11 @@ class Profile
      */
     public function getAvatar ()
     {
-        return $this->avatar;
+        $webRoot = __DIR__.'/../../../../web';
+        if(is_file($webRoot.$this->avatar)){
+            return $this->avatar;
+        }
+        return self::$noAvatar;
     }
 
     /**
