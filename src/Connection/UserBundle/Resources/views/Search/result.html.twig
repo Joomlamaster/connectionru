@@ -78,16 +78,18 @@
     <div class="tab-pane {% if form.searchType.vars.data == 'extended' %}active{% endif %}" id="extended-search-tab">
         {#<h4>Extended Search</h4>#}
         <div class="row">
-            <div class="col-xs-2" style="margin-right: 10px;">
+            <div class="col-xs-2">
                 <div class="form-inline">
-                    {{ form_label(form.education) }}
-                    <div class="row" style="max-height: 100px; min-width: 120px; overflow-y: auto; overflow-x: hidden; margin-top:3px;">
-                        {{ form_widget(form.education, {'attr': { 'class': 'select-inline'} }) }}
+                    <div class="row">
+                        {{ form_label(form.education) }}
+                        <div style="max-height: 100px; min-width: 120px; overflow-y: auto; overflow-x: hidden; margin-top:3px;">
+                            {{ form_widget(form.education, {'attr': { 'class': 'select-inline'} }) }}
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-xs-2">
-                <div class="form-inline">
+                <div class="form-inline" style="margin-left:15px;">
                     <div class="row">
                         {{ form_row(form.educationIvyLeague, {'attr': { 'class': 'select-inline'} }) }}
                     </div>
