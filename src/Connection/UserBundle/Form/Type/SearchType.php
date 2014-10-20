@@ -160,7 +160,6 @@ class SearchType extends AbstractType
                 'property' => 'name',
                 'multiple' => true,
                 'empty_value' =>'Any education',
-                'expanded' => true,
                 'required' => false,
             ))
 

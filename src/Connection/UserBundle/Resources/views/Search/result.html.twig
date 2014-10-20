@@ -13,6 +13,7 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/connectionuser/css/search.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/multiple-select.css') }}" type="text/css" />
 {% endblock %}
 {% block content %}
 <ul class="nav nav-tabs" role="tablist">
@@ -82,7 +83,7 @@
                 <div class="form-inline">
                     <div class="row">
                         {{ form_label(form.education) }}
-                        <div style="max-height: 100px; min-width: 120px; overflow-y: auto; overflow-x: hidden; margin-top:3px;">
+                        <div>
                             {{ form_widget(form.education, {'attr': { 'class': 'select-inline'} }) }}
                         </div>
                     </div>
@@ -282,6 +283,7 @@
 {% block javascript %}
     {{ parent() }}
     <script type="text/javascript" src="{{ asset('bundles/connectionuser/js/search.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jquery.multiple.select.js') }}"></script>
     <script type="text/javascript">
         window.onload = function(){
             $('#search-form').formInit({
@@ -289,6 +291,10 @@
                 'userSeek': '{{ app.user.profile.seek.id|default('0')}}',
                 'userGenderField': '{{ form.gender.vars.data.id|default('0')}}',
                 'userSeekField': '{{ form.seek.vars.data.id|default('0') }}'
+            });
+
+            $('#{{form.education.vars.id}}').multipleSelect({
+                width: '100%'
             });
         }
     </script>
