@@ -50,3 +50,13 @@
     font-weight: bold;
     font-size: 75%;
 }
+
+.multi-select-checkbox-dropdown {
+    width: 100%;
+    border: none;
+    padding: 0px 0px 0px 0px;
+}
+
+.multi-select-checkbox-dropdown div.ms-drop {
+    width: auto;
+}

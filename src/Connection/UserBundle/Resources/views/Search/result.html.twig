@@ -84,7 +84,7 @@
                     <div class="row">
                         {{ form_label(form.education) }}
                         <div>
-                            {{ form_widget(form.education, {'attr': { 'class': 'select-inline'} }) }}
+                            {{ form_widget(form.education, {'attr': { 'class': 'select-inline multi-select-checkbox-dropdown'} }) }}
                         </div>
                     </div>
                 </div>
@@ -294,7 +294,8 @@
             });
 
             $('#{{form.education.vars.id}}').multipleSelect({
-                width: '100%'
+                width: '100%',
+                placeholder : 'Any education'
             });
         }
     </script>
