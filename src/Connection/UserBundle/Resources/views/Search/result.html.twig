@@ -13,7 +13,7 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/connectionuser/css/search.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/multiple-select.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/multipleselect/multiple-select.css') }}" type="text/css" />
 {% endblock %}
 {% block content %}
 <ul class="nav nav-tabs" role="tablist">
@@ -283,7 +283,7 @@
 {% block javascript %}
     {{ parent() }}
     <script type="text/javascript" src="{{ asset('bundles/connectionuser/js/search.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jquery.multiple.select.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/multipleselect/jquery.multiple.select.js') }}"></script>
     <script type="text/javascript">
         window.onload = function(){
             $('#search-form').formInit({
