@@ -15,7 +15,7 @@
     padding: 0;
     overflow: hidden;
     cursor: pointer;
-    border: 1px solid #aaa;
+    border: none;
     text-align: left;
     white-space: nowrap;
     line-height: 26px;
@@ -24,7 +24,7 @@
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
-    background-color: #fff;
+    background-color: inherit;
 }
 
 .ms-choice.disabled {
@@ -47,7 +47,7 @@
 }
 
 .ms-choice > span.placeholder {
-    color: #999;
+    color: #555;
 }
 
 .ms-choice > div {
@@ -67,16 +67,14 @@
     width: 100%;
     overflow: hidden;
     display: none;
-    margin-top: -1px;
+    margin:-38px 0px 0px -5px;
     padding: 0;
     position: absolute;
     z-index: 1000;
     background: #fff;
     color: #000;
-    border: 1px solid #aaa;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
-    border-radius: 4px;
 }
 
 .ms-drop.bottom {
@@ -176,6 +174,10 @@
     font-weight: normal;
     display: block;
     white-space: nowrap;
+    color: #000 !important;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: inherit;
 }
 
 .ms-drop ul > li label.optgroup {
