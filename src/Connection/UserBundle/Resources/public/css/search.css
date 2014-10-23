@@ -16,12 +16,16 @@
     color: #4d4d4d;
 }
 
+.form-group label {
+    min-width: 50px;
+}
+
 #connection_search_gender input,
 #connection_search_seek input,
 #fos_user_registration_form_profile_gender input,
 #fos_user_registration_form_profile_seek input
 {
-    margin: 8px 4px 0px 3px;
+    margin: -3px 3px 0px 8px;
 }
 
 /*Search Profile Page*/
