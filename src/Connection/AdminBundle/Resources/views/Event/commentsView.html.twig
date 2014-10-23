@@ -1,0 +1,42 @@
+{% extends 'ConnectionAdminBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <table class="table table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>Author</th>
+            <th>Comment</th>
+            <th>Created At</th>
+            <th>#</th>
+        </tr>
+        {% if comments is defined and comments is not empty %}
+            {% for comment in comments %}
+                <tr>
+                    <td>{{ comment.id|default("") }}</td>
+                    <td>{{ comment.author|default("") }}</td>
+                    <td>{{ comment.comment|default("") }}</td>
+                    <td>{{ comment.createdAt|date|default("") }}</td>
+                    <td>
+                        <ul class="nav nav-pills">
+                            <li class="dropdown">
+                                <a id="drop5" role="button" data-toggle="dropdown" href="#">Action <span class="caret"></span></a>
+                                <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
+                                    <li role="presentation"><a role="menuitem" target="_blank" tabindex="-1" href="{{ path('view_event', {'id': comment.event.id}) }}">View</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ path('admin_event_comment_delete', {'id': comment.id}) }}">Delete</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+{% endblock %}
