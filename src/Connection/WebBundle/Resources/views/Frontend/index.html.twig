@@ -19,7 +19,7 @@
                     {% endif %}
                     <li class="active"><a href="#search" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-search"></span> Quick Search</a></li>
                 </ul>
-                <div class="tab-content">
+                <div class="tab-content" id="quick-tab" style="display: none;">
                     {% if not is_granted('ROLE_USER') %}
                         <div class="tab-pane" id="registration">
                             {{ include("FOSUserBundle:Registration:register_content.html.twig", {'form': registrationForm}) }}
@@ -42,4 +42,29 @@
 {% block javascript %}
     {{ parent() }}
     <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jquery.watermark.js') }}"></script>
+    <script type="text/javascript">
+        window.onload = function(){
+            $('#quick-tab').show();
+            $.datepicker.setDefaults({
+                dateFormat: "yy-mm-dd"
+            });
+            $('#fos_user_registration_form_profile_birthdate').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                minDate: "-150Y",
+                maxDate: "+0D"
+            });
+
+        }
+        preLoadSlaveFeedback = function(slaveBlock){
+            if(slaveBlock.length){
+                $(slaveBlock).html('');
+            }
+        }
+
+        loadSlaveFeedback = function(){
+            $('#connection_search_state').selectpicker();
+            $('#fos_user_registration_form_profile_state').selectpicker();
+        }
+     </script>
 {% endblock %}

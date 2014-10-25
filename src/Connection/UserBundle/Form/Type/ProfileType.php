@@ -43,7 +43,6 @@ class ProfileType extends AbstractType
                         ->orderBy('c.priority', 'DESC');
                 },
             'property' => 'name',
-            'attr' => array('class' => 'master')
         ));
 
         $builder->add('originallyFrom', 'entity', array(
@@ -69,7 +68,6 @@ class ProfileType extends AbstractType
                 $form->add('state', 'entity', array(
                     'class' => 'ConnectionCoreBundle:State',
                     'property' => 'name',
-                    'attr' => array('class' => 'slave'),
                     'query_builder' => function(EntityRepository $er) use ($country) {
                             return $er
                                 ->createQueryBuilder('s')
@@ -129,10 +127,10 @@ class ProfileType extends AbstractType
                 'required' => false
             ))
 
-            ->add('birthdate', 'date', array(
-                'years' => range(date('Y'), date('Y') - 100),
-                'input'  => 'datetime',
-                'widget' => 'choice',
+            ->add('birthdate', 'text', array(
+                //'years' => range(date('Y'), date('Y') - 100),
+                //'input'  => 'datetime',
+                //'widget'    => 'single_text',
             ));
 
             $builder->add('languages', 'entity', array(

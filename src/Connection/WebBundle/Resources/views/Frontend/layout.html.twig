@@ -15,8 +15,10 @@
 
         {# stylesheets... #}
         {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/bootstrap.css') }}" type="text/css" />
-        <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/bootstrap-theme.css') }}" type="text/css" />
+            <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/jquery-ui-1.11.1/jquery-ui.css') }}" type="text/css" />
+            <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/bootstrap.css') }}" type="text/css" />
+            <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/bootstrap-theme.css') }}" type="text/css" />
+            <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/bootstrapselect/bootstrap-select.min.css') }}" type="text/css" />
         <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/popup/popup.css') }}" type="text/css" />
 
         {% stylesheets output='assets/compiled/frontend.css' filter='cssrewrite'
@@ -68,7 +70,7 @@
         {% endblock %}
 
         {% block footer %}
-        <div class="container">
+        <div class="container" style="margin-top: 100px">
             <footer>
                 {#{% include 'ConnectionWebBundle:Frontend:_footer.html.twig' %}#}
 
@@ -104,9 +106,10 @@
         {% block javascript %}
             <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jquery-1.11.1.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/bootstrap.min.js') }}"></script>
-            <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jquery-ui.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/bootstrapselect/bootstrap-select.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/common.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/tell-a-friend.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jquery-ui.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/connectionuser/js/registration.js') }}"></script>
             <script type="text/javascript"> $(function() { FormAjaxFields.init(); }) </script>
 

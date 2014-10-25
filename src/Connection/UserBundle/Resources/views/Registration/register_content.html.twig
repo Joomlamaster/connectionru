@@ -11,19 +11,33 @@
         {{ form_row(form.email) }}
         <div class="master_slave">
             <div>
-                {{ form_row(form.profile.country) }}
+                {{ form_row(form.profile.country, {'attr': { 'class': 'selectpicker master', 'data-width':'175px'} }) }}
             </div>
             {% if (form.profile.state is defined) %}
                 <div class="slave_block">
-                    {{ form_row(form.profile.state) }}
+                    {{ form_row(form.profile.state, {'attr': { 'class': 'selectpicker slave', 'data-width':'175px'} }) }}
                 </div>
             {% endif %}
         </div>
         {{ form_row(form.profile.city) }}
         {{ form_row(form.profile.zip) }}
-        {{ form_row(form.profile.ethnicity) }}
+        {{ form_row(form.profile.ethnicity, {'attr': { 'class': 'selectpicker','data-width':'175px'}}) }}
 {#        {{ form_row(form.captcha, { 'attr': { 'class' : 'captcha' } } ) }}#}
         {{ form_row(form.agree) }}
         {{ form_row(form.registrationType, {'value':'quick'}) }}
         {{ form_row(form.submit) }}
 {{ form_end(form, {'render_rest': false}) }}
+
+<script type="text/javascript">
+    window.onload = function(){
+        $.datepicker.setDefaults({
+            dateFormat: "yy-mm-dd"
+        });
+        $('#{{form.profile.birthdate.vars.id}}').datepicker({
+            changeMonth: true,
+            changeYear: true,
+            minDate: "-150Y",
+            maxDate: "+1D"
+        });
+    }
+</script>

@@ -4,7 +4,7 @@
 {% block fos_user_content %}
     {% if form is defined %}
     {% form_theme form 'ConnectionUserBundle:Registration:fields.html.twig' %}
-    {{ form_start(form, {'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register master_slave form-horizontal master_slave'}}) }}
+    {{ form_start(form, {'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register master_slave form-horizontal'}}) }}
         <div class="col-xs-9">
             <div class="row">
                 <div class="col-xs-6">
@@ -37,19 +37,19 @@
                 <div class="col-xs-4">
                     {{ form_row(form.profile.seek) }}
                 </div>
-                <div class="col-xs-4 birthdate">
-                    {{ form_row(form.profile.birthdate, { 'atrr': { 'class': 'select-inline'} } ) }}
+                <div class="col-xs-4">
+                    {{ form_row(form.profile.birthdate, { 'attr': { 'class': 'select-inline'} } ) }}
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-4">
                     <div class="master_slave">
                         <div>
-                            {{ form_row(form.profile.country) }}
+                            {{ form_row(form.profile.country, { 'attr': { 'class': 'selectpicker master'} }) }}
                         </div>
                         {% if (form.profile.state is defined) %}
                             <div class="slave_block">
-                                {{ form_row(form.profile.state) }}
+                                {{ form_row(form.profile.state, { 'attr': { 'class': 'selectpicker slave'} }) }}
                             </div>
                         {% endif %}
                     </div>
@@ -64,12 +64,12 @@
                         {{ form_row(form.profile.zip) }}
                     </div>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-4" style="margin-top:7px;">
                         <div>
-                            {{ form_row(form.profile.originallyFrom) }}
+                            {{ form_row(form.profile.originallyFrom, { 'attr': { 'class': 'selectpicker'}} ) }}
                         </div>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-4" style="margin-top:7px;">
                         <div>
                             {{ form_row(form.profile.originallyFromCity) }}
                         </div>
@@ -93,29 +93,29 @@
             </div>
             <div class="row">
                 <div class="col-xs-3">
-                    {{ form_row(form.profile.height) }}
+                    {{ form_row(form.profile.height, { 'attr': { 'class': 'selectpicker'}}) }}
                 </div>
                 <div class="col-xs-3">
-                    {{ form_row(form.profile.bodyType) }}
+                    {{ form_row(form.profile.bodyType, { 'attr': { 'class': 'selectpicker'}}) }}
                 </div>
                 <div class="col-xs-3">
-                    {{ form_row(form.profile.eyeColor, {'value':'2'}) }}
+                    {{ form_row(form.profile.eyeColor, {'value':'2', 'attr': { 'class': 'selectpicker'}}) }}
                 </div>
                 <div class="col-xs-3">
-                    {{ form_row(form.profile.hairColor, {'value':'3'}) }}
+                    {{ form_row(form.profile.hairColor, {'value':'3', 'attr': { 'class': 'selectpicker'}}) }}
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-3">
-                    {{ form_row(form.profile.smoking) }}
+                    {{ form_row(form.profile.smoking, { 'attr': { 'class': 'selectpicker'}}) }}
                 </div>
                 <div class="col-xs-3">
-                    {{ form_row(form.profile.drinking) }}
+                    {{ form_row(form.profile.drinking, { 'attr': { 'class': 'selectpicker'}}) }}
                 </div>
             </div>
-            <div class="row" style="height: 67px;">
+            <div class="row">
                 <div class="col-xs-3">
-                    {{ form_row(form.profile.education) }}
+                    {{ form_row(form.profile.education, { 'attr': { 'class': 'selectpicker'}}) }}
                 </div>
                 <div class="col-xs-4">
                     {{ form_row(form.profile.educationIvyLeague) }}
@@ -126,32 +126,32 @@
             </div>
             <div class="row">
                 <div class="col-xs-3">
-                    {{ form_row(form.profile.profession) }}
+                    {{ form_row(form.profile.profession, { 'attr': { 'class': 'selectpicker'}}) }}
                 </div>
                 <div class="col-xs-4">
-                    {{ form_row(form.profile.haveChildren) }}
+                    {{ form_row(form.profile.haveChildren, { 'attr': { 'class': 'selectpicker'}}) }}
                 </div>
                 <div class="col-xs-4">
-                    {{ form_row(form.profile.wantChildren) }}
+                    {{ form_row(form.profile.wantChildren, { 'attr': { 'class': 'selectpicker'}}) }}
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-6">
-                    {{ form_row(form.profile.livesWithChildren) }}
+                    {{ form_row(form.profile.livesWithChildren, { 'attr': { 'class': 'selectpicker'}}) }}
                 </div>
                 <div class="col-xs-6">
-                    {{ form_row(form.profile.openToPersonWithKids) }}
+                    {{ form_row(form.profile.openToPersonWithKids, { 'attr': { 'class': 'selectpicker'}}) }}
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-3">
-                    {{ form_row(form.profile.religion) }}
+                    {{ form_row(form.profile.religion, { 'attr': { 'class': 'selectpicker'}}) }}
                 </div>
                 <div class="col-xs-3">
-                    {{ form_row(form.profile.ethnicity) }}
+                    {{ form_row(form.profile.ethnicity, { 'attr': { 'class': 'selectpicker'}}) }}
                 </div>
                 <div class="col-xs-3">
-                    {{ form_row(form.profile.zodiac) }}
+                    {{ form_row(form.profile.zodiac, { 'attr': { 'class': 'selectpicker'}}) }}
                 </div>
             </div>
             {#<div class="row">
@@ -183,6 +183,27 @@
         window.onload = function(){
            handleIvyLeague();
            handleOriginallyFrom('#{{form.profile.originallyFrom.vars.id}}', '#{{form.profile.originallyFromCity.vars.id}}');
+
+            $.datepicker.setDefaults({
+                dateFormat: "yy-mm-dd"
+            });
+            $('#{{form.profile.birthdate.vars.id}}').datepicker({
+                changeMonth: true,
+                changeYear: true,
+                minDate: "-150Y",
+                maxDate: "+0D"
+            });
+
+        }
+
+        preLoadSlaveFeedback = function(slaveBlock){
+            if(slaveBlock.length){
+                $(slaveBlock).html('');
+            }
+        }
+
+        loadSlaveFeedback = function(){
+            $('#fos_user_registration_form_profile_state').selectpicker();
         }
     </script>
 

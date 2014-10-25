@@ -18,7 +18,6 @@
     <link rel="stylesheet" href="{{ asset('bundles/connectionweb/js/dropzone/css/dropzone.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('bundles/connectionuser/css/profile.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('bundles/connectionweb/js/jcorp/css/jquery.Jcrop.min.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/jquery-ui-1.11.1/jquery-ui.css') }}" type="text/css" />
 {% endblock %}
 
 {% block content %}
@@ -33,11 +32,11 @@
             <div class="col-xs-3">
                 <div class="master_slave">
                     <div>
-                        {{ form_row(form.country) }}
+                        {{ form_row(form.country,{'attr': {'class': 'selectpicker master' } }) }}
                     </div>
                     {% if (form.state is defined) %}
                         <div class="slave_block">
-                            {{ form_row(form.state) }}
+                            {{ form_row(form.state, {'attr': {'class': 'selectpicker slave' } }) }}
                         </div>
                     {% endif %}
                 </div>
@@ -118,6 +117,16 @@
                 dateFormat: "yy-mm-dd"
             });
             $('#{{form.eventDate.vars.id}}').datepicker();
+            preLoadSlaveFeedback = function(slaveBlock){
+                if(slaveBlock.length){
+                    $(slaveBlock).html('');
+                }
+            }
+            loadSlaveFeedback = function(){
+                $('#connection_event_type_state').selectpicker();
+                MAP.listen();
+                MAP.update(10);
+            }
         });
         {# PopUp Listener (Upload/View/Update) #}
         FM.popUp.listen("{{ path('update_profile_image') }}");

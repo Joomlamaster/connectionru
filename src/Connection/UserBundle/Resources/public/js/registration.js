@@ -22,6 +22,9 @@ FormAjaxFields = {
             type: $form.attr('method'),
             data : data,
             success: function(html) {
+                if(typeof preLoadSlaveFeedback === 'function'){
+                    preLoadSlaveFeedback($form.find(FormAjaxFields.cfg.slave.block));
+                }
                 if ( $form.find(FormAjaxFields.cfg.slave.elem).length ) {
                     $form.find(FormAjaxFields.cfg.slave.elem).replaceWith(
                         $(html).find(FormAjaxFields.cfg.slave.elem)
@@ -31,8 +34,8 @@ FormAjaxFields = {
                         $(html).find(FormAjaxFields.cfg.slave.block)
                     );
                 }
-                if(typeof loadCountryStateFeedback === 'function'){
-                    loadCountryStateFeedback();
+                if(typeof loadSlaveFeedback === 'function'){
+                    loadSlaveFeedback();
                 }
             }
         });

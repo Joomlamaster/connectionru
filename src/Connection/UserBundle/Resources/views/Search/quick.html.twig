@@ -8,17 +8,17 @@
 
     <div class="clearfix form-inline">
         <label for="search_age" class="required">Age</label>
-        {{ form_widget(form.ageFrom, { 'attr': {'class': 'form-control'} }) }} - {{ form_widget(form.ageTo, { 'attr': {'class': 'form-control'} }) }}
+        {{ form_widget(form.ageFrom, { 'attr': {'class': 'form-control selectpicker', 'data-width':'65px'} }) }} - {{ form_widget(form.ageTo, { 'attr': {'class': 'form-control selectpicker', 'data-width':'65px'} }) }}
     </div>
 
-    {{ form_row(form.lookingFor) }}
+    {{ form_row(form.lookingFor, {'attr': { 'class': 'selectpicker','data-width':'143px'}}) }}
     <div class="master_slave">
         <div>
-            {{ form_row(form.country) }}
+            {{ form_row(form.country, {'attr': { 'class': 'selectpicker master','data-width':'143px'}}) }}
         </div>
         {% if (form.state is defined) %}
             <div class="slave_block">
-                {{ form_row(form.state) }}
+                {{ form_row(form.state, {'attr': { 'class': 'selectpicker slave','data-width':'143px'}}) }}
             </div>
         {% endif %}
     </div>

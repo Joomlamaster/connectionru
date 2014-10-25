@@ -248,7 +248,7 @@ footer .bottom-right-menu li a {
   padding-top: 0;
   margin-bottom: 0;
   padding-bottom: 0;
-  max-width: 125px;
+  max-width: 200px;
 }
 .form-group select.form-control,
 .form-inline select.form-control {
@@ -1172,4 +1172,10 @@ fieldset[disabled] .btn-info.active {
   /*background-color: #2aabd2; original*/
   background-color: #93C3D2;
   background-image: none;
+}
+.horizontal-checkbox{
+    margin-top:20px;
+}
+.horizontal-checkbox input{
+    margin-top:-1px;
 }

@@ -160,7 +160,7 @@ class SearchType extends AbstractType
                 'property' => 'name',
                 'multiple' => true,
                 'empty_value' =>'Any education',
-                'required' => false,
+                'required' => false
             ))
 
             ->add('educationIvyLeague', 'choice', array(
@@ -177,7 +177,8 @@ class SearchType extends AbstractType
                 'class' => 'ConnectionUserBundle:Profile\Profession',
                 'property' => 'name',
                 'empty_value' =>'Any profession',
-                'required' => false
+                'required' => false,
+
             ))
 
             ->add('income', 'entity', array(

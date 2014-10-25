@@ -116,8 +116,3 @@ MAP = {
     }
 };
 google.maps.event.addDomListener(window, 'load', MAP.init());
-
-loadCountryStateFeedback = function(){
-    MAP.listen();
-    MAP.update(10);
-}

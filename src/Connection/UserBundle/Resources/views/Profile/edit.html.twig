@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="{{ asset('bundles/connectionweb/js/dropzone/css/dropzone.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('bundles/connectionuser/css/profile.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('bundles/connectionweb/js/jcorp/css/jquery.Jcrop.min.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/bootstrapselect/bootstrap-select.min.css') }}" type="text/css" />
 {% endblock %}
 
 {% block content %}
@@ -58,7 +59,7 @@
                 </ul>
 
                 <div class="tab-content">
-                    <div class="tab-pane {%if tab == '' or tab == 'profile' %}active{% endif %}" id="profile">
+                    <div class="tab-pane {%if tab == '' or tab == 'profile' %}active{% endif %}" id="profile" style="display: none;">
                         <div class="col-xs-10">
                             {% if editPersonalInfo is defined and editPersonalInfo %}
                                 {{ include('ConnectionUserBundle:Profile/Part/Edit:personal_info.html.twig') }}
@@ -100,6 +101,7 @@
     <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/bootstrap-tooltip.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/bootstrap-confirmation.js') }}"></script>
     <script type="text/javascript" src="{{ asset('bundles/connectionuser/js/profile.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/bootstrapselect/bootstrap-select.min.js') }}"></script>
     <script type="text/javascript">
         {# Init DropZone #}
         $(document).ready(function() {
@@ -110,7 +112,17 @@
 
             handleIvyLeague();
             handleOriginallyFrom('#{{form.profile.originallyFrom.vars.id}}', '#{{form.profile.originallyFromCity.vars.id}}');
+            $('#profile').show();
+
         });
+
+        preLoadSlaveFeedback = function(slaveBlock){
+            $('#connection_user_profile_edit_profile_state').remove();
+        }
+
+        loadSlaveFeedback = function(){
+            $('#connection_user_profile_edit_profile_state').selectpicker();
+        }
 
         {# PopUp Listener (Upload/View/Update) #}
         FM.popUp.listen("{{ path('update_profile_image') }}");

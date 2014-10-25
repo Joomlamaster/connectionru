@@ -72,11 +72,11 @@ class RegistrationController extends BaseController
 
         $registrationType = $form->get('registrationType')->getData();
         if (empty($registrationType) || $registrationType == 'quick') {
-            return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.' . $this->getEngine(), array(
+            return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.twig', array(
                         'form' => $form->createView(),
             ));
         } else {
-            return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:extended_register.html.' . $this->getEngine(), array(
+            return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:extended_register.html.twig', array(
                         'form' => $form->createView(),
             ));
         }
@@ -97,7 +97,7 @@ class RegistrationController extends BaseController
         }
         $formFactory = $this->container->get('fos_user.registration.form.factory');
         $form = $formFactory->createForm();
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:extended_register.html.' . $this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:extended_register.html.twig', array(
             'form' => $form->createView(),
         ));
     }
