@@ -33,7 +33,7 @@
                 <div class="form-inline">
                     <div class="select-inline">
                         <label>Event Date:</label>
-                        {{ form_widget(form.eventDatePeriod) }} or
+                        {{ form_widget(form.eventDatePeriod, {'attr': { 'class': 'selectpicker event-date'} }) }} or
                         {{ form_widget(form.eventDateFrom) }}-
                         {{ form_widget(form.eventDateTo) }}
                     </div>

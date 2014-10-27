@@ -34,7 +34,7 @@
                     {{ form_row(form.profile.country,{'attr': {'class': 'selectpicker master' } }) }}
                 </div>
                 {% if (form.profile.state is defined) %}
-                    <div id="slave_block" style="margin-top:-7px;">
+                    <div id="slave_block" style="margin-top:4px;">
                         {{ form_row(form.profile.state,{'attr': {'class': 'selectpicker slave' } }) }}
                     </div>
                 {% endif %}
@@ -99,7 +99,7 @@
             {{ form_row(form.profile.education, {'attr': {'class': 'selectpicker' } }) }}
         </div>
         <div class="col-xs-4">
-            {{ form_row(form.profile.educationIvyLeague, {'attr': {'class': 'selectpicker' } }) }}
+            {{ form_row(form.profile.educationIvyLeague, {'attr': {'class': 'selectpicker ivy-league-checkbox' } }) }}
         </div>
         <div class="col-xs-4 ivy-league-text hidden">
             {{ form_row(form.profile.ivyLeagueUniversity) }}

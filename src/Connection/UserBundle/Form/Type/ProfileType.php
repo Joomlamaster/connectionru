@@ -131,6 +131,7 @@ class ProfileType extends AbstractType
                 //'years' => range(date('Y'), date('Y') - 100),
                 //'input'  => 'datetime',
                 //'widget'    => 'single_text',
+                'data_class' => 'DateTime'
             ));
 
             $builder->add('languages', 'entity', array(

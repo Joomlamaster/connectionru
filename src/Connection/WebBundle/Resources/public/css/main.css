@@ -651,7 +651,7 @@ body.search-event .search-form input[type=date] {
   margin: 0 12px;
 }
 body.search-event .search-form input#event_search_search {
-  width: 60%;
+  width: 582px;
   margin-bottom: 8px;
 }
 body.search-event .search-form select.form-control {
@@ -1178,4 +1178,12 @@ fieldset[disabled] .btn-info.active {
 }
 .horizontal-checkbox input{
     margin-top:-1px;
+}
+
+.quick-form-element{
+    margin-bottom: -14px !important;
+}
+
+.event-date{
+    width: 130px !important;
 }

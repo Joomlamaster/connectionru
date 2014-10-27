@@ -3,22 +3,22 @@
 
 {{ form_start(form, {'action': path('user_search_quick_form'), 'attr': {'class': 'fos_user_registration_register master_slave form-horizontal'}}) }}
     {{ form_errors(form) }}
-    {{ form_row(form.gender) }}
-    {{ form_row(form.seek) }}
+    {{ form_row(form.gender,{'attr': {'class': 'quick-form-element'}}) }}
+    {{ form_row(form.seek,{'attr': {'class': 'quick-form-element'}}) }}
 
     <div class="clearfix form-inline">
         <label for="search_age" class="required">Age</label>
-        {{ form_widget(form.ageFrom, { 'attr': {'class': 'form-control selectpicker', 'data-width':'65px'} }) }} - {{ form_widget(form.ageTo, { 'attr': {'class': 'form-control selectpicker', 'data-width':'65px'} }) }}
+        {{ form_widget(form.ageFrom, { 'attr': {'class': 'form-control selectpicker quick-form-element', 'data-width':'65px'} }) }} - {{ form_widget(form.ageTo, { 'attr': {'class': 'form-control selectpicker quick-form-element', 'data-width':'65px'} }) }}
     </div>
 
-    {{ form_row(form.lookingFor, {'attr': { 'class': 'selectpicker','data-width':'143px'}}) }}
+    {{ form_row(form.lookingFor, {'attr': { 'class': 'selectpicker quick-form-element','data-width':'143px'}}) }}
     <div class="master_slave">
         <div>
-            {{ form_row(form.country, {'attr': { 'class': 'selectpicker master','data-width':'143px'}}) }}
+            {{ form_row(form.country, {'attr': { 'class': 'selectpicker quick-form-element master','data-width':'143px'}}) }}
         </div>
         {% if (form.state is defined) %}
             <div class="slave_block">
-                {{ form_row(form.state, {'attr': { 'class': 'selectpicker slave','data-width':'143px'}}) }}
+                {{ form_row(form.state, {'attr': { 'class': 'selectpicker quick-form-element slave','data-width':'143px'}}) }}
             </div>
         {% endif %}
     </div>

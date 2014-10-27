@@ -35,7 +35,7 @@
                         {{ form_row(form.country,{'attr': {'class': 'selectpicker master' } }) }}
                     </div>
                     {% if (form.state is defined) %}
-                        <div class="slave_block">
+                        <div class="slave_block" style="margin-top:8px;">
                             {{ form_row(form.state, {'attr': {'class': 'selectpicker slave' } }) }}
                         </div>
                     {% endif %}

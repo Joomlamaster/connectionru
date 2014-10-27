@@ -3,25 +3,25 @@
 
 {{ form_start(form, {'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register master_slave form-horizontal'}}) }}
         {{ form_errors(form) }}
-        {{ form_row(form.profile.gender) }}
-        {{ form_row(form.profile.seek) }}
+        {{ form_row(form.profile.gender,{'attr': {'class': 'quick-form-element'}}) }}
+        {{ form_row(form.profile.seek,{'attr': {'class': 'quick-form-element'}}) }}
         {{ form_row(form.profile.birthdate) }}
         {{ form_row(form.username) }}
         {{ form_row(form.plainPassword) }}
         {{ form_row(form.email) }}
         <div class="master_slave">
             <div>
-                {{ form_row(form.profile.country, {'attr': { 'class': 'selectpicker master', 'data-width':'175px'} }) }}
+                {{ form_row(form.profile.country, {'attr': { 'class': 'selectpicker quick-form-element master', 'data-width':'175px'} }) }}
             </div>
             {% if (form.profile.state is defined) %}
-                <div class="slave_block">
-                    {{ form_row(form.profile.state, {'attr': { 'class': 'selectpicker slave', 'data-width':'175px'} }) }}
+                <div class="slave_block" style="margin-top:3px;">
+                    {{ form_row(form.profile.state, {'attr': { 'class': 'selectpicker quick-form-element slave', 'data-width':'175px'} }) }}
                 </div>
             {% endif %}
         </div>
         {{ form_row(form.profile.city) }}
         {{ form_row(form.profile.zip) }}
-        {{ form_row(form.profile.ethnicity, {'attr': { 'class': 'selectpicker','data-width':'175px'}}) }}
+        {{ form_row(form.profile.ethnicity, {'attr': { 'class': 'selectpicker quick-form-element','data-width':'175px'}}) }}
 {#        {{ form_row(form.captcha, { 'attr': { 'class' : 'captcha' } } ) }}#}
         {{ form_row(form.agree) }}
         {{ form_row(form.registrationType, {'value':'quick'}) }}
