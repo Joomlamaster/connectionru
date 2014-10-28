@@ -55,4 +55,18 @@ class UserController extends Controller
 
         return $this->redirect( $this->generateUrl('admin_user_index') );
     }
+
+    /**
+     * @Route("/user/delete/{id}", name="admin_user_delete", requirements={"id" = "\d+"})
+     * @Template()
+     * @ParamConverter("Event", class="ConnectionUserBundle:User")
+     */
+    public function deleteAction( User $user )
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($user);
+        $em->flush();
+        $this->container->get('session')->getFlashBag()->add('notice', 'User was successfully deleted.');
+        return $this->redirect( $this->generateUrl('admin_user_index') );
+    }
 }

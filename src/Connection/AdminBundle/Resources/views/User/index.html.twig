@@ -35,6 +35,7 @@
                                     {% else %}
                                         <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ path('admin_user_unban', {'id': user.id}) }}">Enable</a></li>
                                     {% endif %}
+                                        <li role="presentation"><a role="menuitem" onclick="return confirm('Are you sure?');" tabindex="-1" href="{{ path('admin_user_delete', {'id': user.id}) }}">Delete</a></li>
                                 </ul>
                             </li>
                         </ul>
