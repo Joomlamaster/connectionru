@@ -14,6 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 /**
@@ -30,6 +31,11 @@ class ProfileController extends Controller
     public function viewAction( Profile $profile )
     {
         $user = $profile->getUser();
+
+        if ($user->getHide()) {
+            throw new NotFoundHttpException("Profile Not Found");
+        }
+
         if($this->getUser() == $user){
             return new RedirectResponse($this->get('router')->generate('edit_user_profile'));
         }

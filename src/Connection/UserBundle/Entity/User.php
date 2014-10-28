@@ -123,6 +123,14 @@ class User extends BaseUser implements ParticipantInterface
      */
     protected $deletedAt;
 
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="hide", type="boolean", nullable=false)
+     */
+    protected $hide = false;
+
     /**
      * @return int
      */
@@ -413,5 +421,21 @@ class User extends BaseUser implements ParticipantInterface
      */
     public function hasFavoriteUser(User $user){
         return $this->favoriteUsers->contains($user);
+    }
+
+    /**
+     * @param boolean $hide
+     */
+    public function setHide ( $hide )
+    {
+        $this->hide = $hide;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getHide ()
+    {
+        return $this->hide;
     }
 }

@@ -9,6 +9,16 @@
         {#</div>#}
     {#</div>#}
     <div class="row">
+        <h5 class="profile-visibility">
+            Profile Visibility ({{ app.user.hide is defined and app.user.hide ? "Invisible": "Visible" }}):
+            {% if app.user.hide is defined and app.user.hide %}
+                <a class="btn btn-info" href="{{ path('profile_visibility_show') }}">Show my profile</a>
+            {% else %}
+                <a class="btn btn-danger" href="{{ path('profile_visibility_hide') }}">Hide my profile</a>
+            {% endif %}
+        </h5>
+    </div>
+    <div class="row">
         <div class="col-xs-6">
             {{ form_row(form.profile.aboutMe) }}
         </div>

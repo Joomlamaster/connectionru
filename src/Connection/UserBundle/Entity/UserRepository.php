@@ -39,10 +39,11 @@ class UserRepository extends EntityRepository
     {
             $qb = $this->createQueryBuilder('u')
                        ->select('u')
-                       ->join('u.profile', 'p');
+                       ->join('u.profile', 'p')
+                       ->where('u.hide = :hide')->setParameter('hide', 0);
 
             if ( $excludeUserId ) {
-                $qb->where('u.id != :exclude_id')->setParameter('exclude_id', $excludeUserId);
+                $qb->andWhere('u.id != :exclude_id')->setParameter('exclude_id', $excludeUserId);
             }
 
             return $qb->orderBy('u.createdAt')
@@ -64,7 +65,8 @@ class UserRepository extends EntityRepository
         $converterService = new ConverterService();
 
         $qb = $this->createQueryBuilder('u')
-            ->join('u.profile', 'p');
+            ->join('u.profile', 'p')
+            ->where('u.hide = :hide')->setParameter('hide', 0);
 
         //  Filter By Country
         if ( !empty($filter['country']) ) {

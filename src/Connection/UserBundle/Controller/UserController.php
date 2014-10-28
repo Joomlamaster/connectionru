@@ -80,4 +80,30 @@ class UserController extends Controller
         )) );
 
     }
+
+    /**
+     * @Route("/visibility/hide", name="profile_visibility_hide")
+     */
+    public function hideAction() {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $user->setHide(true);
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirect( $this->generateUrl('edit_user_profile_edit') );
+    }
+
+    /**
+     * @Route("/visibility/show", name="profile_visibility_show")
+     */
+    public function showAction( ) {
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $user->setHide(false);
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirect( $this->generateUrl('edit_user_profile_edit') );
+    }
 }
