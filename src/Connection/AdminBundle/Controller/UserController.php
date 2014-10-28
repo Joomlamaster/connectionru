@@ -55,4 +55,42 @@ class UserController extends Controller
 
         return $this->redirect( $this->generateUrl('admin_user_index') );
     }
+
+    /**
+     * @Route("/user/delete/{id}", name="admin_user_delete", requirements={"id" = "\d+"})
+     * @Template()
+     * @ParamConverter("Event", class="ConnectionUserBundle:User")
+     */
+    public function deleteAction( User $user )
+    {
+        $em = $this->getDoctrine()->getManager();
+        $threadsMetadataRepo = $em->getRepository('ConnectionMessageBundle:ThreadMetadata');
+        $threadsRepo = $em->getRepository('ConnectionMessageBundle:Thread');
+        $messagesMetadataRepo = $em->getRepository('ConnectionMessageBundle:MessageMetadata');
+        $messagesRepo = $em->getRepository('ConnectionMessageBundle:Message');
+
+        //delete all user messages/threads
+        $threadsMeta = $threadsMetadataRepo->findBy(array('participant' => $user));
+        foreach($threadsMeta as $thread){
+            $em->remove($thread);
+        }
+        $threads = $threadsRepo->findBy(array('createdBy' => $user));
+        foreach($threads as $thread){
+            $em->remove($thread);
+        }
+        $messagesMeta = $messagesMetadataRepo->findBy(array('participant' => $user));
+        foreach($messagesMeta as $message){
+            $em->remove($message);
+        }
+        $messages = $messagesRepo->findBy(array('sender' => $user));
+        foreach($messages as $message){
+            $em->remove($message);
+        }
+
+        $em->flush();
+        $em->remove($user);
+        $em->flush();
+        $this->container->get('session')->getFlashBag()->add('notice', 'User was successfully deleted.');
+        return $this->redirect( $this->generateUrl('admin_user_index') );
+    }
 }
