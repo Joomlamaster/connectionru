@@ -138,6 +138,7 @@
     margin: 35px 0px 0px 10px;
 }
 
-.profile-visibility {
-    margin-left: 15px;
+.profile-visibility p {
+    font-size: 12px;
+    padding: 20px 0px 0px 0px;
 }
