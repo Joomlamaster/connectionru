@@ -40,7 +40,7 @@ class UserRepository extends EntityRepository
             $qb = $this->createQueryBuilder('u')
                        ->select('u')
                        ->join('u.profile', 'p')
-                       ->where('u.hide = :hide')->setParameter('hide', 0);
+                       ->where('u.hide = :hide AND u.admin = :admin')->setParameters(array('hide' => 0, 'admin' => 0));
 
             if ( $excludeUserId ) {
                 $qb->andWhere('u.id != :exclude_id')->setParameter('exclude_id', $excludeUserId);
@@ -66,7 +66,7 @@ class UserRepository extends EntityRepository
 
         $qb = $this->createQueryBuilder('u')
             ->join('u.profile', 'p')
-            ->where('u.hide = :hide')->setParameter('hide', 0);
+            ->where('u.hide = :hide AND u.admin = :admin')->setParameters(array('hide' => 0, 'admin' => 0));
 
         //  Filter By Country
         if ( !empty($filter['country']) ) {
@@ -216,5 +216,18 @@ class UserRepository extends EntityRepository
         }
 
         return $qb->getQuery()->getResult();
+    }
+
+    /*
+     * Return Users list for Admin Area
+     * Exclude logged in Admin user
+     */
+    public function getUsersList($uId) {
+        return $this->createQueryBuilder('u')
+            ->select('u')
+            ->join('u.profile', 'p')
+            ->where('u.id != :admin')->setParameter('admin', $uId)
+            ->getQuery()
+            ->getResult();
     }
 }

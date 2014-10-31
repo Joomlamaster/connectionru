@@ -32,7 +32,7 @@ class ProfileController extends Controller
     {
         $user = $profile->getUser();
 
-        if ($user->getHide()) {
+        if ($user->getHide() || $user->getAdmin()) {
             throw new NotFoundHttpException("Profile Not Found");
         }
 

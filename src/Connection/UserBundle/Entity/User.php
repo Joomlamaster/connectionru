@@ -132,6 +132,13 @@ class User extends BaseUser implements ParticipantInterface
     protected $hide = false;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="admin", type="boolean", nullable=false)
+     */
+    protected $admin = false;
+
+    /**
      * @return int
      */
     public function getId ()
@@ -388,6 +395,12 @@ class User extends BaseUser implements ParticipantInterface
         if (  $this->getProfile() && !$this->hasRole('ROLE_VERIFIED_USER') ) {
             $this->setRoles(array('ROLE_VERIFIED_USER'));
         }
+
+        if ( $this->hasRole("ROLE_ADMIN") ) {
+            $this->setAdmin(true);
+        } else {
+            $this->setAdmin(false);
+        }
     }
 
     /**
@@ -437,5 +450,21 @@ class User extends BaseUser implements ParticipantInterface
     public function getHide ()
     {
         return $this->hide;
+    }
+
+    /**
+     * @return boolean
+     */
+    private function setAdmin ($admin)
+    {
+        $this->admin = $admin;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getAdmin ()
+    {
+        return $this->admin;
     }
 }

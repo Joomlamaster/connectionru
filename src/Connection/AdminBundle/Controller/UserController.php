@@ -10,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Symfony\Component\HttpFoundation\File\Exception\AccessDeniedException;
 
 class UserController extends Controller
 {
@@ -19,7 +20,10 @@ class UserController extends Controller
      */
     public function indexAction()
     {
-        $users = $this->getDoctrine()->getRepository("ConnectionUserBundle:User")->findAll();
+        if (!$user = $this->getUser()) {
+            throw new AccessDeniedException("You have no permissions");
+        }
+        $users = $this->getDoctrine()->getRepository("ConnectionUserBundle:User")->getUsersList($user->getId());
         return array(
             'users' => $users,
             'headline' => "Users"
