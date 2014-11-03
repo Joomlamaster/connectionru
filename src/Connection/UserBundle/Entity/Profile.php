@@ -384,7 +384,11 @@ class Profile
      */
     public function setBirthdate ( $birthdate )
     {
-        $this->birthdate = $birthdate;
+        if ($birthdate instanceof DateTime) {
+            $this->birthdate = $birthdate;
+        } else {
+            $this->birthdate = new \DateTime($birthdate);
+        }
     }
 
     /**

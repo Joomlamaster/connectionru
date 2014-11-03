@@ -187,10 +187,10 @@
             $.datepicker.setDefaults({
                 dateFormat: "yy-mm-dd"
             });
+
             $('#{{form.profile.birthdate.vars.id}}').datepicker({
-                changeMonth: true,
                 changeYear: true,
-                minDate: "-150Y",
+                yearRange: "-100:+0",
                 maxDate: "+0D"
             });
 
