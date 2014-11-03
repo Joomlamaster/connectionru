@@ -46,12 +46,13 @@
         window.onload = function(){
             $('#quick-tab').show();
             $.datepicker.setDefaults({
-                dateFormat: "yy-mm-dd"
+                dateFormat: "mm-dd-yy"
             });
             $('#fos_user_registration_form_profile_birthdate').datepicker({
                 changeYear: true,
                 yearRange: "-100:+0",
-                maxDate: "+0D"
+                maxDate: "+0D",
+                dateFormat: "mm-dd-yy"
             });
 
         }

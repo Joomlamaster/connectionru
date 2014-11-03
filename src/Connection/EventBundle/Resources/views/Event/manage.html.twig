@@ -114,9 +114,11 @@
                     "{{ path('profile_image') }}"
             );
             $.datepicker.setDefaults({
-                dateFormat: "yy-mm-dd"
+                dateFormat: "mm-dd-yy"
             });
-            $('#{{form.eventDate.vars.id}}').datepicker();
+            $('#{{form.eventDate.vars.id}}').datepicker({
+                dateFormat: "mm-dd-yy"
+            });
             preLoadSlaveFeedback = function(slaveBlock){
                 if(slaveBlock.length){
                     $(slaveBlock).html('');

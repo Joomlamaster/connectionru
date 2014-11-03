@@ -185,13 +185,14 @@
            handleOriginallyFrom('#{{form.profile.originallyFrom.vars.id}}', '#{{form.profile.originallyFromCity.vars.id}}');
 
             $.datepicker.setDefaults({
-                dateFormat: "yy-mm-dd"
+                dateFormat: "mm-dd-yy"
             });
 
             $('#{{form.profile.birthdate.vars.id}}').datepicker({
                 changeYear: true,
                 yearRange: "-100:+0",
-                maxDate: "+0D"
+                maxDate: "+0D",
+                dateFormat: 'mm-dd-yy'
             });
 
         }

@@ -7,7 +7,7 @@
     <div class="col-lg-4">
         {%if user.lastLogin is not empty%}
             <h6>
-                <b>Last login</b>: {{user.lastLogin|date('Y-M-d')}}
+                <b>Last login</b>: {{user.lastLogin|date('m-d-Y')}}
             </h6>
         {% endif %}
         <h6>
