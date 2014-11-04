@@ -58,7 +58,6 @@ MAP = {
     },
     'getGeoLoc': function() {
         queryStr = MAP.buildQuery();
-        console.log(queryStr);
         if (queryStr) {
             $.get(
                 MAP.apiUrl,
@@ -68,7 +67,6 @@ MAP = {
                 },
                 function(data) {
                     if ( "OK" == data.status) {
-                        console.log(data);
                         mapLocation = data.results[0].geometry.location;
                         MAP.setMarker(new google.maps.LatLng(mapLocation.lat, mapLocation.lng));
                     } else {

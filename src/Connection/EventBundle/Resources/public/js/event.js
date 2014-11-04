@@ -14,7 +14,6 @@ EM = {
             //  Handle Join Event Action
             $("div.going input").on('click', function() {
                 var action = $(this).data('action');
-                console.log(action);
                 if ('subscribe' == action) {
                     EM.subscriber.handleSubscribe($(this).is(":checked"));
                 } else if ('interested' == action) {

@@ -7,7 +7,6 @@ FosMessage = {
     message : {
         'hi': function(hiUrl) {
             if (!hiUrl) {
-                console.log('Wrong Url!');
                 return;
             }
 
@@ -21,7 +20,6 @@ FosMessage = {
         },
         showSendMessage: function(hiUrl) {
             if (!hiUrl) {
-                console.log('Wrong Url!');
                 return;
             }
 
