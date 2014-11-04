@@ -12,11 +12,16 @@ DropZoneStoreage = {
                 $('.dz-upload-message').on('click', function(){ $(this).parent().trigger('click')});
 
                 this.on("addedfile", function(file) {
-                    $('.dz-upload-message').addClass('hidden');
-                    setTimeout(function() {
-                        $('.fm-popup').trigger('dz.added.file', { context: "dz.added.file" });
-                        initJCrop();
-                    }, 500);
+                    if (file.size > 2000000) {
+                        alert('Max File Size: 2MB');
+                        profileImageDropzone.removeAllFiles();
+                    } else {
+                        $('.dz-upload-message').addClass('hidden');
+                        setTimeout(function() {
+                            $('.fm-popup').trigger('dz.added.file', { context: "dz.added.file" });
+                            initJCrop();
+                        }, 500);
+                    }
                 });
 
                 $('#profile-images').on('fm.close.profile.popup', function() {
