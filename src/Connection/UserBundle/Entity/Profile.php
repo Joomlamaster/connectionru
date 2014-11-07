@@ -384,10 +384,16 @@ class Profile
      */
     public function setBirthdate ( $birthdate )
     {
+//        ToDo: Refactor This code, HotFixed!
         if ($birthdate instanceof DateTime) {
             $this->birthdate = $birthdate;
         } else {
-            $this->birthdate = new \DateTime($birthdate);
+            try {
+                $date = explode("-",$birthdate);
+                $this->birthdate = new \DateTime("$date[2]-$date[0]-$date[1]");
+            } catch (\Exception $e) {
+                $this->birthdate = new \DateTime();
+            }
         }
     }
 
