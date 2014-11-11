@@ -82,6 +82,8 @@ class FileUploadListener
         $em->persist($image);
         $em->flush();
 
+        $this->container->get('session')->getFlashBag()->add('success', 'Image uploaded successfully.');
+
         if ( file_exists($image->getUploadRootDir()) ) {
             $response['id']   = $image->getId();
             $response['name'] = $image->getPath();

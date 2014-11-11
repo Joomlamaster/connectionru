@@ -123,7 +123,6 @@ class SearchController extends Controller
             'languages'             => 'ConnectionCoreBundle:Language'
         );
 
-        $result = array();
         $em     = $this->getDoctrine()->getManager();
 
         array_walk($search, function(&$value, &$key) use ($em, $classMapping) {

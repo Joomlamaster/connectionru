@@ -12,7 +12,9 @@ DropZoneStoreage = {
                 $('.dz-upload-message').on('click', function(){ $(this).parent().trigger('click')});
 
                 this.on("addedfile", function(file) {
+                    $(".global-loader").removeClass('hide');
                     if (file.size > 2000000) {
+                        $(".global-loader").addClass('hide');
                         alert('Max File Size: 2MB');
                         profileImageDropzone.removeAllFiles();
                     } else {
@@ -20,6 +22,7 @@ DropZoneStoreage = {
                         setTimeout(function() {
                             $('.fm-popup').trigger('dz.added.file', { context: "dz.added.file" });
                             initJCrop();
+                            $(".global-loader").addClass('hide');
                         }, 500);
                     }
                 });
@@ -65,6 +68,7 @@ DropZoneStoreage = {
 
         $(".dz-process-queue").on('click', function(e){
             e.preventDefault();
+            $(".global-loader").removeClass('hide');
             profileImageDropzone.processQueue();
         });
     }
