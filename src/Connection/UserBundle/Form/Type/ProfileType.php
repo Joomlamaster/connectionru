@@ -201,7 +201,8 @@ class ProfileType extends AbstractType
             ))
 
             ->add('height', 'choice', array(
-                'choices' => $this->height()
+                'choices' => $this->height(),
+                'data' => 200
             ))
 
             ->add('bodyType', 'entity', array(
