@@ -29,12 +29,12 @@
     </div>
     <div class="row">
         <div class="col-xs-4">
-            <div id="master_slave">
+            <div class="master_slave">
                 <div>
                     {{ form_row(form.profile.country,{'attr': {'class': 'selectpicker master' } }) }}
                 </div>
                 {% if (form.profile.state is defined) %}
-                    <div id="slave_block" style="margin-top:4px;">
+                    <div class="slave_block" style="margin-top:4px;">
                         {{ form_row(form.profile.state,{'attr': {'class': 'selectpicker slave' } }) }}
                     </div>
                 {% endif %}

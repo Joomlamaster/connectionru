@@ -100,7 +100,9 @@ class ProfileType extends AbstractType
 
         // add your custom field
         $builder
-            ->add('city', 'text')
+            ->add('city', 'text', array(
+                'required' => false
+            ))
             ->add('zip', 'text')
 
             ->add('gender', 'entity', array(

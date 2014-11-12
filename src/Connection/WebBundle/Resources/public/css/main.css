@@ -1212,3 +1212,8 @@ fieldset[disabled] .btn-info.active {
     position: absolute;
     top: 45%
 }
+
+.global-alert {
+    margin: 0px;
+    border-radius: 0px;
+}
