@@ -264,7 +264,9 @@ class ProfileType extends AbstractType
             ))
             ->add('zodiac', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Zodiac',
-                'property' => 'name'
+                'property' => 'name',
+                'empty_value' =>'Select',
+                'required' => false,
             ));
 
             $builder->add('aboutMe', 'textarea');
