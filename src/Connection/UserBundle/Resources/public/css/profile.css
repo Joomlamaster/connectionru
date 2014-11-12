@@ -146,3 +146,15 @@
 .slave_block ul {
     display: none;
 }
+
+#connection_user_profile_edit_profile_seek label,
+#connection_user_profile_edit_profile_gender label
+{
+    margin: -3px 3px 0px 8px;
+}
+
+#connection_user_profile_edit_profile_seek input,
+#connection_user_profile_edit_profile_gender input
+{
+    vertical-align: baseline;
+}
