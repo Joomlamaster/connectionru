@@ -128,4 +128,10 @@ gregwar_captcha:
     as_url: true
     reload: true    
     distortion: false
-    disabled: true    
+    disabled: true
+
+doctrine_migrations:
+    dir_name: %kernel.root_dir%/DoctrineMigrations
+    namespace: Application\Migrations
+    table_name: migration_versions
+    name: Application Migrations

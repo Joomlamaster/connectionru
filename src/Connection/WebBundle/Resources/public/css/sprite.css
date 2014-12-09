@@ -21,10 +21,11 @@
     background-position: -62px -5px;
 }
 
-.sprite-logo-bottom {
-    width: 126px;
-    height: 28px;
-    background-position: -88px -5px;
+.logo-bottom {
+	width: 126px;
+	height: 28px;
+	background: url('/bundles/connectionweb/img/logo.png') no-repeat;
+	background-size: 95px;
 }
 
 .sprite-logo-brand {
@@ -39,7 +40,7 @@
     height: 66px;
     margin-top: 10px;
     background: url('/bundles/connectionweb/img/logo.png') no-repeat;
-    float:left;
+    float: left;
 }
 
 .sprite-navbar-facebook {

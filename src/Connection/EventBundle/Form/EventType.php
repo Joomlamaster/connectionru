@@ -88,6 +88,7 @@ class EventType extends AbstractType
                 ))
             ->add('eventDate', 'date', array(
                 'widget'    => 'single_text',
+                'format'    => 'dd-MM-yyyy',
                 'attr'      => array(
                     'class' => 'input-append date'
                 )
