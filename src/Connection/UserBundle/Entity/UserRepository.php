@@ -89,9 +89,9 @@ class UserRepository extends EntityRepository
         }
 
         //  Filter By LookingFor
-        if ( !empty($filter['lookingFor']) ) {
-            $qb->join('p.lookingFor', 'lf')->andWhere('lf.id = :looking_for')->setParameter('looking_for', $filter['lookingFor']);
-        }
+	    if ( !empty($filter['lookingFor']) && !$filter['lookingFor']->isEmpty()) {
+		    $qb->join('p.lookingFor', 'lf')->andWhere('lf.id IN (:looking_for)')->setParameter('looking_for', $filter['lookingFor']->toArray());
+	    }
 
         //  Filter By ageFrom
         if ( !empty($filter['ageFrom'])) {
@@ -214,6 +214,12 @@ class UserRepository extends EntityRepository
         if($offset){
             $qb->setFirstResult($offset);
         }
+
+	    $qb->orderBy('u.createdAt', 'DESC');
+
+/*	    var_dump($qb->getQuery()->getSQL());
+	    var_dump($qb->getQuery()->getParameters());
+	    die;*/
 
         return $qb->getQuery()->getResult();
     }

@@ -34,7 +34,12 @@
             <h6><b>Religion</b>: {{ user.profile.religion.name }}</h6>
         {% endif %}
         {% if user.profile.education is defined and user.profile.education is not empty %}
-            <h6><b>Education</b>: {{ user.profile.education.name }}</h6>
+            <h6>
+				<b>Education</b>: {{ user.profile.education.name }}
+				{% if user.profile.ivyLeagueUniversity is defined and user.profile.ivyLeagueUniversity is not empty %}
+					<i class="muted">({{ user.profile.ivyLeagueUniversity }})</i>
+				{% endif %}
+			</h6>
         {% endif %}
         {% if user.profile.profession is defined and user.profile.profession is not empty %}
             <h6><b>Profession</b>: {{ user.profile.profession.name }}</h6>
@@ -85,15 +90,6 @@
             {% if user.profile.drinking is defined and user.profile.drinking is not empty %}
                 <h6><b>Drinking</b>: {{ user.profile.drinking.name }}</h6>
             {% endif %}
-            {% if user.profile.educationIvyLeague is defined and user.profile.educationIvyLeague is not empty %}
-                <h6>
-                    <b>Education Ivy League</b>: {{ user.profile.educationIvyLeague is defined and user.profile.educationIvyLeague ? 'Yes' : 'No'  }}
-                    {% if user.profile.ivyLeagueUniversity is defined and user.profile.ivyLeagueUniversity is not empty %}
-                        <i class="muted">({{ user.profile.ivyLeagueUniversity }})</i>
-                    {% endif %}
-                </h6>
-            {% endif %}
-
             {% if user.profile.hasChildren is defined and user.profile.hasChildren is not empty %}
                 <h6><b>Has children</b>: {{ user.profile.hasChildren.name }}</h6>
             {% endif %}

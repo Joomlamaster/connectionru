@@ -138,7 +138,8 @@ class SearchType extends AbstractType
                 'class' => 'ConnectionUserBundle:Profile\LookingFor',
                 'property' => 'name',
                 'empty_value' =>'Anything',
-                'required' => false
+                'required' => false,
+	            'multiple' => true
             ))
 
             ->add('languages', 'entity', array(

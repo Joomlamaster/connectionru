@@ -140,14 +140,20 @@
                             {{ form_row(form.minimumHeight, {'attr': { 'class': 'select-inline selectpicker'} }) }}
                         </div>
                         <div class="row">
-                            {{ form_row(form.maximumHeight, {'attr': { 'class': 'select-inline selectpicker'} }) }}
-                        </div>
-                        <div class="row">
                             {{ form_row(form.bodyType, {'attr': { 'class': 'select-inline selectpicker'} }) }}
                         </div>
+						<div class="row">
+							{{ form_row(form.haveChildren, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+						</div>
+						<div class="row">
+							{{ form_row(form.wantChildren, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+						</div>
+						<div class="row">
+							{{ form_row(form.openToPersonWithKids, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+						</div>
                     </div>
                 </div>
-                <div class="col-xs-5">
+                <div class="col-xs-4">
                     <div class="form-inline">
                         <div class="row">
                             {{ form_row(form.eyeColor, {'attr': { 'class': 'select-inline selectpicker'} }) }}
@@ -163,7 +169,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-3">
+                <div class="col-xs-4">
                     <div class="form-inline">
                         <div class="row">
                             {{ form_row(form.income, {'attr': { 'class': 'inline-labels selectpicker'} }) }}
@@ -176,28 +182,6 @@
                         </div>
                         <div class="row">
                             {{ form_row(form.zodiac, {'attr': { 'class': 'select-inline selectpicker'} }) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-4">
-                    <div class="form-inline">
-                        <div class="row">
-                            {{ form_row(form.haveChildren, {'attr': { 'class': 'select-inline selectpicker'} }) }}
-                        </div>
-                        <div class="row">
-                            {{ form_row(form.wantChildren, {'attr': { 'class': 'select-inline selectpicker'} }) }}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-5">
-                    <div class="form-inline">
-                        <div class="row">
-                            {{ form_row(form.livesWithChildren, {'attr': { 'class': 'select-inline selectpicker'} }) }}
-                        </div>
-                        <div class="row">
-                            {{ form_row(form.openToPersonWithKids, {'attr': { 'class': 'select-inline selectpicker'} }) }}
                         </div>
                     </div>
                 </div>
