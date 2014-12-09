@@ -12,7 +12,7 @@ class SecurityController extends BaseController
 {
     protected function renderLogin(array $data)
     {
-        $template = sprintf('ConnectionUserBundle:Default:_headerLogin.html.%s', $this->container->getParameter('fos_user.template.engine'));
+        $template = sprintf('ConnectionUserBundle:Default:_headerLogin.html.twig');
         return $this->container->get('templating')->renderResponse($template, $data);
     }
 
