@@ -81,7 +81,6 @@
                         <a class="title" href="{{ path('view_event', {'id': event.id}) }}">{{ event.title }}</a>
                         <a href="{{ path('view_event', {'id': event.id}) }}" class="btn-gradient">View</a>
 						{% if event is ownedByCurrentUser %}
-							<br>
 							<a href="{{ path('event_manage', {id: event.id}) }}" class="btn-gradient" title="Edit this event">Edit</a>
 						{% endif %}
                         <br/>
@@ -113,7 +112,6 @@
                             <a class="title" href="{{ path('view_event', {'id': event.id}) }}">{{ event.title }}</a>
                             <a href="{{ path('view_event', {'id': event.id}) }}" class="btn-gradient">View</a>
 							{% if event is ownedByCurrentUser %}
-								<br>
 								<a href="{{ path('event_manage', {id: event.id}) }}" class="btn-gradient" title="Edit this event">Edit</a>
 							{% endif %}
                             <br/>
