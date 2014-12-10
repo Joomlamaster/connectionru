@@ -10,21 +10,21 @@
                 <b>Last login</b>: {{user.lastLogin|date('m-d-Y')}}
             </h6>
         {% endif %}
+		{% spaceless %}
         <h6>
-            {% spaceless %}
             <span>{{ user.profile.birthdate|userAge}}</span>
             <span>{{ user.profile.gender.name is defined ? ", " ~ user.profile.gender.name : ""}}</span>
             <span>{{ user.profile.city is defined and user.profile.city is not empty  ? ", " ~ user.profile.city : ""}}</span>
             <span>{{ user.profile.state.name is defined ? ", " ~ user.profile.state.name : ""}}</span>
             <span>{{ user.profile.country.name is defined ? ", " ~ user.profile.country.name : ""}}</span>
-            {% endspaceless %}
         </h6>
         <h6>
-            <b>Seeking</b>: {{ user.profile.seek.name|default('') }}
+            <b>Seeking</b>: <span>{{ user.profile.seek.name|default('') }}</span>
             {% if user.profile.lookingFor.name is defined and user.profile.lookingFor.name is not empty %}
-                {{ ', ' ~ user.profile.lookingFor.name }}
+                <span>{{ ', ' ~ user.profile.lookingFor.name }}</span>
             {% endif %}
         </h6>
+		{% endspaceless %}
     </div>
     <div class="col-md-5">
         {% if user.profile.maritalStatus is defined and user.profile.maritalStatus is not empty %}

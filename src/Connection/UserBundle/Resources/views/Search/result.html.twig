@@ -142,15 +142,15 @@
                         <div class="row">
                             {{ form_row(form.bodyType, {'attr': { 'class': 'select-inline selectpicker'} }) }}
                         </div>
-						<div class="row">
-							{{ form_row(form.haveChildren, {'attr': { 'class': 'select-inline selectpicker'} }) }}
-						</div>
-						<div class="row">
-							{{ form_row(form.wantChildren, {'attr': { 'class': 'select-inline selectpicker'} }) }}
-						</div>
-						<div class="row">
-							{{ form_row(form.openToPersonWithKids, {'attr': { 'class': 'select-inline selectpicker'} }) }}
-						</div>
+                        <div class="row">
+                            {{ form_row(form.haveChildren, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+                        </div>
+                        <div class="row">
+                            {{ form_row(form.wantChildren, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+                        </div>
+                        <div class="row">
+                            {{ form_row(form.openToPersonWithKids, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+                        </div>
                     </div>
                 </div>
                 <div class="col-xs-4">
@@ -219,29 +219,28 @@
                                         {{ user.userName }}
                                     </a>
                                 </h4>
-                                <h6>
-                                    {{ user.profile.birthdate|userAge}}
-                                    {{ user.profile.gender.name is defined ? ", " ~ user.profile.gender.name : ""}}
-                                    {{ user.profile.city is defined and user.profile.city is not empty  ? ", " ~ user.profile.city : ""}}
-                                    {{ user.profile.state.name is defined ? ", " ~ user.profile.state.name : ""}}
-                                    {{ user.profile.country.name is defined ? ", " ~ user.profile.country.name : ""}}
-                                </h6>
-                                <h6>
-                                    <b>Seeking</b>: {{ user.profile.seek.name|default('') }}
-                                    {#                                        {% if user.profile.lookingFor.name is defined and user.profile.lookingFor.name is not empty %}#}
-                                    {{ ', ' ~ user.profile.lookingFor.name|default('Anything') }}
-                                    {#                                        {% endif %}#}
-                                </h6>
-                                {% if user.profile.aboutMe is defined and user.profile.aboutMe is not empty %}
-                                    <h6>
-                                        {% if user.profile.aboutMe|length > 100 %}
-                                            {{user.profile.aboutMe|slice(0, 100)}} <a href="{{ path('view_profile', {'id': user.profile.id}) }}"><span class="see-more-link">>></span></a>
-                                        {% else %}
-                                            {{user.profile.aboutMe}}
-                                        {% endif %}
-                                        {#                                            {{ user.profile.aboutMe }}#}
-                                    </h6>
-                                {% endif %}
+								{% spaceless %}
+									<h6>
+										<span>{{ user.profile.birthdate|userAge}}</span>
+										<span>{{ user.profile.gender.name is defined ? ", " ~ user.profile.gender.name : ""}}</span>
+										<span>{{ user.profile.city is defined and user.profile.city is not empty  ? ", " ~ user.profile.city : ""}}</span>
+										<span>{{ user.profile.state.name is defined ? ", " ~ user.profile.state.name : ""}}</span>
+										<span>{{ user.profile.country.name is defined ? ", " ~ user.profile.country.name : ""}}</span>
+									</h6>
+									<h6>
+										<b>Seeking</b>: <span>{{ user.profile.seek.name|default('') }}</span>
+										<span>{{ ', ' ~ user.profile.lookingFor.name|default('Anything') }}</span>
+									</h6>
+									{% if user.profile.aboutMe is defined and user.profile.aboutMe is not empty %}
+										<h6>
+											{% if user.profile.aboutMe|length > 100 %}
+												{{user.profile.aboutMe|slice(0, 100)}} <a href="{{ path('view_profile', {'id': user.profile.id}) }}"><span class="see-more-link">>></span></a>
+											{% else %}
+												{{user.profile.aboutMe}}
+											{% endif %}
+										</h6>
+									{% endif %}
+								{% endspaceless %}
                             </div>
                             <div class="col-xs-6">
                                 {% if user.profile.religion is defined and user.profile.religion is not empty %}

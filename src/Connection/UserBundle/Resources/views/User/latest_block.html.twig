@@ -8,11 +8,12 @@
                 <div class="info redirect" data-href="{{ path('view_profile', {id: user.profile.id}) }}">
                     <p class="name">{{ user.userName }}</p>
                     <p>
-                        {{ user.profile.birthdate|userAge}}
-                        {{ user.profile.gender.name is defined ? "," ~ user.profile.gender.name : ""}}
-                        {{ user.profile.state.name is defined ? "," ~ user.profile.state.name : ""}}
+						{% spaceless %}
+							<span>{{ user.profile.birthdate|userAge}}</span>
+							<span>{{ user.profile.gender.name is defined ? ", " ~ user.profile.gender.name : ""}}</span>
+							<span>{{ user.profile.state.name is defined ? ", " ~ user.profile.state.name : ""}}</span>
+						{% endspaceless %}
                     </p>
-
                     {% if user.profile.lookingFor.name is defined %}
                         <p>Looking for:</p>
                         <p class="blue">{{ user.profile.lookingFor.name }}</p>
