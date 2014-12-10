@@ -117,7 +117,7 @@ class RegistrationController extends BaseController
             $form->get('profile')->get('ethnicity')->setData($ethnicity);
         }
 
-        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:quick_register.html.' . $this->getEngine(), array(
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:quick_register.html.twig', array(
             'form' => $form->createView(),
         ));
     }
