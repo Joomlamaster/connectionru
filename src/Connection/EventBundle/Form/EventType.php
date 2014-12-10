@@ -86,9 +86,9 @@ class EventType extends AbstractType
                         'placeholder' => "Example:  let's get together and celebrated it's cool Russian party in the style bits!"
                     )
                 ))
-            ->add('eventDate', 'date', array(
+            ->add('eventDate', 'datetime', array(
                 'widget'    => 'single_text',
-                'format'    => 'dd-MM-yyyy',
+                'format'    => 'MM/dd/yyyy',
                 'attr'      => array(
                     'class' => 'input-append date'
                 )
