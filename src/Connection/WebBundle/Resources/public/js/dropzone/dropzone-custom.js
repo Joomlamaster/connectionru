@@ -53,6 +53,7 @@ DropZoneStoreage = {
             },
             'success': function(file, data) {
                 $('.fm-popup').trigger('dz.upload.complete', data);
+                $(".global-loader").addClass('hide');
                 profileImageDropzone.removeAllFiles();
             }
         };

@@ -45,8 +45,9 @@ class SearchController extends Controller
             ->getRepository('ConnectionEventBundle:Event')
             ->search( $filter, $topLimit, $topOffset );
 
-        $events    = $this->getDoctrine()
-            ->getRepository('ConnectionEventBundle:Event')->search( $filter, $limit, $offset );
+        $events = $this->getDoctrine()
+            ->getRepository('ConnectionEventBundle:Event')
+	        ->search( $filter, $limit, $offset );
 
         return array(
             'topEvents'     => $topEvents,

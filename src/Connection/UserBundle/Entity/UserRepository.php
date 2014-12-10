@@ -116,6 +116,11 @@ class UserRepository extends EntityRepository
             $qb->join('p.education', 'e')->andWhere('e.id IN (:education)')->setParameter('education', $filter['education']->toArray());
         }
 
+	    //  Filter By religion
+	    if ( !empty($filter['religion']) && !$filter['religion']->isEmpty()) {
+		    $qb->join('p.religion', 'r')->andWhere('r.id IN (:religion)')->setParameter('religion', $filter['religion']->toArray());
+	    }
+
         //  Filter By educationIvyLeague
         if ( isset($filter['educationIvyLeague'])) {
             $qb->andWhere('p.educationIvyLeague = :educationIvyLeague')->setParameter('educationIvyLeague', $filter['educationIvyLeague']);
@@ -129,11 +134,6 @@ class UserRepository extends EntityRepository
         //  Filter By income
         if ( !empty($filter['income'])) {
             $qb->andWhere('p.income = :income')->setParameter('income', $filter['income']);
-        }
-
-        //  Filter By religion
-        if ( !empty($filter['religion'])) {
-            $qb->andWhere('p.religion = :religion')->setParameter('religion', $filter['religion']);
         }
 
         //  Filter By maritalStatus
@@ -216,10 +216,6 @@ class UserRepository extends EntityRepository
         }
 
 	    $qb->orderBy('u.createdAt', 'DESC');
-
-/*	    var_dump($qb->getQuery()->getSQL());
-	    var_dump($qb->getQuery()->getParameters());
-	    die;*/
 
         return $qb->getQuery()->getResult();
     }

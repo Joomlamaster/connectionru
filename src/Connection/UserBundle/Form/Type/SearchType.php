@@ -193,8 +193,8 @@ class SearchType extends AbstractType
                 'class' => 'ConnectionUserBundle:Profile\Religion',
                 'property' => 'name',
                 'label' => 'User religion',
-                'empty_value' =>'Any religion',
-                'required' => false
+                'required' => false,
+                'multiple' => true
             ))
 
             ->add('maritalStatus', 'entity', array(

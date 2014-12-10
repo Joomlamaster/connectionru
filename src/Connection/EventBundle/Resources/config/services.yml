@@ -8,6 +8,13 @@ services:
         tags:
             - { name: twig.extension }
 
+    connection.twig.common_extension:
+        class: Connection\EventBundle\Twig\CommonExtension
+        arguments:
+            - "@security.context"
+        tags:
+            - { name: twig.extension }
+
     connection_event.event.type:
         class: Connection\EventBundle\Form\EventType
         arguments:
