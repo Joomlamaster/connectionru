@@ -95,39 +95,14 @@
 
         {#extended search tab#}
         <div class="tab-pane {% if form.searchType.vars.data == 'extended' %}active{% endif %}" id="extended-search-tab">
-            <div class="row">
-                <div class="col-xs-4">
-                    <div class="form-inline">
-                        <div class="row">
-                            {{ form_label(form.education) }}
-                            <div>
-                                {{ form_widget(form.education, {'attr': { 'class': 'select-inline selectpicker', 'data-selected-text-format': 'count>2' } }) }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-inline" style="margin-left: -15px;">
-                        {{ form_label(form.educationIvyLeague) }}
-                        <div>
-                            {{ form_widget(form.educationIvyLeague, {'attr': { 'class': 'select-inline selectpicker'} }) }}
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xs-4">
-                    <div class="form-inline" style="margin-left: -15px;">
-                        {{ form_label(form.profession) }}
-                        <div>
-                            {{ form_widget(form.profession, {'attr': { 'class': 'select-inline selectpicker'} }) }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
+           <div class="row">
                 <div class="col-xs-4">
                     <div class="form-inline">
 						<div class="row">
-							{{ form_row(form.maritalStatus, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+							{{ form_row(form.education, {'attr': { 'class': 'select-inline selectpicker', 'data-selected-text-format': 'count>2' } }) }}
+						</div>
+						<div  class="row">
+							{{ form_row(form.educationIvyLeague, {'attr': { 'class': 'select-inline selectpicker'} }) }}
 						</div>
                         <div class="row">
                             {{ form_row(form.haveChildren, {'attr': { 'class': 'select-inline selectpicker'} }) }}
@@ -145,6 +120,9 @@
                 </div>
                 <div class="col-xs-4">
                     <div class="form-inline">
+						<div class="row">
+							{{ form_row(form.maritalStatus, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+						</div>
 						<div class="row">
 							{{ form_row(form.minimumHeight, {'attr': { 'class': 'select-inline selectpicker'} }) }}
 						</div>
@@ -164,6 +142,9 @@
                 </div>
                 <div class="col-xs-4">
                     <div class="form-inline">
+						<div class="row">
+							{{ form_row(form.profession, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+						</div>
                         <div class="row">
                             {{ form_row(form.income, {'attr': { 'class': 'inline-labels selectpicker'} }) }}
                         </div>
