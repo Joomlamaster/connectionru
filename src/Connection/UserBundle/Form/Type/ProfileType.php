@@ -125,7 +125,6 @@ class ProfileType extends AbstractType
                 'class' => 'ConnectionUserBundle:Profile\LookingFor',
                 'property' => 'name',
                 'expanded' =>  true,
-                'empty_value' =>'Anything',
                 'required' => false
             ))
 
