@@ -137,9 +137,9 @@ class UserRepository extends EntityRepository
         }
 
         //  Filter By maritalStatus
-        if ( !empty($filter['maritalStatus'])) {
-            $qb->andWhere('p.maritalStatus = :maritalStatus')->setParameter('maritalStatus', $filter['maritalStatus']);
-        }
+	    if ( !empty($filter['maritalStatus']) && !$filter['maritalStatus']->isEmpty()) {
+		    $qb->join('p.maritalStatus', 'ms')->andWhere('ms.id IN (:marital_status)')->setParameter('marital_status', $filter['maritalStatus']->toArray());
+	    }
 
         //  Filter By heightFrom
         if ( !empty($filter['minimumHeight'])) {

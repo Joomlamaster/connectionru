@@ -200,7 +200,7 @@ class SearchType extends AbstractType
             ->add('maritalStatus', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\MaritalStatus',
                 'property' => 'name',
-                'expanded' => true,
+                'multiple' => true,
                 'empty_value' =>'Any status',
                 'required' => false
             ));
