@@ -179,7 +179,7 @@ class SearchType extends AbstractType
                 'property' => 'name',
                 'empty_value' =>'Any profession',
                 'required' => false,
-
+                'multiple' => true,
             ))
 
             ->add('income', 'entity', array(

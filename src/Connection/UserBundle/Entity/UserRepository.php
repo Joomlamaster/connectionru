@@ -127,9 +127,9 @@ class UserRepository extends EntityRepository
         }
 
         //  Filter By profession
-        if ( !empty($filter['profession'])) {
-            $qb->andWhere('p.profession = :profession')->setParameter('profession', $filter['profession']);
-        }
+	    if ( !empty($filter['profession']) && !$filter['profession']->isEmpty()) {
+		    $qb->join('p.profession', 'pr')->andWhere('pr.id IN (:profession)')->setParameter('profession', $filter['profession']->toArray());
+	    }
 
         //  Filter By income
         if ( !empty($filter['income'])) {
