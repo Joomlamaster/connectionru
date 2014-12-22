@@ -125,7 +125,8 @@ class ProfileType extends AbstractType
                 'class' => 'ConnectionUserBundle:Profile\LookingFor',
                 'property' => 'name',
                 'expanded' =>  true,
-                'required' => false
+                'required' => false,
+	            'empty_value' => 'Anything'
             ))
 
             ->add('birthdate', 'text', array(
@@ -183,6 +184,11 @@ class ProfileType extends AbstractType
 
             ->add('religion', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Religion',
+                'query_builder' => function(EntityRepository $er) {
+	                return $er
+		                ->createQueryBuilder('r')
+		                ->orderBy('r.priority', 'DESC');
+                },
                 'property' => 'name',
                 'label' => 'My religion'
             ))
@@ -201,7 +207,7 @@ class ProfileType extends AbstractType
 
             ->add('height', 'choice', array(
                 'choices' => $this->height(),
-                'data' => 200
+                'data' => 182
             ))
 
             ->add('bodyType', 'entity', array(
@@ -264,7 +270,7 @@ class ProfileType extends AbstractType
             ->add('zodiac', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Zodiac',
                 'property' => 'name',
-                'empty_value' =>'Select',
+                'empty_value' => 'Prefer not to say',
                 'required' => false,
             ));
 

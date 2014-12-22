@@ -34,6 +34,13 @@ class Religion
      */
     private $profile;
 
+	/**
+	 * @var integer
+	 *
+	 * @ORM\Column(name="priority", type="integer", nullable=true)
+	 */
+	private $priority;
+
     /**
      * @return int
      */
@@ -57,6 +64,20 @@ class Religion
     {
         return $this->name;
     }
+
+	/**
+	 * @return int
+	 */
+	public function getPriority() {
+		return $this->priority;
+	}
+
+	/**
+	 * @param int $priority
+	 */
+	public function setPriority( $priority ) {
+		$this->priority = $priority;
+	}
 
     /**
      * @param \Doctrine\Common\Collections\ArrayCollection $profile

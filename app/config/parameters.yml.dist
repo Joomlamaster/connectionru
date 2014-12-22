@@ -29,7 +29,7 @@ parameters:
     
     # Country field for search/register forms will be 
     # limited to this values
-    profile_country_iso: [US, CA, UK, IT, FR, DE, DK, AU, BR, RU, TR, OTHER]
+    profile_country_iso: [US, CA, UK, IT, FR, DE, DK, AU, BR, RU, TR, UA, OTHER]
 
     #Education Ivy League afirmative ID from database need to be indicated in order to 
     #show/hide 'Ivy League university' additional input field on register/profile forms

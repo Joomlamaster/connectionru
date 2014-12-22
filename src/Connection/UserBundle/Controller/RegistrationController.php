@@ -23,9 +23,9 @@ class RegistrationController extends BaseController
     public function registerAction(Request $request)
     {
         //if authenticated redirect to homepage
-        if($request->isMethod('GET')){
+        if ($request->isMethod('GET')) {
             $authenticated = $this->_isUserAuthenticated($request);
-            if($authenticated){
+            if ($authenticated) {
                 $url = $this->container->get('router')->generate('connection_homepage');
                 return new RedirectResponse($url);
             }
@@ -88,9 +88,9 @@ class RegistrationController extends BaseController
     public function registerExtendedAction(Request $request)
     {
         //if authenticated redirect to homepage
-        if($request->isMethod('GET')){
+        if ($request->isMethod('GET')) {
             $authenticated = $this->_isUserAuthenticated($request);
-            if($authenticated){
+            if ($authenticated) {
                 $url = $this->container->get('router')->generate('connection_homepage');
                 return new RedirectResponse($url);
             }
