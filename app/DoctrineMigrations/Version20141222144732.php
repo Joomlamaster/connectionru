@@ -36,28 +36,28 @@ class Version20141222144732 extends AbstractMigration implements ContainerAwareI
 	{
 		// Set religion priorities
 	    $repo = $this->em->getRepository('ConnectionUserBundle:Profile\Religion');
-		$religion = $repo->findOneBy(['name' => 'Non-religious']);
+		$religion = $repo->findOneBy(array('name' => 'Non-religious'));
 		$religion->setPriority(10);
 		$this->em->persist($religion);
-		$religion = $repo->findOneBy(['name' => 'Jewish']);
+		$religion = $repo->findOneBy(array('name' => 'Jewish'));
 		$religion->setPriority(9);
 		$this->em->persist($religion);
-		$religion = $repo->findOneBy(['name' => 'Catholic']);
+		$religion = $repo->findOneBy(array('name' => 'Catholic'));
 		$religion->setPriority(8);
 		$this->em->persist($religion);
-		$religion = $repo->findOneBy(['name' => 'Buddhist']);
+		$religion = $repo->findOneBy(array('name' => 'Buddhist'));
 		$religion->setPriority(7);
 		$this->em->persist($religion);
-		$religion = $repo->findOneBy(['name' => 'Hindu']);
+		$religion = $repo->findOneBy(array('name' => 'Hindu'));
 		$religion->setPriority(6);
 		$this->em->persist($religion);
-		$religion = $repo->findOneBy(['name' => 'Christian-Orthodox']);
+		$religion = $repo->findOneBy(array('name' => 'Christian-Orthodox'));
 		$religion->setPriority(5);
 		$this->em->persist($religion);
-		$religion = $repo->findOneBy(['name' => 'Baptist']);
+		$religion = $repo->findOneBy(array('name' => 'Baptist'));
 		$religion->setPriority(4);
 		$this->em->persist($religion);
-		$religion = $repo->findOneBy(['name' => 'Muslim']);
+		$religion = $repo->findOneBy(array('name' => 'Muslim'));
 		$religion->setPriority(3);
 		$this->em->persist($religion);
 		$this->em->flush();
@@ -66,7 +66,7 @@ class Version20141222144732 extends AbstractMigration implements ContainerAwareI
     public function down(Schema $schema)
     {
 	    $repo = $this->em->getRepository('ConnectionCoreBundle:Language');
-	    $language = $repo->findOneBy(['name' => 'Ukrainian']);
+	    $language = $repo->findOneBy(array('name' => 'Ukrainian'));
 	    $this->em->remove($language);
 	    $this->em->flush();
 
