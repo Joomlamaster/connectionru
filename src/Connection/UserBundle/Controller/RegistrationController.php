@@ -148,7 +148,7 @@ class RegistrationController extends BaseController
         $userManager->updateUser($user);
 
         if (null === $response = $event->getResponse()) {
-            $url = $this->container->get('router')->generate('edit_user_profile');
+            $url = $this->container->get('router')->generate('edit_user_profile_edit');
             $request->getSession()->getFlashBag()->add(
                 'notice',
                 'Registration Complete, Please fill out your profile information.'
