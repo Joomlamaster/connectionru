@@ -11,7 +11,7 @@
         {{ form_widget(form.ageFrom, { 'attr': {'class': 'form-control selectpicker quick-form-element', 'data-width':'65px'} }) }} - {{ form_widget(form.ageTo, { 'attr': {'class': 'form-control selectpicker quick-form-element', 'data-width':'65px'} }) }}
     </div>
 
-    {{ form_row(form.lookingFor, {'attr': { 'class': 'selectpicker quick-form-element','data-width':'143px'}}) }}
+    {{ form_row(form.lookingFor, {'attr': { 'class': 'selectpicker quick-form-element', 'data-width':'143px', 'title': 'Anything'}}) }}
     <div class="master_slave">
         <div>
             {{ form_row(form.country, {'attr': { 'class': 'selectpicker quick-form-element master','data-width':'143px'}}) }}

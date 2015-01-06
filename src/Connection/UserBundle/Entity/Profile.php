@@ -930,6 +930,14 @@ class Profile
     }
 
     /**
+     * @return bool
+     */
+    public function hasAvatar()
+    {
+        return !empty($this->avatar);
+    }
+
+    /**
      * @param string $zodiac
      */
     public function setZodiac ( $zodiac )
