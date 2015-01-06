@@ -3,6 +3,7 @@
 namespace Connection\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Connection\UserBundle\Service\ConverterService;
 
 /**
  * eventRepository
@@ -15,32 +16,219 @@ class UserRepository extends EntityRepository
     public function findByFbId($id)
     {
         return $this->createQueryBuilder('u')
-                    ->select('u')
-                    ->join('u.profile', 'p')
-                    ->where('p.facebookId = :facebook_id')
-                    ->setParameter('facebook_id', $id)
-                    ->getQuery()
-                    ->getOneOrNullResult();
+            ->select('u')
+            ->join('u.profile', 'p')
+            ->where('p.facebookId = :facebook_id')
+            ->setParameter('facebook_id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
     public function findByTwitterId($id)
     {
         return $this->createQueryBuilder('u')
-                    ->select('u')
-                    ->join('u.profile', 'p')
-                    ->where('p.twitterId = :twitter_id')
-                    ->setParameter('twitter_id', $id)
-                    ->getQuery()
-                    ->getOneOrNullResult();
+            ->select('u')
+            ->join('u.profile', 'p')
+            ->where('p.twitterId = :twitter_id')
+            ->setParameter('twitter_id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
     }
 
-    public function getLatest($limit)
+    public function getLatest($limit, $excludeUserId = false)
     {
+            $qb = $this->createQueryBuilder('u')
+                       ->select('u')
+                       ->join('u.profile', 'p')
+                       ->where('u.hide = :hide AND u.admin = :admin')->setParameters(array('hide' => 0, 'admin' => 0));
+
+            if ( $excludeUserId ) {
+                $qb->andWhere('u.id != :exclude_id')->setParameter('exclude_id', $excludeUserId);
+            }
+
+            return $qb->orderBy('u.createdAt')
+                      ->setMaxResults($limit)
+                      ->getQuery()
+                      ->getResult();
+    }
+
+    public function countAll()
+    {
+        return $this->createQueryBuilder('u')
+            ->select('COUNT(u.id) AS total')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function search($filter, $limit = false, $offset = false)
+    {
+        $converterService = new ConverterService();
+
+        $qb = $this->createQueryBuilder('u')
+            ->join('u.profile', 'p')
+            ->where('u.hide = :hide AND u.admin = :admin')->setParameters(array('hide' => 0, 'admin' => 0));
+
+        //  Filter By Country
+        if ( !empty($filter['country']) ) {
+            $qb->join('p.country', 'c')->andWhere('c.id = :country')->setParameter('country', $filter['country']);
+        }
+
+        //  Filter By State
+        if ( !empty($filter['state']) ) {
+            $qb->join('p.state', 'st')->andWhere('st.id = :state')->setParameter('state', $filter['state']);
+        }
+
+        //  Found person should seek for searcher gender
+        if ( !empty($filter['gender']) ) {
+            $qb->join('p.seek', 's')->andWhere('s.id = :gender')->setParameter('gender', $filter['gender']);
+        }
+
+        //  Found person gender should be equal to searcher seek
+        if ( !empty($filter['seek']) ) {
+            $qb->join('p.gender', 'g')->andWhere('g.id = :seek')->setParameter('seek', $filter['seek']);
+        }
+
+        //  Filter By LookingFor
+	    if ( !empty($filter['lookingFor']) && !$filter['lookingFor']->isEmpty()) {
+		    $qb->join('p.lookingFor', 'lf')->andWhere('lf.id IN (:looking_for)')->setParameter('looking_for', $filter['lookingFor']->toArray());
+	    }
+
+        //  Filter By ageFrom
+        if ( !empty($filter['ageFrom'])) {
+            $from = $converterService->ageToDate($filter['ageFrom'], 2);
+            $qb->andWhere('p.birthdate <= :age_from')->setParameter('age_from', $from);
+        }
+
+
+        //  Filter By ageTo
+        if ( !empty($filter['ageTo'])) {
+            $to = $converterService->ageToDate($filter['ageTo'], 1);
+            $qb->andWhere('p.birthdate >= :age_to')->setParameter('age_to', $to);
+        }
+
+        //  Filter By languages
+        if ( !empty($filter['languages']) && !$filter['languages']->isEmpty()) {
+            $qb->join('p.languages', 'l')->andWhere('l.id IN (:languages)')->setParameter('languages', $filter['languages']->toArray());
+        }
+
+        //  Filter By education
+        if ( !empty($filter['education']) && !$filter['education']->isEmpty()) {
+            $qb->join('p.education', 'e')->andWhere('e.id IN (:education)')->setParameter('education', $filter['education']->toArray());
+        }
+
+	    //  Filter By religion
+	    if ( !empty($filter['religion']) && !$filter['religion']->isEmpty()) {
+		    $qb->join('p.religion', 'r')->andWhere('r.id IN (:religion)')->setParameter('religion', $filter['religion']->toArray());
+	    }
+
+        //  Filter By educationIvyLeague
+        if ( isset($filter['educationIvyLeague'])) {
+            $qb->andWhere('p.educationIvyLeague = :educationIvyLeague')->setParameter('educationIvyLeague', $filter['educationIvyLeague']);
+        }
+
+        //  Filter By profession
+	    if ( !empty($filter['profession']) && !$filter['profession']->isEmpty()) {
+		    $qb->join('p.profession', 'pr')->andWhere('pr.id IN (:profession)')->setParameter('profession', $filter['profession']->toArray());
+	    }
+
+        //  Filter By income
+        if ( !empty($filter['income'])) {
+            $qb->andWhere('p.income = :income')->setParameter('income', $filter['income']);
+        }
+
+        //  Filter By maritalStatus
+	    if ( !empty($filter['maritalStatus']) && !$filter['maritalStatus']->isEmpty()) {
+		    $qb->join('p.maritalStatus', 'ms')->andWhere('ms.id IN (:marital_status)')->setParameter('marital_status', $filter['maritalStatus']->toArray());
+	    }
+
+        //  Filter By heightFrom
+        if ( !empty($filter['minimumHeight'])) {
+            $qb->andWhere('p.height >= :minimumHeight')->setParameter('minimumHeight', $filter['minimumHeight']);
+        }
+
+        //  Filter By heightTo
+        if ( !empty($filter['maximumHeight'])) {
+            $qb->andWhere('p.height <= :maximumHeight')->setParameter('maximumHeight', $filter['maximumHeight']);
+        }
+
+        //  Filter By bodyType
+        if ( !empty($filter['bodyType'])) {
+            $qb->andWhere('p.bodyType = :bodyType')->setParameter('bodyType', $filter['bodyType']);
+        }
+
+        //  Filter By eyeColor
+        if ( !empty($filter['eyeColor'])) {
+            $qb->andWhere('p.eyeColor = :eyeColor')->setParameter('eyeColor', $filter['eyeColor']);
+        }
+
+        //  Filter By hairColor
+        if ( !empty($filter['hairColor'])) {
+            $qb->andWhere('p.hairColor = :hairColor')->setParameter('hairColor', $filter['hairColor']);
+        }
+
+        //  Filter By smoking
+        if ( !empty($filter['smoking'])) {
+            $qb->andWhere('p.smoking = :smoking')->setParameter('smoking', $filter['smoking']);
+        }
+
+        //  Filter By drinking
+        if ( !empty($filter['drinking'])) {
+            $qb->andWhere('p.drinking = :drinking')->setParameter('drinking', $filter['drinking']);
+        }
+
+        //  Filter By haveChildren
+        if ( !empty($filter['haveChildren'])) {
+            $qb->andWhere('p.haveChildren = :haveChildren')->setParameter('haveChildren', $filter['haveChildren']);
+        }
+
+        //  Filter By wantChildren
+        if ( !empty($filter['wantChildren'])) {
+            $qb->andWhere('p.wantChildren = :wantChildren')->setParameter('wantChildren', $filter['wantChildren']);
+        }
+
+        //  Filter By livesWithChildren
+        if ( !empty($filter['livesWithChildren'])) {
+            $qb->andWhere('p.livesWithChildren = :livesWithChildren')->setParameter('livesWithChildren', $filter['livesWithChildren']);
+        }
+
+        //  Filter By openToPersonWithKids
+        if ( !empty($filter['openToPersonWithKids'])) {
+            $qb->andWhere('p.openToPersonWithKids = :openToPersonWithKids')->setParameter('openToPersonWithKids', $filter['openToPersonWithKids']);
+        }
+
+        //  Filter By etnicity
+        if ( !empty($filter['etnicity'])) {
+            $qb->andWhere('p.etnicity = :etnicity')->setParameter('etnicity', $filter['etnicity']);
+        }
+
+        //  Filter By zodiac
+        if ( !empty($filter['zodiacSign'])) {
+            $qb->andWhere('p.zodiac = :zodiacSign')->setParameter('zodiacSign', $filter['zodiacSign']);
+        }
+
+
+        if($limit){
+            $qb->setMaxResults($limit);
+        }
+
+        if($offset){
+            $qb->setFirstResult($offset);
+        }
+
+	    $qb->orderBy('u.createdAt', 'DESC');
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /*
+     * Return Users list for Admin Area
+     * Exclude logged in Admin user
+     */
+    public function getUsersList($uId) {
         return $this->createQueryBuilder('u')
             ->select('u')
             ->join('u.profile', 'p')
-            ->orderBy('u.createdAt')
-            ->setMaxResults($limit)
+            ->where('u.id != :admin')->setParameter('admin', $uId)
             ->getQuery()
             ->getResult();
     }

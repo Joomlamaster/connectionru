@@ -3,23 +3,40 @@
 
 {{ form_start(form, {'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register master_slave form-horizontal'}}) }}
         {{ form_errors(form) }}
+        {{ form_row(form.profile.gender,{'attr': {'class': 'quick-form-element'}}) }}
+        {{ form_row(form.profile.birthdate) }}
         {{ form_row(form.username) }}
         {{ form_row(form.plainPassword) }}
         {{ form_row(form.email) }}
-        {{ form_row(form.profile.languages) }}
-        {{ form_row(form.profile.birthdate) }}
-        {{ form_row(form.profile.gender) }}
-        <div id="master_slave">
+        <div class="master_slave">
             <div>
-                {{ form_row(form.profile.country) }}
+                {{ form_row(form.profile.country, {'attr': { 'class': 'selectpicker quick-form-element master', 'data-width':'175px'} }) }}
             </div>
             {% if (form.profile.state is defined) %}
-                <div id="slave_block">
-                    {{ form_row(form.profile.state) }}
+                <div class="slave_block" style="margin-top:3px;">
+                    {{ form_row(form.profile.state, {'attr': { 'class': 'selectpicker quick-form-element slave', 'data-width':'175px'} }) }}
                 </div>
             {% endif %}
         </div>
-        {{ form_row(form.profile.ethnicity) }}
+        {{ form_row(form.profile.city) }}
+        {{ form_row(form.profile.zip) }}
+        {{ form_row(form.profile.ethnicity, {'attr': { 'class': 'selectpicker quick-form-element','data-width':'175px'}}) }}
+{#        {{ form_row(form.captcha, { 'attr': { 'class' : 'captcha' } } ) }}#}
         {{ form_row(form.agree) }}
+        {{ form_row(form.registrationType, {'value':'quick'}) }}
         {{ form_row(form.submit) }}
 {{ form_end(form, {'render_rest': false}) }}
+
+<script type="text/javascript">
+    window.onload = function(){
+        $.datepicker.setDefaults({
+            dateFormat: "yy-mm-dd"
+        });
+        $('#{{form.profile.birthdate.vars.id}}').datepicker({
+            changeMonth: true,
+            changeYear: true,
+			yearRange: "-100:+0",
+			maxDate: "+0D"
+        });
+    }
+</script>

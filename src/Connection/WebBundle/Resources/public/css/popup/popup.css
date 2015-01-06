@@ -1,0 +1,87 @@
+.fm-popup {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    min-width: 400px;
+    min-height: 200px;
+    z-index: 100;
+}
+
+.fm-content {
+    text-align: center;
+}
+
+.fm-popup .fm-popup-headline {
+    background-color: #484848;
+    padding: 5px;
+    color: #fff;
+}
+
+.fm-popup .fm-nav-container {
+    display: block;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.fm-popup .fm-nav-container .fm-nav {
+    position: absolute;
+    bottom: 1px;
+    right: 5px;
+    padding: 5px;
+    width: 150px;
+}
+
+.fm-popup-image-area {
+    min-width: 400px;
+    min-height: 250px;
+    margin: 10px;
+    background-color: #ccc;
+}
+
+.fm-popup .fm-top-inventory {
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+.fm-popup table {
+    width: 100%;
+}
+
+.fm-popup .dashboard {
+    margin-top: 10px;
+    border-top:1px solid #ccc ;
+}
+
+.fm-popup .dashboard button {
+    font-size: 11px;
+}
+
+#view-profile-image {
+    border: 2px solid #ccc;
+    padding: 10px;
+}
+
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    filter:alpha(opacity=50);
+    -moz-opacity:0.5;
+    -khtml-opacity: 0.5;
+    opacity: 0.5;
+    z-index: 10;
+}
+
+.fm-close-popup {
+    position: absolute;
+    right: 0px;
+    cursor: pointer;
+    top: 0px;
+    background: url('/bundles/connectionweb/img/close.png') no-repeat;
+    width: 30px;
+    height: 30px;
+}

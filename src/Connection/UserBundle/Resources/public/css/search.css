@@ -1,0 +1,66 @@
+#connection_search_gender,
+#connection_search_seek,
+#fos_user_registration_form_profile_gender,
+#fos_user_registration_form_profile_seek
+{
+    border: none;
+    padding-left: 3px;
+}
+
+#connection_search_gender label,
+#connection_search_seek label,
+#fos_user_registration_form_profile_gender label,
+#fos_user_registration_form_profile_seek label
+{
+    display: inline;
+    color: #4d4d4d;
+}
+
+.form-group label {
+    min-width: 50px;
+}
+
+#connection_search_gender input,
+#connection_search_seek input,
+#fos_user_registration_form_profile_gender input,
+#fos_user_registration_form_profile_seek input
+{
+    margin: -3px 3px 0px 8px;
+}
+
+/*Search Profile Page*/
+.search-result-profile {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 2px;
+    border-radius: 3px;
+}
+
+.search-result-profile-photo {
+    padding: 0px;
+    width: auto;
+}
+
+.search-result-profile-info {
+    padding:10px;
+}
+
+.search-result-profile-container {
+    padding: 0px;
+}
+
+.see-more-link{
+    color: #428bca;
+    font-weight: bold;
+    font-size: 75%;
+}
+
+.multi-select-checkbox-dropdown {
+    width: 100%;
+    border: none;
+    padding: 0px 0px 0px 0px;
+}
+
+.multi-select-checkbox-dropdown div.ms-drop {
+    width: auto;
+}

@@ -98,6 +98,13 @@ class Country
     private $geoNameId;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="priority", type="integer", nullable=true)
+     */
+    private $priority;
+
+    /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      * @ORM\OneToMany(targetEntity="Connection\CoreBundle\Entity\State", mappedBy="country", cascade={"persist", "remove"})
      */
@@ -297,5 +304,44 @@ class Country
     public function getGeoNameId ()
     {
         return $this->geoNameId;
+    }
+
+    /**
+     * Set priority
+     *
+     * @param integer priority
+     * @return Language
+     */
+    public function setPriority($priority)
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    /**
+     * Get priority
+     *
+     * @return integer
+     */
+    public function getPriority()
+    {
+        return $this->priority;
+    }
+
+    /**
+     * @param \Doctrine\Common\Collections\ArrayCollection $state
+     */
+    public function setState ( $state )
+    {
+        $this->state = $state;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getState ()
+    {
+        return $this->state;
     }
 }

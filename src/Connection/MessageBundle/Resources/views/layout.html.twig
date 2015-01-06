@@ -1,0 +1,53 @@
+{% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
+
+{% block theme %}content-page{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/connectionmessage/css/messenger.css') }}" type="text/css" />
+{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="container breadcrumbs">
+        <ul>
+            <li><a href="{{ path('connection_homepage') }}">Main page</a></li>
+            <li>Messenger</li>
+        </ul>
+    </div>
+{% endblock breadcrumbs %}
+{% block content %}
+    <div class="row">
+        <div class="col-xs-12">
+            <h4>{% trans from 'FOSMessageBundle' %}messenger{% endtrans %}</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="messenger-container">
+            <div class="row">
+                <div class="navbar col-xs-2">
+                    <ul>
+                        <li><a href="{{ url('fos_message_inbox') }}"><i class="glyphicon glyphicon-inbox"></i> {% trans from 'FOSMessageBundle' %}inbox{% endtrans %}</a></li>
+                        <li><a href="{{ url('fos_message_sent') }}"><i class="glyphicon glyphicon-send"></i> {% trans from 'FOSMessageBundle' %}sent{% endtrans %}</a></li>
+                        <li><a href="{{ url('fos_message_deleted') }}"><i class="glyphicon glyphicon-trash"></i> {% trans from 'FOSMessageBundle' %}deleted{% endtrans %}</a></li>
+                    </ul>
+                </div>
+                <div class="messenger-content  col-xs-10">
+                    {% block fos_message_content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <ul class="nav navbar-nav">
+            <li class="dropdown search-item">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-globe"></span> GoTo:
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="{{ path('edit_user_profile') }}">My Profile</a></li>
+                    <li><a href="{{ path('user_search') }}">Search</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

@@ -54,6 +54,13 @@ class State
     private $event;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="priority", type="integer", nullable=true)
+     */
+    private $priority;
+
+    /**
      * @return int
      */
     public function getId ()
@@ -139,5 +146,21 @@ class State
     public function getProfile ()
     {
         return $this->profile;
+    }
+
+    /**
+     * @param int $priority
+     */
+    public function setPriority ( $priority )
+    {
+        $this->priority = $priority;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPriority ()
+    {
+        return $this->priority;
     }
 }

@@ -1,0 +1,23 @@
+services:
+    connection_user.event_images_namer:
+        class: Connection\EventBundle\Service\EventImageNamer
+        arguments: [ @service_container ]
+
+    connection.twig.social_extension:
+        class: Connection\EventBundle\Twig\SocialExtension
+        tags:
+            - { name: twig.extension }
+
+    connection.twig.common_extension:
+        class: Connection\EventBundle\Twig\CommonExtension
+        arguments:
+            - "@security.context"
+        tags:
+            - { name: twig.extension }
+
+    connection_event.event.type:
+        class: Connection\EventBundle\Form\EventType
+        arguments:
+            profileCountryIso: %profile_country_iso%
+        tags:
+          - { name: form.type, alias: connection_event_type }

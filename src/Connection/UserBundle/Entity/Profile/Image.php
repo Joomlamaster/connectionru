@@ -8,7 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
  * Image
  *
  * @ORM\Table(name="image")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Connection\UserBundle\Entity\Profile\ImageRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Image
 {
@@ -40,6 +41,12 @@ class Image
      * @ORM\JoinColumn(name="gallery", referencedColumnName="id")
      **/
     private $gallery;
+
+
+    /**
+     * @ORM\OneToOne(targetEntity="Connection\EventBundle\Entity\Event", mappedBy="image")
+     **/
+    private $event;
 
 
     /**
@@ -114,5 +121,47 @@ class Image
         return $this->gallery;
     }
 
+    public function getUploadRootDir()
+    {
+        return __DIR__.'/../../../../../web' . $this->getPath();
+    }
 
+    public function getAbsoluteDir()
+    {
+        return "http://".$_SERVER['HTTP_HOST'] . $this->getPath();
+    }
+
+    /**
+     * @ORM\PreRemove()
+     */
+    public function removeFiles() {
+        $imagePath = $this->getUploadRootDir();
+        if(file_exists($imagePath)){
+            unlink($imagePath);
+        }
+        $dirParts = explode('/', $imagePath);
+        unset($dirParts[count($dirParts)-1]);
+        $dirPath = join('/', $dirParts);
+        if(is_dir($dirPath)){
+            if(count(glob($dirPath."/*")) === 0){
+                rmdir($dirPath);
+            }
+        }
+    }
+
+    /**
+     * @param mixed $event
+     */
+    public function setEvent ( $event )
+    {
+        $this->event = $event;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEvent ()
+    {
+        return $this->event;
+    }
 }

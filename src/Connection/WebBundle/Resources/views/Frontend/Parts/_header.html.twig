@@ -1,3 +1,4 @@
+{% trans_default_domain 'FOSUserBundle' %}
 <div class="navbar navbar-first" role="navigation">
     <div class="container">
         <div class="navbar-header">
@@ -9,11 +10,31 @@
         </div>
         <div class="navbar-collapse collapse">
             {% if is_granted('ROLE_USER') %}
-                <h4 class="navbar-form navbar-right" style="color:#fff;">
-                    Hello <a href="{{ path('edit_user_profile') }}">{{ app.user.username }}</a>
-                </h4>
+                <ul class="nav navbar-nav pull-right">
+                    <li class="dropdown search-item">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <span class="glyphicon glyphicon-user"></span> {{ app.user.username }}
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="{{ path('edit_user_profile') }}">My Profile</a></li>
+                            <li><a href="{{ path('edit_user_profile_edit') }}">Edit Profile</a></li>
+                           {# <li><a href="{{ path('edit_user_profile',{'tab':'gallery'}) }}">My Gallery</a></li>
+                            <li><a href="{{ path('edit_user_profile',{'tab':'favorites'}) }}">My Favorites</a></li>
+                            <li><a href="{{ path('edit_user_profile',{'tab':'events'}) }}">My Events</a></li>#}
+                            <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <p style="color: #ffffff; padding: 7px 20px 0px 0px;" class="navbar-form navbar-right">
+                    <a href="{{ path('message_inbox') }}">Messages
+                        <span class="badge {{ fos_message_nb_unread() > 0 ? "color-red": "" }}">
+                            {{ fos_message_nb_unread() }}
+                        </span>
+                    </a>
+                </p>
             {% elseif is_granted('IS_AUTHENTICATED_ANONYMOUSLY') %}
-                {{ render(controller("ConnectionUserBundle:Security:login", {'request': app.request})) }}
+                {% include 'ConnectionUserBundle:Default:login_form.html.twig' %}
             {% endif %}
         </div>
     </div>

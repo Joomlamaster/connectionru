@@ -15,164 +15,130 @@
 {% block stylesheets %}
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/connectionweb/js/dropzone/css/dropzone.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/connectionuser/css/profile.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/connectionweb/js/jcorp/css/jquery.Jcrop.min.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/bootstrapselect/bootstrap-select.min.css') }}" type="text/css" />
 {% endblock %}
 
 {% block content %}
-    <h4>Account:</h4>
         <div class="row">
-            <div class="col-xs-2">
-                <div id="add-photo" class="dropzone">
-                    <div class="msg dz-message">
-                        <span>
-                            <div class="sprite sprite-add-photo"></div>
-                            + Add photo
-                        </span>
+            <div class="col-xs-4 col-md-2">
+                <div class="fm-show-popup" data-target_popup="profile-image">
+                    <div id="add-photo">
+                        {% if app.user.profile.avatar is defined and app.user.profile.avatar is not empty %}
+                            <img class="img-rounded" width="140px" height="190" src="{{ app.user.profile.avatar }}">
+                        {% else %}
+                            <div class="msg">
+                                <div class="sprite sprite-add-photo"></div>
+                                + Add photo
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="text-center profile-image-buttons">
+                    <div class="profile-image-button">
+                        {% if app.user.profile.avatar is defined and app.user.profile.avatar is not empty %}
+                            <a href="#" class="btn btn-success dz-upload-image">Change Photo</a>
+                        {% else %}
+                            <a href="#" class="btn btn-success dz-upload-image">+ Add photo</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
-            {{ form_start(form, {'action': path('edit_user_profile'), 'method': 'POST', 'attr': {'class': 'master_slave'}}) }}
-                <div class="col-xs-5">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.firstName) }}
+            <div class="col-xs-8 col-md-10">
+                <ul id="myTab" class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#profile" role="tab" data-toggle="tab">Profile</a></li>
+                    <li role="presentation"><a href="#gallery" role="tab" data-toggle="tab">Gallery</a></li>
+                    {% if favorites is defined and favorites is not empty %}
+                        <li role="presentation"><a href="#favorites" role="tab" data-toggle="tab">Favorites</a></li>
+                    {% endif %}
+                    {% if events is defined and events is not empty %}
+                        <li role="presentation"><a href="#events" role="tab" data-toggle="tab">Events</a></li>
+                    {% endif %}
+                </ul>
+
+                <div id="myTabContent" class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="profile">
+                        <div class="col-xs-10">
+                            {% if editPersonalInfo is defined and editPersonalInfo %}
+                                {{ include('ConnectionUserBundle:Profile/Part/Edit:personal_info.html.twig') }}
+                            {% else %}
+                                <br/>
+                                {{ include('ConnectionUserBundle:Profile/Part/View:personal_info.html.twig') }}<br/>
+                            {% endif %}
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.lastName) }}
-                        </div>
+                    <div role="tabpanel" class="tab-pane" id="gallery">
+                        {{ include('ConnectionUserBundle:Profile/Part/Edit:gallery.html.twig', {userPhotos: userPhotos}) }}
                     </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                           {{ form_row(form.profile.aboutMe) }}
+                    {% if favorites is defined and favorites is not empty %}
+                        <div role="tabpanel" class="tab-pane" id="favorites">
+                            {{ include('ConnectionUserBundle:Profile/Part/Edit:favorites.html.twig', {favorites: favorites}) }}
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.interestsAndHobbies) }}
+                    {% endif %}
+                    {% if events is defined and events is not empty %}
+                        <div role="tabpanel" class="tab-pane" id="events">
+                            {{ include('ConnectionUserBundle:Profile/Part/Edit:events.html.twig', {events: events}) }}
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.gender) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div id="master_slave">
-                                <div>
-                                    {{ form_row(form.profile.country) }}
-                                </div>
-                                {% if (form.profile.state is defined) %}
-                                    <div id="slave_block">
-                                        {{ form_row(form.profile.state) }}
-                                    </div>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.seek) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            {{ form_row(form.profile.lookingFor) }}
-                        </div>
-                        <div class="col-xs-6">
-                            {{ form_row(form.profile.maritalStatus) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-4">
-                            {{ form_row(form.profile.height) }}
-                        </div>
-                        <div class="col-xs-4">
-                            {{ form_row(form.profile.weight) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.eyeColor) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.hairColor) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.smoking) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.drinking) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.education) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.profession) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.languages) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.haveChildren) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.wantChildren) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.livesWithChildren) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.openToPersonWithKids) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.religion) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            {{ form_row(form.profile.ethnicity) }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-3">
-                        </div>
-                        <div class="col-xs-9">
-                            {{ form_row(form.submit, { attr: { class: 'btn-gradient' }}) }}
-                        </div>
-                    </div>
+                    {% endif %}
                 </div>
-                <div class="col-xs-5"></div>
-            {{ form_end(form, {'render_rest': false}) }}
+            </div>
         </div>
+{% endblock %}
+{% block popup %}
+    {{ include('ConnectionUserBundle:Profile/Popup:add_profile_image_popup.html.twig') }}
+    {{ include('ConnectionUserBundle:Profile/Popup:view_profile_image_popup.html.twig', {'navbar': true}) }}
 {% endblock %}
 {% block javascript %}
     {{ parent() }}
     <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/dropzone/dropzone.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/dropzone/dropzone-custom.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/popup/popup.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionuser/js/fos_message.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jcorp/js/jquery.Jcrop.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jcorp/js/settings.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/bootstrap-tooltip.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/bootstrap-confirmation.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionuser/js/profile.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/bootstrapselect/bootstrap-select.min.js') }}"></script>
     <script type="text/javascript">
-        $("div#add-photo").dropzone({ url: "{{ oneup_uploader_endpoint('gallery') }}" });
+        {# Init DropZone #}
+        $(document).ready(function() {
+            DropZoneStoreage.initDropZone(
+                    "{{ path('profile_image') }}",
+                    "{{ path('profile_image') }}"
+            );
+
+            handleIvyLeague();
+            handleOriginallyFrom('#{{form.profile.originallyFrom.vars.id}}', '#{{form.profile.originallyFromCity.vars.id}}');
+            $('#profile').show();
+
+        });
+
+        preLoadSlaveFeedback = function(slaveBlock){
+            $('#connection_user_profile_edit_profile_state').remove();
+        }
+
+        loadSlaveFeedback = function(){
+            $('#connection_user_profile_edit_profile_state').selectpicker();
+        }
+
+        {# PopUp Listener (Upload/View/Update) #}
+        FM.popUp.listen("{{ path('update_profile_image') }}");
+        {# Tabs #}
+        {% if tab and tab is not empty %}
+            $(function(){
+                $("#myTab a[href=#{{ tab }}]").tab('show');
+            });
+        {% endif %}
+        $('#myTab a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        });
+        FosMessage.init();
+
+        $('.fm-popup').on('dz.upload.complete', function() {
+            location.reload();
+        });
     </script>
 {% endblock %}

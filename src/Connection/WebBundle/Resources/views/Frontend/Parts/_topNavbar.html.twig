@@ -1,24 +1,27 @@
 <div class="navbar navbar-second" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="{{ path('connection_homepage') }}">
                 <div class="sprite sprite-logo-brand"></div>
+                <div class="logo-text"></div>
             </a>
         </div>
         <div class="navbar-collapse collapse">
             <form class="navbar-form navbar-right" role="form">
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Home</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Events <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#">+ Add event</a></li>
-                        </ul>
+                    <li>
+                        <a href="{{ path('connection_homepage') }}"><span class="glyphicon glyphicon-home"></span> Home</a>
                     </li>
-                    <li class="search-item"><a href="#"><span class="glyphicon glyphicon-search"></span> Search</a></li>
-                    <li><a href="#">Gallery</a></li>
-                    <li><a href="#">Login</a></li>
-                    <li><a href="#">Register</a></li>
+                    <li>
+                        <a href="{{ path('event_search') }}"><span class="glyphicon glyphicon-globe"></span> Events</a>
+                    </li>
+                    <li><a href="{{ path('user_search') }}"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+                    {% if not is_granted('ROLE_USER') %}
+                        <li><a href="{{ path('fos_user_extended_register') }}">Register</a></li>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{ path('admin_index') }}">Admin</a></li>
+                    {% endif %}
                 </ul>
             </form>
         </div>

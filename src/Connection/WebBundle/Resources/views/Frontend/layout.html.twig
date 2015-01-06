@@ -15,13 +15,17 @@
 
         {# stylesheets... #}
         {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/bootstrap.css') }}" type="text/css" />
-        <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/bootstrap-theme.css') }}" type="text/css" />
+            <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/jquery-ui-1.11.1/jquery-ui.css') }}" type="text/css" />
+            <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/bootstrap.css') }}" type="text/css" />
+            <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/bootstrap-theme.css') }}" type="text/css" />
+            <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/bootstrapselect/bootstrap-select.min.css') }}" type="text/css" />
+        <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/popup/popup.css') }}" type="text/css" />
 
         {% stylesheets output='assets/compiled/frontend.css' filter='cssrewrite'
             '@ConnectionWebBundle/Resources/assets/css/frontend.css'
             '@ConnectionWebBundle/Resources/public/css/main.css'
             '@ConnectionWebBundle/Resources/public/css/sprite.css'
+            '@ConnectionWebBundle/Resources/public/css/datepicker.css'
         %}
         <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
             {% endstylesheets %}
@@ -43,7 +47,7 @@
         {% block flashes %}
             {% for name, flashes in app.session.flashbag.all if name in ['success', 'error', 'notice', 'fos_user_success'] %}
                 {% for flash in flashes %}
-                    <div class="alert alert-{{ name == 'fos_user_success' ? 'success' : name == 'error' ? 'danger' : name == 'notice' ? 'warning' : name }}">
+                    <div class="alert global-alert alert-{{ name == 'fos_user_success' ? 'success' : name == 'error' ? 'danger' : name == 'notice' ? 'warning' : name }}">
                         <a class="close" data-dismiss="alert" href="#">×</a>
                         {{ flash|trans }}
                     </div>
@@ -52,7 +56,11 @@
         {% endblock %}
 
         {% block main %}
-            <div class="jumbotron">
+
+            {# <div> With Background image will be generated here#}
+            {% block background %}
+                <div class="jumbotron">
+            {% endblock %}
                 {% block breadcrumbs %}{% endblock %}
                 <div class="container">
                     {% block content %}
@@ -62,24 +70,21 @@
         {% endblock %}
 
         {% block footer %}
-        {% endblock %}
-
-
-        <div class="container">
+        <div class="container" style="margin-top: 100px">
             <footer>
                 {#{% include 'ConnectionWebBundle:Frontend:_footer.html.twig' %}#}
 
                 <div class="col-xs-2">
-                    <div class="footer-logo sprite sprite-logo-bottom"></div>
+                    <div class="footer-logo logo-bottom"></div>
                 </div>
                 <div class="col-xs-6">
-                    <p class="copy">2014 All rights reserved. Copyright Terms of service/Pravacy policy Info@ConnectionRu.com</p>
+					<p class="copy">© Copyright 2014 ConnectionRu  LLC  All rights reserved. Terms of use / Privacy policy</p>
                 </div>
                 <div class="col-xs-4">
                     <ul class="bottom-right-menu">
-                        <li><a href="#">About us</a></li>
-                        <li><a href="#">privacy</a></li>
-                        <li><a href="#">contact us</a></li>
+                        <li><a href="{{ path('connection_about') }}">About us</a></li>
+                        <li><a href="{{ path('connection_privacy') }}">Privacy</a></li>
+                        <li><a href="{{ path('connection_contact') }}">Contact us</a></li>
                         <li class="sprite sprite-rss"></li>
                         <li class="sprite sprite-facebook"></li>
                         <li class="sprite sprite-twitter"></li>
@@ -89,11 +94,21 @@
                 </div>
             </footer>
         </div>
+        {% endblock %}
+
+        {% block popup %}
+        {% endblock %}
+        {% block tellAFriend %}
+            {{ render(controller("ConnectionWebBundle:Frontend:tellAFriendEndPoint", {'link': app.request.uri})) }}
+        {% endblock %}
 
         {# javascript... #}
         {% block javascript %}
             <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jquery-1.11.1.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/bootstrap.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/bootstrapselect/bootstrap-select.min.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/common.js') }}"></script>
+            <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/tell-a-friend.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jquery-ui.min.js') }}"></script>
             <script type="text/javascript" src="{{ asset('bundles/connectionuser/js/registration.js') }}"></script>
             <script type="text/javascript"> $(function() { FormAjaxFields.init(); }) </script>
@@ -104,5 +119,6 @@
             <script type="text/javascript" src="{{ asset_url }}"></script>
             {% endjavascripts %}
         {% endblock %}
+        <div class="global-loader hide"><span>Please Wait...</span></div>
     </body>
 </html>

@@ -6,10 +6,10 @@ parameters:
     database_user:     root
     database_password: ~
 
-    mailer_transport:  smtp
-    mailer_host:       127.0.0.1
-    mailer_user:       ~
-    mailer_password:   ~
+    mailer_transport:  gmail
+    mailer_host:       ~
+    mailer_user:       developer.optimum@gmail.com
+    mailer_password:   OptimumDev12
 
     locale:            en
     secret:            ThisTokenIsNotSoSecretChangeIt
@@ -21,3 +21,17 @@ parameters:
     # Twitter Credentials
     twitter.key: yWH87mrc1pETeR49y97MileCd
     twitter.secret: 9m5DqquPbP52Hxklx23Oxm8HQLHirFT6H1gbT63vOfgpdWjGAV
+
+    search.user.per_page: 5
+    search.event.per_page: 6
+    search.event.top.per_page: 6
+    event.upcoming.block.limit: 3
+    
+    # Country field for search/register forms will be 
+    # limited to this values
+    profile_country_iso: [US, CA, UK, IT, FR, DE, DK, AU, BR, RU, TR, UA, OTHER]
+
+    #Education Ivy League afirmative ID from database need to be indicated in order to 
+    #show/hide 'Ivy League university' additional input field on register/profile forms
+    ivy_league_afirmative_id: 1
+    quick_registration_ethnicity_id: 8

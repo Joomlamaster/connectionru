@@ -1,6 +1,16 @@
 parameters:
     connection_user.registration.form.type.class: Connection\UserBundle\Form\Type\RegistrationType
 services:
+    connection_user.file.upload.listener:
+        class: Connection\UserBundle\EventListener\FileUploadListener
+        arguments: [@service_container]
+        tags:
+          - { name: kernel.event_listener, event: oneup_uploader.post_persist, method: onUpload }
+
+    connection_user.profile_images_namer:
+        class: Connection\UserBundle\Service\ProfileImageNamer
+        arguments: [ @service_container ]
+
     connection_user.registration.form.type:
         class: %connection_user.registration.form.type.class%
         arguments: ['@service_container']
@@ -25,3 +35,21 @@ services:
             container: @service_container
             appId: %twitter.key%
             secret: %twitter.secret%
+            
+    connection_user.profile.type:
+        class: Connection\UserBundle\Form\Type\ProfileType
+        arguments:            
+            profileCountryIso: %profile_country_iso%
+            converter: @connection_user.converter
+        tags:
+          - { name: form.type, alias: connection_user_profile }
+          
+    connection_user.search.type:
+        class: Connection\UserBundle\Form\Type\SearchType
+        arguments:            
+            profileCountryIso: %profile_country_iso%    
+        tags:
+          - { name: form.type, alias: connection_search }
+
+    connection_user.converter:
+            class: Connection\UserBundle\Service\ConverterService

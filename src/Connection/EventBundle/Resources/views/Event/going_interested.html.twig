@@ -1,0 +1,14 @@
+{% if participants is defined and participants is not empty %}
+    {% for participant in participants %}
+        <div class="author">
+            <div class="people clearfix">
+                <div class="face postet-by">
+                    <a target="_blank" href="{{ path('view_profile', {'id': participant.profile.id}) }}">
+                        <p class="name">{{ participant.username }}</p>
+                        <img width="82px" src="{{ participant.profile.avatar }}">
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endif %}

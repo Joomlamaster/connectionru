@@ -1,5 +1,12 @@
 services:
     connection.web.user_extension:
         class: Connection\WebBundle\Twig\UserExtension
+        arguments:
+            converter: @connection_user.converter
+        tags:
+            - { name: twig.extension }
+
+    connection.web.form_extension:
+        class: Connection\WebBundle\Twig\BootstrapFormExtension
         tags:
             - { name: twig.extension }

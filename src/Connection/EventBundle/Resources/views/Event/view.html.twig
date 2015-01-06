@@ -1,0 +1,159 @@
+{% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
+
+{% block theme %}view-event{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/connectionevent/css/event.css') }}" type="text/css" />
+    <link href="{{ asset('bundles/connectionevent/css/google/map.css') }}" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="container breadcrumbs">
+        <ul>
+            <li><a href="{{ path('connection_homepage') }}">Main page</a></li>
+            <li>Event</li>
+            <li>{{ event.title }}</li>
+        </ul>
+    </div>
+{% endblock breadcrumbs %}
+{% block content %}
+    <div class="row">
+        <div class="col-xs-8">
+            <div class="row">
+                <div class="col-xs-10">
+                    <h4>{{ event.title is defined ? event.title : "" }}</h4>
+                    <div class="row">
+                        <div class="col-xs-5">
+                            <img class="event-image img-rounded" width="190" src="{{ event.image.path is defined ? event.image.path : "" }}" alt=""/>
+                            <strong>Share this event</strong>
+                            <div class="social-share">
+                                <a id="tell-a-friend" href="#" class="btn btn-xs btn-info" title="Share with a friend">
+                                    <span class="glyphicon glyphicon-share"></span>
+                                </a>
+                                <a href="#">
+                                    <div class="fb-share-button" data-type="button_count" data-href="{{ path('view_event', {'id': event.id}, true) }}"></div>
+                                </a>
+                                <a href="#">
+                                    {{ app.request.uri | pinterest(event.image.absoluteDir is defined ? event.image.absoluteDir : "", event.title is defined ? event.title : "") | raw }}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-xs-7 details">
+                            <time>{{ event.eventDate is defined ? event.eventDate|date : "" }}</time>
+                            <address>
+                                <strong>Venue</strong><br>
+                                {{ event.country.name is defined ? event.country.name : "" }}<br>
+                                {{ event.state.name is defined ? event.state.name : "" }}<br>
+                                <em><a href="#">Info</a> and <a class="show-event-map" href="#">map</a></em>
+                            </address>
+                            <a class="return" href="{{ path('event_search') }}"><div class="sprite sprite-return-events"></div>Return to events</a>
+
+                            <h6>Event Description:</h6>
+                            <em>
+                                {{ event.description is defined ? event.description : "" }}
+                            </em>
+                            {% if app.user.id is defined %}
+                                <div class="controls">
+                                    <div class="going">
+                                        <input type="checkbox" data-action="subscribe" {{ event.hasParticipant(app.user) ? "checked" : "" }}/>I'm going
+                                    </div>
+                                    <div class="going">
+                                        <input type="checkbox" data-action="interested" {{ event.hasInterested(app.user) ? "checked" : "" }}/>Interested
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sx-12">
+                            <div class="add-comment-container">
+                                {% if event.comments is defined and event.comments is not empty %}
+                                <div class="block-title"><h4>Comments:</h4></div>
+                                <div class="comments">
+                                        {% for comment in event.comments %}
+                                            <div class="comment" >
+                                                <div class="author"><a href="#">{{ comment.author.username }} | {{ comment.createdAt|date }}</a></div>
+                                                <div class="content">{{ comment.comment }}</div>
+                                            </div>
+                                        {% endfor %}
+                                </div>
+                                {% else %}
+                                    {% if is_granted('ROLE_USER') %}
+                                        <div class="block-title"><h4>Comments:</h4></div>
+                                    {% endif %}
+                                    <div class="comments hidden"></div>
+                                {% endif %}
+                                {% if is_granted('ROLE_USER') %}
+                                    <div class="add-comment-form">
+                                        {{ render(controller("ConnectionEventBundle:Comment:addCommentForm", {'id': event.id})) }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if owner is defined and owner is not empty %}
+                    <div class="col-xs-2 author">
+                        <div class="block-title">Posted:</div>
+                        <div class="people clearfix">
+                            <div class="face postet-by">
+                                <p class="name"><a href="{{ path('view_profile', {'id': owner.profile.id}) }}">{{ owner.username }}</a></p>
+                                <a href="{{ path('view_profile', {'id': owner.profile.id}) }}">
+                                    <img width="82px" src="{{ owner.profile.avatar }}">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="event-stats">
+                            <div>
+                                view<br/>
+                                {{ event.viewed is defined ? event.viewed: "" }}
+                            </div>
+                            <div>
+                                comment<br/>
+                                {{ event.countComments }}
+                            </div>
+                            <div {{ event.countParticipants > 0 ? 'class="going-counter ajax-stat"': "" }} >
+                                going<br/>
+                                {{ event.countParticipants }}
+                            </div>
+                            <div {{ event.countInteresteds > 0 ? 'class="interested-counter ajax-stat"': "" }} >
+                                interested<br/>
+                                {{ event.countInteresteds }}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        {% if upcomingEvents is defined and upcomingEvents is not empty %}
+            {{ include('ConnectionEventBundle:Event:upcoming_events.html.twig', {'upcomingEvents': upcomingEvents, 'eventId': event.id}) }}
+        {% endif %}
+    </div>
+{% endblock %}
+{% block popup %}
+    {{ parent() }}
+    <div class="event-map hidden">
+        {{ include('ConnectionEventBundle:Popup:google_map.html.twig') }}
+    </div>
+    <div class="going-interested hidden"></div>
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
+    <script type="text/javascript" async src="//assets.pinterest.com/js/pinit.js"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionevent/js/event.js') }}"></script>
+    <script type="text/javascript">
+        $(function() {
+            EM.social.share.facebook();
+            EM.user.init("{{ path('event_ajax_going', {'id': event.id}) }}", "{{ path('event_ajax_interested', {'id': event.id}) }}");
+            EM.subscriber.init(
+                    "{{ path('event_subscribe', {id: event.id}) }}",
+                    "{{ path('event_unsubscribe', {id: event.id}) }}",
+                    "{{ path('event_interested', {id: event.id}) }}",
+                    "{{ path('event_not_interested', {id: event.id}) }}"
+            );
+            EM.comment.init("{{ path('add_event_comment') }}");
+            google.maps.event.addDomListener(window, 'load', EM.map.init("{{ event.lat }}", "{{ event.lng }}"));
+        });
+    </script>
+{% endblock %}

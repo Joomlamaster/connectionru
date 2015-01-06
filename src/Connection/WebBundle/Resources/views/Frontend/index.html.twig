@@ -2,22 +2,33 @@
 
 {% block theme %}homepage{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/connectionuser/css/search.css') }}" type="text/css" />
+{% endblock %}
+{% block background %}
+    {{ render( controller('ConnectionWebBundle:Frontend:background') ) }}
+{% endblock %}
+
 {% block content %}
         <div class="row main-block">
             <div class="col-xs-7">
                 <ul class="nav nav-tabs" role="tablist">
                     {% if not is_granted('ROLE_USER') %}
-                        <li class="active"><a href="#registration" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-time"></span> Quick Free Registration</a></li>
+                        <li><a href="#registration" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-time"></span> Quick Free Registration</a></li>
                     {% endif %}
-                    <li><a href="#search" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-search"></span> Quick Search</a></li>
+                    <li class="active"><a href="#search" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-search"></span> Quick Search</a></li>
                 </ul>
-                <div class="tab-content">
+                <div class="tab-content" id="quick-tab" style="display: none;">
                     {% if not is_granted('ROLE_USER') %}
-                        <div class="tab-pane active" id="registration">
-                            {{ render(controller("FOSUserBundle:Registration:register")) }}
+                        <div class="tab-pane" id="registration">
+                            {{ include("FOSUserBundle:Registration:register_content.html.twig", {'form': registrationForm}) }}
+
                         </div>
                     {% endif %}
-                    <div class="tab-pane" id="search"></div>
+                    <div class="tab-pane active" id="search">
+                        {{ include('ConnectionUserBundle:Search:quick.html.twig', {'form':searchForm}) }}
+                    </div>
                 </div>
             </div>
             <div class="col-xs-5">
@@ -31,4 +42,29 @@
 {% block javascript %}
     {{ parent() }}
     <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jquery.watermark.js') }}"></script>
+    <script type="text/javascript">
+        window.onload = function(){
+            $('#quick-tab').show();
+            $.datepicker.setDefaults({
+                dateFormat: "mm-dd-yy"
+            });
+            $('#fos_user_registration_form_profile_birthdate').datepicker({
+                changeYear: true,
+                yearRange: "-100:+0",
+                maxDate: "+0D",
+                dateFormat: "mm-dd-yy"
+            });
+
+        }
+        preLoadSlaveFeedback = function(slaveBlock){
+            if(slaveBlock.length){
+                $(slaveBlock).html('');
+            }
+        }
+
+        loadSlaveFeedback = function(){
+            $('#connection_search_state').selectpicker();
+            $('#fos_user_registration_form_profile_state').selectpicker();
+        }
+     </script>
 {% endblock %}

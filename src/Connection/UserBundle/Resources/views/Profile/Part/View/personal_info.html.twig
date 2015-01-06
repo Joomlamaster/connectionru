@@ -1,0 +1,115 @@
+<div class="row">
+    <div class="col-xs-8">
+        <h4>{{ user.userName }}</h4>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4">
+        {%if user.lastLogin is not empty%}
+            <h6>
+                <b>Last login</b>: {{user.lastLogin|date('m-d-Y')}}
+            </h6>
+        {% endif %}
+		{% spaceless %}
+        <h6>
+            <span>{{ user.profile.birthdate|userAge}}</span>
+            <span>{{ user.profile.gender.name is defined ? ", " ~ user.profile.gender.name : ""}}</span>
+            <span>{{ user.profile.city is defined and user.profile.city is not empty  ? ", " ~ user.profile.city : ""}}</span>
+            <span>{{ user.profile.state.name is defined ? ", " ~ user.profile.state.name : ""}}</span>
+            <span>{{ user.profile.country.name is defined ? ", " ~ user.profile.country.name : ""}}</span>
+        </h6>
+        <h6>
+            <b>Seeking</b>: <span>{{ user.profile.seek.name|default('') }}</span>
+            {% if user.profile.lookingFor.name is defined and user.profile.lookingFor.name is not empty %}
+                <span>{{ ', ' ~ user.profile.lookingFor.name }}</span>
+            {% endif %}
+        </h6>
+		{% endspaceless %}
+    </div>
+    <div class="col-md-5">
+        {% if user.profile.maritalStatus is defined and user.profile.maritalStatus is not empty %}
+            <h6><b>Marital status</b>: {{ user.profile.maritalStatus.name }}</h6>
+        {% endif %}
+        {% if user.profile.religion is defined and user.profile.religion is not empty %}
+            <h6><b>Religion</b>: {{ user.profile.religion.name }}</h6>
+        {% endif %}
+        {% if user.profile.education is defined and user.profile.education is not empty %}
+            <h6>
+				<b>Education</b>: {{ user.profile.education.name }}
+				{% if user.profile.ivyLeagueUniversity is defined and user.profile.ivyLeagueUniversity is not empty %}
+					<i class="muted">({{ user.profile.ivyLeagueUniversity }})</i>
+				{% endif %}
+			</h6>
+        {% endif %}
+        {% if user.profile.profession is defined and user.profile.profession is not empty %}
+            <h6><b>Profession</b>: {{ user.profile.profession.name }}</h6>
+        {% endif %}
+    </div>
+    <div class="col-xs-3">
+        {% if user.profile.height is defined and user.profile.height is not empty %}
+            <h6><b>Height</b>: {{ user.profile.height|cmToFootViewFormat }} ({{ user.profile.height|cmViewFormat }})</h6>
+        {% endif %}
+        {% if user.profile.languages is defined and user.profile.languages is not empty %}
+            <h6><b>Languages spoken</b>: {{ user.profile.languages|join(', ') }}</h6>
+        {% endif %}
+        {% if user.profile.zodiac is defined and user.profile.zodiac is not empty %}
+            <h6><b>Zodiac Sign</b>: {{ user.profile.zodiac.name }}</h6>
+        {% endif %}
+    </div>
+</div><br/><br/>
+<div class="row">
+    {% if user.profile.aboutMe is defined and user.profile.aboutMe is not empty %}
+        <div class="col-xs-6">
+            <h4>About Me:</h4>
+            {{ user.profile.aboutMe }}
+        </div>
+    {% endif %}
+</div><br/>
+<div class="row">
+    {% if user.profile.interestsAndHobbies is defined and user.profile.interestsAndHobbies is not empty %}
+        <div class="col-xs-12">
+            <h6><b>Interests and hobbies</b>:</h6>
+            {{ user.profile.interestsAndHobbies }}
+        </div>
+    {% endif %}
+</div><br/><br/>
+<div class="row">
+    <div class="col-xs-6">
+            {% if user.profile.bodyType is defined and user.profile.bodyType is not empty %}
+                <h6><b>Body type</b>: {{ user.profile.bodyType.name }}</h6>
+            {% endif %}
+            {% if user.profile.eyeColor is defined and user.profile.eyeColor is not empty %}
+                <h6><b>Eye color</b>: {{ user.profile.eyeColor.name }}</h6>
+            {% endif %}
+            {% if user.profile.hairColor is defined and user.profile.hairColor is not empty %}
+                <h6><b>Hair color</b>: {{ user.profile.hairColor.name }}</h6>
+            {% endif %}
+            {% if user.profile.smoking is defined and user.profile.smoking is not empty %}
+                <h6><b>Smoking</b>: {{ user.profile.smoking.name }}</h6>
+            {% endif %}
+            {% if user.profile.drinking is defined and user.profile.drinking is not empty %}
+                <h6><b>Drinking</b>: {{ user.profile.drinking.name }}</h6>
+            {% endif %}
+            {% if user.profile.hasChildren is defined and user.profile.hasChildren is not empty %}
+                <h6><b>Has children</b>: {{ user.profile.hasChildren.name }}</h6>
+            {% endif %}
+            {% if user.profile.wantChildren is defined and user.profile.wantChildren is not empty %}
+                <h6><b>Wants children</b>: {{ user.profile.wantChildren.name }}</h6>
+            {% endif %}
+            {% if user.profile.openToPersonWithKids is defined and user.profile.openToPersonWithKids is not empty %}
+                <h6><b>Is open to dating a person with kids</b>: {{ user.profile.openToPersonWithKids.name }}</h6>
+            {% endif %}
+            {% if user.profile.originallyFrom is not empty %}
+                <h6>
+                {% spaceless %}
+                    <b>Originally from</b>:
+                    <span>{{ user.profile.originallyFromCity is defined and user.profile.originallyFromCity is not empty ? user.profile.originallyFromCity ~ ", " : ""}}</span>
+                    <span>{{ user.profile.originallyFrom is not empty and user.profile.originallyFrom.name is not empty ? user.profile.originallyFrom.name : ""}}</span>
+                {% endspaceless %}
+                </h6>
+            {% endif %}
+            {% if user.profile.income is defined and user.profile.income is not empty %}
+                <h6><b>Income</b>: {{ user.profile.income.name }}</h6>
+            {% endif %}
+    </div>
+</div>

@@ -1,0 +1,158 @@
+.profile-gallery {
+    padding:14px;
+}
+
+.profile-gallery img {
+    padding:2px;
+    width: 120px;
+    float: none;
+    display: block;
+    height: 167px;
+}
+
+.profile-image-buttons {
+    width: 150px;
+    margin-top: 2px;
+}
+.profile-image-box {
+    margin: 10px;
+    height: 199px;
+    border: 1px solid #ccc;
+    float: left;
+    text-align: center;
+}
+
+.user-profile-image-box{
+    margin: 10px;
+    height: 169px;
+    border: 1px solid #ccc;
+    float: left;
+    text-align: center;
+}
+
+.profile-image-box a {
+    font-size: 12px;
+    height: 28px;
+    width: 116px;
+}
+
+.profile-image-box:hover {
+    border: 1px solid #484848;
+    cursor: pointer;
+}
+
+.event-gallery {
+    padding:14px;
+}
+
+.event-gallery img {
+    padding: 2px 2px 1px 2px;
+    width: 120px;
+    float: none;
+    display: block;
+    height: 167px;
+}
+
+.event-image-box {
+    margin: 10px;
+    height: 194px;
+    border: 1px solid #ccc;
+    float: left;
+    text-align: center;
+}
+
+.user-event-image-box{
+    margin: 10px;
+    height: 170px;
+    border: 1px solid #ccc;
+    float: left;
+    text-align: center;
+}
+
+.event-image-box a {
+    font-size: 12px;    
+    width: 116px;
+}
+
+.event-image-box:hover {
+    border: 1px solid #484848;
+    cursor: pointer;
+}
+
+.favorite-gallery {
+    padding:14px;
+}
+
+.favorite-gallery img {
+    padding: 2px 2px 1px 2px;
+    width: 120px;
+    float: none;
+    display: block;
+    height: 167px;
+}
+
+.favorite-image-buttons {
+    width: 120px;
+}
+
+.favorite-image-box {
+    margin: 10px;
+    height: 194px;
+    border: 1px solid #ccc;
+    float: left;
+    text-align: center;
+}
+
+.favorite-image-box a {
+    font-size: 12px;
+}
+
+.favorite-image-box:hover {
+    border: 1px solid #484848;
+    cursor: pointer;
+}
+
+.dz-upload-message {
+    font-size: 23px;
+    position: absolute;
+    top: 185px;
+    left: 25px;
+}
+
+.add-image {
+    margin: 10px;
+    border: 1px solid #ccc;
+    float: left;
+    text-align: center;
+    height: 199px;
+    width: 120px;
+    cursor: pointer;
+}
+
+.add-image img {
+    padding:2px;
+    width: 100px;
+    height: auto;
+    float: none;
+    display: block;
+    margin: 35px 0px 0px 10px;
+}
+
+.profile-visibility p {
+    font-size: 12px;
+    padding: 20px 0px 0px 0px;
+}
+
+.slave_block ul {
+    display: none;
+}
+
+#connection_user_profile_edit_profile_seek label,
+#connection_user_profile_edit_profile_gender label
+{
+    margin: -3px 3px 0px 8px;
+}
+
+.edit-personal-info input {
+    vertical-align: baseline !important;
+}

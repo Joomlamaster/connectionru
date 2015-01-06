@@ -2,17 +2,19 @@
 
 namespace Connection\UserBundle\Controller;
 
+use Symfony\Component\Form\FormError;
+use Connection\UserBundle\Entity\Profile;
+use Symfony\Component\HttpFoundation\Request;
 use Connection\UserBundle\Form\Type\EditProfileType;
 use Connection\UserBundle\Form\Type\LinkAccountType;
 use Connection\UserBundle\Form\Type\RegistrationType;
-use Symfony\Component\Form\FormError;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Connection\UserBundle\Entity\Profile;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 
 /**
@@ -28,11 +30,26 @@ class ProfileController extends Controller
      */
     public function viewAction( Profile $profile )
     {
-        return array( 'user'   => $profile->getUser() );
+        $user = $profile->getUser();
+
+        if ($user->getHide() || $user->getAdmin()) {
+            throw new NotFoundHttpException("Profile Not Found");
+        }
+
+        if($this->getUser() == $user){
+            return new RedirectResponse($this->get('router')->generate('edit_user_profile'));
+        }
+        $userPhotos = $this->getDoctrine()->getRepository('ConnectionUserBundle:Profile\Image')->getGroupedByGalleryImages($user->getId());
+        return array(
+            'user'       => $user,
+            'userPhotos' => $userPhotos,
+            'events'     => $user->getEvents()
+        );
     }
 
     /**
-     * @Route("/edit", name="edit_user_profile")
+     * @Route("/", name="edit_user_profile")
+     * @Route("/edit", name="edit_user_profile_edit")
      * @Template()
      */
     public function editAction( Request $request )
@@ -41,7 +58,14 @@ class ProfileController extends Controller
             return $this->redirect( $this->generateUrl('connection_homepage') );
         }
 
+        $edit = ("edit_user_profile_edit" == $request->get('_route'));
+        $tab  = '';
+
+        if($request->isMethod('GET')){
+            $tab = $request->get('tab');
+        }
         $form = $this->createForm( new EditProfileType(), $user);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -49,12 +73,20 @@ class ProfileController extends Controller
             $em->persist($form->getData());
             $em->flush();
 
+            $this->container->get('session')->getFlashBag()->add('notice', 'Your profile information was successfully updated.');
             return $this->redirect( $this->generateUrl('edit_user_profile') );
         }
 
+        $userPhotos = $this->getDoctrine()->getRepository('ConnectionUserBundle:Profile\Image')->getGroupedByGalleryImages($user->getId());
+
         return array(
-            'form'      => $form->createView(),
-            'user'   => $user
+            'form'       => $form->createView(),
+            'user'       => $user,
+            'userPhotos' => $userPhotos,
+            'favorites'  => $user->getFavoriteUsers(),
+            'events'     => $user->getEvents(),
+            'tab'                   =>$tab,
+            'editPersonalInfo'      => $edit
         );
     }
 
@@ -93,7 +125,7 @@ class ProfileController extends Controller
 
                 $socialUserService->loginUser($user);
                 $session->remove('link_account');
-                return $this->redirect( $this->generateUrl('connection_homepage') );
+                return $this->redirect( $this->generateUrl('user_search') );
             }
 
             $form->get('password')->addError(new FormError('Invalid Password'));

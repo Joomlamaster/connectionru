@@ -17,15 +17,50 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Doctrine\ORM\EntityRepository;
 use Connection\CoreBundle\Entity\Country;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class ProfileType extends AbstractType
 {
+    private $profileCountryIso = array();
+    private $converter;
+
+    public function __construct($profileCountryIso = array(), $converter)
+    {
+        $this->profileCountryIso = $profileCountryIso;
+        $this->converter = $converter;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $profileCountryIso = $this->profileCountryIso;
+
         $builder->add('country', 'entity', array(
             'class' => 'ConnectionCoreBundle:Country',
+            'query_builder' => function(EntityRepository $er) use ($profileCountryIso) {
+                    return $er->createQueryBuilder('c')
+                        ->where('c.iso IN (:iso)')
+                        ->setParameter('iso', $profileCountryIso)
+                        ->orderBy('c.priority', 'DESC');
+                },
             'property' => 'name',
-            'attr' => array('class' => 'master')
+        ));
+
+        $builder->add('originallyFrom', 'entity', array(
+            'class' => 'ConnectionCoreBundle:Country',
+            'query_builder' => function(EntityRepository $er) use ($profileCountryIso) {
+                    return $er
+                        ->createQueryBuilder('c')
+                        ->where('c.iso IN (:iso)')
+                        ->setParameter('iso', $profileCountryIso)
+                        ->orderBy('c.priority', 'DESC');
+
+                },
+            'property' => 'name',
+            'empty_value' => 'Select country',
+            'required' => false
+        ))
+        ->add('originallyFromCity', 'text', array(
+            'required' => false
         ));
 
         $formModifier = function (FormInterface $form, Country $country = null) {
@@ -33,12 +68,12 @@ class ProfileType extends AbstractType
                 $form->add('state', 'entity', array(
                     'class' => 'ConnectionCoreBundle:State',
                     'property' => 'name',
-                    'attr' => array('class' => 'slave'),
                     'query_builder' => function(EntityRepository $er) use ($country) {
                             return $er
                                 ->createQueryBuilder('s')
                                 ->where('s.country = :country')
                                 ->setParameter('country', $country)
+                                ->orderBy('s.priority', 'DESC')
                                 ;
                         }
                 ));
@@ -65,32 +100,54 @@ class ProfileType extends AbstractType
 
         // add your custom field
         $builder
+            ->add('city', 'text', array(
+                'required' => false
+            ))
+            ->add('zip', 'text')
+
             ->add('gender', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Gender',
                 'property' => 'name',
+                'expanded' =>  true,
+                'label' => 'I am',
+                'required' => true
             ))
 
             ->add('seek', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Gender',
                 'property' => 'name',
+                'expanded' =>  true,
+                'label' => 'Seeking',
+                'required' => true
             ))
 
             ->add('lookingFor', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\LookingFor',
                 'property' => 'name',
                 'expanded' =>  true,
+                'required' => false,
+	            'empty_value' => 'Anything'
             ))
 
-            ->add('birthdate', 'date', array(
-                'years' => range(date('Y'), date('Y') - 100),
-                'input'  => 'datetime',
-                'widget' => 'choice',
-            ))
+            ->add('birthdate', 'text', array(
+                //'years' => range(date('Y'), date('Y') - 100),
+                //'input'  => 'datetime',
+                //'widget'    => 'single_text',
+                'data_class' => 'DateTime'
+            ));
 
-            ->add('languages', 'entity', array(
+            $builder->add('languages', 'entity', array(
                 'class' => 'ConnectionCoreBundle:Language',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er
+                        ->createQueryBuilder('l')
+                        ->orderBy('l.priority', 'DESC');
+
+                },
                 'property' => 'name',
-                'multiple' => true
+                'multiple' => true,
+                'expanded' => true
+
             ))
 
             ->add('education', 'entity', array(
@@ -98,15 +155,40 @@ class ProfileType extends AbstractType
                 'property' => 'name',
             ))
 
+            ->add('educationIvyLeague', 'checkbox', array(
+                'label' => 'Ivy league educated?',
+                'attr'  => array(
+                    'style' => 'width: auto;',
+                    'class' => 'ivy-league-checkbox'
+                ),
+                'required' => false
+            ))
+
+            ->add('ivyLeagueUniversity', 'text', array(
+                'required' => false
+            ))
+
             ->add('profession', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Profession',
                 'property' => 'name',
+                'empty_value' => 'Other',
+                'required' => false
             ))
 
-            ->add('income', 'number')
+            ->add('income', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\Income',
+                'property' => 'name',
+                'empty_value' => 'Select income',
+                'required' => false
+            ))
 
             ->add('religion', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Religion',
+                'query_builder' => function(EntityRepository $er) {
+	                return $er
+		                ->createQueryBuilder('r')
+		                ->orderBy('r.priority', 'DESC');
+                },
                 'property' => 'name',
                 'label' => 'My religion'
             ))
@@ -123,9 +205,15 @@ class ProfileType extends AbstractType
                 'expanded' => true
             ))
 
-            ->add('height', 'number')
+            ->add('height', 'choice', array(
+                'choices' => $this->height(),
+                'data' => 182
+            ))
 
-            ->add('weight', 'number')
+            ->add('bodyType', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\BodyType',
+                'property' => 'name',
+            ))
 
             ->add('eyeColor', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\EyeColor',
@@ -164,7 +252,9 @@ class ProfileType extends AbstractType
             ->add('livesWithChildren', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\LivesWithChildren',
                 'property' => 'name',
-                'label' => 'Do you live with your children?'
+                'label' => 'Do you live with your children?',
+                'empty_value' =>'Prefer not to say',
+                'required' => false,
             ))
 
             ->add('openToPersonWithKids', 'entity', array(
@@ -177,20 +267,41 @@ class ProfileType extends AbstractType
                 'class' => 'ConnectionUserBundle:Profile\Ethnicity',
                 'property' => 'name',
             ))
+            ->add('zodiac', 'entity', array(
+                'class' => 'ConnectionUserBundle:Profile\Zodiac',
+                'property' => 'name',
+                'empty_value' => 'Prefer not to say',
+                'required' => false,
+            ));
 
-            ->add('aboutMe', 'textarea')
-        ;
+            $builder->add('aboutMe', 'textarea');
+            $builder->add('lookingForDescription', 'textarea', array(
+                'label' => "What I’m looking for"
+            ));
+
+
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Connection\UserBundle\Entity\Profile'
+            'data_class' => 'Connection\UserBundle\Entity\Profile',
+            'validation_groups' => array('profile')
         ));
     }
 
     public function getName()
     {
         return 'connection_user_profile';
+    }
+
+    private function height()
+    {
+        $result = array();
+        for ($i = 100; $i <= 220; $i++) {
+            $result[$i] = $this->converter->footViewFormat($this->converter->cmToFoot($i));
+        }
+
+        return array_unique($result);
     }
 }

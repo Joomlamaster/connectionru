@@ -13,16 +13,35 @@ use Connection\CoreBundle\Entity\Country;
 
 class EventType extends AbstractType
 {
+    private $profileCountryIso;
+
+    public function __construct($profileCountryIso = array())
+    {
+        $this->profileCountryIso = $profileCountryIso;
+    }
+
+
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $profileCountryIso = $this->profileCountryIso;
+        if(!empty($options['data'])){
+            $country = $options['data']->getCountry();
+        }
         $builder->add('country', 'entity', array(
             'class' => 'ConnectionCoreBundle:Country',
+            'query_builder' => function(EntityRepository $er) use ($profileCountryIso) {
+                    return $er->createQueryBuilder('c')
+                        ->where('c.iso IN (:iso)')
+                        ->setParameter('iso', $profileCountryIso)
+                        ->orderBy('c.priority', 'DESC');
+                },
             'property' => 'name',
-            'attr' => array('class' => 'master')
+            'attr' => array('class' => 'master'),
+            'data' => $country
         ));
 
         $formModifier = function (FormInterface $form, Country $country = null) {
@@ -36,6 +55,7 @@ class EventType extends AbstractType
                                 ->createQueryBuilder('s')
                                 ->where('s.country = :country')
                                 ->setParameter('country', $country)
+                                ->orderBy('s.priority', 'DESC')
                                 ;
                         }
                 ));
@@ -66,8 +86,9 @@ class EventType extends AbstractType
                         'placeholder' => "Example:  let's get together and celebrated it's cool Russian party in the style bits!"
                     )
                 ))
-            ->add('eventDate', 'date', array(
+            ->add('eventDate', 'datetime', array(
                 'widget'    => 'single_text',
+                'format'    => 'MM/dd/yyyy',
                 'attr'      => array(
                     'class' => 'input-append date'
                 )
@@ -81,7 +102,7 @@ class EventType extends AbstractType
             ))
             ->add('contactName')
             ->add('email')
-            ->add('phone')
+//            ->add('phone')
             ->add('lat', 'hidden')
             ->add('lng', 'hidden')
             ->add('save', 'submit', array(
@@ -106,6 +127,6 @@ class EventType extends AbstractType
      */
     public function getName()
     {
-        return 'connection_eventbundle_event';
+        return 'connection_event_type';
     }
 }

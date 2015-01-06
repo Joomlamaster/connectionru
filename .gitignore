@@ -11,3 +11,5 @@
 /composer.phar
 /nbproject/
 /.idea/
+/web/assets/compiled/
+/web/uploads

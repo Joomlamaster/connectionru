@@ -11,6 +11,9 @@ namespace Connection\UserBundle\Form\Type;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormInterface;
 
 class EditProfileType extends AbstractType
 {
@@ -22,8 +25,19 @@ class EditProfileType extends AbstractType
         $builder
             ->add('firstName', 'text')
             ->add('lastName', 'text')
-            ->add('profile', new ProfileType(array('validation_groups' => array('profile'))))
+            ->add('profile', 'connection_user_profile')
             ->add('submit', 'submit');
+
+        $builder->get('profile')->addEventListener(
+            FormEvents::PRE_SUBMIT,
+            function (FormEvent $event) {
+                $form = $event->getForm();
+
+                //remove birthdate or it will be set to null
+                //because we don't show this field in edit form
+                $form->remove('birthdate');
+            }
+        );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

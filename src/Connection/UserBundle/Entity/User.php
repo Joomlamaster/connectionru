@@ -6,6 +6,8 @@ use Connection\UserBundle\Entity\Profile\Gallery;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use FOS\UserBundle\Model\User as BaseUser;
+use Connection\EventBundle\Entity\Event;
+use FOS\MessageBundle\Model\ParticipantInterface;
 
 /**
  * User
@@ -14,7 +16,7 @@ use FOS\UserBundle\Model\User as BaseUser;
  * @ORM\Entity(repositoryClass="Connection\UserBundle\Entity\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class User extends BaseUser
+class User extends BaseUser implements ParticipantInterface
 {
     /**
      * @var integer
@@ -75,12 +77,30 @@ class User extends BaseUser
      */
     protected $addresses;
 
-//    /**
-//     * @var \Doctrine\Common\Collections\ArrayCollection
-//     * @ORM\OneToMany(targetEntity="Event", mappedBy="user", cascade={"persist", "remove"})
-//     */
-//    // ToDo: Add Relation With Event
-//    protected $events;
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\OneToMany(targetEntity="Connection\EventBundle\Entity\Event", mappedBy="user", cascade={"persist", "remove"})
+     */
+    protected $events;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Connection\EventBundle\Entity\Event", inversedBy="participants")
+     * @ORM\JoinTable(name="event_participant")
+     **/
+    private $participateEvents;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Connection\EventBundle\Entity\Event", inversedBy="interested")
+     * @ORM\JoinTable(name="event_interested")
+     **/
+    private $interestedInEvents;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\ManyToMany(targetEntity="Connection\UserBundle\Entity\User", inversedBy="id")
+     * @ORM\JoinTable(name="favorite_users")
+     **/
+    private $favoriteUsers;
 
     /**
      * @var \DateTime
@@ -102,6 +122,21 @@ class User extends BaseUser
      * @ORM\Column(name="deleted_at", type="datetime", nullable=true)
      */
     protected $deletedAt;
+
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="hide", type="boolean", nullable=false)
+     */
+    protected $hide = false;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="admin", type="boolean", nullable=false)
+     */
+    protected $admin = false;
 
     /**
      * @return int
@@ -271,6 +306,7 @@ class User extends BaseUser
     {
         $gallery = new Gallery();
         $gallery->setUser($this);
+        $gallery->setDefault(true);
         $this->addGallery($gallery);
     }
 
@@ -299,8 +335,56 @@ class User extends BaseUser
     }
 
     /**
-     * @ORM\PostPersist
-     * @ORM\PostUpdate
+     * @param \Doctrine\Common\Collections\ArrayCollection $event
+     */
+    public function setEvent ( Event $event )
+    {
+        $this->events[] = $event;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getEvents ()
+    {
+        return $this->events;
+    }
+
+    /**
+     * @param mixed $participateEvents
+     */
+    public function setParticipateEvents ( Event $event )
+    {
+        $this->participateEvents[] = $event;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParticipateEvents ()
+    {
+        return $this->participateEvents;
+    }
+
+    /**
+     * @param mixed $participateEvents
+     */
+    public function setInterestedInEvents ( Event $event )
+    {
+        $this->interestedInEvents[] = $event;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getInterestedInEvents ()
+    {
+        return $this->interestedInEvents;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
      */
     public function setProfileUser ()
     {
@@ -311,5 +395,76 @@ class User extends BaseUser
         if (  $this->getProfile() && !$this->hasRole('ROLE_VERIFIED_USER') ) {
             $this->setRoles(array('ROLE_VERIFIED_USER'));
         }
+
+        if ( $this->hasRole("ROLE_ADMIN") ) {
+            $this->setAdmin(true);
+        } else {
+            $this->setAdmin(false);
+        }
+    }
+
+    /**
+     *
+     * @param \Connection\UserBundle\Entity\User $user
+     */
+    public function addFavoriteUser(User $user){
+        $this->favoriteUsers->add($user);
+        return $this;
+    }
+
+    /**
+     * @return \Doctrine\Common\Collections\ArrayCollection
+     */
+    public function getFavoriteUsers(){
+        return $this->favoriteUsers;
+    }
+
+    /**
+     *
+     * @param \Connection\UserBundle\Entity\User $user
+     */
+    public function removeFavoriteUser(User $user){
+        $this->favoriteUsers->removeElement($user);
+        return $this;
+    }
+
+    /**
+     *
+     * @param \Connection\UserBundle\Entity\User $user
+     */
+    public function hasFavoriteUser(User $user){
+        return $this->favoriteUsers->contains($user);
+    }
+
+    /**
+     * @param boolean $hide
+     */
+    public function setHide ( $hide )
+    {
+        $this->hide = $hide;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getHide ()
+    {
+        return $this->hide;
+    }
+
+    /**
+     * @return boolean
+     */
+    private function setAdmin ($admin)
+    {
+        $this->admin = $admin;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function getAdmin ()
+    {
+        return $this->admin;
     }
 }

@@ -1,0 +1,161 @@
+{% if form is defined %}
+    {{ form_start(form, {'action': path('edit_user_profile_edit'), 'method': 'POST', 'attr': {'class': 'master_slave edit-personal-info'}}) }}
+    {#<div class="row">#}
+        {#<div class="col-xs-6">#}
+            {#{{ form_row(form.firstName) }}#}
+        {#</div>#}
+        {#<div class="col-xs-6">#}
+            {#{{ form_row(form.lastName) }}#}
+        {#</div>#}
+    {#</div>#}
+    <div class="row">
+        <div class="col-xs-6">
+            {{ form_row(form.profile.aboutMe) }}
+        </div>
+        <div class="col-xs-6">
+            {{ form_row(form.profile.interestsAndHobbies) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            {{ form_row(form.profile.gender) }}
+        </div>
+        <div class="col-xs-4">
+            {{ form_row(form.profile.seek) }}
+        </div>
+        {#<div class="col-xs-4 birthdate">
+            {{ form_row(form.profile.birthdate, { 'atrr': { 'class': 'select-inline'} } ) }}
+        </div>#}
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            <div class="master_slave">
+                <div>
+                    {{ form_row(form.profile.country,{'attr': {'class': 'selectpicker master' } }) }}
+                </div>
+                {% if (form.profile.state is defined) %}
+                    <div class="slave_block" style="margin-top:4px;">
+                        {{ form_row(form.profile.state,{'attr': {'class': 'selectpicker slave' } }) }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+         <div class="col-xs-4">
+            <div>
+                {{ form_row(form.profile.city) }}
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div>
+                {{ form_row(form.profile.zip) }}
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div>
+                {{ form_row(form.profile.originallyFrom, {'attr': {'class': 'selectpicker' } }) }}
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div>
+                {{ form_row(form.profile.originallyFromCity) }}
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            {{ form_row(form.profile.lookingFor, {'attr': {'style':'max-width: 125px;' } }) }}
+        </div>
+        <div class="col-xs-4">
+            {{ form_row(form.profile.maritalStatus, {'attr': {'style':'max-width: 125px;' } }) }}
+        </div>
+        <div class="col-xs-4 multi-column-select">
+            {{ form_row(form.profile.languages) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3">
+            {{ form_row(form.profile.height, {'attr': {'class': 'selectpicker' } }) }}
+        </div>
+        <div class="col-xs-3">
+            {{ form_row(form.profile.bodyType, {'attr': {'class': 'selectpicker' } }) }}
+        </div>
+        <div class="col-xs-3">
+            {{ form_row(form.profile.eyeColor, {'attr': {'class': 'selectpicker' } }) }}
+        </div>
+        <div class="col-xs-3">
+            {{ form_row(form.profile.hairColor, {'attr': {'class': 'selectpicker' } }) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3">
+            {{ form_row(form.profile.smoking, {'attr': {'class': 'selectpicker' } }) }}
+        </div>
+        <div class="col-xs-3">
+            {{ form_row(form.profile.drinking, {'attr': {'class': 'selectpicker' } }) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4">
+            {{ form_row(form.profile.education, {'attr': {'class': 'selectpicker' } }) }}
+        </div>
+        <div class="col-xs-4">
+            {{ form_row(form.profile.educationIvyLeague, {'attr': {'class': 'selectpicker ivy-league-checkbox' } }) }}
+        </div>
+        <div class="col-xs-4 ivy-league-text hidden">
+            {{ form_row(form.profile.ivyLeagueUniversity) }}
+    </div>
+    <div class="row">
+        </div>
+        <div class="col-xs-3">
+            {{ form_row(form.profile.profession, {'attr': {'class': 'selectpicker' } }) }}
+        </div>
+        <div class="col-xs-3">
+            {{ form_row(form.profile.income, {'attr': {'class': 'selectpicker' } }) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            {{ form_row(form.profile.haveChildren, {'attr': {'class': 'selectpicker' } }) }}
+        </div>
+        <div class="col-xs-6">
+            {{ form_row(form.profile.wantChildren, {'attr': {'class': 'selectpicker' } }) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6">
+            {{ form_row(form.profile.livesWithChildren, {'attr': {'class': 'selectpicker' } }) }}
+        </div>
+        <div class="col-xs-6">
+            {{ form_row(form.profile.openToPersonWithKids, {'attr': {'class': 'selectpicker' } }) }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3">
+            {{ form_row(form.profile.religion, {'attr': {'class': 'selectpicker' } }) }}
+        </div>
+        <div class="col-xs-3">
+            {{ form_row(form.profile.ethnicity, {'attr': {'class': 'selectpicker' } }) }}
+        </div>
+        <div class="col-xs-3">
+            {{ form_row(form.profile.zodiac, {'attr': {'class': 'selectpicker' } }) }}
+        </div>
+    </div><br/><br/>
+    <div class="row">
+        <div class="col-xs-3">
+        </div>
+        <div class="col-xs-9">
+            {{ form_row(form.submit, { attr: { class: 'btn-gradient' }, label: 'update'}) }}
+        </div>
+    </div>
+    <div class="col-xs-5"></div>
+    {{ form_end(form, {'render_rest': false}) }}
+    <div class="row">
+        <div class="col-xs-12 profile-visibility">
+            {% if app.user.hide is defined and app.user.hide %}
+                <p>To show my profile for other users please click here (<a href="{{ path('profile_visibility_show') }}">Click here</a>)</p>
+            {% else %}
+                <p>To hide my profile from other users please click here (<a href="{{ path('profile_visibility_hide') }}">Click here</a>), Hiding your profile will remove you from all searches.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endif %}

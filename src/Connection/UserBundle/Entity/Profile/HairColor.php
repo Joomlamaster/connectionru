@@ -5,7 +5,7 @@ namespace Connection\UserBundle\Entity\Profile;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Address
+ * HairColor
  *
  * @ORM\Table(name="user_hair_color")
  * @ORM\Entity

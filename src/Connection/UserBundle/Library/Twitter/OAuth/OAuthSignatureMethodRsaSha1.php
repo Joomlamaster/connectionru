@@ -1,6 +1,6 @@
 <?php
 
-namespace Connection\UserBundle\Library\Twitter\Oauth;
+namespace Connection\UserBundle\Library\Twitter\OAuth;
 
 abstract class OAuthSignatureMethodRsaSha1 extends OAuthSignatureMethod
 {

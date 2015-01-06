@@ -1,0 +1,11 @@
+<div class="fm-popup-image-area">
+    <form name="jcrop" action="{{ oneup_uploader_endpoint('user') }}" id="profile-images" style="min-height: 300px;">
+        <div class="fm-top-inventory">
+            <label form="profile_default_image">Set as default profile image
+                <input name="profile_default_image" type="checkbox" value="1">
+            </label>
+        </div>
+        {{ form_rest(form) }}
+        <div class="dz-upload-message" style="font-size: 23px;"><span>Click here to browse a photo (or drop)</span></div>
+    </form>
+</div>

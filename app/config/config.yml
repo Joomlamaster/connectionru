@@ -18,7 +18,8 @@ framework:
     default_locale:  "%locale%"
     trusted_hosts:   ~
     trusted_proxies: ~
-    session: ~
+    session:
+        cookie_lifetime: 0
     fragments:       ~
     http_method_override: true
 
@@ -60,22 +61,77 @@ doctrine:
 
 # Swiftmailer Configuration
 swiftmailer:
-    transport: "%mailer_transport%"
-    host:      "%mailer_host%"
-    username:  "%mailer_user%"
-    password:  "%mailer_password%"
-    spool:     { type: memory }
+    transport: gmail
+    username:  developer.optimum@gmail.com
+    password:  OptimumDev12
+    port: 465
     
 fos_user:
     db_driver: orm
     firewall_name: main
     user_class: Connection\UserBundle\Entity\User
     registration:
-      form:
-        type: connection_user_registration
+        confirmation:
+            from_email:
+                address:      webmaster@connectionru.com
+                sender_name:  WebMaster
+            enabled:    true
+            template:   FOSUserBundle:Registration:email.txt.twig
+        form:
+          type: connection_user_registration
+    resetting:
+        token_ttl: 86400
+        email:
+            from_email:
+                address:      webmaster@connectionru.com
+                sender_name:  WebMaster
+            template:   FOSUserBundle:Resetting:email.txt.twig
+        form:
+            type:               fos_user_resetting
+            name:               fos_user_resetting_form
+            validation_groups:  [ResetPassword, Default]
+    service:
+        mailer:                 fos_user.mailer.default
+        email_canonicalizer:    fos_user.util.canonicalizer.default
+        username_canonicalizer: fos_user.util.canonicalizer.default
+        token_generator:        fos_user.util.token_generator.default
+        user_manager:           fos_user.user_manager.default
 
 oneup_uploader:
     mappings:
-        gallery:
-            frontend: fancyupload
+        user:
+            storage:
+                directory: %kernel.root_dir%/../web/uploads/user/profile
+            frontend: dropzone
+            namer: connection_user.profile_images_namer
+        event:
+            storage:
+                directory: %kernel.root_dir%/../web/uploads/user/event
+            frontend: dropzone
+            namer: connection_user.event_images_namer
+        admin:
+            storage:
+                directory: %kernel.root_dir%/../web/uploads/admin/background
+            frontend: dropzone
 
+fos_message:
+    db_driver: orm
+    thread_class: Connection\MessageBundle\Entity\Thread
+    message_class: Connection\MessageBundle\Entity\Message
+
+gregwar_captcha:
+    width: 100
+    height: 30
+    quality: 60    
+    text_color: [237, 237, 237]
+    background_color: [77, 77, 77]
+    as_url: true
+    reload: true    
+    distortion: false
+    disabled: true
+
+doctrine_migrations:
+    dir_name: %kernel.root_dir%/DoctrineMigrations
+    namespace: Application\Migrations
+    table_name: migration_versions
+    name: Application Migrations

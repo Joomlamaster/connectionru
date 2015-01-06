@@ -5,10 +5,10 @@ namespace Connection\UserBundle\Entity\Profile;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Image
+ * Gallery
  *
  * @ORM\Table(name="user_gallery")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Connection\UserBundle\Entity\Profile\GalleryRepository")
  */
 class Gallery
 {
@@ -26,7 +26,7 @@ class Gallery
      *
      * @ORM\Column(name="title", type="string", length=255)
      */
-    private $title = "Profile";
+    private $title = "Profile Images";
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
      * @ORM\OneToMany(targetEntity="Connection\UserBundle\Entity\Profile\Image", mappedBy="gallery", cascade={"persist", "remove"})
@@ -38,6 +38,13 @@ class Gallery
      * @ORM\JoinColumn(name="user", referencedColumnName="id")
      **/
     private $user;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="is_default", type="boolean")
+     */
+    private $isDefault = false;
 
 
     /**
@@ -96,5 +103,15 @@ class Gallery
     public function getUser ()
     {
         return $this->user;
+    }
+
+    public function getDefault()
+    {
+        return $this->isDefault;
+    }
+
+    public function setDefault($default)
+    {
+        $this->isDefault = $default;
     }
 }

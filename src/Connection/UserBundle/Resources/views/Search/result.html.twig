@@ -1,0 +1,277 @@
+{% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
+{% form_theme form 'ConnectionUserBundle:Search:fields.html.twig' %}
+{% block theme %}search-event{% endblock %}
+
+{% block breadcrumbs %}
+    <div class="container breadcrumbs">
+        <ul>
+            <li><a href="{{ path('connection_homepage') }}">Main page</a></li>
+            <li>Search</li>
+        </ul>
+    </div>
+{% endblock breadcrumbs %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/connectionuser/css/search.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('bundles/connectionweb/css/bootstrapselect/bootstrap-select.min.css') }}" type="text/css" />
+{% endblock %}
+
+{% block content %}
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="{% if form.searchType.vars.data is empty or form.searchType.vars.data == 'quick' %}active{% endif %}">
+            <a href="#" role="tab" data-toggle="tab" id="quick-search-btn">Quick Search</a>
+        </li>
+        <li class="{% if form.searchType.vars.data == 'extended' %}active{% endif %}">
+            <a href="#" role="tab" data-toggle="tab" id="extended-search-btn">Extended Search</a>
+        </li>
+    </ul>
+
+
+    {# tab panes #}
+    {{ form_start(form, {'action': path('user_search'), 'attr': {'class': 'search-result master_slave', 'id': 'search-form'}}) }}
+    <div id="search-tab" class="tab-content search-form" style="display: none;">
+
+        {# quick search tab #}
+        <div class="tab-pane active" id="quick-search-tab">
+            {# <h4>Quick Search</h4> #}
+            <div class="row">
+                <div class="col-xs-3">
+                    <div class="form-inline">
+                        <div class="row">
+                            {{ form_row(form.gender, {'attr': { 'class': 'radio-inline gender'} }) }}
+                        </div>
+                        <div class="row">
+                            {{ form_row(form.seek, {'attr': { 'class': 'radio-inline seek'} }) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="row" style="margin-left:-30px;margin-top:-5px;">
+                        <div class="col-xs-6">
+                            {{ form_row(form.ageFrom, {'attr': { 'class': 'select-inline selectpicker','data-width':'110px' }, 'label': 'Age from' }) }}
+                        </div>
+                        <div class="col-xs-6" style="margin-left:-8px;">
+                            {{ form_row(form.ageTo, {'attr': { 'class': 'select-inline selectpicker','data-width':'110px' }, 'label': 'to' }) }}
+                        </div>
+                    </div>
+                    <div class="row">
+                        {{ form_row(form.lookingFor, {'attr': { 'class': 'select-inline selectpicker', 'title': 'Anything'} }) }}
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div class="col-xs-3">
+                        <div class="form-inline">
+                            <div class="row">
+                                <div class="master_slave">
+                                    <div>
+                                        {{ form_row(form.country,{'attr': { 'class': 'selectpicker master' }}) }}
+                                    </div>
+                                    {% if (form.state is defined) %}
+                                        <div class="slave_block state">
+                                            {{ form_row(form.state, {'attr': { 'class': 'selectpicker slave' }}) }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-9">
+                        <div class="form-inline">
+                            <div class="row">
+                                <div style="margin-left:12px;">
+                                    {{ form_label(form.languages) }}
+                                </div>
+                                <div>
+                                    {{ form_widget(form.languages, {'attr': { 'class': 'select-inline'} }) }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {#end quick search tab#}
+
+        {#extended search tab#}
+        <div class="tab-pane {% if form.searchType.vars.data == 'extended' %}active{% endif %}" id="extended-search-tab">
+           <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-inline">
+						<div class="row">
+							{{ form_row(form.education, {'attr': { 'class': 'select-inline selectpicker', 'data-selected-text-format': 'count>2' } }) }}
+						</div>
+						<div  class="row">
+							{{ form_row(form.educationIvyLeague, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+						</div>
+                        <div class="row">
+                            {{ form_row(form.haveChildren, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+                        </div>
+                        <div class="row">
+                            {{ form_row(form.wantChildren, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+                        </div>
+                        <div class="row">
+                            {{ form_row(form.openToPersonWithKids, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+                        </div>
+						<div class="row">
+							{{ form_row(form.smoking, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+						</div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-inline">
+						<div class="row">
+							{{ form_row(form.maritalStatus, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+						</div>
+						<div class="row">
+							{{ form_row(form.minimumHeight, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+						</div>
+						<div class="row">
+							{{ form_row(form.bodyType, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+						</div>
+                        <div class="row">
+                            {{ form_row(form.eyeColor, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+                        </div>
+                        <div class="row">
+                            {{ form_row(form.hairColor, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+                        </div>
+                        <div class="row">
+                            {{ form_row(form.drinking, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-inline">
+						<div class="row">
+							{{ form_row(form.profession, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+						</div>
+                        <div class="row">
+                            {{ form_row(form.income, {'attr': { 'class': 'inline-labels selectpicker'} }) }}
+                        </div>
+                        <div class="row">
+                            {{ form_row(form.religion, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+                        </div>
+                        <div class="row">
+                            {{ form_row(form.ethnicity, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+                        </div>
+                        <div class="row">
+                            {{ form_row(form.zodiac, {'attr': { 'class': 'select-inline selectpicker'} }) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{ form_row(form.searchType, {'attr': { 'class': 'search-type'} }) }}
+        </div>
+        <div class="row">
+            <div class="form-inline text-center">
+                <button type="submit"><span class="glyphicon glyphicon-search"></span> Search</button>
+                <button type="reset" ><span class="glyphicon glyphicon-trash"></span> Reset</button>
+            </div>
+        </div>
+        {#end extended search tab#}
+
+    </div>
+    {{ form_end(form, {'render_rest': false}) }}
+    {#end tab panes#}
+
+    <div class="row results-line"><span>results found</span></div>
+    {% if users is defined and users is not empty %}
+        {% for user in users %}
+            <div class="row search-result-profile">
+                <div class="col-xs-12 search-result-profile-container">
+                    <div class="col-xs-3 search-result-profile-photo">
+                        <a class="title" href="{{ path('view_profile', {'id': user.profile.id}) }}">
+                            <img style="width: 150px; overflow: hidden;" src="{{ user.profile.avatar is defined ? user.profile.avatar : ""  }}" alt=""/>
+                        </a>
+                    </div>
+                    <div class="col-xs-9 search-result-profile-info">
+                        <div class="col-xs-12">
+                            <div class="col-xs-6">
+                                <h4>
+                                    <a class="title" href="{{ path('view_profile', {'id': user.profile.id}) }}">
+                                        {{ user.userName }}
+                                    </a>
+                                </h4>
+								{% spaceless %}
+									<h6>
+										<span>{{ user.profile.birthdate|userAge}}</span>
+										<span>{{ user.profile.gender.name is defined ? ", " ~ user.profile.gender.name : ""}}</span>
+										<span>{{ user.profile.city is defined and user.profile.city is not empty  ? ", " ~ user.profile.city : ""}}</span>
+										<span>{{ user.profile.state.name is defined ? ", " ~ user.profile.state.name : ""}}</span>
+										<span>{{ user.profile.country.name is defined ? ", " ~ user.profile.country.name : ""}}</span>
+									</h6>
+									<h6>
+										<b>Seeking</b>: <span>{{ user.profile.seek.name|default('') }}</span>
+										<span>{{ ', ' ~ user.profile.lookingFor.name|default('Anything') }}</span>
+									</h6>
+									{% if user.profile.aboutMe is defined and user.profile.aboutMe is not empty %}
+										<h6>
+											{% if user.profile.aboutMe|length > 100 %}
+												{{user.profile.aboutMe|slice(0, 100)}} <a href="{{ path('view_profile', {'id': user.profile.id}) }}"><span class="see-more-link">>></span></a>
+											{% else %}
+												{{user.profile.aboutMe}}
+											{% endif %}
+										</h6>
+									{% endif %}
+								{% endspaceless %}
+                            </div>
+                            <div class="col-xs-6">
+                                {% if user.profile.religion is defined and user.profile.religion is not empty %}
+                                    <h6><b>Religion</b>: {{ user.profile.religion.name }}</h6>
+                                {% endif %}
+                                {#{% if user.profile.profession is defined and user.profile.profession is not empty %}
+                                    <h6><b>Profession</b>: {{ user.profile.profession.name }}</h6>
+                                {% endif %}#}
+                                {#{% if user.profile.height is defined and user.profile.height is not empty %}
+                                    <h6><b>Height</b>: {{ user.profile.height|cmToFootViewFormat }} ({{ user.profile.height|cmViewFormat }})</h6>
+                                {% endif %}#}
+                                {% if user.profile.education is defined and user.profile.education is not empty %}
+                                    <h6><b>Education</b>: {{ user.profile.education.name }}</h6>
+                                {% endif %}
+                                {% if user.profile.zodiac is defined and user.profile.zodiac is not empty %}
+                                    <h6><b>Zodiac Sign</b>: {{ user.profile.zodiac.name }}</h6>
+                                {% endif %}
+                                {% if user.profile.languages is defined and user.profile.languages is not empty %}
+                                    <h6><b>Languages spoken</b>: {{ user.profile.languages|join(', ') }}</h6>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="row">
+        {% if nextPage is defined and nextPage %}
+            <a class="btn btn-info pull-right" href="{{ path('user_search', {'page': nextPage}) }}">Next Page</a>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/connectionuser/js/search.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/bootstrapselect/bootstrap-select.min.js') }}"></script>
+    <script type="text/javascript">
+        window.onload = function(){
+            $('#search-form').formInit({
+                'userGender': '{{ app.user.profile.gender.id|default('0')}}',
+                'userSeek': '{{ app.user.profile.seek.id|default('0')}}',
+                'userGenderField': '{{ form.gender.vars.data.id|default('0')}}',
+                'userSeekField': '{{ form.seek.vars.data.id|default('0') }}'
+            });
+
+            $('#search-tab').show();
+
+        }
+
+        preLoadSlaveFeedback = function(slaveBlock){
+            if(slaveBlock.length){
+                $(slaveBlock).html('');
+            }
+        }
+        loadSlaveFeedback = function(){
+            $('#connection_search_state').selectpicker();
+        }
+    </script>
+{% endblock %}

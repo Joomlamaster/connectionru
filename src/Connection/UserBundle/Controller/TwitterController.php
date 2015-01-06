@@ -41,7 +41,7 @@ class TwitterController extends Controller
         }
 
         $socialUserService->loginUser($user);
-        return $this->redirect( $this->generateUrl('connection_homepage') );
+        return $this->redirect( $this->generateUrl('user_search') );
 
     }
 
@@ -79,7 +79,7 @@ class TwitterController extends Controller
             $user                    = $socialUserService->createNewUser($twitterProfile, $twitterService->getName());
             $socialUserService->sendEmail($user->getEmail());
             $socialUserService->loginUser($user);
-            return $this->redirect( $this->generateUrl('connection_homepage') );
+            return $this->redirect( $this->generateUrl('user_search') );
         }
 
         return $this->render('ConnectionUserBundle:Twitter:add_email.html.twig', array(

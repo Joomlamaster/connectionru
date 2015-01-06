@@ -1,0 +1,51 @@
+{% extends 'ConnectionAdminBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <table class="table table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>UserName</th>
+            <th>Email</th>
+            <th>Last Login</th>
+            <th>Active</th>
+            <th>Created At</th>
+            <th>#</th>
+        </tr>
+        {% if users is defined and users is not empty %}
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.id|default("") }}</td>
+                    <td>{{ user.username|default("") }}</td>
+                    <td>{{ user.email|default("") }}</td>
+                    <td>{{ user.lastLogin is defined and user.lastLogin is not null ? user.lastLogin|date : "" }}</td>
+                    <td>{{ user.enabled is defined and user.enabled ? "Yes" : "No" }}</td>
+                    <td>{{ user.createdAt|date|default("") }}</td>
+                    <td>
+                        <ul class="nav nav-pills">
+                            <li class="dropdown">
+                                <a id="drop5" role="button" data-toggle="dropdown" href="#">Action <span class="caret"></span></a>
+                                <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
+                                    <li role="presentation"><a role="menuitem" target="_blank" tabindex="-1" href="{{ path('view_profile', {'id': user.profile.id}) }}">View</a></li>
+                                    {% if user.enabled is defined and user.enabled %}
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ path('admin_user_ban', {'id': user.id}) }}">Disable</a></li>
+                                    {% else %}
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ path('admin_user_unban', {'id': user.id}) }}">Enable</a></li>
+                                    {% endif %}
+                                        <li role="presentation"><a role="menuitem" onclick="return confirm('Are you sure?');" tabindex="-1" href="{{ path('admin_user_delete', {'id': user.id}) }}">Delete</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'ConnectionAdminBundle::layout.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+    <table class="table table-bordered">
+        <tr>
+            <th>ID</th>
+            <th>Owner</th>
+            <th>Comments</th>
+            <th>Title</th>
+            <th>Contact Email</th>
+            <th>Event Date</th>
+            <th>Created At</th>
+            <th>#</th>
+        </tr>
+        {% if events is defined and events is not empty %}
+            {% for event in events %}
+                <tr>
+                    <td>{{ event.id|default("") }}</td>
+                    <td>{{ event.user.username|default("") }}</td>
+                    <td>{{ event.countComments|default("") }}</td>
+                    <td>{{ event.title|default("") }}</td>
+                    <td>{{ event.email|default("") }}</td>
+                    <td>{{ event.eventDate|date|default("") }}</td>
+                    <td>{{ event.createdAt|date|default("") }}</td>
+                    <td>
+                        <ul class="nav nav-pills">
+                            <li class="dropdown">
+                                <a id="drop5" role="button" data-toggle="dropdown" href="#">Action <span class="caret"></span></a>
+                                <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="drop5">
+                                    <li role="presentation"><a role="menuitem" target="_blank" tabindex="-1" href="{{ path('view_event', {'id': event.id}) }}">View</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ path('admin_event_comments_view', {'id': event.id}) }}">View Comments</a></li>
+                                    <li role="presentation"><a role="menuitem" tabindex="-1" href="{{ path('admin_event_delete', {'id': event.id}) }}">Delete</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+{% endblock %}

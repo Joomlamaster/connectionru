@@ -1,5 +1,5 @@
 {% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
-{% block theme %}create-profile{% endblock %}
+{% block theme %}view-profile{% endblock %}
 
 {% block breadcrumbs %}
     <div class="container breadcrumbs">
@@ -9,42 +9,76 @@
         </ul>
     </div>
 {% endblock breadcrumbs %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/connectionuser/css/profile.css') }}" type="text/css" />
+{% endblock %}
 
 {% block content %}
-    <h4>Account:</h4>
         <div class="row">
             <div class="col-xs-2">
                 <div id="add-photo">
-                    <div class="msg">
-                        <div class="sprite sprite-add-photo"></div>
-                    </div>
+                    {% if user.profile.avatar is defined and user.profile.avatar is not empty %}
+                        <img class="img-rounded" width="140" height="190" src="{{ user.profile.avatar }}">
+                    {% else %}
+                        <div class="msg">
+                            <div class="sprite sprite-add-photo"></div>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="text-center profile-image-buttons">
+                    {{ include('ConnectionUserBundle:Profile/Part/View:action_buttons.html.twig', {'user': user}) }}
                 </div>
             </div>
-            <div class="col-xs-5">
-                <div class="row">
-                    <div class="col-xs-12">
-                        <h4>{{ user.userName }}</h4>
-                        <h6>{{ user.profile.birthdate|userAge}} {{ user.profile.state.name is defined ? "," ~ user.profile.state.name : ""}}</h6>
-                        {% if user.profile.lookingFor.name is defined %}
-                            <span>Looking for: {{ user.profile.lookingFor.name }}</span>
-                        {% endif %}
-                    </div>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <h4>About Me:</h4>
-                            {{ user.profile.aboutMe }}
+            <div class="col-xs-10">
+                <ul class="nav nav-tabs" id="profile-tabs">
+                    <li class="active"><a href="#profile">Profile</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    {% if events is defined and events is not empty %}
+                        <li><a href="#events">Events</a></li>
+                    {% endif %}
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="profile">
+                        <div class="col-xs-15">
+                            {{ include('ConnectionUserBundle:Profile/Part/View:personal_info.html.twig') }}
                         </div>
                     </div>
-                    {% if user.profile.interestsAndHobbies is defined %}
-                        <div class="row">
-                            <div class="col-xs-12">
-                                <h4>Interests and hobbies:</h4>
-                                {{ user.profile.interestsAndHobbies }}
-                            </div>
+                    {% if userPhotos is defined and userPhotos is not empty %}
+                        <div class="tab-pane" id="gallery">
+                            {{ include('ConnectionUserBundle:Profile/Part/View:gallery.html.twig', {userPhotos: userPhotos}) }}
+                        </div>
+                    {% endif %}
+                    {% if events is defined and events is not empty %}
+                        <div class="tab-pane" id="events">
+                            {{ include('ConnectionUserBundle:Profile/Part/Edit:events.html.twig', {events: events}) }}
                         </div>
                     {% endif %}
                 </div>
             </div>
             <div class="col-xs-5"></div>
         </div>
+{% endblock %}
+{% block popup %}
+    {{ include('ConnectionUserBundle:Profile/Popup:view_profile_image_popup.html.twig') }}
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/bootstrap-tooltip.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/bootstrap-confirmation.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/popup/popup.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionuser/js/fos_message.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionuser/js/profile.js') }}"></script>
+    <script type="text/javascript">
+        {# PopUp Listener (Upload/View/Update) #}
+        FM.popUp.listen("{{ path('update_profile_image') }}");
+        {# Tabs #}
+        $('#profile-tabs a').click(function (e) {
+            e.preventDefault();
+            $(this).tab('show');
+        });
+
+        FosMessage.init();
+    </script>
 {% endblock %}

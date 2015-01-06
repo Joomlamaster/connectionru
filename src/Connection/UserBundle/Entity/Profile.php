@@ -11,9 +11,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="user_profile")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks()
+ *
  */
 class Profile
 {
+    public static $noAvatar =  "/bundles/connectionuser/img/noAvatar.jpg";
 //"divorced", "widowed", widow or widower, "cohabiting", "civil union", "domestic partnership" and "unmarried partners"
     /**
      * @var integer
@@ -57,11 +60,38 @@ class Profile
     protected $country;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Connection\CoreBundle\Entity\Country", inversedBy="profile")
+     * @ORM\JoinColumn(name="originally_from", referencedColumnName="id")
+     **/
+    protected $originallyFrom;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="originally_from_city", type="string", length=50, nullable=true)
+     */
+    protected $originallyFromCity;
+
+    /**
      * @Assert\NotNull(groups={"profile"})
      * @ORM\ManyToOne(targetEntity="Connection\CoreBundle\Entity\State", inversedBy="profile")
      * @ORM\JoinColumn(name="state", referencedColumnName="id")
      **/
     protected $state;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=50, nullable=true)
+     */
+    protected $city;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="zip", type="string", length=50, nullable=true)
+     */
+    protected $zip;
 
     /**
      * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\Education", inversedBy="profile")
@@ -70,16 +100,29 @@ class Profile
     protected $education;
 
     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="education_ivy_league", type="boolean", nullable=true)
+     */
+    protected $educationIvyLeague = false;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="ivy_League_university", type="string", length=255, nullable=true)
+     */
+    protected $ivyLeagueUniversity;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\Profession", inversedBy="profile")
-     * @ORM\JoinColumn(name="profession", referencedColumnName="id")
+     * @ORM\JoinColumn(name="profession", referencedColumnName="id", nullable=true)
      **/
     protected $profession;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="income", type="integer", nullable=true)
-     */
+     * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\Income", inversedBy="profile")
+     * @ORM\JoinColumn(name="income", referencedColumnName="id", nullable=true)
+     **/
     protected $income;
 
     /**
@@ -105,7 +148,14 @@ class Profile
     /**
      * @var string
      *
-     * @ORM\Column(name="interests_and_hobbies", type="string", length=600, nullable=true)
+     * @ORM\Column(name="interests_and_hobbies", type="string", length=1000, nullable=true)
+     * @Assert\Length(
+     *      groups={"profile"},
+     *      min = 3,
+     *      max = 1000,
+     *      minMessage = "This field must be at least 3 characters length",
+     *      maxMessage = "This field cannot be longer than 1000 characters length"
+     * )
      */
     protected $interestsAndHobbies;
 
@@ -122,12 +172,11 @@ class Profile
      */
     protected $height;
 
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="weight", type="integer", nullable=true)
-     */
-    protected $weight;
+     /**
+     * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\BodyType", inversedBy="profile")
+     * @ORM\JoinColumn(name="body_type", referencedColumnName="id")
+     **/
+    protected $bodyType;
 
     /**
      * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\EyeColor", inversedBy="profile")
@@ -220,15 +269,47 @@ class Profile
 
     /**
      * @var string
-     * @ORM\Column(name="about_me", type="string", length=600, nullable=true)
+     * @ORM\Column(name="about_me", type="string", length=1000, nullable=true)
+     * @Assert\Length(
+     *      groups={"profile"},
+     *      min = 3,
+     *      max = 1000,
+     *      minMessage = "This field must be at least 3 characters length",
+     *      maxMessage = "This field cannot be longer than 1000 characters length"
+     * )
      */
     protected $aboutMe;
+
+    /**
+     * @var string
+     * @ORM\Column(name="looking_for_description", type="string", length=1000, nullable=true)
+     * @Assert\Length(
+     *      groups={"profile"},
+     *      min = 3,
+     *      max = 1000,
+     *      minMessage = "This field must be at least 3 characters length",
+     *      maxMessage = "This field cannot be longer than 1000 characters length"
+     * )
+     */
+    protected $lookingForDescription;
 
     /**
      * @ORM\OneToOne(targetEntity="Connection\UserBundle\Entity\User", inversedBy="profile")
      * @ORM\JoinColumn(name="user", referencedColumnName="id")
      **/
     private $user;
+
+    /**
+     * @var string
+     * @ORM\Column(name="avatar", type="string", length=200, nullable=true)
+     */
+    protected $avatar;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\Profile\Zodiac", inversedBy="profile")
+     * @ORM\JoinColumn(name="zodiac", referencedColumnName="id")
+     **/
+    protected $zodiac;
 
     /**
      * @return int
@@ -252,6 +333,22 @@ class Profile
     public function getCountry ()
     {
         return $this->country;
+    }
+
+    /**
+     * @param mixed $originallyFrom
+     */
+    public function setOriginallyFrom ( $originallyFrom )
+    {
+        $this->originallyFrom = $originallyFrom;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOriginallyFrom ()
+    {
+        return $this->originallyFrom;
     }
 
     /**
@@ -283,15 +380,25 @@ class Profile
     }
 
     /**
-     * @param \Connection\UserBundle\Entity\DateTime $birthdate
+     * @param \DateTime $birthdate
      */
     public function setBirthdate ( $birthdate )
     {
-        $this->birthdate = $birthdate;
+//        ToDo: Refactor This code, HotFixed!
+        if ($birthdate instanceof DateTime) {
+            $this->birthdate = $birthdate;
+        } else {
+            try {
+                $date = explode("-",$birthdate);
+                $this->birthdate = new \DateTime("$date[2]-$date[0]-$date[1]");
+            } catch (\Exception $e) {
+                $this->birthdate = new \DateTime();
+            }
+        }
     }
 
     /**
-     * @return \Connection\UserBundle\Entity\DateTime
+     * @return \DateTime
      */
     public function getBirthdate ()
     {
@@ -320,6 +427,38 @@ class Profile
     public function setEducation ( $education )
     {
         $this->education = $education;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEducationIvyLeague ()
+    {
+        return $this->educationIvyLeague;
+    }
+
+    /**
+     * @param mixed $educationIvyLeague
+     */
+    public function setEducationIvyLeague ( $educationIvyLeague )
+    {
+        $this->educationIvyLeague = $educationIvyLeague;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIvyLeagueUniversity ()
+    {
+        return $this->ivyLeagueUniversity;
+    }
+
+    /**
+     * @param mixed $educationIvyLeague
+     */
+    public function setIvyLeagueUniversity ( $ivyLeagueUniversity )
+    {
+        $this->ivyLeagueUniversity = $ivyLeagueUniversity;
     }
 
     /**
@@ -683,19 +822,19 @@ class Profile
     }
 
     /**
-     * @param int $weight
+     * @param mixed $bodyType
      */
-    public function setWeight ( $weight )
+    public function setBodyType ( $bodyType )
     {
-        $this->weight = $weight;
+        $this->bodyType = $bodyType;
     }
 
     /**
-     * @return int
+     * @return mixed
      */
-    public function getWeight ()
+    public function getBodyType ()
     {
-        return $this->weight;
+        return $this->bodyType;
     }
 
     /**
@@ -768,5 +907,117 @@ class Profile
         }
 
         $this->$fieldName = $fieldValue;
+    }
+
+    /**
+     * @param string $avatar
+     */
+    public function setAvatar ( $avatar )
+    {
+        $this->avatar = $avatar;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAvatar ()
+    {
+        $webRoot = __DIR__.'/../../../../web';
+        if(is_file($webRoot.$this->avatar)){
+            return $this->avatar;
+        }
+        return self::$noAvatar;
+    }
+
+    /**
+     * @param string $zodiac
+     */
+    public function setZodiac ( $zodiac )
+    {
+        $this->zodiac = $zodiac;
+    }
+
+    /**
+     * @return string
+     */
+    public function getZodiac ()
+    {
+        return $this->zodiac;
+    }
+
+    /**
+     * @param string $lookingForDescription
+     */
+    public function setLookingForDescription ( $lookingForDescription )
+    {
+        $this->lookingForDescription = $lookingForDescription;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLookingForDescription ()
+    {
+        return $this->lookingForDescription;
+    }
+
+    /**
+     * @param string $city
+     */
+    public function setCity ( $city )
+    {
+        $this->city = $city;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCity ()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param string $city
+     */
+    public function setOriginallyFromCity ( $city )
+    {
+        $this->originallyFromCity = $city;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOriginallyFromCity ()
+    {
+        return $this->originallyFromCity;
+    }
+
+    /**
+     * @param string $zip
+     */
+    public function setZip ( $zip )
+    {
+        $this->zip = $zip;
+    }
+
+    /**
+     * @return string
+     */
+    public function getZip ()
+    {
+        return $this->zip;
+    }
+
+    /**
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function prePersist(){
+        //if not IvyLeagueEducated remove IvyLeagueUniversity
+        $ivyLeagueEducation = $this->getEducationIvyLeague();
+        if(empty($ivyLeagueEducation)){
+            $this->ivyLeagueUniversity = null;
+        }
     }
 }

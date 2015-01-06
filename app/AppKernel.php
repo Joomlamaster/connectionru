@@ -16,6 +16,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
+	        new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
 
             //  Users Bundles
@@ -26,7 +27,11 @@ class AppKernel extends Kernel
 
             //  Third party bundles.
             new FOS\UserBundle\FOSUserBundle(),
+            new FOS\MessageBundle\FOSMessageBundle(),
             new Oneup\UploaderBundle\OneupUploaderBundle(),
+            new Connection\MessageBundle\ConnectionMessageBundle(),
+            new Connection\AdminBundle\ConnectionAdminBundle(),
+            new Gregwar\CaptchaBundle\GregwarCaptchaBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

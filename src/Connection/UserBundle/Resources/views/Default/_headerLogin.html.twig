@@ -1,52 +1,38 @@
+{% extends 'ConnectionWebBundle:Frontend:layout.html.twig' %}
 {% trans_default_domain 'FOSUserBundle' %}
-
+{% block content %}
 {% block fos_user_content %}
-    <form class="navbar-form navbar-right" action="{{ path("fos_user_security_check") }}" role="form" id='login-form' method="post">
-        {% if error %}
-            <div class="alert alert-danger hlogin-error" role="alert">{{ error|trans }}</div>
-        {% endif %}
-
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
-        <div class="form-group">
-            <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="E-mail" class="form-control">
-        </div>
-        <div class="form-group">
-            <input type="password" id="password" name="_password" required="required" placeholder="Your password" class="form-control">
-        </div>
-        <button type="submit" class="btn btn-xs btn-gradient" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({},'messages') }}">Sign in</button>
-        <label class="remember pull-left">
-            <input type="checkbox" value=""> {{ 'security.login.remember_me'|trans }}
-        </label>
-    </form>
-    {#<script type="text/javascript">#}
-        {#function headerLoginLoad() {#}
-            {#$('#username').watermark('{{ 'security.login.username_hint'|trans({},'messages') }}');#}
-            {#$('#password').watermark('{{ 'security.login.password_hint'|trans({},'messages') }}');#}
-            {#$('#login-form').submit(function(e){#}
-                {#e.preventDefault();#}
-                {#$.ajax({#}
-                    {#type        : $('#login-form').attr( 'method' ),#}
-                    {#url         : '{{ path("fos_user_security_check") }}',#}
-                    {#data        : $('#login-form').serialize(),#}
-                    {#dataType    : "json",#}
-                    {#success     : function(data, status, object) {#}
-                        {#if(data.error) {#}
-                            {#$('.login-error').html(data.message);#}
-                        {#}#}
-                    {#},#}
-                    {#error: function(data, status, object){#}
-                        {#$('#header-login').html(data.responseText);#}
-                    {#}#}
-                {#});#}
-                {#return false;#}
-            {#});#}
-        {#}#}
-        {#if(window.jQuery){#}
-            {#headerLoginLoad();#}
-        {#} else {#}
-            {#window.addEventListener('load', headerLoginLoad);#}
-        {#}#}
-    {#</script>#}
-
+    <div class="fos-custom-registration-container">
+        <form action="{{ path("fos_user_security_check") }}" role="form" id='login-form' method="post" class="fos_user_registration_register">
+            <div class="clearfix form-inline">
+                {% if error %}
+                    <div class="alert alert-danger hlogin-error" role="alert">{{ error|trans }}</div>
+                {% endif %}
+            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+            <div class="clearfix form-inline">
+                <label for="username">Username or email</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" placeholder="E-mail" class="form-control">
+            </div>
+            <div class="clearfix form-inline">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="_password" required="required" placeholder="Password" class="form-control">
+            </div>
+            <div class="clearfix form-inline">
+                <label class="remember">
+                    <input type="checkbox" value=""> {{ 'security.login.remember_me'|trans }}
+                </label>
+            </div>
+            <div class="clearfix form-inline">
+                <label class="forgot">
+                    <a href="{{ path('fos_user_resetting_request') }}">Forgot password ?</a>
+                </label>
+            </div>
+            <div class="clearfix form-inline">
+                <button type="submit" class="btn btn-xs btn-gradient" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({},'messages') }}">Sign in</button>
+            </div>
+        </form>
+    </div>
 {% endblock fos_user_content %}
+{% endblock %}
 
