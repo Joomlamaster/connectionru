@@ -272,7 +272,7 @@ class ProfileType extends AbstractType
                 'class' => 'ConnectionUserBundle:Profile\Zodiac',
                 'property' => 'name',
                 'empty_value' => 'Prefer not to say',
-                'required' => false,
+                'required' => true,
             ));
 
             $builder->add('aboutMe', 'textarea');
