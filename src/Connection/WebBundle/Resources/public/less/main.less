@@ -400,6 +400,11 @@ body.create-profile, body.manage-event {
             >label {
                 font-size: 100%;
                 margin-top: 20px;
+
+                &.required:after {
+                    content: ' *';
+                    color: #F00;
+                }
             }
         }
 

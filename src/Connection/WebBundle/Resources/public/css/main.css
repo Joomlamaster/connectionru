@@ -338,6 +338,11 @@ body.manage-event .jumbotron .form-inline > label {
   font-size: 100%;
   margin-top: 20px;
 }
+body.create-profile .jumbotron .form-inline > label.required:after,
+body.manage-event .jumbotron .form-inline > label.required:after {
+  content: ' *';
+  color: #F00;
+}
 body.create-profile .jumbotron input[type="radio"],
 body.manage-event .jumbotron input[type="radio"],
 body.create-profile .jumbotron input[type="checkbox"],

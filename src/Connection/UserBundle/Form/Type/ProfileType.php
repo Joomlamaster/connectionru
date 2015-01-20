@@ -125,7 +125,7 @@ class ProfileType extends AbstractType
                 'class' => 'ConnectionUserBundle:Profile\LookingFor',
                 'property' => 'name',
                 'expanded' =>  true,
-                'required' => false,
+                'required' => true,
 	            'empty_value' => 'Anything'
             ))
 
@@ -172,7 +172,7 @@ class ProfileType extends AbstractType
                 'class' => 'ConnectionUserBundle:Profile\Profession',
                 'property' => 'name',
                 'empty_value' => 'Other',
-                'required' => false
+                'required' => true
             ))
 
             ->add('income', 'entity', array(
@@ -260,7 +260,8 @@ class ProfileType extends AbstractType
             ->add('openToPersonWithKids', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\OpenToPersonWithKids',
                 'property' => 'name',
-                'label' => 'Are you open to dating a person with kids?'
+                'label' => 'Are you open to dating a person with kids?',
+                'required' => false,
             ))
 
             ->add('ethnicity', 'entity', array(
