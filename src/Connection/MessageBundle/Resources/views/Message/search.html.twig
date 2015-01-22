@@ -2,9 +2,9 @@
 
 {% block fos_message_content %}
 
-<h2>{% trans from 'FOSMessageBundle' %}search{% endtrans %}</h2>
+<h2>{% trans from 'MessageBundle' %}search{% endtrans %}</h2>
 
-<p>{% transchoice threads|length with {'%num%': threads|length } from 'FOSMessageBundle' %}
+<p>{% transchoice threads|length with {'%num%': threads|length } from 'MessageBundle' %}
     threads_found
 {% endtranschoice %}</p>
 
