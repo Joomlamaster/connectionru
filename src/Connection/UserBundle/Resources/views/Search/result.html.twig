@@ -203,7 +203,11 @@
 									</h6>
 									<h6>
 										<b>Seeking</b>: <span>{{ user.profile.seek.name|default('') }}</span>
-										<span>{{ ', ' ~ user.profile.lookingFor.name|default('Anything') }}</span>
+                                        {% for lookingFor in user.profile.lookingFor %}
+                                            <span>{{ ', ' ~ lookingFor.name }}</span>
+                                        {% else %}
+                                            <span>, Anything</span>
+                                        {% endfor %}
 									</h6>
 									{% if user.profile.aboutMe is defined and user.profile.aboutMe is not empty %}
 										<h6>

@@ -20,9 +20,9 @@
         </h6>
         <h6>
             <b>Seeking</b>: <span>{{ user.profile.seek.name|default('') }}</span>
-            {% if user.profile.lookingFor.name is defined and user.profile.lookingFor.name is not empty %}
-                <span>{{ ', ' ~ user.profile.lookingFor.name }}</span>
-            {% endif %}
+            {% for lookingFor in user.profile.lookingFor %}
+                <span>{{ ', ' ~ lookingFor.name }}</span>
+            {% endfor %}
         </h6>
 		{% endspaceless %}
     </div>

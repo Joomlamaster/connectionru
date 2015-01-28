@@ -30,7 +30,7 @@ class LookingFor
 
     /**
      * @var \Doctrine\Common\Collections\ArrayCollection
-     * @ORM\OneToMany(targetEntity="Connection\UserBundle\Entity\Profile", mappedBy="lookingFor")
+     * @ORM\ManyToMany(targetEntity="Connection\UserBundle\Entity\Profile", mappedBy="lookingFor")
      */
     private $profile;
 
