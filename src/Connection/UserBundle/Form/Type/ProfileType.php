@@ -172,7 +172,6 @@ class ProfileType extends AbstractType
             ->add('profession', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Profession',
                 'property' => 'name',
-                'empty_value' => 'Other',
                 'required' => true
             ))
 
@@ -272,7 +271,6 @@ class ProfileType extends AbstractType
             ->add('zodiac', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Zodiac',
                 'property' => 'name',
-                'empty_value' => 'Prefer not to say',
                 'required' => true,
             ));
 
