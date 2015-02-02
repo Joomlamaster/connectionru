@@ -240,7 +240,9 @@ class ProfileType extends AbstractType
             ->add('haveChildren', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\HaveChildren',
                 'property' => 'name',
-                'label' => 'Do you have children?'
+                'label' => 'Do you have children?',
+                'empty_value' => 'Prefer not to say',
+                'required' => false,
             ))
 
             ->add('wantChildren', 'entity', array(

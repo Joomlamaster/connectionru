@@ -67,15 +67,17 @@
         {% for event in topEvents %}
             <div class="col-xs-2">
                 <div class="event-small">
-                    {% if event.image %}
-                        <div class="row">
-                            <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            {% if event.image %}
                                 <a class="title" href="{{ path('view_event', {'id': event.id}) }}">
                                     <img src="{{ event.image.path }}" alt=""/>
                                 </a>
-                            </div>
+                            {% else %}
+                                <div class="no-image-event"></div>
+                            {% endif %}
                         </div>
-                    {% endif %}
+                    </div>
                     <div class="row">
                         <time>{{ event.eventDate|date }}</time>
                         <a class="title" href="{{ path('view_event', {'id': event.id}) }}">{{ event.title }}</a>

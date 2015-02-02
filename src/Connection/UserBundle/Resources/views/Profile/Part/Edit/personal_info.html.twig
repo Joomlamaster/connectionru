@@ -66,16 +66,19 @@
             {{ form_row(form.profile.height, {'attr': {'class': 'selectpicker' } }) }}
         </div>
         <div class="col-xs-3">
+            {{ form_row(form.profile.ethnicity, {'attr': {'class': 'selectpicker' } }) }}
+        </div>
+        <div class="col-xs-3">
             {{ form_row(form.profile.bodyType, {'attr': {'class': 'selectpicker' } }) }}
         </div>
+    </div>
+    <div class="row">
         <div class="col-xs-3">
             {{ form_row(form.profile.eyeColor, {'attr': {'class': 'selectpicker' } }) }}
         </div>
         <div class="col-xs-3">
             {{ form_row(form.profile.hairColor, {'attr': {'class': 'selectpicker' } }) }}
         </div>
-    </div>
-    <div class="row">
         <div class="col-xs-3">
             {{ form_row(form.profile.smoking, {'attr': {'class': 'selectpicker' } }) }}
         </div>
@@ -121,9 +124,6 @@
     <div class="row">
         <div class="col-xs-3">
             {{ form_row(form.profile.religion, {'attr': {'class': 'selectpicker' } }) }}
-        </div>
-        <div class="col-xs-3">
-            {{ form_row(form.profile.ethnicity, {'attr': {'class': 'selectpicker' } }) }}
         </div>
         <div class="col-xs-3">
             {{ form_row(form.profile.zodiac, {'attr': {'class': 'selectpicker' } }) }}
