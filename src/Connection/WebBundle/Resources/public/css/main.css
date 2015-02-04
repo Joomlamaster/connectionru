@@ -720,7 +720,7 @@ body.search-event .found-1 img {
 body.search-event .found-1 .no-image-event {
   height: 184px;
   margin: 15px 0;
-  background: url('/bundles/connectionweb/img/no-image.jpg') center center no-repeat #F9F9F9;
+  background: url('/bundles/connectionweb/img/no-image.jpg') center center no-repeat #f9f9f9;
 }
 body.search-event .found-2 {
   margin-top: 30px;

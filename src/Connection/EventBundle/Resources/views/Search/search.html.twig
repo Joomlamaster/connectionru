@@ -69,25 +69,25 @@
                 <div class="event-small">
                     <div class="row">
                         <div class="col-xs-12">
-                            {% if event.image %}
-                                <a class="title" href="{{ path('view_event', {'id': event.id}) }}">
+                            <a class="title" href="{{ path('view_event', {'id': event.id}) }}">
+                                {% if event.image %}
                                     <img src="{{ event.image.path }}" alt=""/>
-                                </a>
-                            {% else %}
-                                <div class="no-image-event"></div>
-                            {% endif %}
+                                {% else %}
+                                    <div class="no-image-event"></div>
+                                {% endif %}
+                            </a>
                         </div>
                     </div>
                     <div class="row">
                         <time>{{ event.eventDate|date }}</time>
                         <a class="title" href="{{ path('view_event', {'id': event.id}) }}">{{ event.title }}</a>
-                        <a href="{{ path('view_event', {'id': event.id}) }}" class="btn-gradient">View</a>
 						{% if event is ownedByCurrentUser %}
 							<a href="{{ path('event_manage', {id: event.id}) }}" class="btn-gradient" title="Edit this event">Edit</a>
 						{% endif %}
                         <br/>
                         {% if event.user.profile.id is defined and event.user.username is defined %}
                             <em>Posted:</em>
+                            <time>{{ event.createdAt is defined ? event.createdAt|date : "" }}</time>
                             <a href="{{ path('view_profile', {'id': event.user.profile.id}) }}" class="name">{{ event.user.username }}</a>
                         {% endif %}
 
@@ -111,7 +111,6 @@
                         {% endif %}
                         <div class="col-xs-8">
                             <time>{{ event.eventDate|date }}</time>
-                            <a class="title" href="{{ path('view_event', {'id': event.id}) }}">{{ event.title }}</a>
                             <a href="{{ path('view_event', {'id': event.id}) }}" class="btn-gradient">View</a>
 							{% if event is ownedByCurrentUser %}
 								<a href="{{ path('event_manage', {id: event.id}) }}" class="btn-gradient" title="Edit this event">Edit</a>
@@ -119,6 +118,7 @@
                             <br/>
                             {% if event.user.profile.id is defined and event.user.username is defined %}
                                 <em>Posted:</em>
+                                <time>{{ event.createdAt is defined ? event.createdAt|date : "" }}</time>
                                 <a href="{{ path('view_profile', {'id': event.user.profile.id}) }}" class="name">{{ event.user.username }}</a>
                             {% endif %}
                         </div>

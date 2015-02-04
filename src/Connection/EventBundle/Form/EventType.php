@@ -101,6 +101,7 @@ class EventType extends AbstractType
                 'label'    => 'Select a category:'
             ))
             ->add('contactName')
+            ->add('venue')
             ->add('email')
 //            ->add('phone')
             ->add('lat', 'hidden')

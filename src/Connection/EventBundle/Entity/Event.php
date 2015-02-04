@@ -86,6 +86,13 @@ class Event
     private $description;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="venue", type="string", length=255)
+     */
+    private $venue;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="created_at", type="datetime")
@@ -572,5 +579,21 @@ class Event
 
     public function countComments() {
         return count($this->getComments());
+    }
+
+    /**
+     * @return string
+     */
+    public function getVenue()
+    {
+        return $this->venue;
+    }
+
+    /**
+     * @param string $venue
+     */
+    public function setVenue($venue)
+    {
+        $this->venue = $venue;
     }
 }

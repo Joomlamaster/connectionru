@@ -6,7 +6,7 @@
                 <img src="{{ event.image.path is defined ? event.image.path : ""  }}" alt=""/>
             </a>
             <a href="{{ path('event_manage', {id: event.id}) }}" class="btn btn-xs btn-info" title="Edit this event">
-                <span class="glyphicon glyphicon-edit"></span>
+                <span class="glyphicon glyphicon-edit"></span> Edit event
             </a>
         </div>
     {% endfor %}

@@ -42,6 +42,7 @@
                             <time>{{ event.eventDate is defined ? event.eventDate|date : "" }}</time>
                             <address>
                                 <strong>Venue</strong><br>
+                                {{ event.venue }}<br>
                                 {{ event.country.name is defined ? event.country.name : "" }}<br>
                                 {{ event.state.name is defined ? event.state.name : "" }}<br>
                                 <em><a href="#">Info</a> and <a class="show-event-map" href="#">map</a></em>

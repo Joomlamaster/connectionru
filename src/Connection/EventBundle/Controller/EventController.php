@@ -90,7 +90,13 @@ class EventController extends Controller
             $event->setUser($user);
             $em->persist($event);
             $em->flush();
-            return $this->redirect( $this->generateUrl('event_manage', array('id' => $event->getId())) );
+
+            if ($id) {
+                $redirectUrl = $this->generateUrl('event_manage', array('id' => $id));
+            } else {
+                $redirectUrl = $this->generateUrl('event_search');
+            }
+            return $this->redirect($redirectUrl);
         }
 
         return array(
