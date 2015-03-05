@@ -2,10 +2,13 @@
 
 namespace Connection\UserBundle\Entity;
 
+use Doctrine\DBAL\Connection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Tests\Constraints\ConstraintViolationAssertion;
+use Connection\UserBundle\Validator\Constraints\DateTime;
+use Connection\UserBundle\Validator\Constraints\DateTimeValidator;
 /**
  * User
  *
@@ -384,17 +387,24 @@ class Profile
      */
     public function setBirthdate ( $birthdate )
     {
-//        ToDo: Refactor This code, HotFixed!
-        if ($birthdate instanceof DateTime) {
-            $this->birthdate = $birthdate;
+        $date = $this->getDateFromBirthdate($birthdate);
+        if ($date) {
+            $this->birthdate = $date;
         } else {
-            try {
-                $date = explode("-",$birthdate);
-                $this->birthdate = new \DateTime("$date[2]-$date[0]-$date[1]");
-            } catch (\Exception $e) {
-                $this->birthdate = new \DateTime();
+            $this->birthdate = new \DateTime();
+        }
+    }
+
+    private function getDateFromBirthdate($date) {
+        $obDate = new DateTimeValidator();
+        foreach ($obDate->formats as $f) {
+            $dateRes = $obDate->getDate($date, $f);
+            if (!empty($dateRes)) {
+                return $dateRes;
+                break;
             }
         }
+        return false;
     }
 
     /**
