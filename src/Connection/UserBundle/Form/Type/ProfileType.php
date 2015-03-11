@@ -9,7 +9,7 @@
 namespace Connection\UserBundle\Form\Type;
 
 use Connection\UserBundle\Entity\Profile;
-use Connection\UserBundle\Validator\Constraints\DateTime;
+use Connection\UserBundle\Validator\Constraints\ConstraintDate;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -139,10 +139,10 @@ class ProfileType extends AbstractType
                 //'widget'    => 'single_text',
                 'trim' => true,
                 'required' => true,
-                'data_class' => 'DateTime',
+                'data_class' => 'ConstraintDate',
                 'constraints' => array(
                     new Assert\NotBlank(),
-                    new DateTime()
+                    new ConstraintDate()
                 )
             ));
 
