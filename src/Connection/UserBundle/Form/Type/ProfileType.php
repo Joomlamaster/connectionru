@@ -9,6 +9,7 @@
 namespace Connection\UserBundle\Form\Type;
 
 use Connection\UserBundle\Entity\Profile;
+use Connection\UserBundle\Validator\Constraints\DateTime;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -103,7 +104,9 @@ class ProfileType extends AbstractType
             ->add('city', 'text', array(
                 'required' => false
             ))
-            ->add('zip', 'text')
+            ->add('zip', 'text', array(
+                'required' => false
+            ))
 
             ->add('gender', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Gender',
@@ -134,7 +137,13 @@ class ProfileType extends AbstractType
                 //'years' => range(date('Y'), date('Y') - 100),
                 //'input'  => 'datetime',
                 //'widget'    => 'single_text',
-                'data_class' => 'DateTime'
+                'trim' => true,
+                'required' => true,
+                'data_class' => 'DateTime',
+                'constraints' => array(
+                    new Assert\NotBlank(),
+                    new DateTime()
+                )
             ));
 
             $builder->add('languages', 'entity', array(
@@ -288,7 +297,7 @@ class ProfileType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Connection\UserBundle\Entity\Profile',
-            'validation_groups' => array('profile')
+            //'validation_groups' => array('profile')
         ));
     }
 
