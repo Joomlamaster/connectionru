@@ -1,13 +1,13 @@
 $(function(){
     $.datepicker.setDefaults({
-        dateFormat: "yy-mm-dd"
+        dateFormat: "dd-mm-yy"
     });
-    $('#{{form.profile.birthdate.vars.id}}').datepicker({
+    $('#fos_user_registration_form_profile_birthdate').datepicker({
         changeMonth: true,
         changeYear: true,
         yearRange: "-100:+0",
         maxDate: "+0D",
-        //constrainInput: false,
+        dateFormat: "dd-mm-yy/",
         //format date mm-dd-yy mm/dd/yy
         onSelect: function (date) {
             $(this).val(date.substr(0, 10));

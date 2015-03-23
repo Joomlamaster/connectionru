@@ -29,7 +29,8 @@ class Thread extends BaseThread
     /**
      * @ORM\OneToMany(
      *   targetEntity="Connection\MessageBundle\Entity\Message",
-     *   mappedBy="thread"
+     *   mappedBy="thread",
+     *   cascade={"remove"}
      * )
      * @var Message[]|\Doctrine\Common\Collections\Collection
      */

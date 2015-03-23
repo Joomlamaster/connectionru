@@ -4,9 +4,9 @@ namespace Connection\UserBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Connection\UserBundle\Validator\Constraints\DateTime;
 
-
-class ConstraintDateValidator extends ConstraintValidator
+class DateTimeValidator extends ConstraintValidator
 {
     public $formats = array(
         'd-m-Y',
@@ -18,6 +18,7 @@ class ConstraintDateValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
+        $r =1;
 
         if (null === $value || '' === $value) {
             return;
@@ -39,7 +40,7 @@ class ConstraintDateValidator extends ConstraintValidator
         }
         if (!$bIsset) {
             $this->buildViolation($constraint->message)
-                ->setParameter('{{ value }}', $this->formatValue($value))
+                ->setParameter('{{ date }}', $this->formatValue($value))
                 ->addViolation();
         }
 
@@ -48,7 +49,7 @@ class ConstraintDateValidator extends ConstraintValidator
     public function getDate ($value, $format) {
         $date = \DateTime::createFromFormat($format, $value);
         $lastRes = \DateTime::getLastErrors();
-        if ($lastRes['warning_count'] != 0 && $lastRes['error_count'] != 0) {
+        if ($lastRes['warning_count'] != 0 || $lastRes['error_count'] != 0) {
             return false;
         }
         return $date;

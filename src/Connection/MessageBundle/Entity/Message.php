@@ -30,7 +30,9 @@ class Message extends BaseMessage
     protected $thread;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\User",
+     * cascade={"remove"}
+     * )
      * @var \FOS\MessageBundle\Model\ParticipantInterface
      */
     protected $sender;

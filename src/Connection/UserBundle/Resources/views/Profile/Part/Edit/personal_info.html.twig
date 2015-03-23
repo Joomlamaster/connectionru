@@ -141,10 +141,11 @@
     <div class="row">
         <div class="col-xs-12 profile-visibility">
             {% if app.user.hide is defined and app.user.hide %}
-                <p>To show my profile for other users please click here (<a href="{{ path('profile_visibility_show') }}">Click here</a>)</p>
+                <p>To show my profile for other users please click here (<a href="{{ path('profile_visibility_show') }}">Click here</a>).<br>
             {% else %}
-                <p>To hide my profile from other users please click here (<a href="{{ path('profile_visibility_hide') }}">Click here</a>), Hiding your profile will remove you from all searches.</p>
+                <p>To hide my profile from other users please click here (<a href="{{ path('profile_visibility_hide') }}">Click here</a>), Hiding your profile will remove you from all searches.<br>
             {% endif %}
+            To remove your profile completely please click here (<a href="{{ path('user_delete') }}">Click here</a>).</p>
         </div>
     </div>
 {% endif %}
