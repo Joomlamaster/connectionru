@@ -28,7 +28,7 @@ class RegistrationType extends BaseType
                 'required'  => true,
                 'mapped'    => false
             ))
-//            ->add('captcha', 'captcha')
+//          ->add('captcha', 'captcha')
             ->add('registrationType', 'hidden', array(
                 'mapped' => false
             ))
