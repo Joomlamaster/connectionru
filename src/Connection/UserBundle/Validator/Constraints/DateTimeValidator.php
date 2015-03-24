@@ -18,14 +18,9 @@ class DateTimeValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
-        $r =1;
 
-        if (null === $value || '' === $value) {
-            return;
-        }
-
-        if (empty($this->formats)) {
-            return;
+        if ($date = $this->check($value, $this->formats[0])) {
+            return $date;
         }
 
         $value = (string) $value;
@@ -38,6 +33,7 @@ class DateTimeValidator extends ConstraintValidator
                 break;
             }
         }
+
         if (!$bIsset) {
             $this->buildViolation($constraint->message)
                 ->setParameter('{{ date }}', $this->formatValue($value))
@@ -46,13 +42,37 @@ class DateTimeValidator extends ConstraintValidator
 
     }
 
-    public function getDate ($value, $format) {
+    public function getDate (\DateTime $value, $format)
+    {
+
+        if ($date = $this->check($value, $format)) {
+            return $date;
+        }
+
         $date = \DateTime::createFromFormat($format, $value);
         $lastRes = \DateTime::getLastErrors();
         if ($lastRes['warning_count'] != 0 || $lastRes['error_count'] != 0) {
             return false;
         }
         return $date;
+    }
+
+    private function check ($value, $format) {
+        if (null === $value || '' === $value || empty($value)) {
+            return true;
+        }
+
+        if (empty($format)) {
+            return true;
+        }
+
+        if (is_object($value)) {
+            $ts = $value->getTimestamp();
+            $date = date($format, $ts);
+            return $date;
+        }
+
+        return false;
     }
 
 
