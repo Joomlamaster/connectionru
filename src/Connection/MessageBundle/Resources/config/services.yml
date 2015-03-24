@@ -1,0 +1,11 @@
+services:
+  message_send_listener:
+      class: Connection\MessageBundle\EventListener\Message
+      arguments:
+          - @fos_message.message_manager
+          - @mailer
+          - %fos_user.registration.confirmation.from_email%
+          - @templating
+
+      tags:
+          - { name: kernel.event_subscriber }
