@@ -1166,3 +1166,10 @@ fieldset[disabled] .btn-info.active {
   margin: 0px;
   border-radius: 0px;
 }
+select.selectpicker {
+  display: inline-block !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  clear: both;
+}
