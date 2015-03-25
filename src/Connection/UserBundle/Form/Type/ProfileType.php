@@ -140,7 +140,7 @@ class ProfileType extends AbstractType
                 //'widget'    => 'single_text',
                 'trim' => true,
                 'required' => true,
-                //'data_class' => 'DateTime',
+                'data_class' => 'DateTime',
                 'constraints' => array(
                     new Assert\NotBlank(),
                     new DateTime()

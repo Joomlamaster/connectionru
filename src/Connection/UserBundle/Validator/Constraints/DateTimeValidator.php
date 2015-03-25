@@ -20,7 +20,7 @@ class DateTimeValidator extends ConstraintValidator
     {
 
         if ($date = $this->check($value, $this->formats[0])) {
-            return $date;
+            return false;
         }
 
         $value = (string) $value;
@@ -42,7 +42,7 @@ class DateTimeValidator extends ConstraintValidator
 
     }
 
-    public function getDate (\DateTime $value, $format)
+    public function getDate ($value, $format)
     {
 
         if ($date = $this->check($value, $format)) {
