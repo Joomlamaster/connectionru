@@ -395,7 +395,8 @@ class Profile
         }
     }
 
-    private function getDateFromBirthdate($date) {
+    private function getDateFromBirthdate($date)
+    {
         $obDate = new DateTimeValidator();
         foreach ($obDate->formats as $f) {
             $dateRes = $obDate->getDate($date, $f);

@@ -2,7 +2,7 @@ $(function(){
     $.datepicker.setDefaults({
         dateFormat: "dd-mm-yy"
     });
-    $('#fos_user_registration_form_profile_birthdate').datepicker({
+    $('#fos_user_registration_form_profile_birthdate, #connection_user_profile_edit_profile_birthdate').datepicker({
         changeMonth: true,
         changeYear: true,
         yearRange: "-100:+0",

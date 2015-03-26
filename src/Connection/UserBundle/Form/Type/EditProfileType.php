@@ -28,16 +28,16 @@ class EditProfileType extends AbstractType
             ->add('profile', 'connection_user_profile')
             ->add('submit', 'submit');
 
-        $builder->get('profile')->addEventListener(
-            FormEvents::PRE_SUBMIT,
-            function (FormEvent $event) {
-                $form = $event->getForm();
-
-                //remove birthdate or it will be set to null
-                //because we don't show this field in edit form
-                $form->remove('birthdate');
-            }
-        );
+//        $builder->get('profile')->addEventListener(
+//            FormEvents::PRE_SUBMIT,
+//            function (FormEvent $event) {
+//                $form = $event->getForm();
+//
+//                //remove birthdate or it will be set to null
+//                //because we don't show this field in edit form
+//                $form->remove('birthdate');
+//            }
+//        );
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
