@@ -386,7 +386,7 @@ class Profile
      * @param \DateTime $birthdate
      * @return \DateTime
      */
-    public function setBirthdate(\DateTime $birthdate)
+    public function setBirthdate($birthdate)
     {
         $this->birthdate = $birthdate;
     }
