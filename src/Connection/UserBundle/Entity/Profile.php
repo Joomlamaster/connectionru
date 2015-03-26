@@ -39,7 +39,7 @@ class Profile
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="birthdate", type="date", nullable=true)
+     * @ORM\Column(name="birthdate", type="datetime", nullable=true)
      */
     protected $birthdate;
 
@@ -384,33 +384,17 @@ class Profile
 
     /**
      * @param \DateTime $birthdate
+     * @return \DateTime
      */
-    public function setBirthdate ( $birthdate )
+    public function setBirthdate(\DateTime $birthdate)
     {
-        $date = $this->getDateFromBirthdate($birthdate);
-        if ($date) {
-            $this->birthdate = $date;
-        } else {
-            $this->birthdate = new \DateTime();
-        }
-    }
-
-    private function getDateFromBirthdate($date) {
-        $obDate = new DateTimeValidator();
-        foreach ($obDate->formats as $f) {
-            $dateRes = $obDate->getDate($date, $f);
-            if (!empty($dateRes)) {
-                return $dateRes;
-                break;
-            }
-        }
-        return false;
+        $this->birthdate = $birthdate;
     }
 
     /**
      * @return \DateTime
      */
-    public function getBirthdate ()
+    public function getBirthdate()
     {
         return $this->birthdate;
     }

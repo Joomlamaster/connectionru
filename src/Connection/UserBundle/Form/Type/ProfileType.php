@@ -44,6 +44,7 @@ class ProfileType extends AbstractType
                         ->orderBy('c.priority', 'DESC');
                 },
             'property' => 'name',
+            'empty_value' => 'Select'
         ));
 
         $builder->add('originallyFrom', 'entity', array(
@@ -57,8 +58,8 @@ class ProfileType extends AbstractType
 
                 },
             'property' => 'name',
-            'empty_value' => 'Select country',
-            'required' => false
+            'empty_value' => 'Select',
+            'required' => false,
         ))
         ->add('originallyFromCity', 'text', array(
             'required' => false
@@ -102,10 +103,10 @@ class ProfileType extends AbstractType
         // add your custom field
         $builder
             ->add('city', 'text', array(
-                'required' => false
+                'required' => false,
             ))
             ->add('zip', 'text', array(
-                'required' => false
+                'required' => false,
             ))
 
             ->add('gender', 'entity', array(
@@ -131,19 +132,12 @@ class ProfileType extends AbstractType
                 'multiple' => true,
                 'required' => true,
 	            'empty_value' => 'Anything'
-            ))
+            ));
 
-            ->add('birthdate', 'text', array(
-                //'years' => range(date('Y'), date('Y') - 100),
-                //'input'  => 'datetime',
-                //'widget'    => 'single_text',
-                'trim' => true,
-                'required' => true,
-                'data_class' => 'DateTime',
-                'constraints' => array(
-                    new Assert\NotBlank(),
-                    new ConstraintDate()
-                )
+            $builder->add('birthdate', 'date', array(
+                'widget' => 'single_text',
+                'html5'  => false,
+                'format' => 'MM-dd-yyyy',
             ));
 
             $builder->add('languages', 'entity', array(
@@ -152,7 +146,6 @@ class ProfileType extends AbstractType
                     return $er
                         ->createQueryBuilder('l')
                         ->orderBy('l.priority', 'DESC');
-
                 },
                 'property' => 'name',
                 'multiple' => true,
@@ -163,6 +156,7 @@ class ProfileType extends AbstractType
             ->add('education', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Education',
                 'property' => 'name',
+                'empty_value' => 'Select'
             ))
 
             ->add('educationIvyLeague', 'checkbox', array(
@@ -181,13 +175,14 @@ class ProfileType extends AbstractType
             ->add('profession', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Profession',
                 'property' => 'name',
-                'required' => true
+                'required' => true,
+                'empty_value' => 'Select'
             ))
 
             ->add('income', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Income',
                 'property' => 'name',
-                'empty_value' => 'Select income',
+                'empty_value' => 'Select',
                 'required' => false
             ))
 
@@ -199,7 +194,8 @@ class ProfileType extends AbstractType
 		                ->orderBy('r.priority', 'DESC');
                 },
                 'property' => 'name',
-                'label' => 'My religion'
+                'label' => 'My religion',
+                'empty_value' => 'Select'
             ))
 
             ->add('telephone', 'number')
@@ -216,56 +212,63 @@ class ProfileType extends AbstractType
 
             ->add('height', 'choice', array(
                 'choices' => $this->height(),
-                'data' => 182
+                //'data' => 182,
+                'empty_value' => 'Select'
             ))
 
             ->add('bodyType', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\BodyType',
                 'property' => 'name',
+                'empty_value' => 'Select'
             ))
 
             ->add('eyeColor', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\EyeColor',
                 'property' => 'name',
+                'empty_value' => 'Select'
             ))
 
             ->add('hairColor', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\HairColor',
                 'property' => 'name',
+                'empty_value' => 'Select'
             ))
 
             ->add('smoking', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Smoking',
                 'property' => 'name',
                 'label' => 'Smoking?',
+                'empty_value' => 'Select'
             ))
 
             ->add('drinking', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Drinking',
                 'property' => 'name',
-                'label' => 'Drinking?'
+                'label' => 'Drinking?',
+                'empty_value' => 'Select'
             ))
 
             ->add('haveChildren', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\HaveChildren',
                 'property' => 'name',
                 'label' => 'Do you have children?',
-                'empty_value' => 'Prefer not to say',
                 'required' => false,
+                'empty_value' => 'Select'
             ))
 
             ->add('wantChildren', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\WantChildren',
                 'property' => 'name',
-                'label' => 'Do you want children?'
+                'label' => 'Do you want children?',
+                'empty_value' => 'Select'
             ))
 
             ->add('livesWithChildren', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\LivesWithChildren',
                 'property' => 'name',
                 'label' => 'Do you live with your children?',
-                'empty_value' =>'Prefer not to say',
                 'required' => false,
+                'empty_value' => 'Select'
             ))
 
             ->add('openToPersonWithKids', 'entity', array(
@@ -273,16 +276,19 @@ class ProfileType extends AbstractType
                 'property' => 'name',
                 'label' => 'Are you open to dating a person with kids?',
                 'required' => false,
+                'empty_value' => 'Select'
             ))
 
             ->add('ethnicity', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Ethnicity',
                 'property' => 'name',
+                'empty_value' => 'Select'
             ))
             ->add('zodiac', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Zodiac',
                 'property' => 'name',
                 'required' => true,
+                'empty_value' => 'Select'
             ));
 
             $builder->add('aboutMe', 'textarea');
@@ -312,7 +318,8 @@ class ProfileType extends AbstractType
         for ($i = 100; $i <= 220; $i++) {
             $result[$i] = $this->converter->footViewFormat($this->converter->cmToFoot($i));
         }
-
-        return array_unique($result);
+        $result = array_unique($result);
+        $result[] = 'Prefer not to say';
+        return $result;
     }
 }

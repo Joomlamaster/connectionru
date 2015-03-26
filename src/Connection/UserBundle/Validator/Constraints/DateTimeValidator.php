@@ -4,9 +4,9 @@ namespace Connection\UserBundle\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Connection\UserBundle\Validator\Constraints\DateTime;
 
-
-class ConstraintDateValidator extends ConstraintValidator
+class DateTimeValidator extends ConstraintValidator
 {
     public $formats = array(
         'd-m-Y',
@@ -19,12 +19,8 @@ class ConstraintDateValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
 
-        if (null === $value || '' === $value) {
-            return;
-        }
-
-        if (empty($this->formats)) {
-            return;
+        if ($date = $this->check($value, $this->formats[0])) {
+            return false;
         }
 
         $value = (string) $value;
@@ -37,21 +33,46 @@ class ConstraintDateValidator extends ConstraintValidator
                 break;
             }
         }
+
         if (!$bIsset) {
             $this->buildViolation($constraint->message)
-                ->setParameter('{{ value }}', $this->formatValue($value))
+                ->setParameter('{{ date }}', $this->formatValue($value))
                 ->addViolation();
         }
 
     }
 
-    public function getDate ($value, $format) {
+    public function getDate ($value, $format)
+    {
+
+        if ($date = $this->check($value, $format)) {
+            return $date;
+        }
+
         $date = \DateTime::createFromFormat($format, $value);
         $lastRes = \DateTime::getLastErrors();
-        if ($lastRes['warning_count'] != 0 && $lastRes['error_count'] != 0) {
+        if ($lastRes['warning_count'] != 0 || $lastRes['error_count'] != 0) {
             return false;
         }
         return $date;
+    }
+
+    private function check ($value, $format) {
+        if (null === $value || '' === $value || empty($value)) {
+            return true;
+        }
+
+        if (empty($format)) {
+            return true;
+        }
+
+        if (is_object($value)) {
+            $ts = $value->getTimestamp();
+            $date = date($format, $ts);
+            return $date;
+        }
+
+        return false;
     }
 
 

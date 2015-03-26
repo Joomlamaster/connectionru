@@ -106,4 +106,12 @@ class UserController extends Controller
 
         return $this->redirect( $this->generateUrl('edit_user_profile_edit') );
     }
+
+    /**
+     * @Route("/delete", name="user_delete")
+     */
+    public function deleteAction( ) {
+
+
+    }
 }

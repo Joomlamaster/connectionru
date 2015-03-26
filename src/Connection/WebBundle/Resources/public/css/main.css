@@ -298,6 +298,11 @@ footer .bottom-right-menu li a {
 .form-inline label:first-child {
   color: #00A0E3;
 }
+.form-group .two-columns.form-control label,
+.form-inline .two-columns.form-control label {
+  width: 48%;
+  float: left;
+}
 .multi-column-select .form-control {
   max-width: 145px;
 }
@@ -1160,4 +1165,11 @@ fieldset[disabled] .btn-info.active {
 .global-alert {
   margin: 0px;
   border-radius: 0px;
+}
+select.selectpicker {
+  display: inline-block !important;
+  width: 1px !important;
+  height: 1px !important;
+  opacity: 0 !important;
+  clear: both;
 }

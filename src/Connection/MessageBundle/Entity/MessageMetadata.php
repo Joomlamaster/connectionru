@@ -29,7 +29,10 @@ class MessageMetadata extends BaseMessageMetadata
     protected $message;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\User")
+     * @ORM\ManyToOne(
+     * targetEntity="Connection\UserBundle\Entity\User",
+     * cascade={"remove"}
+     * )
      * @var \FOS\MessageBundle\Model\ParticipantInterface
      */
     protected $participant;

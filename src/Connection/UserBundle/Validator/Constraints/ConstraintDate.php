@@ -3,7 +3,7 @@
 namespace Connection\UserBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 
-class ConstraintDate extends Constraint
+class DateTime extends Constraint
 {
-    public $message = 'The date "%string%" is not correct.';
+    public $message = 'The date {{ date }} is not a valid date.';
 }

@@ -21,14 +21,14 @@ class RegistrationType extends BaseType
         // add your custom field
         $builder
             ->add('profile', 'connection_user_profile', array(
-                'required' => false
+                //'required' => false
             ))
             ->add('agree', 'checkbox', array(
                 'label'     => 'I Agree to the terms of service',
                 'required'  => true,
                 'mapped'    => false
             ))
-//            ->add('captcha', 'captcha')
+//          ->add('captcha', 'captcha')
             ->add('registrationType', 'hidden', array(
                 'mapped' => false
             ))

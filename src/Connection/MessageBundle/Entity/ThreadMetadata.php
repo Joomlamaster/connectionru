@@ -23,13 +23,16 @@ class ThreadMetadata extends BaseThreadMetadata
      * @ORM\ManyToOne(
      *   targetEntity="Connection\MessageBundle\Entity\Thread",
      *   inversedBy="metadata"
+     *
      * )
      * @var \FOS\MessageBundle\Model\ThreadInterface
      */
     protected $thread;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\User",
+     * cascade={"remove"}
+     * )
      * @var \FOS\MessageBundle\Model\ParticipantInterface
      */
     protected $participant;

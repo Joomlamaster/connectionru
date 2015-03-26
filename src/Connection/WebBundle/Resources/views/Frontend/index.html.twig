@@ -42,29 +42,19 @@
 {% block javascript %}
     {{ parent() }}
     <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jquery.watermark.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/datepicker/datepicker.js') }}"></script>
     <script type="text/javascript">
-        window.onload = function(){
+        window.onload = function() {
             $('#quick-tab').show();
-            $.datepicker.setDefaults({
-                dateFormat: "mm-dd-yy"
-            });
-            $('#fos_user_registration_form_profile_birthdate').datepicker({
-                changeYear: true,
-                yearRange: "-100:+0",
-                maxDate: "+0D",
-                dateFormat: "mm-dd-yy"
-            });
-
-        }
-        preLoadSlaveFeedback = function(slaveBlock){
-            if(slaveBlock.length){
-                $(slaveBlock).html('');
+            preLoadSlaveFeedback = function (slaveBlock) {
+                if (slaveBlock.length) {
+                    $(slaveBlock).html('');
+                }
             }
-        }
-
-        loadSlaveFeedback = function(){
-            $('#connection_search_state').selectpicker();
-            $('#fos_user_registration_form_profile_state').selectpicker();
+            loadSlaveFeedback = function () {
+                $('#connection_search_state').selectpicker();
+                $('#fos_user_registration_form_profile_state').selectpicker();
+            }
         }
      </script>
 {% endblock %}

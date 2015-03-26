@@ -1,3 +1,5 @@
+{% form_theme form 'ConnectionUserBundle:Registration:fields.html.twig' %}
+
 {% if form is defined %}
     {{ form_start(form, {'action': path('edit_user_profile_edit'), 'method': 'POST', 'attr': {'class': 'master_slave edit-personal-info'}}) }}
     <div class="row">
@@ -12,8 +14,12 @@
         <div class="col-xs-4">
             {{ form_row(form.profile.gender) }}
         </div>
-        <div class="col-xs-5">
+        <div class="col-xs-4">
             {{ form_row(form.profile.seek) }}
+        </div>
+        <div class="col-xs-4">
+            {#{{ dump(form.profile.birthdate) }}#}
+            {{ form_row(form.profile.birthdate, { 'attr': { 'class': 'select-inline'} } ) }}
         </div>
     </div>
     <div class="row">
@@ -141,10 +147,11 @@
     <div class="row">
         <div class="col-xs-12 profile-visibility">
             {% if app.user.hide is defined and app.user.hide %}
-                <p>To show my profile for other users please click here (<a href="{{ path('profile_visibility_show') }}">Click here</a>)</p>
+                <p>To show my profile for other users please click here (<a href="{{ path('profile_visibility_show') }}">Click here</a>).<br>
             {% else %}
-                <p>To hide my profile from other users please click here (<a href="{{ path('profile_visibility_hide') }}">Click here</a>), Hiding your profile will remove you from all searches.</p>
+                <p>To hide my profile from other users please click here (<a href="{{ path('profile_visibility_hide') }}">Click here</a>), Hiding your profile will remove you from all searches.<br>
             {% endif %}
+            To remove your profile completely please click here (<a href="{{ path('user_delete') }}">Click here</a>).</p>
         </div>
     </div>
 {% endif %}

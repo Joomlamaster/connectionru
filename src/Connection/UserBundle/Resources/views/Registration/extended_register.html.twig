@@ -88,7 +88,7 @@
                     {{ form_row(form.profile.maritalStatus) }}
                 </div>
                 <div class="col-xs-4">
-                    {{ form_row(form.profile.languages) }}
+                    {{ form_row(form.profile.languages, { 'attr': { 'class': 'two-columns'}}) }}
                 </div>
             </div>
             <div class="row">
@@ -99,10 +99,10 @@
                     {{ form_row(form.profile.bodyType, { 'attr': { 'class': 'selectpicker'}}) }}
                 </div>
                 <div class="col-xs-3">
-                    {{ form_row(form.profile.eyeColor, {'value':'2', 'attr': { 'class': 'selectpicker'}}) }}
+                    {{ form_row(form.profile.eyeColor, { 'attr': { 'class': 'selectpicker'}}) }}
                 </div>
                 <div class="col-xs-3">
-                    {{ form_row(form.profile.hairColor, {'value':'3', 'attr': { 'class': 'selectpicker'}}) }}
+                    {{ form_row(form.profile.hairColor, { 'attr': { 'class': 'selectpicker'}}) }}
                 </div>
             </div>
             <div class="row">
