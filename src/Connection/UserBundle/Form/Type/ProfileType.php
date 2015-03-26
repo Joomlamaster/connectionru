@@ -103,10 +103,10 @@ class ProfileType extends AbstractType
         // add your custom field
         $builder
             ->add('city', 'text', array(
-                'required' => false,
+                'required' => true,
             ))
             ->add('zip', 'text', array(
-                'required' => false,
+                'required' => true,
             ))
 
             ->add('gender', 'entity', array(
@@ -252,7 +252,7 @@ class ProfileType extends AbstractType
                 'class' => 'ConnectionUserBundle:Profile\HaveChildren',
                 'property' => 'name',
                 'label' => 'Do you have children?',
-                'required' => false,
+                'required' => true,
                 'empty_value' => 'Select'
             ))
 
