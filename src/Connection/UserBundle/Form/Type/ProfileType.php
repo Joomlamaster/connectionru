@@ -136,17 +136,8 @@ class ProfileType extends AbstractType
 
             $builder->add('birthdate', 'date', array(
                 'widget' => 'single_text',
-                'html5' => false,
-                'trim' => true,
-//                'data_class' => 'DateTime',
-//                'format' => 'dd-MM-yyyy',
-//                'date_format' => 3,
-                'required' => true,
-                'data_class' => null,
-                'constraints' => array(
-                    new Assert\NotBlank(),
-                    new DateTime()
-                )
+                'html5'  => false,
+                'format' => 'dd-MM-yyyy',
             ));
 
             $builder->add('languages', 'entity', array(
