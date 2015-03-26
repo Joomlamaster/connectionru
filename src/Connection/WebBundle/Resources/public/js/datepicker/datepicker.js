@@ -7,7 +7,7 @@ $(function(){
         changeYear: true,
         yearRange: "-100:+0",
         maxDate: "+0D",
-        dateFormat: "dd-mm-yy/",
+        dateFormat: "mm-dd-yy/",
         //format date mm-dd-yy mm/dd/yy
         onSelect: function (date) {
             $(this).val(date.substr(0, 10));

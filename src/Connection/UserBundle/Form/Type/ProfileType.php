@@ -137,7 +137,7 @@ class ProfileType extends AbstractType
             $builder->add('birthdate', 'date', array(
                 'widget' => 'single_text',
                 'html5'  => false,
-                'format' => 'dd-MM-yyyy',
+                'format' => 'MM-dd-yyyy',
             ));
 
             $builder->add('languages', 'entity', array(
@@ -146,7 +146,6 @@ class ProfileType extends AbstractType
                     return $er
                         ->createQueryBuilder('l')
                         ->orderBy('l.priority', 'DESC');
-
                 },
                 'property' => 'name',
                 'multiple' => true,
