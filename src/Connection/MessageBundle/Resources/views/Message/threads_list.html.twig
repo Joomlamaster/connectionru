@@ -15,15 +15,11 @@
 
     {% if threads %}
         {% for thread in threads %}
-            <tr>
+                <tr {{ fos_message_is_read(thread) ? '' : 'style="font-weight: bold"' }}>
                 <td>
                     <a href="{{ url('fos_message_thread_view', {'threadId': thread.id}) }}">
                         {{ thread.subject }}
                     </a>
-
-                    {% if not fos_message_is_read(thread) %}
-                        ({% trans from 'MessageBundle' %}new{% endtrans %})
-                    {% endif %}
                 </td>
                 <td>
                     {{ thread.createdBy }}

@@ -213,4 +213,29 @@ class EventController extends Controller
         }
         return array('participants' => $event->getInteresteds()) ;
     }
+
+    /**
+     * @Route("/remove/{id}", name="remove_profile_event", requirements={"id" = "\d+"})
+     * @ParamConverter("Event", class="ConnectionEventBundle:Event")
+     * @param Event $event
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function removeAction( Event $event)
+    {
+        if (!$user = $this->getUser()) {
+            throw new AccessDeniedException();
+        }
+
+        if ($event->getUser()->getId() != $user->getId()) {
+            throw new AccessDeniedException();
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($event);
+        $em->flush();
+
+        return $this->redirect( $this->generateUrl('edit_user_profile', array(
+            'tab' => 'events'
+        )));
+    }
 }
