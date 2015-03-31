@@ -282,6 +282,7 @@ class ProfileType extends AbstractType
             ->add('ethnicity', 'entity', array(
                 'class' => 'ConnectionUserBundle:Profile\Ethnicity',
                 'property' => 'name',
+                'required' => true,
                 'empty_value' => 'Select'
             ))
             ->add('zodiac', 'entity', array(

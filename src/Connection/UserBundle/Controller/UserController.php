@@ -110,8 +110,13 @@ class UserController extends Controller
     /**
      * @Route("/delete", name="user_delete")
      */
-    public function deleteAction( ) {
-
-
+    public function deleteAction() {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $em->flush();
+        $em->remove($user);
+        $em->flush();
+        $this->container->get('session')->getFlashBag()->add('notice', 'User was successfully deleted.');
+        return $this->redirect( $this->generateUrl('admin_user_index') );
     }
 }

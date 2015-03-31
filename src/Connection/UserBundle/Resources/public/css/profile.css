@@ -55,10 +55,15 @@
 
 .event-image-box {
     margin: 10px;
-    height: 194px;
     border: 1px solid #ccc;
     float: left;
     text-align: center;
+}
+
+.event-image-box .btn-danger {
+    padding: 2px;
+    margin: 2px;
+    display: block;
 }
 
 .user-event-image-box{

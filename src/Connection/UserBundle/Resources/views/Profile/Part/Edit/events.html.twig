@@ -8,6 +8,9 @@
             <a href="{{ path('event_manage', {id: event.id}) }}" class="btn btn-xs btn-info" title="Edit this event">
                 <span class="glyphicon glyphicon-edit"></span> Edit event
             </a>
+            <a data-href="{{ path('remove_profile_event', {id: event.id}) }}"
+               class="btn btn-danger"
+               data-toggle="confirmation">Remove</a>
         </div>
     {% endfor %}
 </div>

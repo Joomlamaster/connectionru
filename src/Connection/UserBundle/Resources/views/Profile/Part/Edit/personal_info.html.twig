@@ -72,19 +72,16 @@
             {{ form_row(form.profile.height, {'attr': {'class': 'selectpicker' } }) }}
         </div>
         <div class="col-xs-3">
-            {{ form_row(form.profile.ethnicity, {'attr': {'class': 'selectpicker' } }) }}
-        </div>
-        <div class="col-xs-3">
             {{ form_row(form.profile.bodyType, {'attr': {'class': 'selectpicker' } }) }}
         </div>
-    </div>
-    <div class="row">
         <div class="col-xs-3">
             {{ form_row(form.profile.eyeColor, {'attr': {'class': 'selectpicker' } }) }}
         </div>
         <div class="col-xs-3">
             {{ form_row(form.profile.hairColor, {'attr': {'class': 'selectpicker' } }) }}
         </div>
+    </div>
+    <div class="row">
         <div class="col-xs-3">
             {{ form_row(form.profile.smoking, {'attr': {'class': 'selectpicker' } }) }}
         </div>
@@ -132,6 +129,9 @@
             {{ form_row(form.profile.religion, {'attr': {'class': 'selectpicker' } }) }}
         </div>
         <div class="col-xs-3">
+            {{ form_row(form.profile.ethnicity, {'attr': {'class': 'selectpicker' } }) }}
+        </div>
+        <div class="col-xs-3">
             {{ form_row(form.profile.zodiac, {'attr': {'class': 'selectpicker' } }) }}
         </div>
     </div><br/><br/>
@@ -151,7 +151,8 @@
             {% else %}
                 <p>To hide my profile from other users please click here (<a href="{{ path('profile_visibility_hide') }}">Click here</a>), Hiding your profile will remove you from all searches.<br>
             {% endif %}
-            To remove your profile completely please click here (<a href="{{ path('user_delete') }}">Click here</a>).</p>
+            {#To remove your profile completely please click here (<a href="{{ path('user_delete') }}">Click here</a>).#}
+            </p>
         </div>
     </div>
 {% endif %}
