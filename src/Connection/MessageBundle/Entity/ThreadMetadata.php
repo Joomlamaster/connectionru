@@ -31,8 +31,9 @@ class ThreadMetadata extends BaseThreadMetadata
 
     /**
      * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\User",
-     * cascade={"remove"}
+     *      inversedBy="participant"
      * )
+     * @ORM\JoinColumn(name="participant_id", referencedColumnName="id")
      * @var \FOS\MessageBundle\Model\ParticipantInterface
      */
     protected $participant;

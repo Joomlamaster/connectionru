@@ -31,8 +31,9 @@ class Message extends BaseMessage
 
     /**
      * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\User",
-     * cascade={"remove"}
+     *      inversedBy="sender"
      * )
+     * @ORM\JoinColumn(name="sender_id", referencedColumnName="id")
      * @var \FOS\MessageBundle\Model\ParticipantInterface
      */
     protected $sender;

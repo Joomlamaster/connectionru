@@ -113,10 +113,9 @@ class UserController extends Controller
     public function deleteAction() {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $em->flush();
         $em->remove($user);
         $em->flush();
-        $this->container->get('session')->getFlashBag()->add('notice', 'User was successfully deleted.');
-        return $this->redirect( $this->generateUrl('admin_user_index') );
+        $this->container->get('session')->getFlashBag()->add('notice', 'Your account has beengit  successfully deleted.');
+        return $this->redirect( $this->generateUrl('connection_homepage') );
     }
 }
