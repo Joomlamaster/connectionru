@@ -115,7 +115,7 @@ class UserController extends Controller
         $user = $this->getUser();
         $em->remove($user);
         $em->flush();
-        $this->container->get('session')->getFlashBag()->add('notice', 'Your account has beengit  successfully deleted.');
+        $this->container->get('session')->getFlashBag()->add('notice', 'Your account has been successfully deleted.');
         return $this->redirect( $this->generateUrl('connection_homepage') );
     }
 }
