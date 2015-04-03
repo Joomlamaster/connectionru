@@ -21,7 +21,11 @@ class Thread extends BaseThread
     protected $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Connection\UserBundle\Entity\User")
+     * @ORM\ManyToOne(
+     *    targetEntity="Connection\UserBundle\Entity\User",
+     *    inversedBy="createdBy"
+     * )
+     * @ORM\JoinColumn(name="createdBy_id", referencedColumnName="id")
      * @var \FOS\MessageBundle\Model\ParticipantInterface
      */
     protected $createdBy;

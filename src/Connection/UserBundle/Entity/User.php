@@ -139,6 +139,30 @@ class User extends BaseUser implements ParticipantInterface
     protected $admin = false;
 
     /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\OneToMany(targetEntity="Connection\MessageBundle\Entity\Thread", mappedBy="createdBy", cascade={"persist", "remove"})
+     */
+    private $threads;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\OneToMany(targetEntity="Connection\MessageBundle\Entity\ThreadMetadata", mappedBy="participant", cascade={"persist", "remove"})
+     */
+    private $threadsMetadata;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\OneToMany(targetEntity="Connection\MessageBundle\Entity\Message", mappedBy="sender", cascade={"persist", "remove"})
+     */
+    private $messages;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     * @ORM\OneToMany(targetEntity="Connection\MessageBundle\Entity\MessageMetadata", mappedBy="participant", cascade={"persist", "remove"})
+     */
+    private $messagesMetadata;
+
+    /**
      * @return int
      */
     public function getId ()
