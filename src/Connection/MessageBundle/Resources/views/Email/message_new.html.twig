@@ -1,4 +1,4 @@
 {% trans_default_domain 'FOSUserBundle' %}
 <p>You received a new message from {{ user.username }} at  {{ message.getCreatedAt|date("g:ia l, M d, Y") }}</p>
-<p>{{ message.body }}</p>
-<p><a href="{{ url('fos_user_security_login') }}">Login now</a> and read your messages.</p>
+{#<p>{{ message.body }}</p>#}
+<p><a href="{{ url('message_view', {'threadId': thread}) }}">Login now</a> and read your messages.</p>

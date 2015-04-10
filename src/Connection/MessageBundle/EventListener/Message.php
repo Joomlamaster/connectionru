@@ -19,17 +19,20 @@ class Message implements EventSubscriberInterface
 
     private $templating;
 
+    private $user;
+
     /**
      * @param MessageManagerInterface $messageManager
      * @param Swift_Mailer $mailer
      * @param $params
      */
-    public function __construct(MessageManagerInterface $messageManager, Swift_Mailer $mailer, $params, EngineInterface $templating)
+    public function __construct(MessageManagerInterface $messageManager, Swift_Mailer $mailer, $params, EngineInterface $templating, $user)
     {
         $this->mailer = $mailer;
         $this->params = $params;
         $this->messageManager = $messageManager;
         $this->templating = $templating;
+        $this->user = $user;
 
     }
 
@@ -49,13 +52,16 @@ class Message implements EventSubscriberInterface
     public function sendEmailNotification(MessageEvent $event)
     {
         $ms = $event->getMessage();
-        $subject = $ms->getThread()->getSubject();
+        $thread = $ms->getThread();
+        $subject = $thread->getSubject();
         $subject = "You received new email ( $subject )";
         $participants = $ms->getThread()->getParticipants();
-        //not send notification user-self
-        unset($participants[0]);
 
         foreach ($participants as $p) {
+            if ($this->user->getEmail() == $p->getEmail()) {
+                //not send notification user-self
+                continue;
+            }
             $message = $this->mailer->createMessage()
                 ->setSubject($subject)
                 ->setFrom(key($this->params), current($this->params))
@@ -66,6 +72,7 @@ class Message implements EventSubscriberInterface
                         array(
                             'message' => $ms,
                             'user' => $p,
+                            'thread' => $thread->getId()
                         )
                     ),
                     'text/html'

@@ -6,6 +6,7 @@ services:
           - @mailer
           - %fos_user.registration.confirmation.from_email%
           - @templating
+          - @=service('security.context').getToken().getUser()
 
       tags:
           - { name: kernel.event_subscriber }
