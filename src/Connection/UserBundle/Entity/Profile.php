@@ -7,8 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 use Symfony\Component\Validator\Tests\Constraints\ConstraintViolationAssertion;
-use Connection\UserBundle\Validator\Constraints\DateTime;
-use Connection\UserBundle\Validator\Constraints\DateTimeValidator;
 /**
  * User
  *

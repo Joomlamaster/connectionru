@@ -4,16 +4,9 @@
     {{ parent() }}
     <link rel="stylesheet" href="{{ asset('bundles/connectionuser/css/fos-registration.css') }}" type="text/css" />
 {% endblock %}
-
-{% block javascript %}
-    {{ parent() }}
-    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/datepicker/datepicker.js') }}"></script>
-{% endblock %}
-
 {% block content %}
     {% trans_default_domain 'FOSUserBundle' %}
     <div class="fos-custom-registration-container">
         {% block fos_user_content %}{% endblock fos_user_content %}
     </div>
 {% endblock %}
-

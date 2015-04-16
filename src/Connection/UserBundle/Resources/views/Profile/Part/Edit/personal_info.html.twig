@@ -17,9 +17,8 @@
         <div class="col-xs-4">
             {{ form_row(form.profile.seek) }}
         </div>
-        <div class="col-xs-4">
-            {#{{ dump(form.profile.birthdate) }}#}
-            {{ form_row(form.profile.birthdate, { 'attr': { 'class': 'select-inline'} } ) }}
+        <div class="col-xs-4 birthdate">
+            {{ form_row(form.profile.birthdate) }}
         </div>
     </div>
     <div class="row">

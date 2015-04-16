@@ -9,7 +9,11 @@
 namespace Connection\UserBundle\Form\Type;
 
 use Connection\UserBundle\Entity\Profile;
+use Connection\UserBundle\Transformer\DateTimeMultiFormatTransformer;
+use Connection\UserBundle\Validator\Constraints\BirthDay;
 use Connection\UserBundle\Validator\Constraints\ConstraintDate;
+use Connection\UserBundle\Validator\Constraints\DateTime;
+use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToStringTransformer;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -135,9 +139,11 @@ class ProfileType extends AbstractType
             ));
 
             $builder->add('birthdate', 'date', array(
-                'widget' => 'single_text',
-                'html5'  => false,
-                'format' => 'MM-dd-yyyy',
+                'years'         => range(date('Y') - 100, date('Y') - 16),
+                'months'        => range(1, 12),
+                'days'          => range(1, 31),
+                'widget'        => 'choice',
+                'input'         => 'datetime',
             ));
 
             $builder->add('languages', 'entity', array(

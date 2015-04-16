@@ -1173,3 +1173,9 @@ select.selectpicker {
   opacity: 0 !important;
   clear: both;
 }
+
+.birthdate select {
+    display: inline-block;
+    float: left;
+    margin-left: 3px;
+}

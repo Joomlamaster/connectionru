@@ -42,10 +42,10 @@
 {% block javascript %}
     {{ parent() }}
     <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/jquery.watermark.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/connectionweb/js/datepicker/datepicker.js') }}"></script>
     <script type="text/javascript">
         window.onload = function() {
             $('#quick-tab').show();
+            $('.selectpicker-container select').selectpicker();
             preLoadSlaveFeedback = function (slaveBlock) {
                 if (slaveBlock.length) {
                     $(slaveBlock).html('');
