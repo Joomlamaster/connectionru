@@ -74,7 +74,7 @@ fos_user:
         confirmation:
             from_email:
                 address:      webmaster@connectionru.com
-                sender_name:  WebMaster
+                sender_name:  ConnectionRu.com
             enabled:    true
             template:   FOSUserBundle:Registration:email.txt.twig
         form:
@@ -84,7 +84,7 @@ fos_user:
         email:
             from_email:
                 address:      webmaster@connectionru.com
-                sender_name:  WebMaster
+                sender_name:  ConnectionRu.com
             template:   FOSUserBundle:Resetting:email.txt.twig
         form:
             type:               fos_user_resetting
