@@ -1,2 +1,0 @@
-# connectionru
-connectionru.com repostory
