@@ -1,0 +1,38 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: 127.0.0.1
+    database_port: null
+    database_name: connectionru
+    database_user: connectionru
+    database_password: oR4phaax
+    mailer_transport: gmail
+    mailer_host: smtp.gmail.com
+    mailer_user: developer.optimum@gmail.com
+    mailer_password: OptimumDev12
+    locale: en
+    secret: ThisTokenIsNotSoSecretChangeIt
+    facebook.appid: '1587917454781906'
+    facebook.secret: a5ac7cb4023ee1d3ba63904d26f62fc6
+    twitter.key: yWH87mrc1pETeR49y97MileCd
+    twitter.secret: 9m5DqquPbP52Hxklx23Oxm8HQLHirFT6H1gbT63vOfgpdWjGAV
+    search.user.per_page: 20
+    search.event.per_page: 12
+    search.event.top.per_page: 6
+    event.upcoming.block.limit: 3
+    profile_country_iso:
+        - US
+        - CA
+        - UK
+        - IT
+        - FR
+        - DE
+        - DK
+        - AU
+        - BR
+        - RU
+        - TR
+        - UA
+        - OTHER
+    ivy_league_afirmative_id: 1
+    quick_registration_ethnicity_id: 8
